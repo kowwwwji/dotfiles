@@ -421,3 +421,6 @@ autocmd FileType python setlocal completeopt-=preview
 
 " CFn
 autocmd! BufNewFile,BufRead *.template set filetype=json
+
+" トラックパッドで操作できるようにする。
+set mouse=a
