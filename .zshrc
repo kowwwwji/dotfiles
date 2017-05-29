@@ -3,12 +3,8 @@
 # key binding
 ####################
 
-# vim binding
-bindkey -v
-
-# default keybinding is ^X^F
-bindkey '^]' 'vi-find-next-char'
-bindkey '^[^]' 'vi-find-prev-char'
+# emacs binding
+bindkey -e
 
 ####################
 # Alias
@@ -27,13 +23,6 @@ typeset -U path cdpath fpath manpath
 # local utils
 path=(${HOME}/bin(N-/) $path)
 
-# go
-if type go &>/dev/null; then
-  export GOPATH="${HOME}/.go"
-  [[ -d "${HOME}/.go" ]] || mkdir "${HOME}/.go"
-  path=($path ${GOPATH}/bin)
-fi
-
 # rsense
 path=($path ${HOME}/rsense-0.3/bin(N-/))
 
@@ -45,13 +34,11 @@ path=(/usr/local/bin(N-/) $path)
 ####################
 
 # autoload func path
-#if type brew &>/dev/null; then
-#  fpath=($(brew --prefix)/share/zsh/site-functions(N-/) $fpath)
-#fi
-#fpath=(${ANTIBODY_HOME}/zsh-users-zsh-completions/src(N-/) $fpath)
+if type brew &>/dev/null; then
+  fpath=($(brew --prefix)/share/zsh/site-functions(N-/) $fpath)
+fi
 
-# original zsh completions
-#fpath=(${HOME}/.zsh/completions(N-/) $fpath)
+#fpath=(${ANTIBODY_HOME}/zsh-users-zsh-completions/src(N-/) $fpath)
 
 # zsh functions
 #fpath=(${HOME}/.zsh/functions(N-/) $fpath)
@@ -65,8 +52,8 @@ path=(/usr/local/bin(N-/) $path)
 #}
 
 # enable completion
-#autoload -Uz compinit
-#compinit # also compinit -u
+autoload -Uz compinit
+compinit # also compinit -u
 
 #zstyle ':completion:*' completer _oldlist _complete
 #zstyle ':completion:*' matcher-list 'm:{a-z}={A-Z}'
@@ -92,7 +79,7 @@ setopt hist_ignore_space
 setopt hist_no_store
 
 # history file
-HISTFILE="${HOME}/.zhistory"
+HISTFILE="${HOME}/.zsh_history"
 
 # history file size
 HISTSIZE=40000
@@ -133,45 +120,6 @@ setopt pushd_ignore_dups
 autoload -Uz chpwd_recent_dirs cdr
 add-zsh-hook chpwd chpwd_recent_dirs
 zstyle ':chpwd:*' recent-dirs-max 200
-
-####################
-# antibody
-####################
-
-if type antibody &>/dev/null; then
-  export ANTIBODY_HOME="${HOME}/.antibody"
-  [[ -d "$ANTIBODY_HOME" ]] || mkdir "$ANTIBODY_HOME"
-  source <(/usr/local/bin/antibody init)
-
-  # too slow
-  #antibody bundle zsh-users/zsh-syntax-highlighting
-  antibody bundle zsh-users/zsh-history-substring-search
-  antibody bundle zsh-users/zsh-completions src
-  antibody bundle gunzy83/packer-zsh-completion
-  antibody bundle mollifier/anyframe
-  antibody bundle Tarrasch/zsh-bd
-  antibody bundle knakayama/ghq-util
-  antibody bundle knakayama/zsh-git-prompt
-  antibody bundle knakayama/gopath-util
-
-  # zsh-users/zsh-history-substring-search
-  bindkey -M emacs '^P' history-substring-search-up
-  bindkey -M emacs '^N' history-substring-search-down
-
-  # mollifier/anyframe settings
-  zstyle ":anyframe:selector:" use peco
-  if [[ -f "${HOME}/.peco_config.json" ]]; then
-    zstyle ":anyframe:selector:peco:" command "peco --rcfile=${HOME}/.peco_config.json"
-  fi
-
-  bindkey '^xr' anyframe-widget-execute-history
-  bindkey '^xi' anyframe-widget-put-history
-  bindkey '^xg' anyframe-widget-cd-ghq-repository
-  bindkey '^x^b' anyframe-widget-checkout-git-branch
-  bindkey '^xe' anyframe-widget-insert-git-branch
-  bindkey '^xt' anyframe-widget-tmux-attach
-  bindkey '^xb' anyframe-widget-cdr
-fi
 
 ####################
 # PROMPT
@@ -331,7 +279,7 @@ if [[ -n "$TMUX" || -n "$SSH_TTY" ]]; then
   if type pyenv &>/dev/null; then
     eval "$(pyenv init -)";
     eval "$(pyenv virtualenv-init -)"
-    export PYENV_VIRTUALENV_DISABLE_PROMPT=1
+#   export PYENV_VIRTUALENV_DISABLE_PROMPT=1
   fi
 
   # plenv
@@ -339,22 +287,17 @@ if [[ -n "$TMUX" || -n "$SSH_TTY" ]]; then
     eval "$(plenv init -)"
   fi
 
-  # autoload general-env
-  if type pyenv &>/dev/null && type pyenv-virtualenv &>/dev/null; then
-    if [[ "$(pyenv virtualenvs)" =~ 'general-env' ]]; then
-      pyenv activate general-env
-    fi
-  fi
+# # autoload general-env
+# if type pyenv &>/dev/null && type pyenv-virtualenv &>/dev/null; then
+#   if [[ "$(pyenv virtualenvs)" =~ 'general-env' ]]; then
+#     pyenv activate general-env
+#   fi
+# fi
 
   # phpbrew
   if [[ -f "${HOME}/.phpbrew/bashrc" ]]; then
     source "${HOME}/.phpbrew/bashrc"
   fi
-fi
-
-# awscli
-if type aws &>/dev/null && [[ -f "${HOME}/ghq/github.com/aws/aws-cli/bin/aws_zsh_completer.sh" ]]; then
-  source "${HOME}/ghq/github.com/aws/aws-cli/bin/aws_zsh_completer.sh"
 fi
 
 # workaround:
