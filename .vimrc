@@ -7,8 +7,9 @@ if &compatible
   set nocompatible
 endif
 
-"turn on wild menu
+"コマンドモードの時に補完を行う
 set wildmenu
+set wildmode=list,full
 
 "always show current position
 set ruler
@@ -133,7 +134,7 @@ if has('vim_starting') && dein#check_install()
 endif
 " }}}
 
-" Required:
+" ファイルタイプに適したインデントとプラグインを使う:
 filetype plugin indent on
 
 " deoplete
@@ -242,9 +243,9 @@ let g:airline#extensions#tabline#tab_nr_type = 1
 vmap v <Plug>(expand_region_expand)
 vmap <C-v> <Plug>(expand_region_shrink)
 
-" mmozuras/vim-github-comment
-let g:github_user = 'knakayama'
-let g:github_comment_open_browser = 1
+"" mmozuras/vim-github-comment
+"let g:github_user = 'knakayama'
+"let g:github_comment_open_browser = 1
 
 " fatih/vim-go
 autocmd FileType go nmap <leader>r <Plug>(go-run)
