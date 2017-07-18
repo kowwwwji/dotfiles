@@ -1,4 +1,3 @@
-# Created by newuser for 5.3.1
 ####################
 # key binding
 ####################
@@ -172,10 +171,11 @@ if [[ "$OSTYPE" =~ "darwin*" ]]; then
   export CLICOLOR=1
 fi
 
-# editor
-if type nvim &>/dev/null; then
-  export EDITOR="nvim"
-elif type vim &>/dev/null; then
+# TODO editor nvimだとpython関係でエラーが出てしまっている。
+#if type nvim &>/dev/null; then
+#  export EDITOR="nvim"
+#el
+if type vim &>/dev/null; then
   export EDITOR="vim"
 else
   export EDITOR="vi"
@@ -279,7 +279,7 @@ if [[ -n "$TMUX" || -n "$SSH_TTY" ]]; then
   if type pyenv &>/dev/null; then
     eval "$(pyenv init -)";
     eval "$(pyenv virtualenv-init -)"
-#   export PYENV_VIRTUALENV_DISABLE_PROMPT=1
+    export PYENV_VIRTUALENV_DISABLE_PROMPT=1
   fi
 
   # plenv
@@ -287,12 +287,12 @@ if [[ -n "$TMUX" || -n "$SSH_TTY" ]]; then
     eval "$(plenv init -)"
   fi
 
-# # autoload general-env
-# if type pyenv &>/dev/null && type pyenv-virtualenv &>/dev/null; then
-#   if [[ "$(pyenv virtualenvs)" =~ 'general-env' ]]; then
-#     pyenv activate general-env
-#   fi
-# fi
+  # autoload general-env
+  if type pyenv &>/dev/null && type pyenv-virtualenv &>/dev/null; then
+    if [[ "$(pyenv virtualenvs)" =~ 'general-env' ]]; then
+      pyenv activate general-env
+    fi
+  fi
 
   # phpbrew
   if [[ -f "${HOME}/.phpbrew/bashrc" ]]; then
@@ -305,3 +305,4 @@ fi
 if type tmux &>/dev/null && [[ -n "$TMUX" ]]; then
   tmux set-environment -g PATH "$PATH"
 fi
+
