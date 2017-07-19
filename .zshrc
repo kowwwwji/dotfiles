@@ -3,6 +3,9 @@
 ########################################
 export LANG=ja_JP.UTF-8
 
+# インストールしたものの読込
+path=(/usr/local/bin(N-/) $path)
+
 # 色を使用出来るようにする
 autoload -Uz colors
 colors
@@ -21,7 +24,6 @@ SAVEHIST=50000
 # 2行表示
 PROMPT="%{${fg[green]}%}[%n@%m]%{${reset_color}%} %~
 %# "
-
 
 # 単語の区切り文字を指定する
 autoload -Uz select-word-style
