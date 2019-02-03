@@ -22,89 +22,56 @@ on_i = 1
 repo = 'Shougo/vimfiler.vim'
 
 [[plugins]]
-repo = 'cespare/vim-toml'
-on_ft = 'toml'
-
-[[plugins]]
 repo = 'thinca/vim-quickrun'
 
 [[plugins]]
-repo = 'thinca/vim-ref'
-
-[[plugins]]
-repo = 'mattn/webapi-vim'
-
-[[plugins]]
-repo = 'mattn/gist-vim'
-
-[[plugins]]
-repo = 'tyru/open-browser.vim'
-
-[[plugins]]
-repo = 'scrooloose/syntastic'
-
-[[plugins]]
-repo = 'tpope/vim-surround'
-
-[[plugins]]
-repo = 'tpope/vim-endwise'
+repo = 'editorconfig/editorconfig-vim'
 
 [[plugins]]
 repo = 'majutsushi/tagbar'
 
 [[plugins]]
-repo = 'kchmck/vim-coffee-script'
-on_ft = ['coffee']
-
-#[[plugins]]
-#repo = 'pearofducks/ansible-vim'
-#on_ft = ['yaml']
-
-[[plugins]]
-repo = 'kannokanno/previm'
-
-[[plugins]]
-repo = 'godlygeek/tabular'
-
-[[plugins]]
-repo = 'markcornick/vim-terraform'
-on_ft = ['terraform']
-
-[[plugins]]
-repo = 'elzr/vim-json'
-on_ft = ['json']
-
-[[plugins]]
 repo = 'bling/vim-airline'
 
+# カッコ系
 [[plugins]]
-repo = 'fatih/vim-go'
-on_ft = ['go']
-
+repo = 'tpope/vim-endwise'
 [[plugins]]
-repo = 'garyburd/go-explorer'
-
-[[plugins]]
-repo = 'davidhalter/jedi-vim'
-on_ft = ['python']
-
-[[plugins]]
-repo = 'nvie/vim-flake8'
-on_ft = ['python']
-
-[[plugins]]
-repo = 'vimperator/vimperator.vim'
-on_ft = ['vimperator']
-
+repo = 'tpope/vim-surround'
 [[plugins]]
 repo = 'cohama/lexima.vim'
 
+# テーブル系
+[[plugins]]
+repo = 'godlygeek/tabular'
 [[plugins]]
 repo = 'dhruvasagar/vim-table-mode'
 
-[[plugins]]
-repo = 'tmux-plugins/vim-tmux'
-on_ft = ['tmux']
+# Syntax Highlight
+  [[plugins]]
+  repo = 'scrooloose/syntastic'
+  
+  [[plugins]]
+  repo = 'cespare/vim-toml'
+  on_ft = 'toml'
 
-[[plugins]]
-repo = 'editorconfig/editorconfig-vim'
+  [[plugins]]
+  repo = 'posva/vim-vue'
+
+  [[plugins]]
+  repo = 'elzr/vim-json'
+  on_ft = ['json']
+
+  [[plugins]]
+  repo = 'tmux-plugins/vim-tmux'
+  on_ft = ['tmux']
+
+# Markdown用
+  [[plugins]]
+  repo = 'tyru/open-browser.vim'
+  
+  [[plugins]]
+  repo = 'kannokanno/previm'
+  
+  [[plugins]]
+  repo = 'plasticboy/vim-markdown'
