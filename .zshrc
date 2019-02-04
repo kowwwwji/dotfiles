@@ -146,6 +146,13 @@ export PYENV_ROOT="$HOME/.pyenv"
 export PATH="$PYENV_ROOT/bin:$PATH"
 eval "$(pyenv init -)"
 
+# nodebrew用の設定
+NODEBREW_HOME=$HOME/.nodebrew/current
+export NODEBREW_HOME
+export NODEBREW_ROOT=$HOME/nodebrew
+
+export PATH=$PATH:$NODEBREW_HOME/bin
+
 # tabtab source for serverless package
 # uninstall by removing these lines or running `tabtab uninstall serverless`
 [[ -f /usr/local/lib/node_modules/serverless/node_modules/tabtab/.completions/serverless.zsh ]] && . /usr/local/lib/node_modules/serverless/node_modules/tabtab/.completions/serverless.zsh
