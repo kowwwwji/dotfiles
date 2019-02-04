@@ -14,9 +14,15 @@ repo = 'Shougo/unite.vim'
 depends = 'neomru.vim'
 
 [[plugins]]
+repo = 'Shougo/context_filetype.vim'
+
+[[plugins]]
 repo = 'Shougo/deoplete.nvim'
-if = 'has("nvim")'
+depends = 'context_filetype.vim'
 on_i = 1
+hook_source = '''
+let g:deoplete#enable_at_startup = 1
+'''
 
 [[plugins]]
 repo = 'Shougo/vimfiler.vim'
@@ -32,6 +38,36 @@ repo = 'majutsushi/tagbar'
 
 [[plugins]]
 repo = 'bling/vim-airline'
+
+#########################
+[[plugins]]
+repo = 'Shougo/neosnippet.vim'
+depends = ['context_filetype.vim']
+on_event = 'InsertCharPre'
+on_ft = 'snippet'
+
+[[plugins]]
+repo = 'Shougo/neosnippet-snippets'
+
+[[plugins]]
+repo = 'autozimu/LanguageClient-neovim'
+depends = 'deoplete.nvim'
+on_ft = ['vue']
+build = './install.sh'
+hook_source = '''
+set hidden
+let g:LanguageClient_serverCommands = {
+    \ 'vue': ['vls'],
+    \ }
+let g:LanguageClient_autoStart = 1
+nnoremap <silent> K :call LanguageClient_textDocument_hover()<CR>
+nnoremap <silent> gd :call LanguageClient_textDocument_definition()<CR>
+nnoremap <silent> <F2> :call LanguageClient_textDocument_rename()<CR>
+'''
+
+[[plugins]]
+repo = 'w0rp/ale'
+#######################
 
 # カッコ系
 [[plugins]]
@@ -50,7 +86,7 @@ repo = 'dhruvasagar/vim-table-mode'
 # Syntax Highlight
   [[plugins]]
   repo = 'scrooloose/syntastic'
-  
+
   [[plugins]]
   repo = 'cespare/vim-toml'
   on_ft = 'toml'
@@ -69,9 +105,9 @@ repo = 'dhruvasagar/vim-table-mode'
 # Markdown用
   [[plugins]]
   repo = 'tyru/open-browser.vim'
-  
+
   [[plugins]]
   repo = 'kannokanno/previm'
-  
+
   [[plugins]]
   repo = 'plasticboy/vim-markdown'
