@@ -1,7 +1,7 @@
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " 画面表示の設定
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""
-colorscheme default
+colorscheme desert
 syntax enable
 set number         " 行番号を表示する
 set cursorline     " カーソル行の背景色を変える
@@ -83,7 +83,7 @@ set visualbell t_vb=
 set noerrorbells        "エラーメッセージの表示時にビープを鳴らさない
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" コロンでコマンドモードに入るようにする。 
+" コロンでコマンドモードに入るようにする。
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""
 nnoremap ;  :
 nnoremap :  ;
@@ -99,7 +99,12 @@ inoremap <c-k> <up>
 inoremap <c-j> <down>
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" dein.vimの設定 
+" pyenvで指定したpythonを使用する
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+let $PATH = "~/.pyenv/shims:".$PATH
+
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" dein.vimの設定
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""
 let s:dein_dir = expand('~/.cache/dein')
 let s:dein_repo_dir = s:dein_dir . '/repos/github.com/Shougo/dein.vim'
@@ -124,3 +129,6 @@ endif
 
 filetype plugin indent on
 syntax enable
+
+"" vueファイルのときのsyntax設定
+autocmd FileType vue syntax sync fromstart
