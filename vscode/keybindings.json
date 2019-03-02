@@ -75,12 +75,10 @@
     },
     // terminal
     {
-        "key": "shift+cmd+g",
-        "command": "workbench.view.scm"
-    },
-    {
-        "key": "ctrl+shift+g",
-        "command": "-workbench.view.scm"
+
+        "key": "cmd+`",
+        "command": "workbench.action.terminal.focus",
+        "when": "editorTextFocus"
     },
     {
         "key": "cmd+[",
@@ -88,7 +86,7 @@
         "when": "terminalFocus"
     },
     {
-        "key": "alt+cmd+down",
+        "key": "alt+cmd+right",
         "command": "-workbench.action.terminal.focusNextPane",
         "when": "terminalFocus"
     },
@@ -98,8 +96,8 @@
         "when": "terminalFocus"
     },
     {
-        "key": "alt+cmd+up",
+        "key": "alt+cmd+left",
         "command": "-workbench.action.terminal.focusPreviousPane",
         "when": "terminalFocus"
-    },
+    }
 ]
