@@ -1,6 +1,6 @@
 // Place your key bindings in this file to override the defaults
 [
-    // vimBind
+// vimBind ------------
 　  // moveCursor
     { 
         "key": "ctrl+h",                
@@ -73,6 +73,20 @@
         "command": "cursorWordPartLeftSelect",
         "when": "textInputFocus" 
     },
+// vimBind end-----------
+
+    // intelliSense move
+    {
+        "key": "ctrl+n",
+        "command": "selectNextSuggestion",
+        "when": "editorTextFocus && suggestWidgetMultipleSuggestions && suggestWidgetVisible"
+    },
+    {
+        "key": "ctrl+p",
+        "command": "selectPrevSuggestion",
+        "when": "editorTextFocus && suggestWidgetMultipleSuggestions && suggestWidgetVisible"
+    },
+
     // terminal
     {
 
@@ -91,7 +105,7 @@
         "when": "terminalFocus"
     },
     {
-        "key": "cmd+[BracketLeft]",
+        "key": "cmd+]",
         "command": "workbench.action.terminal.focusPreviousPane",
         "when": "terminalFocus"
     },
