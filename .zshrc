@@ -39,12 +39,12 @@ zstyle ':zle:*' word-style unspecified
 ########################################
 # zsh-completionsを追加
 if type brew &>/dev/null; then
-  fpath=($(brew --prefix)/share/zsh/site-functions(N-/) $fpath)
+  fpath=($(brew --prefix)/share/zsh-completions(N-/) $fpath)
 fi
 
 # 補完機能を有効にする
 autoload -Uz compinit
-compinit
+compinit -u
 
 ## 先方予測機能を有効
 #autoload predict-on
@@ -65,7 +65,7 @@ zstyle ':completion:*:processes' command 'ps x -o pid,s,args'
 
 
 ########################################
-# vcs_info
+# Gitの情報を表示
 ########################################
 autoload -Uz vcs_info
 autoload -Uz add-zsh-hook
@@ -74,8 +74,8 @@ zstyle ':vcs_info:*' formats '%F{green}(%s)-[%b]%f'
 zstyle ':vcs_info:*' actionformats '%F{red}(%s)-[%b|%a]%f'
 
 function _update_vcs_info_msg() {
-    LANG=en_US.UTF-8 vcs_info
-    RPROMPT="${vcs_info_msg_0_}"
+  LANG=en_US.UTF-8 vcs_info
+  RPROMPT="${vcs_info_msg_0_}"
 }
 add-zsh-hook precmd _update_vcs_info_msg
 
@@ -131,15 +131,15 @@ fi
 # OS 別の設定
 ########################################
 case ${OSTYPE} in
-    darwin*)
-        #Mac用の設定
-        export CLICOLOR=1
-        alias ls='ls -G -F'
-        ;;
-    linux*)
-        #Linux用の設定
-        alias ls='ls -F --color=auto'
-        ;;
+  darwin*)
+    #Mac用の設定
+    export CLICOLOR=1
+    alias ls='ls -G -F'
+    ;;
+  linux*)
+    #Linux用の設定
+    alias ls='ls -F --color=auto'
+    ;;
 esac
 ##python用の設定
 export PYENV_ROOT="$HOME/.pyenv"
@@ -153,9 +153,9 @@ export NODEBREW_ROOT=$HOME/nodebrew
 
 export PATH=$PATH:$NODEBREW_HOME/bin
 
-# tabtab source for serverless package
-# uninstall by removing these lines or running `tabtab uninstall serverless`
-[[ -f /usr/local/lib/node_modules/serverless/node_modules/tabtab/.completions/serverless.zsh ]] && . /usr/local/lib/node_modules/serverless/node_modules/tabtab/.completions/serverless.zsh
-# tabtab source for sls package
-# uninstall by removing these lines or running `tabtab uninstall sls`
-[[ -f /usr/local/lib/node_modules/serverless/node_modules/tabtab/.completions/sls.zsh ]] && . /usr/local/lib/node_modules/serverless/node_modules/tabtab/.completions/sls.zsh
+# # tabtab source for serverless package
+# # uninstall by removing these lines or running `tabtab uninstall serverless`
+# [[ -f /usr/local/lib/node_modules/serverless/node_modules/tabtab/.completions/serverless.zsh ]] && . /usr/local/lib/node_modules/serverless/node_modules/tabtab/.completions/serverless.zsh
+# # tabtab source for sls package
+# # uninstall by removing these lines or running `tabtab uninstall sls`
+# [[ -f /usr/local/lib/node_modules/serverless/node_modules/tabtab/.completions/sls.zsh ]] && . /usr/local/lib/node_modules/serverless/node_modules/tabtab/.completions/sls.zsh
