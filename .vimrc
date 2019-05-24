@@ -36,6 +36,8 @@ set noswapfile " ファイル編集中にスワップファイルを作らない
 " 検索/置換の設定
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""
 set hlsearch   " 検索文字列をハイライトする
+hi Search ctermbg=white
+hi Search ctermbg=darkred
 set incsearch  " インクリメンタルサーチを行う
 set ignorecase " 大文字と小文字を区別しない
 set smartcase  " 大文字と小文字が混在した言葉で検索を行った場合に限り、大文字と小文字を区別する
