@@ -5,7 +5,7 @@
   email = kowwwwji@gmail.com
 [alias]
   graph = log --graph --date-order -C -M --pretty=format:\"<%h> %ad [%an] %Cgreen%d%Creset %s\" --all --date=short
-  delete-merged-branches = !git checkout master && git branch --merged | grep -v \\* | xargs -I % git branch -d % | git branch -l
+  dmb = !git checkout master && git branch --merged | grep -v \\* | xargs -I % git branch -d % | git pull -p | git branch -al
   new-branch = !git checkout -b $1
 [merge]
   ff = false
