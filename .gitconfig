@@ -17,8 +17,10 @@
 
 # WIPブランチを作成してPRを作成する 
   start = !"f() { git checkout -b $1; git commit --allow-empty -m \\"[WIP]$1"\\ ; git push -u origin $1; hub pull-request --draft; }; f"
-# 作業終了後、ローカルとリモートブランチをあわせる
-  end = !"f() { git checkout $1; git pull -p origin $1; git delete-merged-branches; git branch -avv; }; f"
+# 作業終了後、作成したPRを表示する
+  # hub browse して画面上でPRをクリックする。
+# Merge後、ローカルとリモートブランチをあわせる
+  refresh = !"f() { git checkout $1; git pull -p origin $1; git delete-merged-branches; git branch -avv; }; f"
 
 [merge]
   ff = false
