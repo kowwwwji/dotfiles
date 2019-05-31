@@ -18,14 +18,6 @@ HISTFILE=~"${HOME}/.zsh_history"
 HISTSIZE=50000
 SAVEHIST=50000
 
-# プロンプト
-# 1行表示
-# PROMPT="%~ %# "
-# 2行表示
-PROMPT="%{${fg[green]}%}[%n@%m]%{${reset_color}%} %~
-%# "
-SPROMPT="%r is correct? [n,y,a,e]: "
-
 # 単語の区切り文字を指定する
 autoload -Uz select-word-style
 select-word-style default
@@ -66,11 +58,17 @@ zstyle ':completion:*:processes' command 'ps x -o pid,s,args'
 
 
 ########################################
-# Gitの情報を表示
+# プロンプト
 ########################################
+# 2行表示
+PROMPT="%{${fg[green]}%}[%n@%m]%{${reset_color}%} %~
+%# "
+SPROMPT="%r is correct? [n,y,a,e]: "
+
 autoload -Uz vcs_info
 autoload -Uz add-zsh-hook
 
+# Gitの情報を表示
 zstyle ':vcs_info:*' formats '%F{green}(%s)-[%b]%f'
 zstyle ':vcs_info:*' actionformats '%F{red}(%s)-[%b|%a]%f'
 
