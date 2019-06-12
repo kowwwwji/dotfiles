@@ -153,7 +153,6 @@ eval "$(pyenv init -)"
 # # uninstall by removing these lines or running `tabtab uninstall sls`
 # [[ -f /usr/local/lib/node_modules/serverless/node_modules/tabtab/.completions/sls.zsh ]] && . /usr/local/lib/node_modules/serverless/node_modules/tabtab/.completions/sls.zsh
 
-# 開発用の設定
 # nvm用の設定
 export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
