@@ -1,5 +1,5 @@
 [ghq]
-  root = ~/ghq
+  root = ~/.ghq
 [user]
   name = Koji Sakamoto
   email = kowwwwji@gmail.com
@@ -11,6 +11,7 @@
   cb = checkout -b
   bv = branch -vv
   see = browse
+  st = status
 # 複合コマンド
   delete-merged-branches = !git branch --merged | grep -vE '^\\*|master$|develop$' | xargs -I % git branch -d %
   graph = log --graph --date-order -C -M --pretty=format:\"<%h> %ad [%an] %Cgreen%d%Creset %s\" --all --date=short
