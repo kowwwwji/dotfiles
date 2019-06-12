@@ -1,10 +1,11 @@
 [ghq]
-  root = ~/ghq
+  root = ~/.ghq
 [user]
   name = Koji Sakamoto
   email = kowwwwji@gmail.com
 [alias]
 # 基本コマンド
+  st = status
   cm = commit
   co = checkout
   b = branch 
@@ -16,7 +17,7 @@
   graph = log --graph --date-order -C -M --pretty=format:\"<%h> %ad [%an] %Cgreen%d%Creset %s\" --all --date=short
 
 # WIPブランチを作成してPRを作成する 
-  start = !"f() { git checkout -b $1; git commit --allow-empty -m \\"[WIP]$1"\\ ; git push -u origin $1; hub pull-request --draft; }; f"
+  start = !"f() { if [ $# -ne 1 ]; then echo ‘set branch-name!’; exit 1; fi; git checkout -b $1; git commit --allow-empty -m \\"[WIP]$1"\\ ; git push -u origin $1; hub pull-request --draft; }; f"
 # 作業終了後、作成したPRを表示する
   # hub browse して画面上でPRをクリックする。
 # Merge後、ローカルとリモートブランチをあわせる
