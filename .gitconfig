@@ -22,7 +22,7 @@
 # 作業終了後、作成したPRを表示する
   # hub browse して画面上でPRをクリックする。
 # Merge後、ローカルとリモートブランチをあわせる
-  refresh = !"f() { git checkout $1; git pull -p origin $1; git delete-merged-branches; git branch -avv; }; f"
+  refresh = !"f() { git checkout master; git pull -p origin master; git delete-merged-branches; git branch -avv; }; f"
 
 [merge]
   ff = false
