@@ -39,35 +39,35 @@ repo = 'majutsushi/tagbar'
 [[plugins]]
 repo = 'bling/vim-airline'
 
-#########################
-[[plugins]]
-repo = 'Shougo/neosnippet.vim'
-depends = ['context_filetype.vim']
-on_event = 'InsertCharPre'
-on_ft = 'snippet'
-
-[[plugins]]
-repo = 'Shougo/neosnippet-snippets'
-
-[[plugins]]
-repo = 'autozimu/LanguageClient-neovim'
-depends = 'deoplete.nvim'
-on_ft = ['vue']
-build = './install.sh'
-hook_source = '''
-set hidden
-let g:LanguageClient_serverCommands = {
-    \ 'vue': ['vls'],
-    \ }
-let g:LanguageClient_autoStart = 1
-nnoremap <silent> K :call LanguageClient_textDocument_hover()<CR>
-nnoremap <silent> gd :call LanguageClient_textDocument_definition()<CR>
-nnoremap <silent> <F2> :call LanguageClient_textDocument_rename()<CR>
-'''
-
-[[plugins]]
-repo = 'w0rp/ale'
-#######################
+## #########################
+## [[plugins]]
+## repo = 'Shougo/neosnippet.vim'
+## depends = ['context_filetype.vim']
+## on_event = 'InsertCharPre'
+## on_ft = 'snippet'
+## 
+## [[plugins]]
+## repo = 'Shougo/neosnippet-snippets'
+## 
+## [[plugins]]
+## repo = 'autozimu/LanguageClient-neovim'
+## depends = 'deoplete.nvim'
+## on_ft = ['vue']
+## build = './install.sh'
+## hook_source = '''
+## set hidden
+## let g:LanguageClient_serverCommands = {
+##     \ 'vue': ['vls'],
+##     \ }
+## let g:LanguageClient_autoStart = 1
+## nnoremap <silent> K :call LanguageClient_textDocument_hover()<CR>
+## nnoremap <silent> gd :call LanguageClient_textDocument_definition()<CR>
+## nnoremap <silent> <F2> :call LanguageClient_textDocument_rename()<CR>
+## '''
+## 
+## [[plugins]]
+## repo = 'w0rp/ale'
+## #######################
 
 # カッコ系
 [[plugins]]
