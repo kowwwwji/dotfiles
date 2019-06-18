@@ -13,6 +13,7 @@
   bv = branch -vv
   see = browse
   st = status
+  ls = log --stat
 # 複合コマンド
   delete-merged-branches = !git branch --merged | grep -vE '^\\*|master$|develop$' | xargs -I % git branch -d %
   graph = log --graph --date-order -C -M --pretty=format:\"<%h> %ad [%an] %Cgreen%d%Creset %s\" --all --date=short

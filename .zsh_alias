@@ -5,6 +5,6 @@ alias gh='hub browse $(ghq list | peco | cut -d "/" -f 2,3)'
 
 alias ll='ls -la'
 
-alias nv='nvim'
+alias vim=nvim
 
 alias git=hub
