@@ -115,10 +115,11 @@ inoremap <c-j> <down>
 let $PATH = "~/.pyenv/shims:".$PATH
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" dein.vimの設定
+" プラグイン設定
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""
 let s:dein_dir = expand('~/.cache/dein')
 let s:dein_repo_dir = s:dein_dir . '/repos/github.com/Shougo/dein.vim'
+let g:python3_host_prog = $PYENV_ROOT . '/shims/python3'
 
 if !isdirectory(s:dein_repo_dir)
   call system('git clone https://github.com/Shougo/dein.vim ' . shellescape(s:dein_repo_dir))
@@ -140,11 +141,12 @@ endif
 
 filetype plugin indent on
 syntax enable
-"" 
-"" "" vueファイルのときのsyntax設定
+
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" vueファイルのときのsyntax設定
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 "" autocmd FileType vue syntax sync fromstart
 "" 
-"" let g:python3_host_prog = $PYENV_ROOT . '/shims/python3'
 "" 
 "" " deoplete.vim
 "" let g:deoplete#enable_at_startup = 1
@@ -186,5 +188,3 @@ syntax enable
 "" nnoremap <silent> K :call LanguageClient_textDocument_hover()<CR>
 "" nnoremap <silent> gd :call LanguageClient_textDocument_definition()<CR>
 "" nnoremap <silent> <F2> :call LanguageClient_textDocument_rename()<CR>
-
-

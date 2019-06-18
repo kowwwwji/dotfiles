@@ -1,92 +1,105 @@
-[[plugins]]
-repo = 'Shougo/dein.vim'
+# パッケージマネージャ
+  [[plugins]]
+  repo = 'Shougo/dein.vim'
 
-[[plugins]]
-repo = 'Shougo/vimproc.vim'
-build = 'make'
+# 非同期処理のため
+  [[plugins]]
+  repo = 'Shougo/vimproc.vim'
+  build = 'make'
 
-[[plugins]]
-repo = 'Shougo/neomru.vim'
-on_path = '.*'
+# 統合インターフェース関連
+  [[plugins]]
+  repo = 'Shougo/neomru.vim'
+  on_path = '.*'
+  
+  [[plugins]]
+  repo = 'Shougo/unite.vim'
+  depends = 'neomru.vim'
 
-[[plugins]]
-repo = 'Shougo/unite.vim'
-depends = 'neomru.vim'
+# 補完機能
+  [[plugins]]
+  repo = 'Shougo/context_filetype.vim'
 
-[[plugins]]
-repo = 'Shougo/context_filetype.vim'
+  [[plugins]]
+  repo = 'roxma/nvim-yarp'
 
-[[plugins]]
-repo = 'Shougo/deoplete.nvim'
-depends = 'context_filetype.vim'
-on_i = 1
-hook_source = '''
-let g:deoplete#enable_at_startup = 1
-'''
+  [[plugins]]
+  repo = 'roxma/vim-hug-neovim-rpc'
 
-[[plugins]]
-repo = 'Shougo/vimfiler.vim'
+  [[plugins]]
+  repo = 'Shougo/deoplete.nvim'
+  depends = 'context_filetype.vim'
+  on_i = 1
+  hook_source = '''
+    let g:deoplete#enable_at_startup = 1
+  '''
+# ファイラー
+  [[plugins]]
+  repo = 'Shougo/vimfiler.vim'
 
-[[plugins]]
-repo = 'thinca/vim-quickrun'
+# 選択したコードを実行できる
+  [[plugins]]
+  repo = 'thinca/vim-quickrun'
 
-[[plugins]]
-repo = 'editorconfig/editorconfig-vim'
+# エディタ横断の設定
+  [[plugins]]
+  repo = 'editorconfig/editorconfig-vim'
+  
+  [[plugins]]
+  repo = 'majutsushi/tagbar'
+  
+  [[plugins]]
+  repo = 'bling/vim-airline'
 
-[[plugins]]
-repo = 'majutsushi/tagbar'
+# スニペット
+  [[plugins]]
+  repo = 'Shougo/neosnippet.vim'
+  depends = ['context_filetype.vim']
+  on_event = 'InsertCharPre'
+  on_ft = 'snippet'
+  
+  [[plugins]]
+  repo = 'Shougo/neosnippet-snippets'
 
-[[plugins]]
-repo = 'bling/vim-airline'
-
-## #########################
-## [[plugins]]
-## repo = 'Shougo/neosnippet.vim'
-## depends = ['context_filetype.vim']
-## on_event = 'InsertCharPre'
-## on_ft = 'snippet'
-## 
-## [[plugins]]
-## repo = 'Shougo/neosnippet-snippets'
-## 
-## [[plugins]]
-## repo = 'autozimu/LanguageClient-neovim'
-## depends = 'deoplete.nvim'
-## on_ft = ['vue']
-## build = './install.sh'
-## hook_source = '''
-## set hidden
-## let g:LanguageClient_serverCommands = {
-##     \ 'vue': ['vls'],
-##     \ }
-## let g:LanguageClient_autoStart = 1
-## nnoremap <silent> K :call LanguageClient_textDocument_hover()<CR>
-## nnoremap <silent> gd :call LanguageClient_textDocument_definition()<CR>
-## nnoremap <silent> <F2> :call LanguageClient_textDocument_rename()<CR>
-## '''
-## 
-## [[plugins]]
-## repo = 'w0rp/ale'
-## #######################
+# Vueの補完
+  [[plugins]]
+  repo = 'autozimu/LanguageClient-neovim'
+  depends = 'deoplete.nvim'
+  on_ft = ['vue']
+  build = './install.sh'
+  hook_source = '''
+    set hidden
+    let g:LanguageClient_serverCommands = {
+        \ 'vue': ['vls'],
+        \ }
+    let g:LanguageClient_autoStart = 1
+    nnoremap <silent> K :call LanguageClient_textDocument_hover()<CR>
+    nnoremap <silent> gd :call LanguageClient_textDocument_definition()<CR>
+    nnoremap <silent> <F2> :call LanguageClient_textDocument_rename()<CR>
+  '''
+# 非同期コードチェッカー
+  [[plugins]]
+  repo = 'w0rp/ale'
 
 # カッコ系
-[[plugins]]
-repo = 'tpope/vim-endwise'
-[[plugins]]
-repo = 'tpope/vim-surround'
-[[plugins]]
-repo = 'cohama/lexima.vim'
+  [[plugins]]
+  repo = 'tpope/vim-endwise'
+  [[plugins]]
+  repo = 'tpope/vim-surround'
+  [[plugins]]
+  repo = 'cohama/lexima.vim'
 
 # テーブル系
-[[plugins]]
-repo = 'godlygeek/tabular'
-[[plugins]]
-repo = 'dhruvasagar/vim-table-mode'
+  [[plugins]]
+  repo = 'godlygeek/tabular'
+  [[plugins]]
+  repo = 'dhruvasagar/vim-table-mode'
 
-# Syntax Highlight
+# Syntax checker
   [[plugins]]
   repo = 'scrooloose/syntastic'
 
+# Syntax HighLight
   [[plugins]]
   repo = 'cespare/vim-toml'
   on_ft = 'toml'
@@ -111,3 +124,7 @@ repo = 'dhruvasagar/vim-table-mode'
 
   [[plugins]]
   repo = 'plasticboy/vim-markdown'
+
+# 移動
+ [[plugins]]
+ repo = 'easymotion/vim-easymotion'
