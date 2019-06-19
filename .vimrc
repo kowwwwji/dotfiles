@@ -146,6 +146,23 @@ filetype plugin indent on
 syntax enable
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" Previm用の設定
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+let g:previm_open_cmd = 'open -a Google\ Chrome'
+augroup PrevimSettings
+  autocmd!
+  autocmd BufNewFile,BufRead *.{md,mdwn,mkd,mkdn,mark*} set filetype=markdown
+  nnoremap <silent> <C-m> :PrevimOpen<CR>
+augroup END
+
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" open-brawser用の設定 
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+let g:netrw_nogx = 1
+augroup OpenBrowserSettings
+  nmap gx <Plug>(openbrowser-smart-search)
+augroup END
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " vueファイルのときのsyntax設定
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""
 "" autocmd FileType vue syntax sync fromstart

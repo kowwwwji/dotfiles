@@ -120,7 +120,7 @@
   repo = 'tyru/open-browser.vim'
 
   [[plugins]]
-  repo = 'kannokanno/previm'
+  repo = 'previm/previm'
 
   [[plugins]]
   repo = 'plasticboy/vim-markdown'
