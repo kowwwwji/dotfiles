@@ -8,3 +8,5 @@ alias ll='ls -la'
 alias vim=nvim
 
 alias git=hub
+
+alias brew="PATH=/usr/local/bin:/usr/local/sbin:/usr/bin:/bin:/usr/sbin:/sbin brew"
