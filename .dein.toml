@@ -1,3 +1,7 @@
+# ヘルプ日本語化
+  [[plugins]]
+  repo = 'vim-jp/vimdoc-ja'
+
 # パッケージマネージャ
   [[plugins]]
   repo = 'Shougo/dein.vim'
@@ -16,23 +20,6 @@
   repo = 'Shougo/unite.vim'
   depends = 'neomru.vim'
 
-# 補完機能
-  [[plugins]]
-  repo = 'Shougo/context_filetype.vim'
-
-  [[plugins]]
-  repo = 'roxma/nvim-yarp'
-
-  [[plugins]]
-  repo = 'roxma/vim-hug-neovim-rpc'
-
-  [[plugins]]
-  repo = 'Shougo/deoplete.nvim'
-  depends = 'context_filetype.vim'
-  on_i = 1
-  hook_source = '''
-    let g:deoplete#enable_at_startup = 1
-  '''
 # ファイラー
   [[plugins]]
   repo = 'Shougo/vimfiler.vim'
@@ -51,12 +38,28 @@
   [[plugins]]
   repo = 'bling/vim-airline'
 
-# スニペット
+# 補完機能
+  [[plugins]]
+  repo = 'Shougo/context_filetype.vim'
+
+  [[plugins]]
+  repo = 'roxma/nvim-yarp'
+
+  [[plugins]]
+  repo = 'roxma/vim-hug-neovim-rpc'
+
+  [[plugins]]
+  repo = 'Shougo/deoplete.nvim'
+  depends = 'context_filetype.vim'
+  on_i = 1
+  hook_source = '''
+    let g:deoplete#enable_at_startup = 1
+  '''
+
   [[plugins]]
   repo = 'Shougo/neosnippet.vim'
   depends = ['context_filetype.vim']
   on_event = 'InsertCharPre'
-  on_ft = 'snippet'
   
   [[plugins]]
   repo = 'Shougo/neosnippet-snippets'
@@ -70,8 +73,8 @@
   hook_source = '''
     set hidden
     let g:LanguageClient_serverCommands = {
-        \ 'vue': ['vls'],
-        \ }
+      \ 'vue': ['vls'],
+      \ }
     let g:LanguageClient_autoStart = 1
     nnoremap <silent> K :call LanguageClient_textDocument_hover()<CR>
     nnoremap <silent> gd :call LanguageClient_textDocument_definition()<CR>
@@ -126,5 +129,6 @@
   repo = 'plasticboy/vim-markdown'
 
 # 移動
- [[plugins]]
- repo = 'easymotion/vim-easymotion'
+  [[plugins]]
+  repo = 'easymotion/vim-easymotion'
+
