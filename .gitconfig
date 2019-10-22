@@ -11,6 +11,7 @@
   b = branch 
   cb = checkout -b
   bv = branch -vv
+  bva = branch -vva
   see = browse
   st = status
   ls = log --stat
@@ -19,11 +20,34 @@
   graph = log --graph --date-order -C -M --pretty=format:\"<%h> %ad [%an] %Cgreen%d%Creset %s\" --all --date=short
 
 # WIPブランチを作成してPRを作成する 
-  start = !"f() { if [ $# -ne 1 ]; then echo 'set branch-name!'; exit 1; fi; git checkout -b $1; git commit --allow-empty -m \\"[WIP]$1"\\ ; git push -u origin $1; hub pull-request --draft; }; f"
+  start = !"f () {\
+    NEW_BRANCH=$1;\
+    BASE_BRANCH=`git rev-parse --abbrev-ref @`;\
+    if [ -z $1  ]; then\
+      git branch;\
+      read -p 'What is Base Branch Name?' bb;\
+      NEW_BRANCH=$BASE_BRANCH;\
+      BASE_BRANCH=$bb;\
+    fi;\
+    read -p 'You Make Base Branch:'$BASE_BRANCH' -> New Branch:'$NEW_BRANCH'? (y/n) ' yn;\
+    case $yn in\
+      [yY]* ) echo 'OK! Lets Start!!';;\
+      * ) exit 1;;\
+    esac;\
+    git checkout -b $1;\
+    git commit --allow-empty -m $1;\
+    git push -u origin $1;\
+    hub pull-request --draft -b $BASE_BRANCH;\
+  }; f"
 # 作業終了後、作成したPRを表示する
   # hub browse して画面上でPRをクリックする。
 # Merge後、ローカルとリモートブランチをあわせる
-  refresh = !"f() { git checkout master; git pull -p origin master; git delete-merged-branches; git branch -avv; }; f"
+  refresh = !"f () { \
+    git checkout master; \
+    git pull -p; \
+    git delete-merged-branches; \
+    git branch -avv; \
+  }; f"
 
 [merge]
   ff = false
