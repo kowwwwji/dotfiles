@@ -4,7 +4,7 @@
 export LANG=ja_JP.UTF-8
 
 # インストールしたものの読込
-path=(/usr/local/bin(N-/) $path)
+path=(/usr/local/bin(N-/) /usr/local/sbin(N-/) $path)
 
 # 色を使用出来るようにする
 autoload -Uz colors
@@ -150,3 +150,9 @@ eval "$(pyenv init -)"
 export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
 [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
+
+# rbenv用の設定
+export RBENV_ROOT="$HOME/.rbenv"
+export PATH="$RBENV_ROOT/bin:$PATH"
+eval "$(rbenv init -)"
+
