@@ -1,3 +1,6 @@
+# プロファイル用
+zmodload zsh/zprof && zprof
+
 ########################################
 # 環境変数
 ########################################
@@ -146,9 +149,14 @@ export PYENV_ROOT="$HOME/.pyenv"
 export PATH="$PYENV_ROOT/bin:$PATH"
 eval "$(pyenv init -)"
 
-# nvm用の設定
+
+# nvm用の設定 nvmコマンドを使用したときのみnvm.shをロードするようにする。
 export NVM_DIR="$HOME/.nvm"
-[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
+nvm() {
+    unset -f nvm
+    source "${NVM_DIR:-$HOME/.nvm}/nvm.sh"
+    nvm "$@"
+}
 [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
 
 # rbenv用の設定
@@ -156,3 +164,7 @@ export RBENV_ROOT="$HOME/.rbenv"
 export PATH="$RBENV_ROOT/bin:$PATH"
 eval "$(rbenv init -)"
 
+# プロファイル用
+if (which zprof > /dev/null 2>&1) ;then
+  zprof
+fi
