@@ -1,5 +1,7 @@
+########################################
 # プロファイル用
-zmodload zsh/zprof && zprof
+########################################
+#zmodload zsh/zprof && zprof
 
 ########################################
 # 環境変数
@@ -164,7 +166,9 @@ export RBENV_ROOT="$HOME/.rbenv"
 export PATH="$RBENV_ROOT/bin:$PATH"
 eval "$(rbenv init -)"
 
+########################################
 # プロファイル用
-if (which zprof > /dev/null 2>&1) ;then
-  zprof
-fi
+########################################
+#if (which zprof > /dev/null 2>&1) ;then
+#  zprof
+#fi
