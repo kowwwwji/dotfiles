@@ -70,7 +70,7 @@
   depends = 'deoplete.nvim'
   on_ft = ['vue']
   build = './install.sh'
-  hook_source = '''
+  hook_source= '''
     set hidden
     let g:LanguageClient_serverCommands = {
       \ 'vue': ['vls'],
@@ -121,9 +121,24 @@
 # Markdown用
   [[plugins]]
   repo = 'tyru/open-browser.vim'
+  hook_add = '''
+    let g:netrw_nogx = 1
+    augroup OpenBrowserSettings
+      nmap gx <Plug>(openbrowser-smart-search)
+      vmap gx <Plug>(openbrowser-smart-search)
+    augroup END
+  '''
 
   [[plugins]]
   repo = 'previm/previm'
+  hook_add = '''
+    let g:previm_open_cmd = 'open -a Google\ Chrome'
+    augroup PrevimSettings
+      autocmd!
+      autocmd BufNewFile,BufRead *.{md,mdwn,mkd,mkdn,mark*} set filetype=markdown
+      nnoremap <silent> <C-m> :PrevimOpen<CR>
+    augroup END
+  '''
 
   [[plugins]]
   repo = 'plasticboy/vim-markdown'
@@ -131,4 +146,3 @@
 # 移動
   [[plugins]]
   repo = 'easymotion/vim-easymotion'
-
