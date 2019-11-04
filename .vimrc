@@ -1,3 +1,7 @@
+if &compatible
+  set nocompatible               " Be iMproved
+endif
+
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " 画面表示の設定
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -122,7 +126,8 @@ let $PATH = "~/.pyenv/shims:".$PATH
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""
 let s:dein_dir = expand('~/.cache/dein')
 let s:dein_repo_dir = s:dein_dir . '/repos/github.com/Shougo/dein.vim'
-let g:python3_host_prog = $PYENV_ROOT . '/shims/python3'
+let g:python_host_prog = $PYENV_ROOT . '/versions/neovim-2/bin/python'
+let g:python3_host_prog = $PYENV_ROOT . '/versions/neovim-3/bin/python'
 
 if !isdirectory(s:dein_repo_dir)
   call system('git clone https://github.com/Shougo/dein.vim ' . shellescape(s:dein_repo_dir))
@@ -131,9 +136,11 @@ endif
 execute 'set runtimepath^=' . s:dein_repo_dir
 
 let s:toml = '~/.dein.toml'
+let s:lazy_toml = '~/.dein_lazy.toml'
 if dein#load_state(s:dein_dir)
-  call dein#begin(s:dein_dir, [$MYVIMRC, s:toml])
-  call dein#load_toml(s:toml)
+  call dein#begin(s:dein_dir)
+  call dein#load_toml(s:toml,      {'lazy': 0})
+  call dein#load_toml(s:lazy_toml, {'lazy': 1})
   call dein#end()
   call dein#save_state()
 endif
@@ -144,48 +151,3 @@ endif
 
 filetype plugin indent on
 syntax enable
-
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" vueファイルのときのsyntax設定
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-autocmd FileType vue syntax sync fromstart
- 
-function! s:check_back_space() abort
-  let col = col('.') - 1
-  return !col || getline('.')[col - 1]  =~ '\s'
-endfunction 
-
-" <TAB>: completion.
-inoremap <silent><expr> <TAB>
-      \ pumvisible() ? "\<C-n>" :
-      \ <SID>check_back_space() ? "\<TAB>" :
-      \ deoplete#manual_complete()
-
-" <S-TAB>: completion back.
-inoremap <expr><S-TAB>  pumvisible() ? "\<C-p>" : "\<C-h>"
-
-" <BS>: close popup and delete backword char.
-inoremap <expr><BS> deoplete#smart_close_popup()."\<C-h>"
-
-" <CR>: close popup and save indent.
-inoremap <silent> <CR> <C-r>=<SID>my_cr_function()<CR>
-function! s:my_cr_function() abort
-  return deoplete#cancel_popup() . "\<CR>"
-endfunction
-
-" neosnippet.vim
-"imap <C-i>     <Plug>(neosnippet_expand_or_jump)
-"smap <C-i>     <Plug>(neosnippet_expand_or_jump)
-"xmap <C-i>     <Plug>(neosnippet_expand_target)
-let g:neosnippet#enable_snipmate_compatibility = 1
-let g:neosnippet#enable_completed_snippet = 1
-let g:neosnippet#expand_word_boundary = 1
-
-" LanguageClient-neovim
-set hidden
-let g:LanguageClient_serverCommands = {
-    \ 'vue': ['vls'],
-    \ }
-nnoremap <silent> K :call LanguageClient_textDocument_hover()<CR>
-nnoremap <silent> gd :call LanguageClient_textDocument_definition()<CR>
-nnoremap <silent> <F2> :call LanguageClient_textDocument_rename()<CR>
