@@ -1,0 +1,64 @@
+  [[plugins]]
+  repo = 'Shougo/neosnippet.vim'
+  depends = ['neosnippet-snippets', 'context_filetype.vim']
+  on_event = 'InsertCharPre'
+  on_ft = 'snippet'
+  hook_source = '''
+    imap <C-k> <Plug>(neosnippet_jump_or_expand)
+    smap <C-k> <Plug>(neosnippet_jump_or_expand)
+    xmap <C-k> <Plug>(neosnippet_expand_target)
+
+    let g:neosnippet#enable_snipmate_compatibility = 1
+    let g:neosnippet#enable_completed_snippet = 1
+    let g:neosnippet#expand_word_boundary = 1
+
+    let g:neosnippet#snippets_directory = '~/.vim/snippets'
+  '''
+
+  [[plugins]]
+  repo = 'Shougo/deoplete.nvim'
+  depends = 'context_filetype.vim'
+  on_event = 'InsertEnter'
+  hook_add = '''
+    let g:deoplete#enable_at_startup = 1
+  '''
+  hook_source = '''
+    function! s:check_back_space() abort
+      let col = col('.') - 1
+      return !col || getline('.')[col - 1]  =~ '\s'
+    endfunction 
+    
+    function! s:my_cr_function() abort
+      return deoplete#cancel_popup() . "\<CR>"
+    endfunction
+
+    " <TAB>: completion.
+    inoremap <expr><TAB> pumvisible() ? 
+      "\<C-n>" : <SID>check_back_space() ? 
+        "\<TAB>" : \ deoplete#manual_complete()
+    
+    " <S-TAB>: completion back.
+    inoremap <expr><S-TAB>  pumvisible() ? "\<C-p>" : "\<C-h>"
+    
+    " <BS>: close popup and delete backword char.
+    inoremap <expr><BS> deoplete#smart_close_popup()."\<C-h>"
+    
+    " <CR>: close popup and save indent.
+    inoremap <CR> <C-r>=<SID>my_cr_function()<CR>
+  '''
+
+# Vueの補完
+  [[plugins]]
+  repo = 'autozimu/LanguageClient-neovim'
+  depends = 'deoplete.nvim'
+  on_ft = ['vue']
+  build = './install.sh'
+  hook_source= '''
+    let g:LanguageClient_serverCommands = {
+      \ 'vue': ['vls'],
+      \ }
+    let g:LanguageClient_autoStart = 1
+    nnoremap <silent> K :call LanguageClient_textDocument_hover()<CR>
+    nnoremap <silent> gd :call LanguageClient_textDocument_definition()<CR>
+    nnoremap <silent> <F2> :call LanguageClient_textDocument_rename()<CR>
+  '''
