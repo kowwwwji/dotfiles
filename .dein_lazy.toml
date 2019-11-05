@@ -34,8 +34,8 @@
 
     " <TAB>: completion.
     inoremap <expr><TAB> pumvisible() ? 
-      "\<C-n>" : <SID>check_back_space() ? 
-        "\<TAB>" : \ deoplete#manual_complete()
+    \ "\<C-n>" : <SID>check_back_space() ? 
+    \   "\<TAB>" : deoplete#manual_complete()
     
     " <S-TAB>: completion back.
     inoremap <expr><S-TAB>  pumvisible() ? "\<C-p>" : "\<C-h>"
@@ -46,6 +46,13 @@
     " <CR>: close popup and save indent.
     inoremap <CR> <C-r>=<SID>my_cr_function()<CR>
   '''
+
+
+# Ruby関連
+  [[plugins]]
+  repo = 'tpope/vim-rails'
+  on_ft = ['rb']
+
 
 # Vueの補完
   [[plugins]]
@@ -62,3 +69,7 @@
     nnoremap <silent> gd :call LanguageClient_textDocument_definition()<CR>
     nnoremap <silent> <F2> :call LanguageClient_textDocument_rename()<CR>
   '''
+  [[plugins]]
+  repo = 'mhartington/nvim-typescript'
+  on_ft = ['ts']
+  build = './install.sh'
