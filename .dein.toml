@@ -54,6 +54,9 @@
 # 非同期コードチェッカー
   [[plugins]]
   repo = 'w0rp/ale'
+  hook_source = '''
+  
+  '''
 
 # カッコ系
   [[plugins]]
@@ -100,16 +103,18 @@
     augroup END
   '''
 
-  [[plugins]]
-  repo = 'previm/previm'
-  hook_add = '''
-    let g:previm_open_cmd = 'open -a Google\ Chrome'
-    augroup PrevimSettings
-      autocmd!
-      autocmd BufNewFile,BufRead *.{md,mdwn,mkd,mkdn,mark*} set filetype=markdown
-      nnoremap <silent> <C-m> :PrevimOpen<CR>
-    augroup END
-  '''
+#  [[plugins]]
+#  repo = 'kannokanno/previm'
+#  on_cmd = 'PrevimOpen'
+#  depends = 'open-browser.vim'
+#  hook_add = '''
+#    let g:previm_open_cmd = 'open -a Google\ Chrome'
+#    augroup PrevimSettings
+#      autocmd!
+#      autocmd BufNewFile,BufRead *.{md,mdwn,mkd,mkdn,mark*} set filetype=markdown
+#      nnoremap <silent> <C-m> :PrevimOpen<CR>
+#    augroup END
+#  '''
 
   [[plugins]]
   repo = 'plasticboy/vim-markdown'
@@ -117,3 +122,14 @@
 # 移動
   [[plugins]]
   repo = 'easymotion/vim-easymotion'
+
+# IDEみたいにするために
+  [[plugins]]
+  repo = 'scrooloose/nerdtree'
+  hook_add = '''
+    nnoremap <silent><C-e> :NERDTreeToggle<CR>
+  '''
+
+  [[plugins]]
+  repo ='junegunn/fzf.vim'
+
