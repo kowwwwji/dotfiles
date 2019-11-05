@@ -14,6 +14,9 @@ set cmdheight=2    " メッセージ表示欄を2行確保
 set showmatch      " 対応する括弧を強調表示
 set helpheight=999 " ヘルプを画面いっぱいに開く
 set list           " 不可視文字を表示
+"" 補完のポップアップメニューの色
+highlight Pmenu ctermfg=white ctermbg=darkgray
+highlight PmenuSel ctermfg=yellow ctermbg=black
 
 " 不可視文字の表示記号指定
 set listchars=tab:▸\ ,eol:↲,extends:❯,precedes:❮
