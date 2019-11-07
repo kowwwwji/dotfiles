@@ -1,0 +1,69 @@
+{
+    "window.zoomLevel": 0,
+    "workbench.colorTheme": "Opacc Web Application Services - dark",
+    "vetur.format.defaultFormatter.html": "js-beautify-html",
+    "editor.formatOnSave": false,
+    "eslint.autoFixOnSave": true,
+    "eslint.validate": [
+        "javascript",
+        {
+            "language": "typescript",
+            "autoFix": true
+        },
+        {
+            "language": "vue",
+            "autoFix": true
+        }
+    ],
+    "git.enableSmartCommit": true,
+    "terminal.integrated.shell.osx": "/bin/zsh",
+    "editor.minimap.enabled": false,
+    "workbench.colorCustomizations": {
+        "statusBar.background": "#005f5f",
+        "statusBar.noFolderBackground": "#005f5f",
+        "statusBar.debuggingBackground": "#005f5f"
+    },
+    "vim.useCtrlKeys": true,
+    "vim.easymotion": true,
+    "vim.leader": "<space>",
+    "vim.statusBarColorControl": true,
+    "vim.useSystemClipboard": true,
+    "vim.sneak": true,
+    "vim.camelCaseMotion.enable": true,
+    "vim.changeWordIncludesWhitespace": true,
+    "vim.normalModeKeyBindings": [
+        {
+            "before": [";"],
+            "after": [":"]
+        },
+    ],
+    "vim.easymotionMarkerFontFamily": "Menlo, Monaco, 'Courier New', monospace",
+    "diffEditor.ignoreTrimWhitespace": false,
+    "editor.tabSize": 2,
+    "python.pythonPath": "/Users/ko-sakamoto/.pyenv/versions/3.6.7/bin/python",
+    "editor.suggestSelection": "first",
+    "vsintellicode.modify.editor.suggestSelection": "automaticallyOverrodeDefaultValue",
+    "[json]": {
+        "editor.defaultFormatter": "HookyQR.beautify"
+    },
+    "typescript.updateImportsOnFileMove.enabled": "always",
+    "terminal.integrated.rendererType": "dom",
+    "workbench.iconTheme": "vscode-icons",
+
+    //Ruby用
+    "ruby.intellisense": "rubyLocate",
+    "ruby.codeCompletion": "rcodetools",
+    "ruby.useBundler": true,
+    "ruby.useLanguageServer": true,
+    "ruby.lint": {
+        "rubocop": true
+    },
+    "ruby.format": "rubocop",
+    "ruby.rubocop.executePath": "/Users/ko-sakamoto/.rbenv/shims/",
+    "solargraph.definitions": true,
+    "solargraph.diagnostics": true,
+    "[ruby]": {
+        "editor.defaultFormatter": "misogi.ruby-rubocop"
+    },
+    "keyboard.dispatch": "keyCode"
+}
