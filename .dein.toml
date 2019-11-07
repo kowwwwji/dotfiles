@@ -147,3 +147,6 @@
     nnoremap <silent> ,h :History<CR>
     nnoremap <silent> ,m :Mark<CR><Paste>
   '''
+
+  [[plugins]]
+  repo = 'tpope/vim-fugitive'
