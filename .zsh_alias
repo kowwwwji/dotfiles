@@ -2,11 +2,10 @@
 alias g='cd $(ghq root)/$(ghq list | peco)'
 #githubのリモートリポジトリをブラウズ
 alias gh='hub browse $(ghq list | peco | cut -d "/" -f 2,3)'
-
-alias ll='ls -la'
-
-alias vim=nvim
-
-alias git=hub
-
 alias brew="PATH=/usr/local/bin:/usr/local/sbin:/usr/bin:/bin:/usr/sbin:/sbin brew"
+
+alias ll='ls -lha'
+alias vim=nvim
+alias git=hub
+alias dc=docker-compose
+alias re=rbenv
