@@ -1,8 +1,9 @@
 {
+    "files.trimTrailingWhitespace": true,
     "window.zoomLevel": 0,
     "workbench.colorTheme": "Opacc Web Application Services - dark",
     "vetur.format.defaultFormatter.html": "js-beautify-html",
-    "editor.formatOnSave": false,
+    "editor.formatOnSave": true,
     "eslint.autoFixOnSave": true,
     "eslint.validate": [
         "javascript",
@@ -35,7 +36,7 @@
         {
             "before": [";"],
             "after": [":"]
-        },
+        }
     ],
     "vim.easymotionMarkerFontFamily": "Menlo, Monaco, 'Courier New', monospace",
     "diffEditor.ignoreTrimWhitespace": false,
@@ -49,21 +50,27 @@
     "typescript.updateImportsOnFileMove.enabled": "always",
     "terminal.integrated.rendererType": "dom",
     "workbench.iconTheme": "vscode-icons",
-
+    "keyboard.dispatch": "keyCode",
+    "editor.rulers": [
+        80
+    ],
     //Ruby用
-    "ruby.intellisense": "rubyLocate",
-    "ruby.codeCompletion": "rcodetools",
+    "ruby.intellisense": false,
     "ruby.useBundler": true,
     "ruby.useLanguageServer": true,
     "ruby.lint": {
         "rubocop": true
     },
-    "ruby.format": "rubocop",
-    "ruby.rubocop.executePath": "/Users/ko-sakamoto/.rbenv/shims/",
-    "solargraph.definitions": true,
-    "solargraph.diagnostics": true,
     "[ruby]": {
         "editor.defaultFormatter": "misogi.ruby-rubocop"
     },
-    "keyboard.dispatch": "keyCode"
+    "ruby.rubocop.onSave": true,
+    "ruby.rubocop.executePath": "/Users/sakamotokouji/.rbenv/shims/",
+    //Ruby用
+    "solargraph.definitions": true,
+    "solargraph.diagnostics": true,
+    "solargraph.useBundler": true,
+    "solargraph.commandPath": "/Users/sakamotokouji/.rbenv/shims/solargraph",
+    "solargraph.bundlerPath": "/Users/sakamotokouji/.rbenv/shims/bundle",
+    "solargraph.checkGemVersion": true
 }
