@@ -2,6 +2,8 @@
 # 環境変数
 ########################################
 export LANG=ja_JP.UTF-8
+export LC_CTYPE=en_US.UTF-8
+export TERM=xterm-256color
 
 # インストールしたものの読込
 path=(/usr/local/bin(N-/) $path)
@@ -117,8 +119,17 @@ setopt list_packed
 # キーバインド
 ########################################
 # ^R で履歴検索をするときに * でワイルドカードを使用出来るようにする
-bindkey '^R' history-incremental-pattern-search-backward
+# bindkey '^R' history-incremental-pattern-search-backward
 
+# ^Rで検索するときにpecoを使ってインクリメンタルサーチができるようにする。
+function peco-history-selection() {
+    BUFFER=`history -n 1 | tail -r  | awk '!a[$0]++' | peco`
+    CURSOR=$#BUFFER
+    zle reset-prompt
+}
+
+zle -N peco-history-selection
+bindkey '^R' peco-history-selection
 ########################################
 # エイリアス
 ########################################
@@ -146,6 +157,11 @@ export PYENV_ROOT="$HOME/.pyenv"
 export PATH="$PYENV_ROOT/bin:$PATH"
 eval "$(pyenv init -)"
 
+#go用の設定
+export GOENV_ROOT="$HOME/.goenv"
+export PATH="$GOENV_ROOT/bin:$PATH"
+eval "$(goenv init -)"
+
 # # tabtab source for serverless package
 # # uninstall by removing these lines or running `tabtab uninstall serverless`
 # [[ -f /usr/local/lib/node_modules/serverless/node_modules/tabtab/.completions/serverless.zsh ]] && . /usr/local/lib/node_modules/serverless/node_modules/tabtab/.completions/serverless.zsh
@@ -157,3 +173,6 @@ eval "$(pyenv init -)"
 export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
 [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
+
+# rbenvの設定
+eval "$(rbenv init -)"
