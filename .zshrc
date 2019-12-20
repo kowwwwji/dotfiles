@@ -7,6 +7,8 @@
 # 環境変数
 ########################################
 export LANG=ja_JP.UTF-8
+export LC_CTYPE=en_US.UTF-8
+export TERM=xterm-256color
 
 # インストールしたものの読込
 path=(/usr/local/bin(N-/) /usr/local/sbin(N-/) $path)
