@@ -1,5 +1,5 @@
 ########################################
-# プロファイル用
+# デバッグ用
 ########################################
 #zmodload zsh/zprof && zprof
 
@@ -73,6 +73,8 @@ zstyle ':completion:*:sudo:*' \
 # ps コマンドのプロセス名補完
 zstyle ':completion:*:processes' command 'ps x -o pid,s,args'
 
+# fzf completion
+[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 
 ########################################
 # プロンプト
@@ -153,13 +155,16 @@ case ${OSTYPE} in
     ;;
 esac
 
-#python用の設定
+########################################
+# 言語別の設定
+########################################
+# python用の設定
 export PYENV_ROOT="$HOME/.pyenv"
 export PATH="$PYENV_ROOT/bin:$PATH"
 eval "$(pyenv init -)"
 
-
-# nvm用の設定 nvmコマンドを使用したときのみnvm.shをロードするようにする。
+# node
+# nvmコマンドを使用したときのみnvm.shをロードするようにする。
 export NVM_DIR="$HOME/.nvm"
 nvm() {
     unset -f nvm
@@ -168,16 +173,17 @@ nvm() {
 }
 [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
 
-# rbenv用の設定
+# Ruby
 export RBENV_ROOT="$HOME/.rbenv"
 export PATH="$RBENV_ROOT/bin:$PATH"
 eval "$(rbenv init -)"
 
-# fzf completion
-[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+# Go
+export GOPATH=~/.go
+export PATH=$GOPATH/bin:$PATH
 
 ########################################
-# プロファイル用
+# デバッグ用
 ########################################
 #if (which zprof > /dev/null 2>&1) ;then
 #  zprof
