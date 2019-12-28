@@ -24,6 +24,16 @@ bindkey -e
 HISTFILE=~"${HOME}/.zsh_history"
 HISTSIZE=50000
 SAVEHIST=50000
+setopt inc_append_history
+setopt share_history
+# ^Rでpecoを使って履歴検索できるようにする。
+function peco-history-selection() {
+    BUFFER=`history -n 1 | tac  | awk '!a[$0]++' | peco`
+    CURSOR=$#BUFFER
+    zle reset-prompt
+}
+zle -N peco-history-selection
+bindkey '^R' peco-history-selection
 
 # 単語の区切り文字を指定する
 autoload -Uz select-word-style
@@ -120,11 +130,6 @@ setopt correct
 # 補完候補を詰めて表示する設定
 setopt list_packed
 
-########################################
-# キーバインド
-########################################
-# ^R で履歴検索をするときに * でワイルドカードを使用出来るようにする
-bindkey '^R' history-incremental-pattern-search-backward
 
 ########################################
 # エイリアス
