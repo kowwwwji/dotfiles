@@ -12,3 +12,5 @@ alias git=hub
 alias dc=docker-compose
 
 alias re=rbenv
+
+alias lg=lazygit
