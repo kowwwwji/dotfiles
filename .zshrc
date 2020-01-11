@@ -3,6 +3,17 @@
 ########################################
 #zmodload zsh/zprof && zprof
 
+
+########################################
+# 各種設定ファイル
+#########################################
+if [[ -f "${HOME}/.zsh_alias" ]]; then
+  source "${HOME}/.zsh_alias"
+fi
+
+if [[ -f "${HOME}/.zsh_alias" ]]; then
+  HISTFILE="${HOME}/.zsh_history"
+fi
 ########################################
 # 環境変数
 ########################################
@@ -21,19 +32,10 @@ colors
 bindkey -e
 
 # ヒストリの設定
-HISTFILE=~"${HOME}/.zsh_history"
 HISTSIZE=50000
 SAVEHIST=50000
 setopt inc_append_history
 setopt share_history
-# ^Rでpecoを使って履歴検索できるようにする。
-function peco-history-selection() {
-    BUFFER=`history -n 1 | tac  | awk '!a[$0]++' | peco`
-    CURSOR=$#BUFFER
-    zle reset-prompt
-}
-zle -N peco-history-selection
-bindkey '^R' peco-history-selection
 
 # 単語の区切り文字を指定する
 autoload -Uz select-word-style
@@ -131,14 +133,6 @@ setopt extended_glob
 setopt correct
 # 補完候補を詰めて表示する設定
 setopt list_packed
-
-
-########################################
-# エイリアス
-########################################
-if [[ -f "${HOME}/.zsh_alias" ]]; then
-  source "${HOME}/.zsh_alias"
-fi
 
 ########################################
 # OS 別の設定
