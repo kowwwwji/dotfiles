@@ -1,0 +1,12 @@
+#githubのローカルリポジトリに移動
+alias g='cd $(ghq root)/$(ghq list | peco)'
+#githubのリモートリポジトリをブラウズ
+alias gh='hub browse $(ghq list | peco | cut -d "/" -f 2,3)'
+alias brew="PATH=/usr/local/bin:/usr/local/sbin:/usr/bin:/bin:/usr/sbin:/sbin brew"
+
+alias ll='ls -lha'
+alias vim=nvim
+alias git=hub
+alias dc=docker-compose
+alias re=rbenv
+alias lg=lazygit
