@@ -9,6 +9,7 @@
 # 基本コマンド
   st = status
   cm = commit
+  cma = commit --amend
   co = checkout
   b = branch 
   cb = checkout -b
