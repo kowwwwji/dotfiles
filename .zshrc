@@ -14,6 +14,11 @@ fi
 if [[ -f "${HOME}/.zsh_alias" ]]; then
   HISTFILE="${HOME}/.zsh_history"
 fi
+
+GITHUB_CREDENTIAL_FILE=~/.config/.github_credentials
+if [ -e $GITHUB_CREDENTIAL_FILE ]; then
+  source $GITHUB_CREDENTIAL_FILE
+fi
 ########################################
 # 環境変数
 ########################################
