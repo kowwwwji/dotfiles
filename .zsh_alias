@@ -10,3 +10,4 @@ alias git=hub
 alias dc=docker-compose
 alias re=rbenv
 alias lg=lazygit
+alias assume-role='function(){eval $(command assume-role $@);}'
