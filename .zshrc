@@ -174,8 +174,9 @@ export PATH="$RBENV_ROOT/bin:$PATH"
 eval "$(rbenv init -)"
 
 # Go
-export GOPATH=~/.go
-export PATH=$GOPATH/bin:$PATH
+export GOENV_ROOT="$HOME/.goenv"
+export PATH="$GOENV_ROOT/bin:$PATH"
+eval "$(goenv init -)"
 
 ########################################
 # デバッグ用
