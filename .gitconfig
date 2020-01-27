@@ -49,6 +49,7 @@
     git checkout master; \
     git pull -p; \
     git delete-merged-branches; \
+    echo "---Local Branch------------------------------"; \
     git branch -avv; \
   }; f"
 
