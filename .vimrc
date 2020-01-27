@@ -135,6 +135,9 @@ let $PATH = "~/.pyenv/shims:".$PATH
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""
 let s:dein_dir = expand('~/.cache/dein')
 let s:dein_repo_dir = s:dein_dir . '/repos/github.com/Shougo/dein.vim'
+
+" neovim用pythonの設定
+" https://qiita.com/sigwyg/items/41630f8754c2028a7a9f
 let g:python_host_prog = $PYENV_ROOT . '/versions/neovim-2/bin/python'
 let g:python3_host_prog = $PYENV_ROOT . '/versions/neovim-3/bin/python'
 
