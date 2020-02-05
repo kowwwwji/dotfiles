@@ -62,6 +62,10 @@ fi
 autoload -Uz compinit
 compinit -u
 
+# Terraform用
+autoload -U +X bashcompinit && bashcompinit
+complete -o nospace -C /usr/local/bin/terraform terraform
+
 ## 先方予測機能を有効
 #autoload predict-on
 #predict-on
@@ -189,3 +193,4 @@ eval "$(goenv init -)"
 #if (which zprof > /dev/null 2>&1) ;then
 #  zprof
 #fi
+
