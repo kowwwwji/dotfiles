@@ -20,6 +20,9 @@
   repo = 'Shougo/unite.vim'
   depends = 'neomru.vim'
 
+  [[plugins]]
+  repo = 'Shougo/denite.nvim'
+  
 # ファイラー
   [[plugins]]
   repo = 'Shougo/vimfiler.vim'
@@ -164,5 +167,6 @@
     nnoremap <silent> ,m :Mark<CR><Paste>
   '''
 
+# Git操作
   [[plugins]]
   repo = 'tpope/vim-fugitive'

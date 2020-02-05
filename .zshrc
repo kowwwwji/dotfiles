@@ -170,11 +170,12 @@ eval "$(pyenv virtualenv-init -)"
 # node
 # nvmコマンドを使用したときのみnvm.shをロードするようにする。
 export NVM_DIR="$HOME/.nvm"
-nvm() {
-    unset -f nvm
-    source "${NVM_DIR:-$HOME/.nvm}/nvm.sh"
-    nvm "$@"
-}
+#nvm() {
+#    unset -f nvm
+#    source "${NVM_DIR:-$HOME/.nvm}/nvm.sh"
+#    nvm "$@"
+#}
+[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
 [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
 
 # Ruby
