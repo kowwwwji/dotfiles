@@ -41,6 +41,7 @@ set sidescroll=1               " 左右スクロールは一文字づつ行う
 
 " easy-motion用
 let g:EasyMotion_leader_key = '<Space><Space>'
+let mapleader = "\<Space>"
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " ファイル処理関連の設定
@@ -165,3 +166,7 @@ endif
 
 filetype plugin indent on
 syntax enable
+
+" nnoremap [Window] <Nop>
+" nmap s [Window]
+" nmap <Space> [Space]
