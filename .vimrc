@@ -41,6 +41,7 @@ set sidescroll=1               " 左右スクロールは一文字づつ行う
 
 " easy-motion用
 let g:EasyMotion_leader_key = '<Space><Space>'
+let mapleader = "\<Space>"
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " ファイル処理関連の設定
@@ -125,41 +126,47 @@ inoremap <c-j> <down>
 cnoremap <C-p> <Up>
 cnoremap <C-n> <Down>
 
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" pyenvで指定したpythonを使用する
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-let $PATH = "~/.pyenv/shims:".$PATH
+if has('nvim')
+  """"""""""""""""""""""""""""""""""""""""""""""""""""""""""
+  " pyenvで指定したpythonを使用する
+  """"""""""""""""""""""""""""""""""""""""""""""""""""""""""
+  let $PATH = "~/.pyenv/shims:".$PATH
 
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" プラグイン設定
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-let s:dein_dir = expand('~/.cache/dein')
-let s:dein_repo_dir = s:dein_dir . '/repos/github.com/Shougo/dein.vim'
+  """"""""""""""""""""""""""""""""""""""""""""""""""""""""""
+  " プラグイン設定
+  """"""""""""""""""""""""""""""""""""""""""""""""""""""""""
+  let s:dein_dir = expand('~/.cache/dein')
+  let s:dein_repo_dir = s:dein_dir . '/repos/github.com/Shougo/dein.vim'
 
-" neovim用pythonの設定
-" https://qiita.com/sigwyg/items/41630f8754c2028a7a9f
-let g:python_host_prog = $PYENV_ROOT . '/versions/neovim-2/bin/python'
-let g:python3_host_prog = $PYENV_ROOT . '/versions/neovim-3/bin/python'
+  " neovim用pythonの設定
+  " https://qiita.com/sigwyg/items/41630f8754c2028a7a9f
+  let g:python_host_prog = $PYENV_ROOT . '/versions/neovim-2/bin/python'
+  let g:python3_host_prog = $PYENV_ROOT . '/versions/neovim-3/bin/python'
 
-if !isdirectory(s:dein_repo_dir)
-  call system('git clone https://github.com/Shougo/dein.vim ' . shellescape(s:dein_repo_dir))
-endif
+  if !isdirectory(s:dein_repo_dir)
+    call system('git clone https://github.com/Shougo/dein.vim ' . shellescape(s:dein_repo_dir))
+  endif
 
-execute 'set runtimepath^=' . s:dein_repo_dir
+  execute 'set runtimepath^=' . s:dein_repo_dir
 
-let s:toml = '~/.dein.toml'
-let s:lazy_toml = '~/.dein_lazy.toml'
-if dein#load_state(s:dein_dir)
-  call dein#begin(s:dein_dir)
-  call dein#load_toml(s:toml,      {'lazy': 0})
-  call dein#load_toml(s:lazy_toml, {'lazy': 1})
-  call dein#end()
-  call dein#save_state()
-endif
+  let s:toml = '~/.dein.toml'
+  let s:lazy_toml = '~/.dein_lazy.toml'
+  if dein#load_state(s:dein_dir)
+    call dein#begin(s:dein_dir)
+    call dein#load_toml(s:toml,      {'lazy': 0})
+    call dein#load_toml(s:lazy_toml, {'lazy': 1})
+    call dein#end()
+    call dein#save_state()
+  endif
 
-if has('vim_starting') && dein#check_install()
- call dein#install()
+  if has('vim_starting') && dein#check_install()
+   call dein#install()
+  endif
 endif
 
 filetype plugin indent on
 syntax enable
+
+" nnoremap [Window] <Nop>
+" nmap s [Window]
+" nmap <Space> [Space]

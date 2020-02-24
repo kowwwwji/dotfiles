@@ -62,6 +62,10 @@ fi
 autoload -Uz compinit
 compinit -u
 
+# Terraform用
+autoload -U +X bashcompinit && bashcompinit
+complete -o nospace -C /usr/local/bin/terraform terraform
+
 ## 先方予測機能を有効
 #autoload predict-on
 #predict-on
@@ -166,11 +170,12 @@ eval "$(pyenv virtualenv-init -)"
 # node
 # nvmコマンドを使用したときのみnvm.shをロードするようにする。
 export NVM_DIR="$HOME/.nvm"
-nvm() {
-    unset -f nvm
-    source "${NVM_DIR:-$HOME/.nvm}/nvm.sh"
-    nvm "$@"
-}
+#nvm() {
+#    unset -f nvm
+#    source "${NVM_DIR:-$HOME/.nvm}/nvm.sh"
+#    nvm "$@"
+#}
+[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
 [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
 
 # Ruby
@@ -189,3 +194,4 @@ eval "$(goenv init -)"
 #if (which zprof > /dev/null 2>&1) ;then
 #  zprof
 #fi
+

@@ -20,6 +20,12 @@
   repo = 'Shougo/unite.vim'
   depends = 'neomru.vim'
 
+#  [[plugins]]
+#  repo = 'Shougo/denite.nvim'
+#  hook_add = '''
+#    source ~/.config/nvim/plugins/denite.vim 
+#  '''
+  
 # ファイラー
   [[plugins]]
   repo = 'Shougo/vimfiler.vim'
@@ -83,6 +89,7 @@
 
   [[plugins]]
   repo = 'posva/vim-vue'
+  on_ft = 'vue'
 
   [[plugins]]
   repo = 'elzr/vim-json'
@@ -103,21 +110,29 @@
     augroup END
   '''
 
-#  [[plugins]]
-#  repo = 'kannokanno/previm'
-#  on_cmd = 'PrevimOpen'
-#  depends = 'open-browser.vim'
-#  hook_add = '''
-#    let g:previm_open_cmd = 'open -a Google\ Chrome'
-#    augroup PrevimSettings
-#      autocmd!
-#      autocmd BufNewFile,BufRead *.{md,mdwn,mkd,mkdn,mark*} set filetype=markdown
-#      nnoremap <silent> <C-m> :PrevimOpen<CR>
-#    augroup END
-#  '''
+  [[plugins]]
+  repo = 'kannokanno/previm'
+  on_cmd = 'PrevimOpen'
+  depends = 'open-browser.vim'
+  hook_add = '''
+    let g:previm_open_cmd = 'open -a Google\ Chrome'
+    augroup PrevimSettings
+      autocmd!
+      autocmd BufNewFile,BufRead *.{md,mdwn,mkd,mkdn,mark*} set filetype=markdown
+      nnoremap <silent> <C-m> :PrevimOpen<CR>
+    augroup END
+  '''
 
   [[plugins]]
   repo = 'plasticboy/vim-markdown'
+  hook_add = '''
+    " 折りたたみOFF
+    let g:vim_markdown_folding_disabled = 1
+    " 以下2つは問題が出るためON
+    " https://github.com/plasticboy/vim-markdown#do-not-automatically-insert-bulletpoints
+    let g:vim_markdown_auto_insert_bullets = 0
+    let g:vim_markdown_new_list_item_indent = 0
+  '''
 
 # 移動
   [[plugins]]
@@ -129,6 +144,13 @@
   hook_add = '''
     let NERDTreeShowHidden=1
     nnoremap <silent><C-e> :NERDTreeToggle<CR>
+
+    "引数なしでvimを開いたらNERDTreeを起動、
+    "引数ありならNERDTreeは起動せず、引数で渡されたファイルを開く。
+    autocmd vimenter * if !argc() | NERDTree | endif
+
+    "他のバッファをすべて閉じた時にNERDTreeが開いていたらNERDTreeも一緒に閉じる。
+    autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
   '''
 
   [[plugins]]
@@ -140,13 +162,21 @@
   repo ='junegunn/fzf.vim'
   depends = 'fzf'
   hook_add = '''
-    nnoremap <silent> ,f :GFiles<CR>
-    nnoremap <silent> ,F :GFiles?<CR>
-    nnoremap <silent> ,b :Buffers<CR>
-    nnoremap <silent> ,l :BLines<CR>
-    nnoremap <silent> ,h :History<CR>
-    nnoremap <silent> ,m :Mark<CR><Paste>
+    nnoremap <silent> <Leader>F :Ag<CR>
+    nnoremap <silent> <Leader>f :GFiles<CR>
+    nnoremap <silent> <Leader>gf :GFiles?<CR>
+    nnoremap <silent> <Leader>gc :Commits<CR>
+    nnoremap <silent> <Leader>l :BLines<CR>
+    nnoremap <silent> <Leader>h :History<CR>
+    nnoremap <silent> <Leader>m :Mark<CR><Paste>
   '''
 
+# Git操作
   [[plugins]]
   repo = 'tpope/vim-fugitive'
+
+  [[plugins]]
+  repo = 'haya14busa/vim-edgemotion'
+
+  [[plugins]]
+  repo = "tpope/vim-commentary"
