@@ -12,3 +12,4 @@ alias re=rbenv
 alias lg=lazygit
 alias ar='function(){eval $(command assume-role $@);}'
 alias tf=terraform
+alias tm=tmux
