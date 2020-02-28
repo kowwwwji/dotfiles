@@ -169,6 +169,7 @@
     nnoremap <silent> <Leader>F :Ag<CR>
     nnoremap <silent> <Leader>f :GFiles<CR>
     nnoremap <silent> <Leader>gf :GFiles?<CR>
+    nnoremap <silent> <Leader>gd :Gdiff<CR>
     nnoremap <silent> <Leader>gc :Commits<CR>
     nnoremap <silent> <Leader>l :BLines<CR>
     nnoremap <silent> <Leader>h :History<CR>
