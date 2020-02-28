@@ -156,6 +156,8 @@
   repo = 'ryanoasis/vim-devicons'
   [[plugins]]
   repo = 'Xuyuanp/nerdtree-git-plugin'
+  [[plugins]]
+  repo = 'tiagofumo/vim-nerdtree-syntax-highlight'
 
   [[plugins]]
   repo ='junegunn/fzf'
