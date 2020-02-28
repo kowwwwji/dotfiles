@@ -11,12 +11,12 @@ if [[ -f "${HOME}/.zsh_alias" ]]; then
   source "${HOME}/.zsh_alias"
 fi
 
-if [[ -f "${HOME}/.zsh_alias" ]]; then
+if [[ -f "${HOME}/.zsh_history" ]]; then
   HISTFILE="${HOME}/.zsh_history"
 fi
 
 GITHUB_CREDENTIAL_FILE=~/.config/.github_credentials
-if [ -e $GITHUB_CREDENTIAL_FILE ]; then
+if [[ -f $GITHUB_CREDENTIAL_FILE ]]; then
   source $GITHUB_CREDENTIAL_FILE
 fi
 ########################################
