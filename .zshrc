@@ -11,12 +11,12 @@ if [[ -f "${HOME}/.zsh_alias" ]]; then
   source "${HOME}/.zsh_alias"
 fi
 
-if [[ -f "${HOME}/.zsh_alias" ]]; then
+if [[ -f "${HOME}/.zsh_history" ]]; then
   HISTFILE="${HOME}/.zsh_history"
 fi
 
 GITHUB_CREDENTIAL_FILE=~/.config/.github_credentials
-if [ -e $GITHUB_CREDENTIAL_FILE ]; then
+if [[ -f $GITHUB_CREDENTIAL_FILE ]]; then
   source $GITHUB_CREDENTIAL_FILE
 fi
 ########################################
@@ -170,7 +170,7 @@ eval "$(pyenv virtualenv-init -)"
 # node
 # nvmコマンドを使用したときのみnvm.shをロードするようにする。
 export NVM_DIR="$HOME/.nvm"
-#nvm() {
+#function nvm() {
 #    unset -f nvm
 #    source "${NVM_DIR:-$HOME/.nvm}/nvm.sh"
 #    nvm "$@"
@@ -186,7 +186,33 @@ eval "$(rbenv init -)"
 # Go
 export GOENV_ROOT="$HOME/.goenv"
 export PATH="$GOENV_ROOT/bin:$PATH"
+export GOPATH=$HOME/.go
 eval "$(goenv init -)"
+
+########################################
+# tmux
+########################################
+function t(){
+  tmux new-session -s $(basename $(pwd))
+}
+
+function peco-select-tmux-session()
+{
+  local session="$(tmux list-sessions | peco | cut -d : -f 1)"
+  if [ -n "$session" ]; then
+    BUFFER="tmux a -t $session"
+    if [ -n "$TMUX" ]; then
+      BUFFER="tmux switch -t $session"
+    fi
+
+    zle accept-line
+  fi
+}
+zle -N peco-select-tmux-session
+bindkey '^T' peco-select-tmux-session
+
+bindkey '^S' fzf-file-widget
+
 
 ########################################
 # デバッグ用
