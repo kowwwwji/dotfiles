@@ -191,6 +191,7 @@
     nnoremap <silent> <Leader>l :BLines<CR>
     nnoremap <silent> <Leader>h :History<CR>
     nnoremap <silent> <Leader>m :Mark<CR><Paste>
+    nnoremap <silent> <Leader>b :Buffer<CR>
   '''
 
 # Git操作
