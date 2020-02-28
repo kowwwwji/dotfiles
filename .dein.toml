@@ -57,6 +57,10 @@
   repo = 'Shougo/neosnippet-snippets'
   depends = ['neosnippet.vim']
 
+  [[plugins]]
+  repo = 'neoclide/coc.nvim'
+  rev = 'release'
+
 # 非同期コードチェッカー
   [[plugins]]
   repo = 'w0rp/ale'
