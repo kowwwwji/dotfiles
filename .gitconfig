@@ -6,7 +6,9 @@
   name = Koji Sakamoto
   email = kowwwwji@gmail.com
 [alias]
+##################
 # 基本コマンド
+##################
   st = status
   cm = commit
   co = checkout
@@ -17,21 +19,29 @@
   see = browse
   st = status
   ls = log --stat
+
+##################
 # 複合コマンド
+##################
   delete-merged-branches = !git branch --merged | grep -vE '^\\*|master$|develop$' | xargs -I % git branch -d %
   graph = log --graph --date-order -C -M --pretty=format:\"<%h> %ad [%an] %Cgreen%d%Creset %s\" --all --date=short
+  wip = !git add --all && git commit -m 'wip'
+  base = !git show-branch | grep '*' | grep -v "$(git rev-parse --abbrev-ref HEAD)" | head -1 | awk -F'[]~^[]' '{print $2}'
 
 # WIPブランチを作成してPRを作成する 
   start = !"f () {\
     NEW_BRANCH=$1;\
-    BASE_BRANCH=`git rev-parse --abbrev-ref @`;\
+    \
     if [ -z $1  ]; then\
-      git branch;\
-      read -p 'What is Base Branch Name?' bb;\
-      NEW_BRANCH=$BASE_BRANCH;\
-      BASE_BRANCH=$bb;\
+      echo 'Use Now branch as feature branch.';\
+      BASE_BRANCH=`git base`;\
+      NEW_BRANCH=`git rev-parse --abbrev-ref @`;\
+    else\
+      BASE_BRANCH=`git rev-parse --abbrev-ref @`;\
     fi;\
-    read -p 'You Make Base Branch:'$BASE_BRANCH' -> New Branch:'$NEW_BRANCH'? (y/n) ' yn;\
+    \
+    if [ $BASE_BRANCH = 'master' ]; then echo 'Attention!! you are trying to make branch from master'; fi;\
+    read -p 'You want to make Base Branch:'$BASE_BRANCH' -> New Branch:'$NEW_BRANCH'? (y/n)  ' yn;\
     case $yn in\
       [yY]* ) echo 'OK! Lets Start!!';;\
       * ) exit 1;;\

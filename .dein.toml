@@ -166,8 +166,8 @@
   repo ='junegunn/fzf.vim'
   depends = 'fzf'
   hook_add = '''
-    nnoremap <silent> <Leader>F :Ag<CR>
-    nnoremap <silent> <Leader>f :GFiles<CR>
+    nnoremap <silent> <Leader>f :Ag<CR>
+    nnoremap <silent> <Leader>F :GFiles<CR>
     nnoremap <silent> <Leader>gf :GFiles?<CR>
     nnoremap <silent> <Leader>gd :Gdiff<CR>
     nnoremap <silent> <Leader>gc :Commits<CR>
