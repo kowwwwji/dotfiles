@@ -41,7 +41,18 @@
   repo = 'majutsushi/tagbar'
   
   [[plugins]]
-  repo = 'bling/vim-airline'
+  repo = 'vim-airline/vim-airline'
+  hook_add = '''
+    set laststatus=2
+    let g:airline_powerline_fonts = 1
+    let g:airline#extensions#tabline#enabled = 1
+    let g:airline#extensions#tabline#buffer_idx_mode = 1
+    let g:airline#extensions#whitespace#mixed_indent_algo = 1
+  '''
+  [[plugins]]
+  repo = 'vim-airline/vim-airline-themes'
+  hook_add = '''
+  '''
 
 # 補完機能
   [[plugins]]
