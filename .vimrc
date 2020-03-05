@@ -170,3 +170,9 @@ syntax enable
 " nnoremap [Window] <Nop>
 " nmap s [Window]
 " nmap <Space> [Space]
+
+" for Files
+let $FZF_DEFAULT_COMMAND = 'ag --hidden --ignore .git -g ""'
+" for Ag
+autocmd VimEnter * command! -bang -nargs=* Ag
+  \ call fzf#vim#ag(<q-args>, '--hidden --ignore .git', <bang>0)
