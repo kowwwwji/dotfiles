@@ -5,7 +5,7 @@ endif
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " 画面表示の設定
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""
-""" colorscheme desert
+colorscheme peachpuff
 syntax enable
 set number         " 行番号を表示する
 set cursorline     " カーソル行の背景色を変える
@@ -65,6 +65,8 @@ set wrapscan   " 最後尾まで検索を終えたら次の検索で先頭に移
 set gdefault   " 置換の時 g オプションをデフォルトで有効にする
 " 常に very magic モードにする
 nnoremap / /\v
+" ハイライトを消したい時
+nnoremap <silent> <Esc><Esc> :noh<CR>
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " タブ/インデントの設定

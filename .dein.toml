@@ -65,18 +65,26 @@
   repo = 'roxma/vim-hug-neovim-rpc'
 
   [[plugins]]
-  repo = 'Shougo/neosnippet-snippets'
-  depends = ['neosnippet.vim']
-
-  [[plugins]]
   repo = 'neoclide/coc.nvim'
   rev = 'release'
+  on_event = 'InsertEnter'
+  merged = '0'
 
 # 非同期コードチェッカー
   [[plugins]]
   repo = 'w0rp/ale'
   hook_source = '''
-  
+    let g:ale_fixers = {
+    \   'ruby': ['rubocop'],
+    \}
+    "" 保存時に自動修正されるようにする
+    "" let g:ale_fix_on_save = 1
+  '''
+  hook_add = '''
+    let g:ale_statusline_format = ['⨉ %d', '⚠ %d', '']
+    let g:ale_echo_msg_format = '[%linter%] %s'
+    nmap <silent> <C-k> <Plug>(ale_previous_wrap)
+    nmap <silent> <C-j> <Plug>(ale_next_wrap)
   '''
 
 # カッコ系
@@ -94,8 +102,18 @@
   repo = 'dhruvasagar/vim-table-mode'
 
 # Syntax checker
-  [[plugins]]
-  repo = 'scrooloose/syntastic'
+  # [[plugins]]
+  # repo = 'scrooloose/syntastic'
+  # hook_add = '''
+  #   set statusline+=%#warningmsg#
+  #   set statusline+=%{SyntasticStatuslineFlag()}
+  #   set statusline+=%*
+  #   let g:syntastic_always_populate_loc_list = 1
+  #   let g:syntastic_auto_loc_list = 1
+  #   let g:syntastic_check_on_open = 1
+  #   let g:syntastic_check_on_wq = 0
+  #   let g:syntastic_ruby_checkers=['rubocop', 'mri']
+  # '''
 
 # Syntax HighLight
   [[plugins]]
@@ -126,16 +144,15 @@
   '''
 
   [[plugins]]
-  repo = 'kannokanno/previm'
+  repo = 'previm/previm'
   on_cmd = 'PrevimOpen'
   depends = 'open-browser.vim'
   hook_add = '''
     let g:previm_open_cmd = 'open -a Google\ Chrome'
-    augroup PrevimSettings
-      autocmd!
-      autocmd BufNewFile,BufRead *.{md,mdwn,mkd,mkdn,mark*} set filetype=markdown
-      nnoremap <silent> <C-m> :PrevimOpen<CR>
-    augroup END
+    autocmd!
+    autocmd BufNewFile,BufRead *.md set filetype=markdown
+    let g:vim_markdown_folding_disabled = 1
+    let g:previm_enable_realtime = 1
   '''
 
   [[plugins]]
@@ -187,7 +204,7 @@
     nnoremap <silent> <Leader>F :GFiles<CR>
     nnoremap <silent> <Leader>gf :GFiles?<CR>
     nnoremap <silent> <Leader>gd :Gdiff<CR>
-    nnoremap <silent> <Leader>gc :Commits<CR>
+    nnoremap <silent> <Leader>gsc :Commits<CR>
     nnoremap <silent> <Leader>l :BLines<CR>
     nnoremap <silent> <Leader>h :History<CR>
     nnoremap <silent> <Leader>m :Mark<CR><Paste>
@@ -197,9 +214,33 @@
 # Git操作
   [[plugins]]
   repo = 'tpope/vim-fugitive'
+  hook_add = '''
+    nnoremap <silent> <Leader>gc :Gcommit<CR>
+  '''
 
   [[plugins]]
   repo = 'haya14busa/vim-edgemotion'
 
   [[plugins]]
   repo = "tpope/vim-commentary"
+
+# Ruby
+  [[plugins]]
+  repo = 'ngmy/vim-rubocop'
+
+# React
+  [[plugins]]
+  repo = 'pangloss/vim-javascript'
+  on_ft = ['javascript', 'javascript.jsx']
+
+  [[plugins]]
+  repo = 'maxmellon/vim-jsx-pretty'
+  on_ft = ['javascript', 'javascript.jsx']
+
+  [[plugins]]
+  repo = 'alampros/vim-styled-jsx'
+  on_ft = ['javascript', 'javascript.jsx']
+
+  [[plugins]]
+  repo = 'moll/vim-node'
+  on_ft = ['javascript'] 
