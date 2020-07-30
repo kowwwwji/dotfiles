@@ -183,6 +183,9 @@ eval "$(goenv init -)"
 function t(){
   tmux new-session -s $(basename $(pwd))
 }
+function dev(){
+  tmux new-session -s $(basename $(pwd)) \; source-file ~/.tmux/.tmux.dev.conf
+}
 
 function peco-select-tmux-session()
 {
