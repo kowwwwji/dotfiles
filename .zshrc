@@ -144,7 +144,7 @@ esac
 ########################################
 # python用の設定
 export PYENV_ROOT="$HOME/.pyenv"
-export PATH="$PYENV_ROOT/bin:$PATH"
+export PATH="$PYENV_ROOT/shims:$PATH"
 eval "$(pyenv init -)"
 eval "$(pyenv virtualenv-init -)"
 
@@ -161,12 +161,12 @@ export NVM_DIR="$HOME/.nvm"
 
 # Ruby
 export RBENV_ROOT="$HOME/.rbenv"
-export PATH="$RBENV_ROOT/bin:$PATH"
+export PATH="$RBENV_ROOT/shims:$PATH"
 eval "$(rbenv init -)"
 
 # Go
 export GOENV_ROOT="$HOME/.goenv"
-export PATH="$GOENV_ROOT/bin:$PATH"
+export PATH="$GOENV_ROOT/shims:$PATH"
 export GOPATH=$HOME/.go
 eval "$(goenv init -)"
 
