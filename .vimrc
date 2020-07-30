@@ -11,6 +11,7 @@ highlight EndOfBuffer ctermbg=NONE guibg=NONE
 syntax enable
 set number         " 行番号を表示する
 set cursorline     " カーソル行の背景色を変える
+set cursorcolumn   " カーソル列の背景色を変える
 set laststatus=2   " ステータス行を常に表示
 set cmdheight=2    " メッセージ表示欄を2行確保
 set showmatch      " 対応する括弧を強調表示
@@ -19,6 +20,7 @@ set list           " 不可視文字を表示
 "" 補完のポップアップメニューの色
 highlight Pmenu ctermfg=white ctermbg=darkgray
 highlight PmenuSel ctermfg=yellow ctermbg=black
+highlight CursorLine cterm=NONE ctermfg=NONE ctermbg=darkgray
 
 " 不可視文字の表示記号指定
 set listchars=tab:▸\ ,eol:↲,extends:❯,precedes:❮
