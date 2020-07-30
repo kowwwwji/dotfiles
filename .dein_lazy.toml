@@ -1,8 +1,4 @@
   # [[plugins]]
-  # repo = 'Shougo/neosnippet-snippets'
-  # depends = ['neosnippet.vim']
-  
-  # [[plugins]]
   # repo = 'Shougo/neosnippet.vim'
   # depends = ['neosnippet-snippets', 'context_filetype.vim']
   # on_event = 'InsertCharPre'
@@ -52,28 +48,28 @@
   # '''
 
 
-# Ruby関連
-  [[plugins]]
-  repo = 'tpope/vim-rails'
-  on_ft = ['rb']
+# # Ruby関連
+#   [[plugins]]
+#   repo = 'tpope/vim-rails'
+#   on_ft = ['rb']
 
 
-# Vueの補完
-  # [[plugins]]
-  # repo = 'autozimu/LanguageClient-neovim'
-  # depends = 'deoplete.nvim'
-  # on_ft = ['vue']
-  # build = './install.sh'
-  # hook_source= '''
-  #   let g:LanguageClient_serverCommands = {
-  #     \ 'vue': ['vls'],
-  #     \ }
-  #   let g:LanguageClient_autoStart = 1
-  #   nnoremap <silent> K :call LanguageClient_textDocument_hover()<CR>
-  #   nnoremap <silent> gd :call LanguageClient_textDocument_definition()<CR>
-  #   nnoremap <silent> <F2> :call LanguageClient_textDocument_rename()<CR>
-  # '''
-  # [[plugins]]
-  # repo = 'mhartington/nvim-typescript'
-  # on_ft = ['ts']
-  # build = './install.sh'
+# # Vueの補完
+#   [[plugins]]
+#   repo = 'autozimu/LanguageClient-neovim'
+#   depends = 'deoplete.nvim'
+#   on_ft = ['vue']
+#   build = './install.sh'
+#   hook_source= '''
+#     let g:LanguageClient_serverCommands = {
+#       \ 'vue': ['vls'],
+#       \ }
+#     let g:LanguageClient_autoStart = 1
+#     nnoremap <silent> K :call LanguageClient_textDocument_hover()<CR>
+#     nnoremap <silent> gd :call LanguageClient_textDocument_definition()<CR>
+#     nnoremap <silent> <F2> :call LanguageClient_textDocument_rename()<CR>
+#   '''
+#   [[plugins]]
+#   repo = 'mhartington/nvim-typescript'
+#   on_ft = ['ts']
+#   build = './install.sh'
