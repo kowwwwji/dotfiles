@@ -126,6 +126,12 @@ inoremap <c-j> <down>
 cnoremap <C-p> <Up>
 cnoremap <C-n> <Down>
 
+"NormalモードでEnter押したら改行
+nnoremap <CR> o<ESC>
+
+"バッファを移動する
+nnoremap <silent> <C-j> :bprev<CR>
+nnoremap <silent> <C-k> :bnext<CR>
 if has('nvim')
   """"""""""""""""""""""""""""""""""""""""""""""""""""""""""
   " pyenvで指定したpythonを使用する
