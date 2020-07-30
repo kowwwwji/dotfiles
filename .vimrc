@@ -1,5 +1,13 @@
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " 画面表示の設定
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" colorscheme desert
+highlight Normal ctermbg=NONE guibg=NONE
+highlight NonText ctermbg=NONE guibg=NONE
+highlight LineNr ctermbg=NONE guibg=NONE
+highlight Folded ctermbg=NONE guibg=NONE
+highlight EndOfBuffer ctermbg=NONE guibg=NONE
+
 syntax enable
 set number         " 行番号を表示する
 set cursorline     " カーソル行の背景色を変える
@@ -45,6 +53,8 @@ set hidden     " 保存されていないファイルがあるときでも別の
 set autoread   " 外部でファイルに変更がされた場合は読みなおす
 set nobackup   " ファイル保存時にバックアップファイルを作らない
 set noswapfile " ファイル編集中にスワップファイルを作らない
+set fileencodings=utf-8,cp932,euc-jp,sjis " ファイルを読み込む時の、文字コード自動判別の順番
+
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " 検索/置換の設定
