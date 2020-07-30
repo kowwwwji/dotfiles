@@ -1,11 +1,5 @@
-if &compatible
-  set nocompatible               " Be iMproved
-endif
-
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " 画面表示の設定
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-""" colorscheme desert
 syntax enable
 set number         " 行番号を表示する
 set cursorline     " カーソル行の背景色を変える
@@ -132,15 +126,15 @@ nnoremap <CR> o<ESC>
 "バッファを移動する
 nnoremap <silent> <C-j> :bprev<CR>
 nnoremap <silent> <C-k> :bnext<CR>
+
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" neovim関連
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 if has('nvim')
-  """"""""""""""""""""""""""""""""""""""""""""""""""""""""""
   " pyenvで指定したpythonを使用する
-  """"""""""""""""""""""""""""""""""""""""""""""""""""""""""
   let $PATH = "~/.pyenv/shims:".$PATH
 
-  """"""""""""""""""""""""""""""""""""""""""""""""""""""""""
   " プラグイン設定
-  """"""""""""""""""""""""""""""""""""""""""""""""""""""""""
   let s:dein_dir = expand('~/.cache/dein')
   let s:dein_repo_dir = s:dein_dir . '/repos/github.com/Shougo/dein.vim'
 
