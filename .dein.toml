@@ -1,34 +1,15 @@
-# ヘルプ日本語化
-  [[plugins]]
-  repo = 'vim-jp/vimdoc-ja'
-
-# パッケージマネージャ
   [[plugins]]
   repo = 'Shougo/dein.vim'
 
-# 非同期処理のため
+# ヘルプ日本語化
   [[plugins]]
-  repo = 'Shougo/vimproc.vim'
-  build = 'make'
-
-# 統合インターフェース関連
-  [[plugins]]
-  repo = 'Shougo/neomru.vim'
-  on_path = '.*'
-  
-  [[plugins]]
-  repo = 'Shougo/unite.vim'
-  depends = 'neomru.vim'
+  repo = 'vim-jp/vimdoc-ja'
 
 #  [[plugins]]
 #  repo = 'Shougo/denite.nvim'
 #  hook_add = '''
 #    source ~/.config/nvim/plugins/denite.vim 
 #  '''
-  
-# ファイラー
-  [[plugins]]
-  repo = 'Shougo/vimfiler.vim'
 
 # 選択したコードを実行できる
   [[plugins]]
@@ -39,6 +20,9 @@
   
   [[plugins]]
   repo = 'majutsushi/tagbar'
+  hook_add = '''
+    nmap <F8> :TagbarToggle<CR>
+  '''
   
   [[plugins]]
   repo = 'vim-airline/vim-airline'
@@ -52,31 +36,6 @@
   [[plugins]]
   repo = 'vim-airline/vim-airline-themes'
   hook_add = '''
-  '''
-
-# 補完機能
-  [[plugins]]
-  repo = 'Shougo/context_filetype.vim'
-
-  [[plugins]]
-  repo = 'roxma/nvim-yarp'
-
-  [[plugins]]
-  repo = 'roxma/vim-hug-neovim-rpc'
-
-  [[plugins]]
-  repo = 'Shougo/neosnippet-snippets'
-  depends = ['neosnippet.vim']
-
-  [[plugins]]
-  repo = 'neoclide/coc.nvim'
-  rev = 'release'
-
-# 非同期コードチェッカー
-  [[plugins]]
-  repo = 'w0rp/ale'
-  hook_source = '''
-  
   '''
 
 # カッコ系
@@ -93,6 +52,19 @@
   [[plugins]]
   repo = 'dhruvasagar/vim-table-mode'
 
+#####################################
+# 補完機能
+#####################################
+#  [[plugins]]
+#  repo = 'neoclide/coc.nvim'
+#  rev = 'release'
+
+# 非同期コードチェッカー
+  [[plugins]]
+  repo = 'w0rp/ale'
+  hook_source = '''
+
+  '''
 # Syntax checker
   [[plugins]]
   repo = 'scrooloose/syntastic'
@@ -114,7 +86,9 @@
   repo = 'tmux-plugins/vim-tmux'
   on_ft = ['tmux']
 
+#####################################
 # Markdown用
+#####################################
   [[plugins]]
   repo = 'tyru/open-browser.vim'
   hook_add = '''
@@ -124,9 +98,8 @@
       vmap gx <Plug>(openbrowser-smart-search)
     augroup END
   '''
-
   [[plugins]]
-  repo = 'kannokanno/previm'
+  repo = 'previm/previm'
   on_cmd = 'PrevimOpen'
   depends = 'open-browser.vim'
   hook_add = '''
@@ -135,9 +108,9 @@
       autocmd!
       autocmd BufNewFile,BufRead *.{md,mdwn,mkd,mkdn,mark*} set filetype=markdown
       nnoremap <silent> <C-m> :PrevimOpen<CR>
+      nunmap <CR>
     augroup END
   '''
-
   [[plugins]]
   repo = 'plasticboy/vim-markdown'
   hook_add = '''
@@ -152,12 +125,13 @@
 # 移動
   [[plugins]]
   repo = 'easymotion/vim-easymotion'
+  [[plugins]]
+  repo = 'haya14busa/vim-edgemotion'
 
-# IDEみたいにするために
   [[plugins]]
   repo = 'scrooloose/nerdtree'
   hook_add = '''
-    let NERDTreeShowHidden=1
+    let NERDTreeShowHidden = 1
     nnoremap <silent><C-e> :NERDTreeToggle<CR>
 
     "引数なしでvimを開いたらNERDTreeを起動、
@@ -178,19 +152,19 @@
   repo ='junegunn/fzf'
   build = './install --all'
   merged =  0
-
   [[plugins]]
   repo ='junegunn/fzf.vim'
   depends = 'fzf'
   hook_add = '''
-    nnoremap <silent> <Leader>f :Ag<CR>
-    nnoremap <silent> <Leader>F :GFiles<CR>
+    nnoremap <silent> <Leader>s :Ag<CR>
+    nnoremap <silent> <Leader>f :GFiles<CR>
     nnoremap <silent> <Leader>gf :GFiles?<CR>
     nnoremap <silent> <Leader>gd :Gdiff<CR>
     nnoremap <silent> <Leader>gc :Commits<CR>
     nnoremap <silent> <Leader>l :BLines<CR>
     nnoremap <silent> <Leader>h :History<CR>
-    nnoremap <silent> <Leader>m :Mark<CR><Paste>
+    "" nnoremap <silent> <Leader>m :Mark<CR><Paste>
+    nnoremap <silent> <Leader>m :Map<CR>
     nnoremap <silent> <Leader>b :Buffer<CR>
   '''
 
@@ -199,7 +173,21 @@
   repo = 'tpope/vim-fugitive'
 
   [[plugins]]
-  repo = 'haya14busa/vim-edgemotion'
+  repo = "tpope/vim-commentary"
 
   [[plugins]]
-  repo = "tpope/vim-commentary"
+  repo = 'glidenote/memolist.vim'
+  hook_add = '''
+    let g:memolist_path = "~/GoogleDrive/memo"
+    nnoremap <Leader>mn :MemoNew<CR>
+    nnoremap <Leader>ml :MemoList<CR>
+    nnoremap <Leader>mg :MemoGrep<CR>
+  '''
+
+  [[plugins]]
+  repo = 'mbbill/undotree'
+  hook_add = '''
+    let g:undotree_WindowLayout = 4
+    let g:undotree_SetFocusWhenToggle = 1
+    nnoremap <Leader>r :UndotreeToggle<CR>
+  '''
