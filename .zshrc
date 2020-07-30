@@ -43,6 +43,7 @@ setopt share_history
 
 # 単語の区切り文字を指定する
 autoload -Uz select-word-style && select-word-style default
+
 # ここで指定した文字は単語区切りとみなされる
 # / も区切りと扱うので、^W でディレクトリ１つ分を削除できる
 zstyle ':zle:*' word-chars " /=;@:{},|"
@@ -82,6 +83,11 @@ zstyle ':completion:*:processes' command 'ps x -o pid,s,args'
 
 # fzf completion
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+export FZF_DEFAULT_OPTS='--height 40% --reverse --border'
+export FZF_DEFAULT_COMMAND='ag -g ""'
+# bindkey '^S' fzf-file-widget
+
+
 
 ########################################
 # プロンプト
@@ -101,6 +107,7 @@ function _update_vcs_info_msg() {
   LANG=en_US.UTF-8 vcs_info
   RPROMPT="${vcs_info_msg_0_}"
 }
+
 autoload -Uz add-zsh-hook
 add-zsh-hook precmd _update_vcs_info_msg
 
@@ -179,7 +186,7 @@ function t(){
 
 function peco-select-tmux-session()
 {
-  local session="$(tmux list-sessions | peco | cut -d : -f 1)"
+  local session="$(tmux list-sessions | fzf | cut -d : -f 1)"
   if [ -n "$session" ]; then
     BUFFER="tmux a -t $session"
     if [ -n "$TMUX" ]; then
