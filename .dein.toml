@@ -27,16 +27,10 @@
   [[plugins]]
   repo = 'vim-airline/vim-airline'
   hook_add = '''
-    set laststatus=2
-    let g:airline_powerline_fonts = 1
-    let g:airline#extensions#tabline#enabled = 1
-    let g:airline#extensions#tabline#buffer_idx_mode = 1
-    let g:airline#extensions#whitespace#mixed_indent_algo = 1
+    source ~/.config/nvim/plugins/vim-airline.vim
   '''
   [[plugins]]
   repo = 'vim-airline/vim-airline-themes'
-  hook_add = '''
-  '''
 
 # カッコ系
   [[plugins]]
@@ -49,6 +43,9 @@
 # テーブル系
   [[plugins]]
   repo = 'godlygeek/tabular'
+  hook_add = '''
+    source ~/.config/nvim/plugins/tabular.vim
+  '''
   [[plugins]]
   repo = 'dhruvasagar/vim-table-mode'
 
@@ -62,29 +59,21 @@
 # 非同期コードチェッカー
   [[plugins]]
   repo = 'w0rp/ale'
-  hook_source = '''
 
-  '''
 # Syntax checker
-  [[plugins]]
-  repo = 'scrooloose/syntastic'
+  # [[plugins]]
+  # repo = 'scrooloose/syntastic'
+  # hook_add = '''
+  #   set statusline+=%#warningmsg#
+  #   set statusline+=%{SyntasticStatuslineFlag()}
+  #   set statusline+=%*
+  #   let g:syntastic_always_populate_loc_list = 1
+  #   let g:syntastic_auto_loc_list = 1
+  #   let g:syntastic_check_on_open = 1
+  #   let g:syntastic_check_on_wq = 0
+  #   let g:syntastic_ruby_checkers=['rubocop', 'mri']
+  # '''
 
-# Syntax HighLight
-  [[plugins]]
-  repo = 'cespare/vim-toml'
-  on_ft = 'toml'
-
-  [[plugins]]
-  repo = 'posva/vim-vue'
-  on_ft = 'vue'
-
-  [[plugins]]
-  repo = 'elzr/vim-json'
-  on_ft = ['json']
-
-  [[plugins]]
-  repo = 'tmux-plugins/vim-tmux'
-  on_ft = ['tmux']
 
 #####################################
 # Markdown用
@@ -92,34 +81,19 @@
   [[plugins]]
   repo = 'tyru/open-browser.vim'
   hook_add = '''
-    let g:netrw_nogx = 1
-    augroup OpenBrowserSettings
-      nmap gx <Plug>(openbrowser-smart-search)
-      vmap gx <Plug>(openbrowser-smart-search)
-    augroup END
+    source ~/.config/nvim/plugins/open-browser.vim
   '''
   [[plugins]]
   repo = 'previm/previm'
   on_cmd = 'PrevimOpen'
   depends = 'open-browser.vim'
   hook_add = '''
-    let g:previm_open_cmd = 'open -a Google\ Chrome'
-    augroup PrevimSettings
-      autocmd!
-      autocmd BufNewFile,BufRead *.{md,mdwn,mkd,mkdn,mark*} set filetype=markdown
-      nnoremap <silent> <C-m> :PrevimOpen<CR>
-      nunmap <CR>
-    augroup END
+    source ~/.config/nvim/plugins/previm.vim
   '''
   [[plugins]]
   repo = 'plasticboy/vim-markdown'
   hook_add = '''
-    " 折りたたみOFF
-    let g:vim_markdown_folding_disabled = 1
-    " 以下2つは問題が出るためON
-    " https://github.com/plasticboy/vim-markdown#do-not-automatically-insert-bulletpoints
-    let g:vim_markdown_auto_insert_bullets = 0
-    let g:vim_markdown_new_list_item_indent = 0
+    source ~/.config/nvim/plugins/vim-markdown.vim
   '''
 
 # 移動
@@ -131,15 +105,7 @@
   [[plugins]]
   repo = 'scrooloose/nerdtree'
   hook_add = '''
-    let NERDTreeShowHidden = 1
-    nnoremap <silent><C-e> :NERDTreeToggle<CR>
-
-    "引数なしでvimを開いたらNERDTreeを起動、
-    "引数ありならNERDTreeは起動せず、引数で渡されたファイルを開く。
-    autocmd vimenter * if !argc() | NERDTree | endif
-
-    "他のバッファをすべて閉じた時にNERDTreeが開いていたらNERDTreeも一緒に閉じる。
-    autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
+    source ~/.config/nvim/plugins/nerdtree.vim
   '''
   [[plugins]]
   repo = 'ryanoasis/vim-devicons'
@@ -158,9 +124,6 @@
   hook_add = '''
     nnoremap <silent> <Leader>s :Ag<CR>
     nnoremap <silent> <Leader>f :GFiles<CR>
-    nnoremap <silent> <Leader>gf :GFiles?<CR>
-    nnoremap <silent> <Leader>gd :Gdiff<CR>
-    nnoremap <silent> <Leader>gc :Commits<CR>
     nnoremap <silent> <Leader>l :BLines<CR>
     nnoremap <silent> <Leader>h :History<CR>
     "" nnoremap <silent> <Leader>m :Mark<CR><Paste>
@@ -171,18 +134,19 @@
 # Git操作
   [[plugins]]
   repo = 'tpope/vim-fugitive'
+  hook_add = '''
+    nnoremap [GitLeader]    <Nop>
+    nmap     <Space>g [GitLeader]
+
+    nnoremap <silent> [GitLeader]c :Gcommit<CR>
+    nnoremap <silent> [GitLeader]f :GFiles?<CR>
+    nnoremap <silent> [GitLeader]d :Gdiff<CR>
+    nnoremap <silent> [GitLeader]C :Commits<CR>
+    nnoremap <silent> [GitLeader]l :Git log<CR>
+  '''
 
   [[plugins]]
   repo = "tpope/vim-commentary"
-
-  [[plugins]]
-  repo = 'glidenote/memolist.vim'
-  hook_add = '''
-    let g:memolist_path = "~/GoogleDrive/memo"
-    nnoremap <Leader>mn :MemoNew<CR>
-    nnoremap <Leader>ml :MemoList<CR>
-    nnoremap <Leader>mg :MemoGrep<CR>
-  '''
 
   [[plugins]]
   repo = 'mbbill/undotree'
@@ -191,3 +155,24 @@
     let g:undotree_SetFocusWhenToggle = 1
     nnoremap <Leader>r :UndotreeToggle<CR>
   '''
+
+## LSP関連
+  [[plugins]]
+  repo = 'prabirshrestha/asyncomplete.vim'
+  [[plugins]]
+  repo =  'prabirshrestha/asyncomplete-lsp.vim'
+  [[plugins]]
+  repo =  'prabirshrestha/vim-lsp'
+  hook_add = '''
+    source ~/.config/nvim/plugins/vim-lsp.vim
+  '''
+  [[plugins]]
+  repo =  'mattn/vim-lsp-settings'
+  [[plugins]]
+  repo =  'mattn/vim-lsp-icons'
+  [[plugins]]
+  repo =  'hrsh7th/vim-vsnip'
+  [[plugins]]
+  repo =  'hrsh7th/vim-vsnip-integ'
+
+

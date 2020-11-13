@@ -43,9 +43,14 @@ set scrolloff=8                " 上下8行の視界を確保
 set sidescrolloff=16           " 左右スクロール時の視界を確保
 set sidescroll=1               " 左右スクロールは一文字づつ行う
 
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" プレフィックスキー
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " easy-motion用
 let g:EasyMotion_leader_key = '<Space><Space>'
 let mapleader = "\<Space>"
+nnoremap [GitLeader]    <Nop>
+nmap     <Space>g [GitLeader]
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " ファイル処理関連の設定
@@ -71,6 +76,8 @@ set wrapscan   " 最後尾まで検索を終えたら次の検索で先頭に移
 set gdefault   " 置換の時 g オプションをデフォルトで有効にする
 " 常に very magic モードにする
 nnoremap / /\v
+" ハイライトを消したい時
+nnoremap <silent> <Esc><Esc> :noh<CR>
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " タブ/インデントの設定
