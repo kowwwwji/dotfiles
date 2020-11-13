@@ -24,7 +24,8 @@ fi
 ########################################
 export LANG=ja_JP.UTF-8
 export LC_CTYPE=en_US.UTF-8
-# export TERM=xterm-256color
+export TERM=xterm-256color
+export XDG_CONFIG_HOME=~/.config
 
 # インストールしたものの読込
 path=(/usr/local/bin(N-/) /usr/local/sbin(N-/) $path)
@@ -93,7 +94,7 @@ export FZF_DEFAULT_COMMAND='ag --hidden --ignore .git -g ""'
 # プロンプト
 ########################################
 # 2行表示
-PROMPT="%{${fg[green]}%}[%n@%m]%{${reset_color}%} %~
+PROMPT="%{${fg[green]}%}[%n@%m %*]%{${reset_color}%} %~
 %# "
 SPROMPT="%r is correct? [n,y,a,e]: "
 
