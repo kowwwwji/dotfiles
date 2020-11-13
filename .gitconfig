@@ -2,6 +2,8 @@
   editor = vi
 [ghq]
   root = ~/.ghq
+[ghq "http://ghe.aws01.mapion.co.jp/repos/"]
+  vcs = git
 [user]
   name = Koji Sakamoto
   email = kowwwwji@gmail.com
@@ -13,18 +15,19 @@
   cm = commit
   cma = commit --amend
   co = checkout
-  b = branch 
   cb = checkout -b
+  b = branch 
   bv = branch -vv
   bva = branch -vva
   see = browse
   st = status
-  ls = log --stat
+  log = log --stat
 
 ##################
 # 複合コマンド
 ##################
   delete-merged-branches = !git branch --merged | grep -vE '^\\*|master$|develop$' | xargs -I % git branch -d %
+  delete-gone-branches = !git branch --format '%(refname:short) %(upstream:track)' | grep 'gone' | cut -d ' ' -f1 | xargs -I % git branch -D % 
   graph = log --graph --date-order -C -M --pretty=format:\"<%h> %ad [%an] %Cgreen%d%Creset %s\" --all --date=short
   wip = !git add --all && git commit -m 'wip'
   base = !git show-branch | grep '*' | grep -v "$(git rev-parse --abbrev-ref HEAD)" | head -1 | awk -F'[]~^[]' '{print $2}'
@@ -58,7 +61,10 @@
   refresh = !"f () { \
     git checkout master; \
     git pull -p; \
+    echo "---Delete Merged Branch------------------------------"; \
     git delete-merged-branches; \
+    echo "---Delete Gone Branch------------------------------"; \
+    git delete-gone-branches; \
     echo "---Local Branch------------------------------"; \
     git branch -avv; \
   }; f"
