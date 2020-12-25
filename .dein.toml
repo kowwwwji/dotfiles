@@ -80,6 +80,7 @@
   [[plugins]]
   repo = 'haya14busa/vim-edgemotion'
 
+# サイドバー
   [[plugins]]
   repo = 'scrooloose/nerdtree'
   hook_add = '''
@@ -117,6 +118,7 @@
     nmap     <Space>g [GitLeader]
 
     nnoremap <silent> [GitLeader]c :Gcommit<CR>
+    nnoremap <silent> [GitLeader]s :Gstatus<CR><C-w>T
     nnoremap <silent> [GitLeader]f :GFiles?<CR>
     nnoremap <silent> [GitLeader]d :Gdiff<CR>
     nnoremap <silent> [GitLeader]C :Commits<CR>
