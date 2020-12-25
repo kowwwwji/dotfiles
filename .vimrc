@@ -139,12 +139,10 @@ inoremap <c-j> <down>
 cnoremap <C-p> <Up>
 cnoremap <C-n> <Down>
 
-"NormalモードでEnter押したら改行
-nnoremap <CR> o<ESC>
 
 "バッファを移動する
-nnoremap <silent> <C-j> :bprev<CR>
-nnoremap <silent> <C-k> :bnext<CR>
+nnoremap <silent> <S-Tab> :bprev<CR>
+nnoremap <silent> <Tab> :bnext<CR>
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " neovim関連
@@ -195,3 +193,29 @@ let $FZF_DEFAULT_COMMAND = 'ag --hidden --ignore .git -g ""'
 " for Ag
 autocmd VimEnter * command! -bang -nargs=* Ag
   \ call fzf#vim#ag(<q-args>, '--hidden --ignore .git', <bang>0)
+
+" Move current line to up/down
+" Ref: https://vim.fandom.com/wiki/Moving_lines_up_or_down
+nnoremap <A-j> :m .+1<CR>==
+nnoremap <A-k> :m .-2<CR>==
+inoremap <A-j> <Esc>:m .+1<CR>==gi
+inoremap <A-k> <Esc>:m .-2<CR>==gi
+vnoremap <A-j> :m '>+1<CR>gv=gv
+vnoremap <A-k> :m '<-2<CR>gv=gv
+" When MacOS
+" Ref: https://stackoverflow.com/questions/7501092/can-i-map-alt-key-in-vim
+if has('macunix')
+  " Option + J/K
+  " ∆ == J
+  " ˚ == K
+  nnoremap ∆ :m .+1<CR>==
+  nnoremap ˚ :m .-2<CR>==
+  inoremap ∆ <Esc>:m .+1<CR>==gi
+  inoremap ˚ <Esc>:m .-2<CR>==gi
+  vnoremap ∆ :m '>+1<CR>gv=gv
+  vnoremap ˚ :m '<-2<CR>gv=gv
+endif
+
+"NormalモードでEnter押したら改行
+nnoremap <CR> o<ESC>
+

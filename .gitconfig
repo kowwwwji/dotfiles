@@ -21,14 +21,13 @@
   bva = branch -vva
   see = browse
   st = status
-  log = log --stat
 
 ##################
 # 複合コマンド
 ##################
   delete-merged-branches = !git branch --merged | grep -vE '^\\*|master$|develop$' | xargs -I % git branch -d %
   delete-gone-branches = !git branch --format '%(refname:short) %(upstream:track)' | grep 'gone' | cut -d ' ' -f1 | xargs -I % git branch -D % 
-  graph = log --graph --date-order -C -M --pretty=format:\"<%h> %ad [%an] %Cgreen%d%Creset %s\" --all --date=short
+  ls = log --graph --pretty=format:'%Cred%h %Cgreen(%>(12,trunc)%cr, %ci) %C(bold blue)<%an>%Creset -%C(yellow)%d%Creset %s' --abbrev-commit --date=relative --all
   wip = !git add --all && git commit -m 'wip'
   base = !git show-branch | grep '*' | grep -v "$(git rev-parse --abbrev-ref HEAD)" | head -1 | awk -F'[]~^[]' '{print $2}'
 
