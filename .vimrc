@@ -139,8 +139,6 @@ inoremap <c-j> <down>
 cnoremap <C-p> <Up>
 cnoremap <C-n> <Down>
 
-"NormalモードでEnter押したら改行
-nnoremap <CR> o<ESC>
 
 "バッファを移動する
 nnoremap <silent> <C-j> :bprev<CR>
@@ -195,3 +193,6 @@ let $FZF_DEFAULT_COMMAND = 'ag --hidden --ignore .git -g ""'
 " for Ag
 autocmd VimEnter * command! -bang -nargs=* Ag
   \ call fzf#vim#ag(<q-args>, '--hidden --ignore .git', <bang>0)
+"NormalモードでEnter押したら改行
+nnoremap <CR> o<ESC>
+
