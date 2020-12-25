@@ -175,4 +175,19 @@
   [[plugins]]
   repo =  'hrsh7th/vim-vsnip-integ'
 
+## 翻訳
+  [[plugins]]
+  repo = 'skanehira/translate.vim'
+  hook_add = '''
+    let g:translate_source = "en"
+    let g:translate_target = "ja"
+  " let g:translate_popup_window = 0 " if you want use popup window, set value 1
+    let g:translate_winsize = 10 " set buffer window height size if you doesn't use popup window
 
+    nnoremap <silent> <Leader>t :Translate<CR>
+    nnoremap <silent> <Leader>T :!Translate<CR>
+    vnoremap <silent> <Leader>t :Translate<CR>
+    vnoremap <silent> <Leader>T :!Translate<CR>
+
+    nnoremap <silent> <Esc><Esc><Esc> :bw translate://result<CR>
+  '''
