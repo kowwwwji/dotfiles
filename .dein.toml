@@ -74,28 +74,6 @@
   #   let g:syntastic_ruby_checkers=['rubocop', 'mri']
   # '''
 
-
-#####################################
-# Markdown用
-#####################################
-  [[plugins]]
-  repo = 'tyru/open-browser.vim'
-  hook_add = '''
-    source ~/.config/nvim/plugins/open-browser.vim
-  '''
-  [[plugins]]
-  repo = 'previm/previm'
-  on_cmd = 'PrevimOpen'
-  depends = 'open-browser.vim'
-  hook_add = '''
-    source ~/.config/nvim/plugins/previm.vim
-  '''
-  [[plugins]]
-  repo = 'plasticboy/vim-markdown'
-  hook_add = '''
-    source ~/.config/nvim/plugins/vim-markdown.vim
-  '''
-
 # 移動
   [[plugins]]
   repo = 'easymotion/vim-easymotion'
@@ -154,6 +132,15 @@
     let g:undotree_WindowLayout = 4
     let g:undotree_SetFocusWhenToggle = 1
     nnoremap <Leader>r :UndotreeToggle<CR>
+  '''
+
+    [[plugins]]
+  repo = 'glidenote/memolist.vim'
+  hook_add = '''
+    let g:memolist_path = "~/GoogleDrive/memo"
+    nnoremap <Leader>mn :MemoNew<CR>
+    nnoremap <Leader>ml :MemoList<CR>
+    nnoremap <Leader>mg :MemoGrep<CR>
   '''
 
 ## LSP関連

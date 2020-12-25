@@ -1,8 +1,15 @@
- # Syntax HighLight
   [[plugins]]
   repo = 'cespare/vim-toml'
   on_ft = 'toml'
 
+
+  [[plugins]]
+  repo = 'tmux-plugins/vim-tmux'
+  on_ft = 'tmux'
+
+##################
+## Javascript ####
+##################
   [[plugins]]
   repo = 'posva/vim-vue'
   on_ft = 'vue'
@@ -10,10 +17,6 @@
   [[plugins]]
   repo = 'elzr/vim-json'
   on_ft = 'json'
-
-  [[plugins]]
-  repo = 'tmux-plugins/vim-tmux'
-  on_ft = 'tmux'
 
 # React
   [[plugins]]
@@ -32,20 +35,37 @@
   repo = 'moll/vim-node'
   on_ft = ['javascript'] 
 
-  [[plugins]]
-  repo = 'glidenote/memolist.vim'
-  hook_add = '''
-    let g:memolist_path = "~/GoogleDrive/memo"
-    nnoremap <Leader>mn :MemoNew<CR>
-    nnoremap <Leader>ml :MemoList<CR>
-    nnoremap <Leader>mg :MemoGrep<CR>
-  '''
-
-# Ruby関連
+##################
+## Ruby ##########
+##################
   [[plugins]]
   repo = 'tpope/vim-rails'
   on_ft = ['rb']
   [[plugins]]
   repo = 'ngmy/vim-rubocop'
   on_ft = ['rb']
+
+##################
+## Markdown ######
+##################
+  [[plugins]]
+  repo = 'tyru/open-browser.vim'
+  on_ft = ['md']
+  hook_add = '''
+    source ~/.config/nvim/plugins/open-browser.vim
+  '''
+  [[plugins]]
+  repo = 'previm/previm'
+  on_ft = ['md']
+  on_cmd = 'PrevimOpen'
+  depends = 'open-browser.vim'
+  hook_add = '''
+    source ~/.config/nvim/plugins/previm.vim
+  '''
+  [[plugins]]
+  repo = 'plasticboy/vim-markdown'
+  on_ft = ['md']
+  hook_add = '''
+    source ~/.config/nvim/plugins/vim-markdown.vim
+  '''
 
