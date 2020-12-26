@@ -17,13 +17,13 @@
 
   [[plugins]]
   repo = 'editorconfig/editorconfig-vim'
-  
+ 
   [[plugins]]
   repo = 'majutsushi/tagbar'
   hook_add = '''
     nmap <F8> :TagbarToggle<CR>
   '''
-  
+ 
   [[plugins]]
   repo = 'vim-airline/vim-airline'
   hook_add = '''
@@ -56,9 +56,9 @@
 #  repo = 'neoclide/coc.nvim'
 #  rev = 'release'
 
-# 非同期コードチェッカー
-  [[plugins]]
-  repo = 'w0rp/ale'
+# # 非同期コードチェッカー
+#   [[plugins]]
+#   repo = 'w0rp/ale'
 
 # Syntax checker
   # [[plugins]]
@@ -136,7 +136,7 @@
     nnoremap <Leader>r :UndotreeToggle<CR>
   '''
 
-    [[plugins]]
+  [[plugins]]
   repo = 'glidenote/memolist.vim'
   hook_add = '''
     let g:memolist_path = "~/GoogleDrive/memo"
@@ -155,14 +155,14 @@
   hook_add = '''
     source ~/.config/nvim/plugins/vim-lsp.vim
   '''
-  [[plugins]]
-  repo =  'mattn/vim-lsp-settings'
-  [[plugins]]
-  repo =  'mattn/vim-lsp-icons'
-  [[plugins]]
-  repo =  'hrsh7th/vim-vsnip'
-  [[plugins]]
-  repo =  'hrsh7th/vim-vsnip-integ'
+#   [[plugins]]
+#   repo =  'mattn/vim-lsp-settings'
+#   [[plugins]]
+#   repo =  'mattn/vim-lsp-icons'
+#   [[plugins]]
+#   repo =  'hrsh7th/vim-vsnip'
+#   [[plugins]]
+#   repo =  'hrsh7th/vim-vsnip-integ'
 
 ## 翻訳
   [[plugins]]
