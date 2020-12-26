@@ -1,3 +1,4 @@
+
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " 画面表示の設定
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -8,7 +9,6 @@ highlight LineNr ctermbg=NONE guibg=NONE
 highlight Folded ctermbg=NONE guibg=NONE
 highlight EndOfBuffer ctermbg=NONE guibg=NONE
 
-syntax enable
 set number         " 行番号を表示する
 set cursorline     " カーソル行の背景色を変える
 set cursorcolumn   " カーソル列の背景色を変える
@@ -139,7 +139,6 @@ inoremap <c-j> <down>
 cnoremap <C-p> <Up>
 cnoremap <C-n> <Down>
 
-
 "バッファを移動する
 nnoremap <silent> <S-Tab> :bprev<CR>
 nnoremap <silent> <Tab> :bnext<CR>
@@ -184,8 +183,13 @@ if has('nvim')
   endif
 endif
 
-filetype plugin indent on " dein の後でないとだめ
+" dein の後でないとだめ
+filetype plugin indent on 
+syntax enable
 
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" others
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " for Files
 let $FZF_DEFAULT_COMMAND = 'ag --hidden --ignore .git -g ""'
 " for Ag
