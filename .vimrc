@@ -13,7 +13,7 @@ set number         " 行番号を表示する
 set cursorline     " カーソル行の背景色を変える
 set cursorcolumn   " カーソル列の背景色を変える
 set laststatus=2   " ステータス行を常に表示
-set cmdheight=2    " メッセージ表示欄を2行確保
+set cmdheight=1    " メッセージ表示欄を1行確保
 set showmatch      " 対応する括弧を強調表示
 set helpheight=999 " ヘルプを画面いっぱいに開く
 set list           " 不可視文字を表示
@@ -184,12 +184,7 @@ if has('nvim')
   endif
 endif
 
-filetype plugin indent on
-syntax enable
-
-" nnoremap [Window] <Nop>
-" nmap s [Window]
-" nmap <Space> [Space]
+filetype plugin indent on " dein の後でないとだめ
 
 " for Files
 let $FZF_DEFAULT_COMMAND = 'ag --hidden --ignore .git -g ""'
