@@ -127,17 +127,29 @@ vnoremap ;  :
 vnoremap :  ;
 
 "JISキーとUSキーの配置のため
-inoremap <c-@> <ESC>
+inoremap <C-@> <ESC>
 
+
+function! ExecExCommand(cmd)
+  silent exec a:cmd
+  return ''
+endfunction
 "インサートモードで移動
-inoremap <c-h> <left>
-inoremap <c-l> <right>
-inoremap <c-k> <up>
-inoremap <c-j> <down>
+inoremap <C-h> <Left>
+inoremap <C-l> <Right>
+inoremap <C-k> <Up>
+inoremap <C-j> <Down>
+inoremap <C-a> <Home>
+inoremap <C-e> <End>
+inoremap <silent> <expr> <C-b> pumvisible() ? "<C-e><C-r>=ExecExCommand('normal b')<CR>" : "<C-r>=ExecExCommand('normal b')<CR>"
+inoremap <silent> <expr> <C-w> pumvisible() ? "<C-e><C-r>=ExecExCommand('normal w')<CR>" : "<C-r>=ExecExCommand('normal w')<CR>"
+
 
 "方向キーを使用しなくても検索履歴を使用できるようにする。
 cnoremap <C-p> <Up>
 cnoremap <C-n> <Down>
+cnoremap <C-a> <Home>
+cnoremap <C-e> <End>
 
 
 "バッファを移動する
