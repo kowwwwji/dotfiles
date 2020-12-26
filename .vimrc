@@ -1,7 +1,7 @@
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " 画面表示の設定
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" colorscheme desert
+colorscheme elflord
 highlight Normal ctermbg=NONE guibg=NONE
 highlight NonText ctermbg=NONE guibg=NONE
 highlight LineNr ctermbg=NONE guibg=NONE
@@ -148,8 +148,11 @@ nnoremap <silent> <Tab> :bnext<CR>
 " neovim関連
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""
 if has('nvim')
-  " pyenvで指定したpythonを使用する
-  let $PATH = "~/.pyenv/shims:".$PATH
+  " " pyenvで指定したpythonを使用する
+  " let $PATH = "~/.pyenv/shims:".$PATH
+
+  " ruby用
+  let g:ruby_host_prog = '/usr/local/bin/neovim-ruby-host'
 
   " プラグイン設定
   let s:dein_dir = expand('~/.cache/dein')
