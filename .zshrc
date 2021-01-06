@@ -177,6 +177,10 @@ eval "$(goenv init -)"
 ########################################
 # tmux
 ########################################
+if [[ -d "${HOME}/.tmux" ]]; then
+  if [[ ! -d "${HOME}/.tmux/plugins" ]] mkdir ~/.tmux/plugins
+  git clone 'https://github.com/tmux-plugins/tpm' "${HOME}/.tmux/plugins/tpm"
+fi
 function t(){
   tmux new-session -s $(basename $(pwd))
 }
