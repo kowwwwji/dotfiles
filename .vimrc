@@ -1,5 +1,4 @@
-
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " 画面表示の設定
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""
 colorscheme elflord
@@ -17,10 +16,6 @@ set cmdheight=2    " メッセージ表示欄を1行確保
 set showmatch      " 対応する括弧を強調表示
 set helpheight=999 " ヘルプを画面いっぱいに開く
 set list           " 不可視文字を表示
-"" 補完のポップアップメニューの色
-highlight Pmenu ctermfg=white ctermbg=darkgray
-highlight PmenuSel ctermfg=yellow ctermbg=black
-highlight CursorLine cterm=NONE ctermfg=NONE ctermbg=darkgray
 
 " 不可視文字の表示記号指定
 set listchars=tab:▸\ ,eol:↲,extends:❯,precedes:❮
@@ -203,6 +198,10 @@ endif
 " dein の後でないとだめ
 filetype plugin indent on 
 syntax enable
+"" 補完のポップアップメニューの色
+highlight Pmenu ctermfg=white ctermbg=darkgray
+highlight PmenuSel ctermfg=yellow ctermbg=black
+highlight CursorLine cterm=NONE ctermfg=NONE ctermbg=darkgray
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " others
@@ -235,6 +234,13 @@ if has('macunix')
   vnoremap ˚ :m '<-2<CR>gv=gv
 endif
 
-"NormalモードでEnter押したら改行
+" NormalモードでEnter押したら改行
 nnoremap <CR> o<ESC>
+
+" 補完表示時のEnterで改行をしない
+inoremap <expr><CR>  pumvisible() ? "<C-y>" : "<CR>"
+
+set completeopt=menuone,noinsert
+inoremap <expr><C-n> pumvisible() ? "<Down>" : "<C-n>"
+inoremap <expr><C-p> pumvisible() ? "<Up>" : "<C-p>"
 
