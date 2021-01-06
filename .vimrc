@@ -127,17 +127,29 @@ vnoremap ;  :
 vnoremap :  ;
 
 "JISキーとUSキーの配置のため
-inoremap <c-@> <ESC>
+inoremap <C-@> <ESC>
 
+
+function! ExecExCommand(cmd)
+  silent exec a:cmd
+  return ''
+endfunction
 "インサートモードで移動
-inoremap <c-h> <left>
-inoremap <c-l> <right>
-inoremap <c-k> <up>
-inoremap <c-j> <down>
+inoremap <C-h> <Left>
+inoremap <C-l> <Right>
+inoremap <C-k> <Up>
+inoremap <C-j> <Down>
+inoremap <C-a> <Home>
+inoremap <C-e> <End>
+inoremap <silent> <expr> <C-b> pumvisible() ? "<C-e><C-r>=ExecExCommand('normal b')<CR>" : "<C-r>=ExecExCommand('normal b')<CR>"
+inoremap <silent> <expr> <C-w> pumvisible() ? "<C-e><C-r>=ExecExCommand('normal w')<CR>" : "<C-r>=ExecExCommand('normal w')<CR>"
+
 
 "方向キーを使用しなくても検索履歴を使用できるようにする。
 cnoremap <C-p> <Up>
 cnoremap <C-n> <Down>
+cnoremap <C-a> <Home>
+cnoremap <C-e> <End>
 
 
 "バッファを移動する
@@ -181,18 +193,13 @@ if has('nvim')
   endif
 endif
 
+
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" その他
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+
 filetype plugin indent on
 syntax enable
-
-" nnoremap [Window] <Nop>
-" nmap s [Window]
-" nmap <Space> [Space]
-
-" for Files
-let $FZF_DEFAULT_COMMAND = 'ag --hidden --ignore .git -g ""'
-" for Ag
-autocmd VimEnter * command! -bang -nargs=* Ag
-  \ call fzf#vim#ag(<q-args>, '--hidden --ignore .git', <bang>0)
 
 " Move current line to up/down
 " Ref: https://vim.fandom.com/wiki/Moving_lines_up_or_down
