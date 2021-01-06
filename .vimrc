@@ -13,7 +13,7 @@ set number         " 行番号を表示する
 set cursorline     " カーソル行の背景色を変える
 set cursorcolumn   " カーソル列の背景色を変える
 set laststatus=2   " ステータス行を常に表示
-set cmdheight=1    " メッセージ表示欄を1行確保
+set cmdheight=2    " メッセージ表示欄を1行確保
 set showmatch      " 対応する括弧を強調表示
 set helpheight=999 " ヘルプを画面いっぱいに開く
 set list           " 不可視文字を表示
@@ -120,6 +120,12 @@ set noerrorbells        "エラーメッセージの表示時にビープを鳴�
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Remap
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" Exコマンドを実装する関数を定義
+function! ExecExCommand(cmd)
+  silent exec a:cmd
+  return ''
+endfunction
+
 "コロンでコマンドモードに入るようにする。
 nnoremap ;  :
 nnoremap :  ;
@@ -127,17 +133,27 @@ vnoremap ;  :
 vnoremap :  ;
 
 "JISキーとUSキーの配置のため
-inoremap <c-@> <ESC>
+inoremap <C-@> <ESC>
 
 "インサートモードで移動
-inoremap <c-h> <left>
-inoremap <c-l> <right>
-inoremap <c-k> <up>
-inoremap <c-j> <down>
+inoremap <C-h> <left>
+inoremap <C-l> <right>
+inoremap <C-k> <up>
+inoremap <C-j> <down>
+inoremap <C-e> <End>
+inoremap <C-a> <Home>
+" 補完せず補完ウィンドウを閉じてから移動
+inoremap <silent> <expr> <C-b> pumvisible() ? "<C-e><C-r>=ExecExCommand('normal b')<CR>" : "<C-r>=ExecExCommand('normal b')<CR>"
+inoremap <silent> <expr> <C-w> pumvisible() ? "<C-e><C-r>=ExecExCommand('normal w')<CR>" : "<C-r>=ExecExCommand('normal w')<CR>"
 
 "方向キーを使用しなくても検索履歴を使用できるようにする。
+"zshの移動と同じ
+cnoremap <C-b> <Left>
+cnoremap <C-f> <Right>
 cnoremap <C-p> <Up>
 cnoremap <C-n> <Down>
+cnoremap <C-e> <End>
+cnoremap <C-a> <Home>
 
 "バッファを移動する
 nnoremap <silent> <S-Tab> :bprev<CR>
@@ -147,6 +163,7 @@ nnoremap <silent> <Tab> :bnext<CR>
 " neovim関連
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""
 if has('nvim')
+  set guicursor=n:blinkon10,i-c:ver50-blinkon10
   " " pyenvで指定したpythonを使用する
   " let $PATH = "~/.pyenv/shims:".$PATH
 
