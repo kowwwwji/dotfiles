@@ -130,13 +130,18 @@ vnoremap :  ;
 "JISキーとUSキーの配置のため
 inoremap <C-@> <ESC>
 
+
+function! ExecExCommand(cmd)
+  silent exec a:cmd
+  return ''
+endfunction
 "インサートモードで移動
 inoremap <C-h> <left>
 inoremap <C-l> <right>
 inoremap <C-k> <up>
 inoremap <C-j> <down>
-inoremap <C-e> <End>
 inoremap <C-a> <Home>
+inoremap <C-e> <End>
 " 補完せず補完ウィンドウを閉じてから移動
 inoremap <silent> <expr> <C-b> pumvisible() ? "<C-e><C-r>=ExecExCommand('normal b')<CR>" : "<C-r>=ExecExCommand('normal b')<CR>"
 inoremap <silent> <expr> <C-w> pumvisible() ? "<C-e><C-r>=ExecExCommand('normal w')<CR>" : "<C-r>=ExecExCommand('normal w')<CR>"
@@ -147,8 +152,8 @@ cnoremap <C-b> <Left>
 cnoremap <C-f> <Right>
 cnoremap <C-p> <Up>
 cnoremap <C-n> <Down>
-cnoremap <C-e> <End>
 cnoremap <C-a> <Home>
+cnoremap <C-e> <End>
 
 "バッファを移動する
 nnoremap <silent> <S-Tab> :bprev<CR>
@@ -194,6 +199,7 @@ if has('nvim')
    call dein#install()
   endif
 endif
+
 
 " dein の後でないとだめ
 filetype plugin indent on 
