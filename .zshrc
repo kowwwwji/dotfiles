@@ -152,7 +152,6 @@ esac
 ########################################
 # python用の設定
 export PYENV_ROOT="$HOME/.pyenv"
-export PATH="$PYENV_ROOT/shims:$PATH"
 eval "$(pyenv init -)"
 eval "$(pyenv virtualenv-init -)"
 
@@ -169,13 +168,10 @@ export NVM_DIR="$HOME/.nvm"
 
 # Ruby
 export RBENV_ROOT="$HOME/.rbenv"
-export PATH="$RBENV_ROOT/shims:$PATH"
 eval "$(rbenv init -)"
 
 # Go
 export GOENV_ROOT="$HOME/.goenv"
-export PATH="$GOENV_ROOT/shims:$PATH"
-export GOPATH=$HOME/.go
 eval "$(goenv init -)"
 
 ########################################
@@ -192,8 +188,7 @@ function dev(){
   tmux new-session -s $(basename $(pwd)) \; source-file ~/.tmux/.tmux.dev.conf
 }
 
-function peco-select-tmux-session()
-{
+function peco-select-tmux-session(){
   local session="$(tmux list-sessions | fzf | cut -d : -f 1)"
   if [ -n "$session" ]; then
     BUFFER="tmux a -t $session"
@@ -207,6 +202,7 @@ function peco-select-tmux-session()
 zle -N peco-select-tmux-session
 bindkey '^T' peco-select-tmux-session
 
+bindkey '^S' fzf-file-widget
 
 ########################################
 # デバッグ用

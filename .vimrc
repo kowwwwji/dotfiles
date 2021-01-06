@@ -1,26 +1,21 @@
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " 画面表示の設定
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" colorscheme desert
+colorscheme elflord
 highlight Normal ctermbg=NONE guibg=NONE
 highlight NonText ctermbg=NONE guibg=NONE
 highlight LineNr ctermbg=NONE guibg=NONE
 highlight Folded ctermbg=NONE guibg=NONE
 highlight EndOfBuffer ctermbg=NONE guibg=NONE
 
-syntax enable
 set number         " 行番号を表示する
 set cursorline     " カーソル行の背景色を変える
 set cursorcolumn   " カーソル列の背景色を変える
 set laststatus=2   " ステータス行を常に表示
-set cmdheight=2    " メッセージ表示欄を2行確保
+set cmdheight=2    " メッセージ表示欄
 set showmatch      " 対応する括弧を強調表示
 set helpheight=999 " ヘルプを画面いっぱいに開く
 set list           " 不可視文字を表示
-"" 補完のポップアップメニューの色
-highlight Pmenu ctermfg=white ctermbg=darkgray
-highlight PmenuSel ctermfg=yellow ctermbg=black
-highlight CursorLine cterm=NONE ctermfg=NONE ctermbg=darkgray
 
 " 不可視文字の表示記号指定
 set listchars=tab:▸\ ,eol:↲,extends:❯,precedes:❮
@@ -120,6 +115,12 @@ set noerrorbells        "エラーメッセージの表示時にビープを鳴�
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Remap
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" Exコマンドを実装する関数を定義
+function! ExecExCommand(cmd)
+  silent exec a:cmd
+  return ''
+endfunction
+
 "コロンでコマンドモードに入るようにする。
 nnoremap ;  :
 nnoremap :  ;
@@ -135,22 +136,24 @@ function! ExecExCommand(cmd)
   return ''
 endfunction
 "インサートモードで移動
-inoremap <C-h> <Left>
-inoremap <C-l> <Right>
-inoremap <C-k> <Up>
-inoremap <C-j> <Down>
+inoremap <C-h> <left>
+inoremap <C-l> <right>
+inoremap <C-k> <up>
+inoremap <C-j> <down>
 inoremap <C-a> <Home>
 inoremap <C-e> <End>
+" 補完せず補完ウィンドウを閉じてから移動
 inoremap <silent> <expr> <C-b> pumvisible() ? "<C-e><C-r>=ExecExCommand('normal b')<CR>" : "<C-r>=ExecExCommand('normal b')<CR>"
 inoremap <silent> <expr> <C-w> pumvisible() ? "<C-e><C-r>=ExecExCommand('normal w')<CR>" : "<C-r>=ExecExCommand('normal w')<CR>"
 
-
 "方向キーを使用しなくても検索履歴を使用できるようにする。
+"zshの移動と同じ
+cnoremap <C-b> <Left>
+cnoremap <C-f> <Right>
 cnoremap <C-p> <Up>
 cnoremap <C-n> <Down>
 cnoremap <C-a> <Home>
 cnoremap <C-e> <End>
-
 
 "バッファを移動する
 nnoremap <silent> <S-Tab> :bprev<CR>
@@ -160,8 +163,12 @@ nnoremap <silent> <Tab> :bnext<CR>
 " neovim関連
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""
 if has('nvim')
-  " pyenvで指定したpythonを使用する
-  let $PATH = "~/.pyenv/shims:".$PATH
+  set guicursor=n:blinkon10,i-c:ver50-blinkon10
+  " " pyenvで指定したpythonを使用する
+  " let $PATH = "~/.pyenv/shims:".$PATH
+
+  " ruby用
+  let g:ruby_host_prog = '/usr/local/bin/neovim-ruby-host'
 
   " プラグイン設定
   let s:dein_dir = expand('~/.cache/dein')
@@ -194,12 +201,22 @@ if has('nvim')
 endif
 
 
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" その他
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-
-filetype plugin indent on
+" dein の後でないとだめ
+filetype plugin indent on 
 syntax enable
+"" 補完のポップアップメニューの色
+highlight Pmenu ctermfg=white ctermbg=darkgray
+highlight PmenuSel ctermfg=yellow ctermbg=black
+highlight CursorLine cterm=NONE ctermfg=NONE ctermbg=darkgray
+
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" others
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" for Files
+let $FZF_DEFAULT_COMMAND = 'ag --hidden --ignore .git -g ""'
+" for Ag
+autocmd VimEnter * command! -bang -nargs=* Ag
+  \ call fzf#vim#ag(<q-args>, '--hidden --ignore .git', <bang>0)
 
 " Move current line to up/down
 " Ref: https://vim.fandom.com/wiki/Moving_lines_up_or_down
@@ -223,6 +240,13 @@ if has('macunix')
   vnoremap ˚ :m '<-2<CR>gv=gv
 endif
 
-"NormalモードでEnter押したら改行
+" NormalモードでEnter押したら改行
 nnoremap <CR> o<ESC>
+
+" 補完表示時のEnterで改行をしない
+inoremap <expr><CR>  pumvisible() ? "<C-y>" : "<CR>"
+
+set completeopt=menuone,noinsert
+inoremap <expr><C-n> pumvisible() ? "<Down>" : "<C-n>"
+inoremap <expr><C-p> pumvisible() ? "<Up>" : "<C-p>"
 
