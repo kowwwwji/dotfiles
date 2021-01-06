@@ -2,6 +2,7 @@
 " 画面表示の設定
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""
 colorscheme elflord
+
 highlight Normal ctermbg=NONE guibg=NONE
 highlight NonText ctermbg=NONE guibg=NONE
 highlight LineNr ctermbg=NONE guibg=NONE
@@ -240,8 +241,8 @@ if has('macunix')
   vnoremap ˚ :m '<-2<CR>gv=gv
 endif
 
-" NormalモードでEnter押したら改行
-nnoremap <CR> o<ESC>
+" Normalモードで改行
+nnoremap <C-j> o<ESC>
 
 " 補完表示時のEnterで改行をしない
 inoremap <expr><CR>  pumvisible() ? "<C-y>" : "<CR>"
