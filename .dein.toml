@@ -5,25 +5,19 @@
   [[plugins]]
   repo = 'vim-jp/vimdoc-ja'
 
-#  [[plugins]]
-#  repo = 'Shougo/denite.nvim'
-#  hook_add = '''
-#    source ~/.config/nvim/plugins/denite.vim 
-#  '''
-
 # 選択したコードを実行できる
   [[plugins]]
   repo = 'thinca/vim-quickrun'
 
   [[plugins]]
   repo = 'editorconfig/editorconfig-vim'
-  
+ 
   [[plugins]]
   repo = 'majutsushi/tagbar'
   hook_add = '''
     nmap <F8> :TagbarToggle<CR>
   '''
-  
+ 
   [[plugins]]
   repo = 'vim-airline/vim-airline'
   hook_add = '''
@@ -56,9 +50,9 @@
 #  repo = 'neoclide/coc.nvim'
 #  rev = 'release'
 
-# 非同期コードチェッカー
-  [[plugins]]
-  repo = 'w0rp/ale'
+# # 非同期コードチェッカー
+#   [[plugins]]
+#   repo = 'w0rp/ale'
 
 # Syntax checker
   # [[plugins]]
@@ -116,6 +110,11 @@
     nnoremap <silent> <Leader>m :Map<CR>
     nnoremap <silent> <Leader>b :Buffer<CR>
   '''
+ # [[plugins]]
+ # repo = 'Shougo/denite.nvim'
+ # hook_add = '''
+ #   source ~/.config/nvim/plugins/denite.vim 
+ # '''
 
 # Git操作
   [[plugins]]
@@ -124,13 +123,17 @@
     nnoremap [GitLeader]    <Nop>
     nmap     <Space>g [GitLeader]
 
-    nnoremap <silent> [GitLeader]c :Gcommit<CR>
+    nnoremap <silent> [GitLeader]c :Gcommit -v<CR>
+    nnoremap <silent> [GitLeader]a :Gwrite<CR>
     nnoremap <silent> [GitLeader]s :Gstatus<CR><C-w>T
+    nnoremap <silent> [GitLeader]b :Gblame<CR>
     nnoremap <silent> [GitLeader]f :GFiles?<CR>
     nnoremap <silent> [GitLeader]d :Gdiff<CR>
-    nnoremap <silent> [GitLeader]C :Commits<CR>
-    nnoremap <silent> [GitLeader]l :Git log<CR>
+    nnoremap <silent> [GitLeader]l :Commits<CR>
   '''
+  [[plugins]]
+  repo = 'tpope/vim-rhubarb'
+  depends = 'tope/vim-fugitive'
 
   [[plugins]]
   repo = "tpope/vim-commentary"
@@ -143,7 +146,7 @@
     nnoremap <Leader>r :UndotreeToggle<CR>
   '''
 
-    [[plugins]]
+  [[plugins]]
   repo = 'glidenote/memolist.vim'
   hook_add = '''
     let g:memolist_path = "~/GoogleDrive/memo"
@@ -178,7 +181,7 @@
     let g:translate_source = "en"
     let g:translate_target = "ja"
   " let g:translate_popup_window = 0 " if you want use popup window, set value 1
-    let g:translate_winsize = 10 " set buffer window height size if you doesn't use popup window
+    let g:translate_winsize = 5 " set buffer window height size if you doesn't use popup window
 
     nnoremap <silent> <Leader>t :Translate<CR>
     nnoremap <silent> <Leader>T :!Translate<CR>
