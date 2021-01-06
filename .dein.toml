@@ -97,6 +97,13 @@
   repo ='junegunn/fzf'
   build = './install --all'
   merged =  0
+  hook_add = '''
+    " for Files
+    let $FZF_DEFAULT_COMMAND = 'ag --hidden --ignore .git -g ""'
+    " for Ag
+    autocmd VimEnter * command! -bang -nargs=* Ag
+      \ call fzf#vim#ag(<q-args>, '--hidden --ignore .git', <bang>0)
+  '''
   [[plugins]]
   repo ='junegunn/fzf.vim'
   depends = 'fzf'
