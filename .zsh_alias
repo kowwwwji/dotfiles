@@ -1,7 +1,7 @@
 alias lg=lazygit
 alias g=hub
 #githubのローカルリポジトリに移動
-alias gserch='cd $(ghq root)/$(ghq list | fzf)'
+alias gsearch='cd $(ghq root)/$(ghq list | fzf)'
 #githubのリモートリポジトリをブラウズ
 alias gview='hub browse $(ghq list | fzf | cut -d "/" -f 2,3)'
 
