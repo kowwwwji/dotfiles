@@ -204,8 +204,6 @@ function peco-select-tmux-session(){
 zle -N peco-select-tmux-session
 bindkey '^T' peco-select-tmux-session
 
-bindkey '^S' fzf-file-widget
-
 ########################################
 # デバッグ用
 ########################################

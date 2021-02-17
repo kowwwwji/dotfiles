@@ -11,13 +11,13 @@
 
   [[plugins]]
   repo = 'editorconfig/editorconfig-vim'
- 
+
   [[plugins]]
   repo = 'majutsushi/tagbar'
   hook_add = '''
     nmap <F8> :TagbarToggle<CR>
   '''
- 
+
   [[plugins]]
   repo = 'vim-airline/vim-airline'
   hook_add = '''
@@ -113,7 +113,7 @@
  # [[plugins]]
  # repo = 'Shougo/denite.nvim'
  # hook_add = '''
- #   source ~/.config/nvim/plugins/denite.vim 
+ #   source ~/.config/nvim/plugins/denite.vim
  # '''
 
 # Git操作
