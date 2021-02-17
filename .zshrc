@@ -158,13 +158,13 @@ eval "$(pyenv virtualenv-init -)"
 # node
 # nvmコマンドを使用したときのみnvm.shをロードするようにする。
 export NVM_DIR="$HOME/.nvm"
-#function nvm() {
-#    unset -f nvm
-#    source "${NVM_DIR:-$HOME/.nvm}/nvm.sh"
-#    nvm "$@"
-#}
-[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
-[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
+function nvm() {
+    unset -f nvm
+    source "${NVM_DIR:-$HOME/.nvm}/nvm.sh"
+    nvm "$@"
+}
+#[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
+#[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
 
 # Ruby
 export RBENV_ROOT="$HOME/.rbenv"
@@ -209,6 +209,6 @@ bindkey '^S' fzf-file-widget
 ########################################
 # デバッグ用
 ########################################
-#if (which zprof > /dev/null 2>&1) ;then
-#  zprof
-#fi
+# if (which zprof > /dev/null 2>&1) ;then
+#   zprof
+# fi
