@@ -157,14 +157,23 @@ eval "$(pyenv virtualenv-init -)"
 
 # node
 # nvmコマンドを使用したときのみnvm.shをロードするようにする。
+# https://qiita.com/uasi/items/80865646607b966aedc8
 export NVM_DIR="$HOME/.nvm"
-#function nvm() {
-#    unset -f nvm
-#    source "${NVM_DIR:-$HOME/.nvm}/nvm.sh"
-#    nvm "$@"
-#}
-[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
-[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
+NODE_VER=`cat ${NVM_DIR}/alias/default`
+NODE_DIR=${NVM_DIR}/versions/node/${NODE_VER}
+PATH=${NODE_DIR}/bin:$PATH
+MANPATH=${NODE_DIR}/share/man:$MANPATH
+export NODE_PATH=${NODE_DIR}/lib/node_modules
+NODE_PATH=${NODE_PATH:A}
+function nvm() {
+    unset -f nvm
+    source "${NVM_DIR:-$HOME/.nvm}/nvm.sh"
+    nvm "$@"
+}
+
+
+#[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
+#[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
 
 # Ruby
 export RBENV_ROOT="$HOME/.rbenv"
@@ -207,6 +216,6 @@ bindkey '^T' peco-select-tmux-session
 ########################################
 # デバッグ用
 ########################################
-#if (which zprof > /dev/null 2>&1) ;then
-#  zprof
-#fi
+# if (which zprof > /dev/null 2>&1) ;then
+#   zprof
+# fi
