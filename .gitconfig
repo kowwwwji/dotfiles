@@ -43,7 +43,7 @@
       BASE_BRANCH=`git rev-parse --abbrev-ref @`;\
     fi;\
     \
-    if [ $BASE_BRANCH = 'master' ]; then echo 'Attention!! you are trying to make branch from master'; fi;\
+    if [ \"$BASE_BRANCH\" = 'master' ]; then echo 'Attention!! you are trying to make branch from master'; fi;\
     read -p 'You want to make Base Branch:'$BASE_BRANCH' -> New Branch:'$NEW_BRANCH'? (y/n)  ' yn;\
     case $yn in\
       [yY]* ) echo 'OK! Lets Start!!';;\
