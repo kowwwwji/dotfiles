@@ -1,5 +1,5 @@
 memodir = "/Users/kowwwwji/GoogleDrive/memo"
-memotemplate = ""
+memotemplate = "/Users/kowwwwji/.config/memo/template.txt"
 editor = "nvim"
 column = 20
 selectcmd = "peco"
