@@ -1,0 +1,11 @@
+memodir = "/Users/kowwwwji/GoogleDrive/memo"
+memotemplate = ""
+editor = "nvim"
+column = 20
+selectcmd = "peco"
+# grepcmd = "/Applications/Visual\\ Studio\\ Code.app/Contents/Resources/app/node_modules/vscode-ripgrep/bin/rg -n --no-heading -S ${PATTERN} ${FILES}"
+grepcmd = "grep -nH"
+assetsdir = ""
+pluginsdir = "/Users/kowwwwji/.config/memo/plugins"
+templatedirfile = ""
+templatebodyfile = ""
