@@ -251,3 +251,7 @@ set completeopt=menuone,noinsert
 inoremap <expr><C-n> pumvisible() ? "<Down>" : "<C-n>"
 inoremap <expr><C-p> pumvisible() ? "<Up>" : "<C-p>"
 
+" F12でvimrcを開く 
+nnoremap <F12> :tabnew $MYVIMRC<CR>
+
+
