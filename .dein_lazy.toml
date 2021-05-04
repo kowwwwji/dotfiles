@@ -51,21 +51,20 @@
 ##################
   [[plugins]]
   repo = 'tyru/open-browser.vim'
-  on_ft = ['md']
+  on_ft = ['md','markdown']
   hook_add = '''
     source ~/.config/nvim/plugins/open-browser.vim
   '''
   [[plugins]]
   repo = 'previm/previm'
-  on_ft = ['md']
-  on_cmd = 'PrevimOpen'
+  on_ft = ['md', 'markdown']
   depends = 'open-browser.vim'
   hook_add = '''
     source ~/.config/nvim/plugins/previm.vim
   '''
   [[plugins]]
   repo = 'plasticboy/vim-markdown'
-  on_ft = ['md']
+  on_ft = ['md', 'markdown']
   hook_add = '''
     source ~/.config/nvim/plugins/vim-markdown.vim
   '''

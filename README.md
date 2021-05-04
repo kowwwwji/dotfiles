@@ -29,3 +29,5 @@ install PC with homebrew
   - brew cask install font-hack-nerd-font
 
 vimのTerminal対策として、$ZDOTDIR配下に.zshrcへのリンク作成
+
+.configのリンク
