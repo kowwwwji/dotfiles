@@ -15,7 +15,7 @@
   [[plugins]]
   repo = 'majutsushi/tagbar'
   hook_add = '''
-    nmap <F8> :TagbarToggle<CR>
+    source ~/.config/nvim/plugins/tagbar.vim
   '''
 
   [[plugins]]
