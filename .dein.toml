@@ -123,12 +123,12 @@
     nnoremap [GitLeader]    <Nop>
     nmap     <Space>g [GitLeader]
 
-    nnoremap <silent> [GitLeader]c :Gcommit -v<CR>
+    nnoremap <silent> [GitLeader]c :Git commit -v<CR>
     nnoremap <silent> [GitLeader]a :Gwrite<CR>
-    nnoremap <silent> [GitLeader]s :Gstatus<CR><C-w>T
+    nnoremap <silent> [GitLeader]s :Git<CR><C-w>T
     nnoremap <silent> [GitLeader]b :Gblame<CR>
     nnoremap <silent> [GitLeader]f :GFiles?<CR>
-    nnoremap <silent> [GitLeader]d :Gdiff<CR>
+    nnoremap <silent> [GitLeader]d :Gvdiffsplit<CR>
     nnoremap <silent> [GitLeader]l :Commits<CR>
   '''
   [[plugins]]
