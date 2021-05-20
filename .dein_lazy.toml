@@ -36,6 +36,13 @@
   repo = 'moll/vim-node'
   on_ft = ['javascript'] 
 
+  [[plugins]]
+  repo = 'hushicai/tagbar-javascript.vim'
+  on_ft = ['javascript']
+  hook_add = '''
+    call system('npm i -g esctags')
+  '''
+
 ##################
 ## Ruby ##########
 ##################
