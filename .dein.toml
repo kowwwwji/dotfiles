@@ -15,7 +15,34 @@
   [[plugins]]
   repo = 'majutsushi/tagbar'
   hook_add = '''
-    nmap <F8> :TagbarToggle<CR>
+    nnoremap <silent><F8> :TagbarToggle<CR>
+    
+    " この設定によってホームディレクトリまでTagファイルを探す
+    set tags=.tags;$HOME
+
+    function! s:execute_ctags() abort
+      " 探すタグファイル名
+      let tag_name = '.tags'
+      " ディレクトリを遡り、タグファイルを探し、パス取得
+      let tags_path = findfile(tag_name, '.;')
+      " タグファイルパスが見つからなかった場合
+      if tags_path ==# ''
+        return
+      endif
+
+      " タグファイルのディレクトリパスを取得
+      " `:p:h`の部分は、:h filename-modifiersで確認
+      let tags_dirpath = fnamemodify(tags_path, ':p:h')
+
+      " 見つかったタグファイルのディレクトリに移動して、ctagsをバックグラウンド実行（エラー出力破棄）
+      "" execute 'silent !cd' tags_dirpath '&& ctags -R -f' tag_name '2> /dev/null &'
+      execute '!cd' tags_dirpath '&& ctags -R -f' tag_name '2> /dev/null &'
+    endfunction
+
+    augroup ctags
+      autocmd!
+      autocmd BufWritePost * call s:execute_ctags()
+    augroup END
   '''
 
   [[plugins]]
@@ -129,14 +156,26 @@
     nnoremap <silent> [GitLeader]b :Gblame<CR>
     nnoremap <silent> [GitLeader]f :GFiles?<CR>
     nnoremap <silent> [GitLeader]d :Gdiff<CR>
-    nnoremap <silent> [GitLeader]l :Commits<CR>
+    nnoremap <silent> [GitLeader]C :Commits<CR>
+    nnoremap <silent> [GitLeader]l :Git log<CR>
+
+    highlight DiffAdd    cterm=bold ctermfg=10 ctermbg=22
+    highlight DiffDelete cterm=bold ctermfg=10 ctermbg=52
+    highlight DiffChange cterm=bold ctermfg=10 ctermbg=17
+    highlight DiffText   cterm=bold ctermfg=10 ctermbg=21
   '''
   [[plugins]]
   repo = 'tpope/vim-rhubarb'
   depends = 'tope/vim-fugitive'
 
+# iTerm2の設定を変える必要あり
+# https://qiita.com/satosystems/items/81e292ab2af12249ed8b#%E3%82%AF%E3%83%AA%E3%83%83%E3%83%97%E3%83%9C%E3%83%BC%E3%83%89%E3%82%A2%E3%82%AF%E3%82%BB%E3%82%B9%E8%A8%B1%E5%8F%AF%E8%A8%AD%E5%AE%9A
   [[plugins]]
   repo = "tpope/vim-commentary"
+  hook_add = '''
+    vnoremap <silent> <D-_> :Git log<CR>
+  '''
+
 
   [[plugins]]
   repo = 'mbbill/undotree'
@@ -190,3 +229,4 @@
 
     nnoremap <silent> <Esc><Esc><Esc> :bw translate://result<CR>
   '''
+
