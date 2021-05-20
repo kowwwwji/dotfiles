@@ -253,3 +253,10 @@ inoremap <expr><C-p> pumvisible() ? "<Up>" : "<C-p>"
 
 " F12でvimrcを開く 
 nnoremap <F12> :tabnew $MYVIMRC<CR>
+
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" Terminal
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+tnoremap <Esc> <C-\><C-n>
+command! -nargs=* T split | wincmd j | resize 20 | terminal <args>
+autocmd TermOpen * startinsert
