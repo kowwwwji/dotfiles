@@ -27,12 +27,17 @@
   repo = 'vim-airline/vim-airline-themes'
 
 # カッコ系
-  [[plugins]]
-  repo = 'tpope/vim-endwise'
+  # leximaにhook_addを追加したらEnterを押したときにバグったからコメントアウト
+  # [[plugins]]
+  # repo = 'tpope/vim-endwise'
   [[plugins]]
   repo = 'tpope/vim-surround'
   [[plugins]]
   repo = 'cohama/lexima.vim'
+  hook_add = '''
+    call lexima#add_rule({'at': '- \%#', 'char': '[', 'input': '[ ]<Space>', 'filetype': 'markdown'})
+    call lexima#add_rule({'at': '- \%#', 'char': ']', 'input': '[x]<Space>', 'filetype': 'markdown'})
+  '''
 
 # テーブル系
   [[plugins]]
