@@ -42,6 +42,10 @@
     call system('npm i -g esctags')
   '''
 
+  [[plugins]]
+  repo = 'peitalin/vim-jsx-typescript'
+  on_ft = ['typescriptreact']
+
 ##################
 ## Ruby ##########
 ##################
