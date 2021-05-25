@@ -1,7 +1,7 @@
 nnoremap <F3> :TagbarToggle<CR>
 
 " この設定によってホームディレクトリまでTagファイルを探す
-set tags=./tags;$HOME
+set tags=.tags;$HOME
 
 function! s:execute_ctags() abort
   " 探すタグファイル名

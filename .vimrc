@@ -57,7 +57,7 @@ set autoread   " 外部でファイルに変更がされた場合は読みなお
 set nobackup   " ファイル保存時にバックアップファイルを作らない
 set noswapfile " ファイル編集中にスワップファイルを作らない
 set fileencodings=utf-8,cp932,euc-jp,sjis " ファイルを読み込む時の、文字コード自動判別の順番
-
+set fileformats=unix,dos,mac
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " 検索/置換の設定
