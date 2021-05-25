@@ -257,6 +257,6 @@ command! Vimrc :tabnew $MYVIMRC
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Terminal
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""
-tnoremap <Esc> <C-\><C-n>
+" tnoremap <Esc> <C-\><C-n> " GitFileしたときに<Esc>でwindowが閉じれなくなる
 command! -nargs=* T split | wincmd j | resize 20 | terminal <args>
 autocmd TermOpen * startinsert
