@@ -18,8 +18,7 @@ function! s:execute_ctags() abort
   let tags_dirpath = fnamemodify(tags_path, ':p:h')
 
   " 見つかったタグファイルのディレクトリに移動して、ctagsをバックグラウンド実行（エラー出力破棄）
-  "" execute 'silent !cd' tags_dirpath '&& ctags -R -f' tag_name '2> /dev/null &'
-  execute '!cd' tags_dirpath '&& ctags -R -f' tag_name '2> /dev/null &'
+  execute 'silent !cd' tags_dirpath '&& ctags -R -f' tag_name '2> /dev/null &'
 endfunction
 
 augroup ctags
