@@ -254,6 +254,28 @@ inoremap <expr><C-p> pumvisible() ? "<Up>" : "<C-p>"
 " vimrcを開く 
 command! Vimrc :tabnew $MYVIMRC
 
+" augroup GrepCmd
+"   autocmd!
+"   autocmd QuickFixCmdPost vim,grep,make if len(getqflist()) != 0 | cwindow | endif
+" augroup END
+autocmd QuickFixCmdPost *grep* copen
+
+" Toggle quickfix
+if exists('g:__QUICKFIX_TOGGLE__')
+  finish
+endif
+let g:__QUICKFIX_TOGGLE__ = 1
+
+function! ToggleQuickfix()
+  let l:nr = winnr('$')
+  cwindow
+  let l:nr2 = winnr('$')
+  if l:nr == l:nr2
+      cclose
+  endif
+endfunction
+nnoremap <script> <silent> <F4> :call ToggleQuickfix()<CR>
+
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Terminal
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""
