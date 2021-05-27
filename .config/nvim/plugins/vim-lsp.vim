@@ -5,8 +5,10 @@ endif
 function! s:on_lsp_buffer_enabled() abort
   setlocal omnifunc=lsp#complete
   setlocal signcolumn=yes
-  nmap <buffer> <F12> <plug>(lsp-definition)
+  nmap <buffer> gd <plug>(lsp-definition)
+  nmap <buffer> gr <plug>(lsp-references)
   nmap <buffer> <F2> <plug>(lsp-rename)
+  " 補完表示時のEnterで改行をしない
   inoremap <expr><cr> pumvisible() ? "<c-y>" : "<cr>"
 endfunction
 
