@@ -8,6 +8,11 @@
 # 選択したコードを実行できる
   [[plugins]]
   repo = 'thinca/vim-quickrun'
+  hook_add = '''
+    nnoremap <F5> :call quickrun#run()
+    let g:quickrun_config={'*': {'split': ''}}
+    set splitright
+  '''
 
   [[plugins]]
   repo = 'editorconfig/editorconfig-vim'
