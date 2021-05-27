@@ -1,13 +1,6 @@
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " 画面表示の設定
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""
-colorscheme elflord
-
-highlight Normal ctermbg=NONE guibg=NONE
-highlight NonText ctermbg=NONE guibg=NONE
-highlight LineNr ctermbg=NONE guibg=NONE
-highlight Folded ctermbg=NONE guibg=NONE
-highlight EndOfBuffer ctermbg=NONE guibg=NONE
 
 set number         " 行番号を表示する
 set cursorline     " カーソル行の背景色を変える
@@ -196,14 +189,27 @@ if has('nvim')
 endif
 
 
-" dein の後でないとだめ
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" deinの処理後でないと機能しない
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 filetype plugin indent on 
 syntax enable
+
 "" 補完のポップアップメニューの色
+set pumblend=10
+set termguicolors
 highlight Pmenu ctermfg=white ctermbg=darkgray
 highlight PmenuSel ctermfg=yellow ctermbg=black
 highlight CursorLine cterm=NONE ctermfg=NONE ctermbg=darkgray
 
+highlight Normal ctermbg=NONE guibg=NONE
+highlight NonText ctermbg=NONE guibg=NONE
+highlight LineNr ctermbg=NONE guibg=NONE
+highlight Folded ctermbg=NONE guibg=NONE
+highlight EndOfBuffer ctermbg=NONE guibg=NONE
+
+"" colorscheme gruvbox用の設定
+highlight comment ctermfg=242 guifg=darkcyan
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " others
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""
