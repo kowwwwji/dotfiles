@@ -5,6 +5,13 @@
   [[plugins]]
   repo = 'vim-jp/vimdoc-ja'
 
+# ColorShchemeをdeinで設定した場合、hightはvimrcにdeinの処理の後に書くこと
+  [[plugins]]
+  repo = 'morhetz/gruvbox'
+  hook_add = '''
+    colorscheme gruvbox
+  '''
+
 # 選択したコードを実行できる
   [[plugins]]
   repo = 'thinca/vim-quickrun'
