@@ -261,10 +261,10 @@ command! Vimrc :tabnew $MYVIMRC
 autocmd QuickFixCmdPost *grep* copen
 
 " Toggle quickfix
-if exists('g:__QUICKFIX_TOGGLE__')
-  finish
-endif
-let g:__QUICKFIX_TOGGLE__ = 1
+" if exists('g:__QUICKFIX_TOGGLE__')
+"   finish
+" endif
+" let g:__QUICKFIX_TOGGLE__ = 1
 
 function! ToggleQuickfix()
   let l:nr = winnr('$')
