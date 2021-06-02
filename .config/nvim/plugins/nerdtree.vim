@@ -1,6 +1,13 @@
 let NERDTreeShowHidden = 1
-nnoremap <silent><C-e> :NERDTreeToggleVCS<CR>
-nnoremap <silent><C-e>f :NERDTreeFind<CR>
+nnoremap <silent><C-e> :call NERDTreeFindToggle()<CR>
+
+function! NERDTreeFindToggle() abort
+  if (exists("b:NERDTree") && b:NERDTree.isTabTree()) 
+    NERDTreeClose
+  else
+    NERDTreeFind
+  endif
+endfunction
 
 "引数なしでvimを開いたらNERDTreeを起動、
 "引数ありならNERDTreeは起動せず、引数で渡されたファイルを開く。
