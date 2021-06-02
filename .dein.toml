@@ -17,7 +17,7 @@
   repo = 'thinca/vim-quickrun'
   hook_add = '''
     nnoremap <F5> :call quickrun#run()
-    let g:quickrun_config = {'*': {'split': ''}}
+    let g:quickrun_config = {'_': {'split': ''}}
     set splitright
   '''
 
@@ -47,8 +47,7 @@
   [[plugins]]
   repo = 'cohama/lexima.vim'
   hook_add = '''
-    call lexima#add_rule({'at': '- \%#', 'char': '[', 'input': '[ ]<Space>', 'filetype': 'markdown'})
-    call lexima#add_rule({'at': '- \%#', 'char': ']', 'input': '[x]<Space>', 'filetype': 'markdown'})
+    source ~/.config/nvim/plugins/lexima.vim
   '''
 
 # テーブル系
