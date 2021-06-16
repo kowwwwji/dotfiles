@@ -120,11 +120,11 @@
   hook_add = '''
     nnoremap <silent> <Leader>s :Ag<CR>
     nnoremap <silent> <Leader>f :GFiles<CR>
-    nnoremap <silent> <Leader>l :BLines<CR>
+    nnoremap <silent> <Leader>b :BLines<CR>
     nnoremap <silent> <Leader>h :History<CR>
-    "" nnoremap <silent> <Leader>m :Mark<CR><Paste>
+    nnoremap <silent> <Leader>hc :History:<CR>
+    nnoremap <silent> <Leader>hs :History/<CR>
     nnoremap <silent> <Leader>m :Map<CR>
-    nnoremap <silent> <Leader>b :Buffer<CR>
   '''
  # [[plugins]]
  # repo = 'Shougo/denite.nvim'
