@@ -186,6 +186,8 @@ if has('nvim')
   if has('vim_starting') && dein#check_install()
    call dein#install()
   endif
+  "" 補完のポップアップメニューの色 neovim Only
+  set pumblend=10
 endif
 
 
@@ -196,7 +198,6 @@ filetype plugin indent on
 syntax enable
 
 "" 補完のポップアップメニューの色
-set pumblend=10
 set termguicolors
 highlight Pmenu ctermfg=white ctermbg=darkgray
 highlight PmenuSel ctermfg=yellow ctermbg=black
@@ -280,5 +281,5 @@ nnoremap <script> <silent> <F4> :call ToggleQuickfix()<CR>
 " Terminal
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " tnoremap <Esc> <C-\><C-n> " GitFileしたときに<Esc>でwindowが閉じれなくなる
-command! -nargs=* T split | wincmd j | resize 20 | terminal <args>
-autocmd TermOpen * startinsert
+" command! -nargs=* T split | wincmd j | resize 20 | terminal <args>
+" autocmd TermOpen * startinsert
