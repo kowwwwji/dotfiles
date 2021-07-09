@@ -16,7 +16,8 @@
   [[plugins]]
   repo = 'thinca/vim-quickrun'
   hook_add = '''
-    nnoremap <F5> :call quickrun#run()
+    nnoremap <silent> <F5> :call quickrun#run()<CR>
+    vnoremap <silent> <F5> :QuickRun -mode v<CR>
     let g:quickrun_config = {'_': {'split': ''}}
     set splitright
   '''
