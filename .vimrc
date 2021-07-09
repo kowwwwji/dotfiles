@@ -158,7 +158,7 @@ if has('nvim')
   " let $PATH = "~/.pyenv/shims:".$PATH
 
   " ruby用
-  let g:ruby_host_prog = '/usr/local/bin/neovim-ruby-host'
+  let g:ruby_host_prog = '~/.rbenv/shims/neovim-ruby-host'
 
   " プラグイン設定
   let s:dein_dir = expand('~/.cache/dein')
