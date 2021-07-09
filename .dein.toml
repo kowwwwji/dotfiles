@@ -62,9 +62,18 @@
 #####################################
 # 補完機能
 #####################################
-#  [[plugins]]
-#  repo = 'neoclide/coc.nvim'
-#  rev = 'release'
+  # [[plugins]]
+  # repo = 'neoclide/coc.nvim'
+  # rev = 'release'
+  [[plugins]]
+  repo = 'Shougo/deoplete.nvim'
+  hook_add = '''
+    let g:deoplete#enable_at_startup = 1
+  '''
+  [[plugins]]
+  repo = 'SirVer/ultisnips'
+  [[plugins]]
+  repo = 'honza/vim-snippets'
 
 # # 非同期コードチェッカー
 #   [[plugins]]
