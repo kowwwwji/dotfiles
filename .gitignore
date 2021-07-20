@@ -3,3 +3,4 @@
 
 .zsh/.zsh_history
 .zsh/local.zsh
+.config/.gitconfig.local
