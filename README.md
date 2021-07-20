@@ -31,3 +31,11 @@ install PC with homebrew
 vimのTerminal対策として、$ZDOTDIR配下に.zshrcへのリンク作成
 
 .configのリンク
+
+.cache/dein/repos/github.com/previm/previm/_/index.htmlを修正してる
+
+nvimのプラグイン設定
+`ln -s ~/.ghq/github.com/kowwwwji/dotfiles/.config/nvim/plugins ~/.config/nvim/plugins`
+
+Previmで使用するCSSの最新化
+`curl https://raw.githubusercontent.com/sindresorhus/github-markdown-css/gh-pages/github-markdown.css > .template/github-markdown.css`
