@@ -1,17 +1,11 @@
 # Dotfiles
 
-- vscode関連ファイルのコピー
-  - `cp ./vscode/keybindings.json ~/Library/ApplicationSupport/Code/User/keybindings.json`
-  - `cp ./vscode/settings.json ~/Library/ApplicationSupport/Code/User/settings.json`
-- ホームディレクトリの設定ファイルをリンク化
-  - .dein.toml
-  - .dein_lazy.toml
-  - .gitconfig
-  - .gitignore
-  - .tmux.conf
-  - .vimrc
-  - .zsh
-  - .zshrc
+## 環境構築
+
+```zsh
+$ zsh init.sh
+```
+
 - install nvm with git
 - install PC with homebrew
   - assume-role
@@ -34,9 +28,7 @@
   - tmux
   - brew tap homebrew/cask-fonts
   - brew cask install font-hack-nerd-font
-- .configのリンク
-  - `ln -s ~/.ghq/github.com/kowwwwji/dotfiles/.config/nvim/plugins ~/.config/nvim/plugins`
-  - `.config/.gitconfig.local`の作成
-- Previmで使用するCSSの最新化
-  - `curl https://raw.githubusercontent.com/sindresorhus/github-markdown-css/gh-pages/github-markdown.css | sed -e 's/.markdown-body //g' > .template/github-markdown.css
-`
+
+## LocalPC特有の設定
+- `~/.config/.gitconfig.local`
+- `~/.zsh/local.zsh`
