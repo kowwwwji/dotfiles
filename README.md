@@ -37,6 +37,6 @@
 - .configのリンク
   - `ln -s ~/.ghq/github.com/kowwwwji/dotfiles/.config/nvim/plugins ~/.config/nvim/plugins`
   - `.config/.gitconfig.local`の作成
-- .cache/dein/repos/github.com/previm/previm/_/index.htmlを修正してる
 - Previmで使用するCSSの最新化
-  - `curl https://raw.githubusercontent.com/sindresorhus/github-markdown-css/gh-pages/github-markdown.css > .template/github-markdown.css`
+  - `curl https://raw.githubusercontent.com/sindresorhus/github-markdown-css/gh-pages/github-markdown.css | sed -e 's/.markdown-body //g' > .template/github-markdown.css
+`
