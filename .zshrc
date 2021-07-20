@@ -59,24 +59,26 @@ zstyle ':zle:*' word-style unspecified
 ########################################
 # プロンプト
 ########################################
-# 2行表示
-PROMPT="%{${fg[green]}%}[%n@%m %*]%{${reset_color}%} %~
-%# "
-SPROMPT="%r is correct? [n,y,a,e]: "
+# # 2行表示
+# PROMPT="%{${fg[green]}%}[%n@%m %*]%{${reset_color}%} %~
+# %# "
+# SPROMPT="%r is correct? [n,y,a,e]: "
 
-autoload -Uz vcs_info
+# autoload -Uz vcs_info
 
-# Gitの情報を表示
-zstyle ':vcs_info:*' formats '%F{green}(%s)-[%b]%f'
-zstyle ':vcs_info:*' actionformats '%F{red}(%s)-[%b|%a]%f'
+# # Gitの情報を表示
+# zstyle ':vcs_info:*' formats '%F{green}(%s)-[%b]%f'
+# zstyle ':vcs_info:*' actionformats '%F{red}(%s)-[%b|%a]%f'
 
-function _update_vcs_info_msg() {
-  LANG=en_US.UTF-8 vcs_info
-  RPROMPT="${vcs_info_msg_0_}"
-}
+# function _update_vcs_info_msg() {
+#   LANG=en_US.UTF-8 vcs_info
+#   RPROMPT="${vcs_info_msg_0_}"
+# }
 
-autoload -Uz add-zsh-hook
-add-zsh-hook precmd _update_vcs_info_msg
+# autoload -Uz add-zsh-hook
+# add-zsh-hook precmd _update_vcs_info_msg
+
+eval "$(starship init zsh)"
 
 ########################################
 # オプション
