@@ -1,4 +1,5 @@
 let g:previm_open_cmd = 'open -a Google\ Chrome'
+let g:previm_custom_css_path = '~/.ghq/github.com/kowwwwji/dotfiles/.template/github-markdown.css'
 
 augroup PrevimSettings
   autocmd!

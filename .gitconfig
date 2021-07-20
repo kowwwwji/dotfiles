@@ -1,13 +1,10 @@
+[include]
+  path = ~/.config/.gitconfig.local
 [core]
   editor = vi
   excludesfile = ~/.gitignore
 [ghq]
   root = ~/.ghq
-[ghq "http://ghe.aws01.mapion.co.jp/repos/"]
-  vcs = git
-[user]
-  name = Koji Sakamoto
-  email = kowwwwji@gmail.com
 [alias]
 ##################
 # 基本コマンド
