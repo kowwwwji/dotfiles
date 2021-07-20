@@ -7,12 +7,17 @@
 ########################################
 # 各種設定ファイル
 ########################################
-if [[ -f "${HOME}/.zsh_alias" ]]; then
-  source "${HOME}/.zsh_alias"
+ZSH_HOME="${HOME}/.zsh"
+
+if [ -d $ZSH_HOME -a -r $ZSH_HOME -a -x $ZSH_HOME ]; then
+  for i in $ZSH_HOME/*; do
+    [[ ${i##*/} = *.zsh ]] &&
+      [ \( -f $i -o -h $i \) -a -r $i ] && source $i
+  done
 fi
 
-if [[ -f "${HOME}/.zsh_history" ]]; then
-  HISTFILE="${HOME}/.zsh_history"
+if [[ -f "$ZSH_HOME/.zsh_history" ]]; then
+  HISTFILE="$ZSH_HOME/.zsh_history"
 fi
 
 GITHUB_CREDENTIAL_FILE=~/.config/.github_credentials
@@ -212,6 +217,8 @@ function peco-select-tmux-session(){
 }
 zle -N peco-select-tmux-session
 bindkey '^T' peco-select-tmux-session
+
+
 
 ########################################
 # デバッグ用
