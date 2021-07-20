@@ -8,6 +8,7 @@ for i in ./.* ; do
     && ln -s ${DOTFILES_ROOT}/${i##./} ${HOME}/${i##./}
 done;
 ln -s ${DOTFILES_ROOT}/.config/nvim/plugins ${HOME}/.config/nvim/
+ln -s ${DOTFILES_ROOT}/.config/starship.toml ${HOME}/.config/starship.toml
 
 ln -s ${DOTFILES_ROOT}/.zsh $HOME/
 
