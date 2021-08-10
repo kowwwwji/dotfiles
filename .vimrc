@@ -1,6 +1,6 @@
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " 画面表示の設定
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
 set number         " 行番号を表示する
 set cursorline     " カーソル行の背景色を変える
@@ -12,7 +12,7 @@ set helpheight=999 " ヘルプを画面いっぱいに開く
 set list           " 不可視文字を表示
 
 " 不可視文字の表示記号指定
-set listchars=tab:▸\ ,eol:↲,extends:❯,precedes:❮
+set listchars=tab:▸\ ,trail:-,eol:↲,extends:❯,precedes:❮
 
 " カーソルの形
 if has('vim_starting')
@@ -153,7 +153,7 @@ nnoremap <silent> <Tab> :bnext<CR>
 " neovim関連
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""
 if has('nvim')
-  set guicursor=n:blinkon10,i-c:ver50-blinkon10
+  set guicursor=n:blinkon10,i-ci:ver50-blinkon10
   " " pyenvで指定したpythonを使用する
   " let $PATH = "~/.pyenv/shims:".$PATH
 
