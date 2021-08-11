@@ -66,11 +66,11 @@
   # [[plugins]]
   # repo = 'neoclide/coc.nvim'
   # rev = 'release'
-  [[plugins]]
-  repo = 'Shougo/deoplete.nvim'
-  hook_add = '''
-    let g:deoplete#enable_at_startup = 1
-  '''
+  # [[plugins]]
+  # repo = 'Shougo/deoplete.nvim'
+  # hook_add = '''
+  #   let g:deoplete#enable_at_startup = 1
+  # '''
   [[plugins]]
   repo = 'SirVer/ultisnips'
   [[plugins]]
