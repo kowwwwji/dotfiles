@@ -268,8 +268,14 @@ endfunction
 nnoremap <script> <silent> <F4> :call ToggleQuickfix()<CR>
 
 autocmd FileType vim setlocal foldmethod=marker
-au BufWinLeave * mkview
-au BufWinEnter * silent loadview
+
+"" https://vim-jp.org/vim-users-jp/2009/10/08/Hack-84.html
+" Save fold settings.
+autocmd BufWritePost * if expand('%') != '' && &buftype !~ 'nofile' | mkview | endif
+autocmd BufRead * if expand('%') != '' && &buftype !~ 'nofile' | silent loadview | endif
+" Don't save options.
+set viewoptions-=option
+
 "}}}
 
 " Terminal{{{
