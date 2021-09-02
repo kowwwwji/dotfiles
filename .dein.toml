@@ -60,39 +60,6 @@
   [[plugins]]
   repo = 'dhruvasagar/vim-table-mode'
 
-#####################################
-# 補完機能
-#####################################
-  # [[plugins]]
-  # repo = 'neoclide/coc.nvim'
-  # rev = 'release'
-  # [[plugins]]
-  # repo = 'Shougo/deoplete.nvim'
-  # hook_add = '''
-  #   let g:deoplete#enable_at_startup = 1
-  # '''
-  [[plugins]]
-  repo = 'SirVer/ultisnips'
-  [[plugins]]
-  repo = 'honza/vim-snippets'
-
-# # 非同期コードチェッカー
-#   [[plugins]]
-#   repo = 'w0rp/ale'
-
-# Syntax checker
-  # [[plugins]]
-  # repo = 'scrooloose/syntastic'
-  # hook_add = '''
-  #   set statusline+=%#warningmsg#
-  #   set statusline+=%{SyntasticStatuslineFlag()}
-  #   set statusline+=%*
-  #   let g:syntastic_always_populate_loc_list = 1
-  #   let g:syntastic_auto_loc_list = 1
-  #   let g:syntastic_check_on_open = 1
-  #   let g:syntastic_check_on_wq = 0
-  #   let g:syntastic_ruby_checkers=['rubocop', 'mri']
-  # '''
 
 # 移動
   [[plugins]]
@@ -191,14 +158,19 @@
 
 ## LSP関連
   [[plugins]]
-  repo = 'prabirshrestha/asyncomplete.vim'
-  [[plugins]]
-  repo =  'prabirshrestha/asyncomplete-lsp.vim'
-  [[plugins]]
   repo =  'prabirshrestha/vim-lsp'
   hook_add = '''
     source ~/.config/nvim/plugins/vim-lsp.vim
   '''
+  [[plugins]]
+  repo = 'prabirshrestha/asyncomplete.vim'
+  [[plugins]]
+  repo =  'prabirshrestha/asyncomplete-lsp.vim'
+  # [[plugins]]
+  # repo = 'Shougo/deoplete.nvim'
+  # hook_add = '''
+  #   let g:deoplete#enable_at_startup = 1
+  # '''
   [[plugins]]
   repo =  'mattn/vim-lsp-settings'
   [[plugins]]
@@ -207,6 +179,33 @@
   repo =  'hrsh7th/vim-vsnip'
   [[plugins]]
   repo =  'hrsh7th/vim-vsnip-integ'
+
+  # [[plugins]]
+  # repo = 'SirVer/ultisnips'
+  # [[plugins]]
+  # repo = 'honza/vim-snippets'
+
+  # [[plugins]]
+  # repo = 'neoclide/coc.nvim'
+  # rev = 'release'
+
+# # 非同期コードチェッカー
+#   [[plugins]]
+#   repo = 'w0rp/ale'
+
+# Syntax checker
+  # [[plugins]]
+  # repo = 'scrooloose/syntastic'
+  # hook_add = '''
+  #   set statusline+=%#warningmsg#
+  #   set statusline+=%{SyntasticStatuslineFlag()}
+  #   set statusline+=%*
+  #   let g:syntastic_always_populate_loc_list = 1
+  #   let g:syntastic_auto_loc_list = 1
+  #   let g:syntastic_check_on_open = 1
+  #   let g:syntastic_check_on_wq = 0
+  #   let g:syntastic_ruby_checkers=['rubocop', 'mri']
+  # '''
 
 ## 翻訳
   [[plugins]]
