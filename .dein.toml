@@ -96,12 +96,13 @@
   depends = 'fzf'
   hook_add = '''
     nnoremap <silent> <Leader>s :Ag<CR>
-    nnoremap <silent> <Leader>f :GFiles<CR>
+    nnoremap <silent> <Leader>f :Files<CR>
     nnoremap <silent> <Leader>b :BLines<CR>
     nnoremap <silent> <Leader>h :History<CR>
     nnoremap <silent> <Leader>hc :History:<CR>
     nnoremap <silent> <Leader>hs :History/<CR>
     nnoremap <silent> <Leader>m :Map<CR>
+    nnoremap <silent> <Leader>c :Commits<CR>
   '''
  # [[plugins]]
  # repo = 'Shougo/denite.nvim'
@@ -118,12 +119,11 @@
 
     nnoremap <silent> [GitLeader]c :Git commit -v<CR>
     nnoremap <silent> [GitLeader]a :Gwrite<CR>
-    nnoremap <silent> [GitLeader]s :Git<CR><C-w>T
     nnoremap <silent> [GitLeader]b :Gblame<CR>
     nnoremap <silent> [GitLeader]f :GFiles?<CR>
     nnoremap <silent> [GitLeader]d :Gvdiffsplit<CR>
-    nnoremap <silent> [GitLeader]C :Commits<CR>
     nnoremap <silent> [GitLeader]l :Git log<CR>
+    nnoremap <silent> [GitLeader]s :GBrowse<CR>
 
     highlight DiffAdd    cterm=bold ctermfg=10 ctermbg=22
     highlight DiffDelete cterm=bold ctermfg=10 ctermbg=52
