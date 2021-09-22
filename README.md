@@ -33,3 +33,4 @@ $ zsh init.sh
 ## LocalPC特有の設定
 - `~/.config/.gitconfig.local`
 - `~/.zsh/local.zsh`
+- `~/.vim/local.vim`

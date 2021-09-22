@@ -284,3 +284,8 @@ set viewoptions-=option
 " autocmd TermOpen * startinsert
 " }}}
 
+" Local Setting{{{
+if filereadable(expand('~/.vim/local.vim'))
+  source ~/.vim/local.vim
+endif
+" }}}
