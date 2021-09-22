@@ -40,7 +40,7 @@
   repo = 'vim-airline/vim-airline-themes'
 
 # カッコ系
-  # leximaにhook_addを追加したらEnterを押したときにバグったからコメントアウト
+  # TODO leximaにhook_addを追加したらEnterを押したときにバグったからコメントアウト
   # [[plugins]]
   # repo = 'tpope/vim-endwise'
   [[plugins]]
