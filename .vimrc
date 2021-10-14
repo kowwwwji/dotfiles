@@ -276,6 +276,9 @@ autocmd BufRead * if expand('%') != '' && &buftype !~ 'nofile' | silent! loadvie
 " Don't save options.
 set viewoptions-=option
 
+" htmlで対応タグに移動する。
+source $VIMRUNTIME/macros/matchit.vim
+
 "}}}
 
 " Terminal{{{
