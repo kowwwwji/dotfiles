@@ -121,8 +121,8 @@ inoremap <C-j> <Down>
 inoremap <C-a> <Home>
 inoremap <C-e> <End>
 " 補完せず補完ウィンドウを閉じてから移動
-inoremap <silent> <expr> <C-b> pumvisible() ? "<C-e><C-r>=ExecExCommand('normal b')<CR>" : "<C-r>=ExecExCommand('normal b')<CR>"
-inoremap <silent> <expr> <C-w> pumvisible() ? "<C-e><C-r>=ExecExCommand('normal w')<CR>" : "<C-r>=ExecExCommand('normal w')<CR>"
+inoremap <silent><expr><C-b> pumvisible() ? "<C-e><C-r>=ExecExCommand('normal b')<CR>" : "<C-r>=ExecExCommand('normal b')<CR>"
+inoremap <silent><expr><C-w> pumvisible() ? "<C-e><C-r>=ExecExCommand('normal w')<CR>" : "<C-r>=ExecExCommand('normal w')<CR>"
 
 "方向キーを使用しなくても検索履歴を使用できるようにする。
 cnoremap <C-h> <Left>
