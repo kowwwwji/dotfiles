@@ -124,7 +124,7 @@
     nnoremap <silent> [GitLeader]f :GFiles?<CR>
     nnoremap <silent> [GitLeader]d :Gvdiffsplit<CR>
     nnoremap <silent> [GitLeader]l :Git log<CR>
-    nnoremap <silent> [GitLeader]s :GBrowse<CR>
+    nnoremap <silent> [GitLeader]x :GBrowse<CR>
 
     highlight DiffAdd    cterm=bold ctermfg=10 ctermbg=22
     highlight DiffDelete cterm=bold ctermfg=10 ctermbg=52
