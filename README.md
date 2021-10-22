@@ -2,8 +2,8 @@
 
 ## 環境構築
 
-```zsh
-$ zsh init.sh
+```sh=zsh
+zsh init.sh
 ```
 
 - install nvm with git
