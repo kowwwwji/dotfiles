@@ -14,7 +14,8 @@ function! s:on_lsp_buffer_enabled() abort
   nmap <buffer> ]g <Plug>(lsp-next-diagnostic)
   nmap <buffer> K <plug>(lsp-hover)
   " 補完表示時のEnterで改行をしない
-  inoremap <expr><cr> pumvisible() ? "<c-y>" : "<cr>"
+  inoremap <expr><CR> pumvisible() ? "<C-y>" : "<CR>"
+
 endfunction
 
 augroup lsp_install

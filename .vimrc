@@ -233,8 +233,6 @@ endif
 " Normalモードで改行
 nnoremap <C-j> o<ESC>
 
-" 補完表示時のEnterで改行をしない
-inoremap <expr><CR>  pumvisible() ? "<C-y>" : "<CR>"
 " Ctrl+Spaceで補完呼び出し
 inoremap <C-Space> <C-X><C-O>
 
