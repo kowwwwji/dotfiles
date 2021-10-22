@@ -114,10 +114,10 @@ function! ExecExCommand(cmd)
   return ''
 endfunction
 "インサートモードで移動
-inoremap <C-h> <left>
-inoremap <C-l> <right>
-inoremap <C-k> <up>
-inoremap <C-j> <down>
+inoremap <C-h> <Left>
+inoremap <C-l> <Right>
+inoremap <C-k> <Up>
+inoremap <C-j> <Down>
 inoremap <C-a> <Home>
 inoremap <C-e> <End>
 " 補完せず補完ウィンドウを閉じてから移動
@@ -125,11 +125,10 @@ inoremap <silent> <expr> <C-b> pumvisible() ? "<C-e><C-r>=ExecExCommand('normal 
 inoremap <silent> <expr> <C-w> pumvisible() ? "<C-e><C-r>=ExecExCommand('normal w')<CR>" : "<C-r>=ExecExCommand('normal w')<CR>"
 
 "方向キーを使用しなくても検索履歴を使用できるようにする。
-"zshの移動と同じ
-cnoremap <C-b> <Left>
-cnoremap <C-f> <Right>
-cnoremap <C-p> <Up>
-cnoremap <C-n> <Down>
+cnoremap <C-h> <Left>
+cnoremap <C-l> <Right>
+cnoremap <C-k> <Up>
+cnoremap <C-j> <Down>
 cnoremap <C-a> <Home>
 cnoremap <C-e> <End>
 
