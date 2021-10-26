@@ -158,37 +158,44 @@
   '''
 
 ## LSP関連
-  [[plugins]]
-  repo =  'prabirshrestha/vim-lsp'
-  hook_add = '''
-    source ~/.config/nvim/plugins/vim-lsp.vim
-  '''
-  [[plugins]]
-  repo = 'prabirshrestha/asyncomplete.vim'
-  [[plugins]]
-  repo =  'prabirshrestha/asyncomplete-lsp.vim'
   # [[plugins]]
-  # repo = 'Shougo/deoplete.nvim'
+  # repo =  'prabirshrestha/vim-lsp'
   # hook_add = '''
-  #   let g:deoplete#enable_at_startup = 1
+  #   source ~/.config/nvim/plugins/vim-lsp.vim
   # '''
-  [[plugins]]
-  repo =  'mattn/vim-lsp-settings'
-  [[plugins]]
-  repo =  'mattn/vim-lsp-icons'
-  [[plugins]]
-  repo =  'hrsh7th/vim-vsnip'
-  [[plugins]]
-  repo =  'hrsh7th/vim-vsnip-integ'
+  # [[plugins]]
+  # repo = 'prabirshrestha/asyncomplete.vim'
+  # [[plugins]]
+  # repo =  'prabirshrestha/asyncomplete-lsp.vim'
+  # # [[plugins]]
+  # # repo = 'Shougo/deoplete.nvim'
+  # # hook_add = '''
+  # #   let g:deoplete#enable_at_startup = 1
+  # # '''
+  # [[plugins]]
+  # repo =  'mattn/vim-lsp-settings'
+  # [[plugins]]
+  # repo =  'mattn/vim-lsp-icons'
+  # [[plugins]]
+  # repo =  'hrsh7th/vim-vsnip'
+  # hook_add = '''
+  #   source ~/.config/nvim/plugins/vim-vsnip.vim
+  # '''
+  # [[plugins]]
+  # repo =  'hrsh7th/vim-vsnip-integ'
+  # depends = 'hrsh7th/vim-vsnip'
+  # [[plugins]]
+  # repo = 'rafamadriz/friendly-snippets'
+  # depends = 'hrsh7th/vim-vsnip'
 
-  # [[plugins]]
-  # repo = 'SirVer/ultisnips'
-  # [[plugins]]
-  # repo = 'honza/vim-snippets'
+  [[plugins]]
+  repo = 'SirVer/ultisnips'
+  [[plugins]]
+  repo = 'honza/vim-snippets'
 
-  # [[plugins]]
-  # repo = 'neoclide/coc.nvim'
-  # rev = 'release'
+  [[plugins]]
+  repo = 'neoclide/coc.nvim'
+  rev = 'release'
 
 # # 非同期コードチェッカー
 #   [[plugins]]
