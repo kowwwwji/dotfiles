@@ -1093,9 +1093,9 @@
 			<key>Blinking Cursor</key>
 			<false/>
 			<key>Blur</key>
-			<true/>
+			<false/>
 			<key>Blur Radius</key>
-			<real>2</real>
+			<real>2.2132080078124998</real>
 			<key>Bold Color</key>
 			<dict>
 				<key>Blue Component</key>
@@ -1572,7 +1572,7 @@
 			<key>Silence Bell</key>
 			<false/>
 			<key>Space</key>
-			<integer>0</integer>
+			<integer>-1</integer>
 			<key>Status Bar Layout</key>
 			<dict>
 				<key>advanced configuration</key>
@@ -2319,7 +2319,7 @@
 			<key>Rows</key>
 			<integer>80</integer>
 			<key>Screen</key>
-			<integer>1</integer>
+			<integer>-1</integer>
 			<key>Scrollback Lines</key>
 			<integer>1000</integer>
 			<key>Selected Text Color</key>
@@ -2488,7 +2488,7 @@
 			<key>Terminal Type</key>
 			<string>xterm-256color</string>
 			<key>Transparency</key>
-			<real>0.17938610406091371</real>
+			<real>0.29999999999999999</real>
 			<key>Triggers</key>
 			<array>
 				<dict>
@@ -3121,7 +3121,7 @@
 			<key>Rows</key>
 			<integer>80</integer>
 			<key>Screen</key>
-			<integer>1</integer>
+			<integer>-1</integer>
 			<key>Scrollback Lines</key>
 			<integer>1000</integer>
 			<key>Selected Text Color</key>
@@ -3294,7 +3294,7 @@
 			<key>Terminal Type</key>
 			<string>xterm-256color</string>
 			<key>Transparency</key>
-			<real>0.17788705583756345</real>
+			<real>0.29999999999999999</real>
 			<key>Unlimited Scrollback</key>
 			<false/>
 			<key>Use Bold Font</key>
@@ -4178,7 +4178,7 @@
 	<key>PasteTabToStringTabStopSize</key>
 	<integer>4</integer>
 	<key>PerPaneBackgroundImage</key>
-	<true/>
+	<false/>
 	<key>PointerActions</key>
 	<dict>
 		<key>Button,1,1,,</key>
@@ -4239,9 +4239,9 @@
 	<key>TabsHaveCloseButton</key>
 	<true/>
 	<key>TerminalMargin</key>
-	<integer>2</integer>
+	<integer>10</integer>
 	<key>TerminalVMargin</key>
-	<integer>6</integer>
+	<integer>0</integer>
 	<key>TmuxUsesDedicatedProfile</key>
 	<true/>
 	<key>UseBorder</key>
