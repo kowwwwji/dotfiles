@@ -60,12 +60,6 @@
 ## Markdown ######
 ##################
   [[plugins]]
-  repo = 'tyru/open-browser.vim'
-  on_ft = ['md','markdown']
-  hook_add = '''
-    source ~/.config/nvim/plugins/open-browser.vim
-  '''
-  [[plugins]]
   repo = 'previm/previm'
   on_ft = ['md', 'markdown']
   depends = 'open-browser.vim'

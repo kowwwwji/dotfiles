@@ -79,6 +79,7 @@
   repo = 'Xuyuanp/nerdtree-git-plugin'
   [[plugins]]
   repo = 'tiagofumo/vim-nerdtree-syntax-highlight'
+  hook_add = 'let g:NERDTreeLimitedSyntax = 1'
 
   [[plugins]]
   repo ='junegunn/fzf'
@@ -123,7 +124,7 @@
     nnoremap <silent> [GitLeader]f :GFiles?<CR>
     nnoremap <silent> [GitLeader]d :Gvdiffsplit<CR>
     nnoremap <silent> [GitLeader]l :Git log<CR>
-    nnoremap <silent> [GitLeader]s :GBrowse<CR>
+    nnoremap <silent> [GitLeader]x :GBrowse<CR>
 
     highlight DiffAdd    cterm=bold ctermfg=10 ctermbg=22
     highlight DiffDelete cterm=bold ctermfg=10 ctermbg=52
@@ -224,9 +225,16 @@
     nnoremap <silent> <Esc><Esc><Esc> :bw translate://result<CR>
   '''
 
+## Others
   [[plugins]]
   repo = 'kdheepak/lazygit.nvim'
   rev = 'nvim-v0.4.3'
   hook_add = '''
     nnoremap <silent> <Leader>l :LazyGit<CR>
+  '''
+
+  [[plugins]]
+  repo = 'tyru/open-browser.vim'
+  hook_add = '''
+    source ~/.config/nvim/plugins/open-browser.vim
   '''

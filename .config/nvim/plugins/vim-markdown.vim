@@ -1,5 +1,5 @@
 " 折りたたみOFF
-let g:vim_markdown_folding_disabled = 1
+" let g:vim_markdown_folding_disabled = 1
 
 " 以下2つは問題が出るためON
 " https://github.com/plasticboy/vim-markdown#do-not-automatically-insert-bulletpoints
