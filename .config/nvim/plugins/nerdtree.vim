@@ -18,3 +18,5 @@ autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isT
 
 "<CR>だとファイルを開いてからNeardTreeを閉じる
 let NERDTreeCustomOpenArgs= {'file':{'keepopen':0}}
+
+autocmd FileType nerdtree nmap <buffer> o go
