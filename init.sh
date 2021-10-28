@@ -9,6 +9,7 @@ for i in ./.* ; do
 done;
 ln -s ${DOTFILES_ROOT}/.config/nvim/plugins ${HOME}/.config/nvim/
 ln -s ${DOTFILES_ROOT}/.config/starship.toml ${HOME}/.config/starship.toml
+ln -s ${DOTFILES_ROOT}/.config/coc-settings.json ${HOME}/.config/coc-settings.json
 
 ln -s ${DOTFILES_ROOT}/.zsh $HOME/
 
