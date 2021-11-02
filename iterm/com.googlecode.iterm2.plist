@@ -1911,7 +1911,7 @@
 				<real>1</real>
 			</dict>
 			<key>Badge Text</key>
-			<string></string>
+			<string>PRD</string>
 			<key>Blinking Cursor</key>
 			<false/>
 			<key>Blur</key>
@@ -2714,6 +2714,8 @@
 				<key>Red Component</key>
 				<real>1</real>
 			</dict>
+			<key>Badge Text</key>
+			<string>STG</string>
 			<key>Blinking Cursor</key>
 			<false/>
 			<key>Blur</key>
