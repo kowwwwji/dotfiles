@@ -14,3 +14,4 @@ alias ar='function(){eval $(command assume-role $@);}'
 alias tf=terraform
 alias tm=tmux
 alias relogin='exec $SHELL -l'
+alias vg=vagrant
