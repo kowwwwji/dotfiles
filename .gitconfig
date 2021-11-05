@@ -47,10 +47,13 @@
       [yY]* ) echo 'OK! Lets Start!!';;\
       * ) exit 1;;\
     esac;\
-    git checkout -b $1;\
-    git commit --allow-empty -m $1;\
-    git push -u origin $1;\
-    hub pull-request --draft -b $BASE_BRANCH;\
+    \
+    if [ ! -z $1 ]; then\
+      git checkout -b $1;\
+      git commit --allow-empty -m $1;\
+      git push -u origin $1;\
+    fi;\
+    gh pr create -d -B ${BASE_BRANCH} -H ${NEW_BRANCH};\
   }; f"
 # 作業終了後、作成したPRを表示する
   # hub browse して画面上でPRをクリックする。
