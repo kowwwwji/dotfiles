@@ -150,6 +150,9 @@ eval "$(goenv init -)"
 export GOPATH=~/.go
 export PATH=$GOPATH/bin:$PATH
 
+# PATHの重複を削除
+typeset -U PATH
+
 ########################################
 # デバッグ用
 ########################################
