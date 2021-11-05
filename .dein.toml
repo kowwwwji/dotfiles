@@ -98,7 +98,8 @@
   hook_add = '''
     nnoremap <silent> <Leader>s :Ag<CR>
     nnoremap <silent> <Leader>f :Files<CR>
-    nnoremap <silent> <Leader>b :BLines<CR>
+    nnoremap <silent> <Leader>bs :Lines<CR>
+    nnoremap <silent> <Leader>bf :Buffers<CR>
     nnoremap <silent> <Leader>h :History<CR>
     nnoremap <silent> <Leader>hc :History:<CR>
     nnoremap <silent> <Leader>hs :History/<CR>
@@ -120,7 +121,7 @@
 
     nnoremap <silent> [GitLeader]c :Git commit -v<CR>
     nnoremap <silent> [GitLeader]a :Gwrite<CR>
-    nnoremap <silent> [GitLeader]b :Gblame<CR>
+    nnoremap <silent> [GitLeader]b :Git blame<CR>
     nnoremap <silent> [GitLeader]f :GFiles?<CR>
     nnoremap <silent> [GitLeader]d :Gvdiffsplit<CR>
     nnoremap <silent> [GitLeader]l :Git log<CR>
@@ -158,37 +159,44 @@
   '''
 
 ## LSP関連
-  [[plugins]]
-  repo =  'prabirshrestha/vim-lsp'
-  hook_add = '''
-    source ~/.config/nvim/plugins/vim-lsp.vim
-  '''
-  [[plugins]]
-  repo = 'prabirshrestha/asyncomplete.vim'
-  [[plugins]]
-  repo =  'prabirshrestha/asyncomplete-lsp.vim'
   # [[plugins]]
-  # repo = 'Shougo/deoplete.nvim'
+  # repo =  'prabirshrestha/vim-lsp'
   # hook_add = '''
-  #   let g:deoplete#enable_at_startup = 1
+  #   source ~/.config/nvim/plugins/vim-lsp.vim
   # '''
-  [[plugins]]
-  repo =  'mattn/vim-lsp-settings'
-  [[plugins]]
-  repo =  'mattn/vim-lsp-icons'
-  [[plugins]]
-  repo =  'hrsh7th/vim-vsnip'
-  [[plugins]]
-  repo =  'hrsh7th/vim-vsnip-integ'
+  # [[plugins]]
+  # repo = 'prabirshrestha/asyncomplete.vim'
+  # [[plugins]]
+  # repo =  'prabirshrestha/asyncomplete-lsp.vim'
+  # # [[plugins]]
+  # # repo = 'Shougo/deoplete.nvim'
+  # # hook_add = '''
+  # #   let g:deoplete#enable_at_startup = 1
+  # # '''
+  # [[plugins]]
+  # repo =  'mattn/vim-lsp-settings'
+  # [[plugins]]
+  # repo =  'mattn/vim-lsp-icons'
+  # [[plugins]]
+  # repo =  'hrsh7th/vim-vsnip'
+  # hook_add = '''
+  #   source ~/.config/nvim/plugins/vim-vsnip.vim
+  # '''
+  # [[plugins]]
+  # repo =  'hrsh7th/vim-vsnip-integ'
+  # depends = 'hrsh7th/vim-vsnip'
+  # [[plugins]]
+  # repo = 'rafamadriz/friendly-snippets'
+  # depends = 'hrsh7th/vim-vsnip'
 
-  # [[plugins]]
-  # repo = 'SirVer/ultisnips'
-  # [[plugins]]
-  # repo = 'honza/vim-snippets'
+  [[plugins]]
+  repo = 'SirVer/ultisnips'
+  [[plugins]]
+  repo = 'honza/vim-snippets'
 
-  # [[plugins]]
-  # repo = 'neoclide/coc.nvim'
-  # rev = 'release'
+  [[plugins]]
+  repo = 'neoclide/coc.nvim'
+  rev = 'release'
 
 # # 非同期コードチェッカー
 #   [[plugins]]

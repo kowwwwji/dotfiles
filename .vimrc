@@ -233,6 +233,7 @@ endif
 nnoremap <C-j> o<ESC>
 
 " Ctrl+Spaceで補完呼び出し
+" Mac側でシステム環境設定>キーボード>ショートカット>入力ソースをチェックなしにする必要あり
 inoremap <C-Space> <C-X><C-O>
 
 set completeopt=menuone,noinsert
