@@ -218,6 +218,9 @@
         call CocAction('doHover')
       endif
     endfunction
+
+    " Use NVM default nodejs
+    let g:coc_node_path = expand('$NODE_BIN/node')
   '''
 
 # # 非同期コードチェッカー

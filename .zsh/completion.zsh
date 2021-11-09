@@ -7,13 +7,13 @@ if type brew &>/dev/null; then
 fi
 
 # 補完機能を有効にする
-autoload -Uz compinit && compinit -u
+autoload -Uz compinit && compinit -C
 
 # Terraform用
 autoload -U +X bashcompinit && bashcompinit
 complete -o nospace -C /usr/local/bin/terraform terraform
 
-# 先方予測機能
+# 先方予測機能 zinitを使用してるためOFF
 # autoload -Uz predict-on && predict-on
 
 # 補完で小文字でも大文字にマッチさせる
