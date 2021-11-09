@@ -130,7 +130,8 @@ eval "$(pyenv virtualenv-init -)"
 export NVM_DIR="$HOME/.nvm"
 NODE_VER=`cat ${NVM_DIR}/alias/default`
 NODE_DIR=${NVM_DIR}/versions/node/${NODE_VER}
-PATH=${NODE_DIR}/bin:$PATH
+export NODE_BIN=${NODE_DIR}/bin
+PATH=${NODE_BIN}:$PATH
 MANPATH=${NODE_DIR}/share/man:$MANPATH
 export NODE_PATH=${NODE_DIR}/lib/node_modules
 NODE_PATH=${NODE_PATH:A}
