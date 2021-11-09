@@ -7,7 +7,7 @@ if type brew &>/dev/null; then
 fi
 
 # 補完機能を有効にする
-autoload -Uz compinit && compinit -u
+autoload -Uz compinit && compinit -C
 
 # Terraform用
 autoload -U +X bashcompinit && bashcompinit
