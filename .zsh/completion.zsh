@@ -13,7 +13,7 @@ autoload -Uz compinit && compinit -C
 autoload -U +X bashcompinit && bashcompinit
 complete -o nospace -C /usr/local/bin/terraform terraform
 
-# 先方予測機能
+# 先方予測機能 zinitを使用してるためOFF
 # autoload -Uz predict-on && predict-on
 
 # 補完で小文字でも大文字にマッチさせる
