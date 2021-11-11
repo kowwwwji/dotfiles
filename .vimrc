@@ -201,11 +201,6 @@ highlight comment ctermfg=242 guifg=darkcyan
 "}}}
 
 " others{{{
-" for Files
-let $FZF_DEFAULT_COMMAND = 'ag --hidden --ignore .git -g ""'
-" for Ag
-autocmd VimEnter * command! -bang -nargs=* Ag
-  \ call fzf#vim#ag(<q-args>, '--hidden --ignore .git', <bang>0)
 
 " Move current line to up/down
 " Ref: https://vim.fandom.com/wiki/Moving_lines_up_or_down
