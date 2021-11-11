@@ -21,4 +21,5 @@ if type "code" > /dev/null; then
 fi
 
 # Previmで使用するCSSの最新化
+# TODO cssが変更されるとうまく行かない時がある
 curl https://raw.githubusercontent.com/sindresorhus/github-markdown-css/gh-pages/github-markdown.css | sed -e 's/.markdown-body //g' > ${DOTFILES_ROOT}/.template/github-markdown.css
