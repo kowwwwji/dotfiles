@@ -237,6 +237,8 @@ inoremap <expr><C-p> pumvisible() ? "<Up>" : "<C-p>"
 
 " vimrcを開く 
 command! Vimrc :tabnew $MYVIMRC
+" tmuxをDevModeにする
+command! TmuxModeDev silent !tmux source-file ~/.tmux/.tmux.dev.conf
 
 " augroup GrepCmd
 "   autocmd!
