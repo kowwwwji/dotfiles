@@ -2,7 +2,7 @@ let NERDTreeShowHidden = 1
 nnoremap <silent><C-e> :call NERDTreeFindToggle()<CR>
 
 function! NERDTreeFindToggle() abort
-  if (exists("b:NERDTree") && b:NERDTree.isTabTree()) 
+  if (exists("b:NERDTree") && b:NERDTree.isTabTree())
     NERDTreeClose
   else
     NERDTreeFind
@@ -19,4 +19,5 @@ autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isT
 "<CR>だとファイルを開いてからNeardTreeを閉じる
 let NERDTreeCustomOpenArgs= {'file':{'keepopen':0}}
 
-autocmd FileType nerdtree nmap <buffer> o go
+let g:NERDTreeMapPreview = 'o'
+let g:NERDTreeMapActivateNode = 'g'

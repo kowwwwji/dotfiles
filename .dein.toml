@@ -25,10 +25,17 @@
   [[plugins]]
   repo = 'editorconfig/editorconfig-vim'
 
+  # [[plugins]]
+  # repo = 'majutsushi/tagbar'
+  # hook_add = '''
+  #   source ~/.config/nvim/plugins/tagbar.vim
+  # '''
   [[plugins]]
-  repo = 'majutsushi/tagbar'
+  repo = 'liuchengxu/vista.vim'
+  depends = ['coc.nvim', 'lightline.vim']
   hook_add = '''
-    source ~/.config/nvim/plugins/tagbar.vim
+    nnoremap  <Leader>v :<C-u>Vista coc<CR>
+    nnoremap  <Leader>V :<C-u>Vista finder coc<CR>
   '''
 
   [[plugins]]
@@ -221,6 +228,7 @@
 
     " Use NVM default nodejs
     let g:coc_node_path = expand('$NODE_BIN/node')
+    command! Format :call CocAction('format')
   '''
 
 # # 非同期コードチェッカー
