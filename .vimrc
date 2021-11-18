@@ -201,11 +201,6 @@ highlight comment ctermfg=242 guifg=darkcyan
 "}}}
 
 " others{{{
-" for Files
-let $FZF_DEFAULT_COMMAND = 'ag --hidden --ignore .git -g ""'
-" for Ag
-autocmd VimEnter * command! -bang -nargs=* Ag
-  \ call fzf#vim#ag(<q-args>, '--hidden --ignore .git', <bang>0)
 
 " Move current line to up/down
 " Ref: https://vim.fandom.com/wiki/Moving_lines_up_or_down
@@ -240,8 +235,10 @@ set completeopt=menuone,noinsert
 inoremap <expr><C-n> pumvisible() ? "<Down>" : "<C-n>"
 inoremap <expr><C-p> pumvisible() ? "<Up>" : "<C-p>"
 
-" vimrcを開く 
+" vimrcを開く
 command! Vimrc :tabnew $MYVIMRC
+" tmuxをDevModeにする
+command! TmuxModeDev silent !tmux source-file ~/.tmux/.tmux.dev.conf
 
 " augroup GrepCmd
 "   autocmd!

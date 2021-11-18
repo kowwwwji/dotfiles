@@ -14,7 +14,7 @@
   cma = commit --amend
   co = checkout
   cb = checkout -b
-  b = branch 
+  b = branch
   bv = branch -vv
   bva = branch -vva
   see = browse
@@ -23,14 +23,15 @@
 ##################
 # 複合コマンド
 ##################
-  delete-merged-branches = !git branch --merged | grep -vE '^\\*|master$|develop$' | xargs -I % git branch -d %
-  delete-gone-branches = !git branch --format '%(refname:short) %(upstream:track)' | grep 'gone' | cut -d ' ' -f1 | xargs -I % git branch -D % 
+  delete-merged-branches = !git branch --merged | grep -vE '^\\*|master$|develop|gh-pages$' | xargs -I % git branch -d %
+  delete-gone-branches = !git branch --format '%(refname:short) %(upstream:track)' | grep 'gone' | cut -d ' ' -f1 | xargs -I % git branch -D %
   ls = log --graph --pretty=format:'%Cred%h %Cgreen(%>(12,trunc)%cr, %ci) %C(bold blue)<%an>%Creset -%C(yellow)%d%Creset %s' --abbrev-commit --date=relative --all
   wip = !git add --all && git commit -m 'wip'
   base = !git show-branch | grep '*' | grep -v "$(git rev-parse --abbrev-ref HEAD)" | head -1 | awk -F'[]~^[]' '{print $2}'
 
-# WIPブランチを作成してPRを作成する 
+# WIPブランチを作成してPRを作成する
   start = !"f () {\
+    DEFAULT_BRANCH=`git remote show origin | grep 'HEAD branch' | awk '{print $NF}'`; \
     NEW_BRANCH=$1;\
     \
     if [ -z $1  ]; then\
@@ -41,7 +42,7 @@
       BASE_BRANCH=`git rev-parse --abbrev-ref @`;\
     fi;\
     \
-    if [ \"$BASE_BRANCH\" = 'master' ]; then echo 'Attention!! you are trying to make branch from master'; fi;\
+    if [ \"$BASE_BRANCH\" = $DEFAULT_BRANCH ]; then echo 'Attention!! you are trying to make branch from $DEFAULT_BRANCH'; fi;\
     read -p 'You want to make Base Branch:'$BASE_BRANCH' -> New Branch:'$NEW_BRANCH'? (y/n)  ' yn;\
     case $yn in\
       [yY]* ) echo 'OK! Lets Start!!';;\
@@ -59,7 +60,8 @@
   # hub browse して画面上でPRをクリックする。
 # Merge後、ローカルとリモートブランチをあわせる
   refresh = !"f () { \
-    git checkout master; \
+    DEFAULT_BRANCH=`git remote show origin | grep 'HEAD branch' | awk '{print $NF}'`; \
+    git checkout $DEFAULT_BRANCH; \
     git pull -p; \
     echo "---Delete Merged Branch------------------------------"; \
     git delete-merged-branches; \
