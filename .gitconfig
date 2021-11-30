@@ -42,19 +42,23 @@
       BASE_BRANCH=`git rev-parse --abbrev-ref @`;\
     fi;\
     \
-    if [ \"$BASE_BRANCH\" = $DEFAULT_BRANCH ]; then echo 'Attention!! you are trying to make branch from $DEFAULT_BRANCH'; fi;\
+    if [ \"$BASE_BRANCH\" = $DEFAULT_BRANCH ]; then echo '🔥ATTENTION!! you are trying to make branch from ['$DEFAULT_BRANCH']🔥'; fi;\
     read -p 'You want to make Base Branch:'$BASE_BRANCH' -> New Branch:'$NEW_BRANCH'? (y/n)  ' yn;\
     case $yn in\
       [yY]* ) echo 'OK! Lets Start!!';;\
       * ) exit 1;;\
     esac;\
     \
-    if [ ! -z $1 ]; then\
-      git checkout -b $1;\
-      git commit --allow-empty -m $1;\
-      git push -u origin $1;\
+    if [ ! $(git branch | grep $NEW_BRANCH) ]; then\
+      git checkout -b $NEW_BRANCH;\
+      git commit --allow-empty -m $NEW_BRANCH;\
     fi;\
-    gh pr create -d -B ${BASE_BRANCH} -H ${NEW_BRANCH};\
+    git branch -r | grep $NEW_BRANCH || git push -u origin $NEW_BRANCH;\
+    \
+    git remote show origin | grep 'github' \
+      && gh pr create -d -B ${BASE_BRANCH} -H ${NEW_BRANCH} \
+      || hub pull-request --draft -b $BASE_BRANCH; \
+    \
   }; f"
 # 作業終了後、作成したPRを表示する
   # hub browse して画面上でPRをクリックする。
