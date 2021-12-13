@@ -179,7 +179,7 @@ if has('nvim')
 endif
 
 " deinの処理後でないと機能しない{{{
-filetype plugin indent on 
+filetype plugin indent on
 syntax enable
 
 "" 補完のポップアップメニューの色
