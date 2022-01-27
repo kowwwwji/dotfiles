@@ -49,11 +49,11 @@
       * ) exit 1;;\
     esac;\
     \
-    if [ ! -z $1 ]; then\
-      git checkout -b $1;\
-      git commit --allow-empty -m $1;\
-      git push -u origin $1;\
+    if [ ! $(git branch | grep $NEW_BRANCH) ]; then\
+      git checkout -b $NEW_BRANCH;\
+      git commit --allow-empty -m $NEW_BRANCH;\
     fi;\
+    git branch -r | grep $NEW_BRANCH || git push -u origin $NEW_BRANCH;\
     \
     git remote show origin | grep 'github' \
       && gh pr create -d -B ${BASE_BRANCH} -H ${NEW_BRANCH} \
