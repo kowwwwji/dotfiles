@@ -28,6 +28,9 @@
   ls = log --graph --pretty=format:'%Cred%h %Cgreen(%>(12,trunc)%cr, %ci) %C(bold blue)<%an>%Creset -%C(yellow)%d%Creset %s' --abbrev-commit --date=relative --all
   wip = !git add --all && git commit -m 'wip'
   base = !git show-branch | grep '*' | grep -v "$(git rev-parse --abbrev-ref HEAD)" | head -1 | awk -F'[]~^[]' '{print $2}'
+  # Not newline at end of file 対策
+  # https://sjisjis.hatenablog.com/entry/2018/12/29/221812
+  add-fixed = !git diff -w --no-color | git apply --cached
 
 # WIPブランチを作成してPRを作成する
   start = !"f () {\
