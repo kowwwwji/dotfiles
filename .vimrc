@@ -135,6 +135,9 @@ cnoremap <C-e> <End>
 "バッファを移動する
 nnoremap <silent> <S-Tab> :bprev<CR>
 nnoremap <silent> <Tab> :bnext<CR>
+"タブ移動
+nnoremap <C-h> :tabprevious<CR>
+nnoremap <C-l> :tabnext<CR>
 "}}}
 
 " neovim関連{{{
