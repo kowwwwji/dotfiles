@@ -77,7 +77,8 @@
     echo "---Local Branch------------------------------"; \
     git branch -avv; \
   }; f"
-
+[merge]
+  ff = false
 [pull]
   ff = only
 [color]
