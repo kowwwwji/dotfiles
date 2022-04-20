@@ -132,9 +132,11 @@ cnoremap <C-j> <Down>
 cnoremap <C-a> <Home>
 cnoremap <C-e> <End>
 
-"タブ移動
+"タブ
 nnoremap <silent> <S-Tab> :tabprevious<CR>
 nnoremap <silent> <Tab> :tabnext<CR>
+nnoremap <silent><C-l> :+tabmove<CR>
+nnoremap <silent><C-h> :-tabmove<CR>
 "}}}
 
 " neovim関連{{{
