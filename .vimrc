@@ -237,8 +237,8 @@ set completeopt=menuone,noinsert
 inoremap <expr><C-n> pumvisible() ? "<Down>" : "<C-n>"
 inoremap <expr><C-p> pumvisible() ? "<Up>" : "<C-p>"
 
-" vimrcを開く
-command! Vimrc :tabnew $MYVIMRC
+" Reload vimrc
+command! Vimrc :source ~/.vimrc
 " tmuxをDevModeにする
 command! TmuxModeDev silent !tmux source-file ~/.tmux/.tmux.dev.conf
 
