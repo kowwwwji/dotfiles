@@ -98,7 +98,7 @@ set visualbell t_vb=
 set noerrorbells        "エラーメッセージの表示時にビープを鳴らさない
 "}}}
 
-" Remap{{{
+"Remap{{{
 "コロンでコマンドモードに入るようにする。
 nnoremap ;  :
 nnoremap :  ;
@@ -108,7 +108,7 @@ vnoremap :  ;
 "JISキーとUSキーの配置のため
 inoremap <C-@> <ESC>
 
-" Exコマンドを実装する関数を定義
+"Exコマンドを実装する関数を定義
 function! ExecExCommand(cmd)
   silent exec a:cmd
   return ''
@@ -120,7 +120,7 @@ inoremap <C-k> <Up>
 inoremap <C-j> <Down>
 inoremap <C-a> <Home>
 inoremap <C-e> <End>
-" 補完せず補完ウィンドウを閉じてから移動
+"補完せず補完ウィンドウを閉じてから移動
 inoremap <silent><expr><C-b> pumvisible() ? "<C-e><C-r>=ExecExCommand('normal b')<CR>" : "<C-r>=ExecExCommand('normal b')<CR>"
 inoremap <silent><expr><C-w> pumvisible() ? "<C-e><C-r>=ExecExCommand('normal w')<CR>" : "<C-r>=ExecExCommand('normal w')<CR>"
 
@@ -132,12 +132,11 @@ cnoremap <C-j> <Down>
 cnoremap <C-a> <Home>
 cnoremap <C-e> <End>
 
-"バッファを移動する
-nnoremap <silent> <S-Tab> :bprev<CR>
-nnoremap <silent> <Tab> :bnext<CR>
-"タブ移動
-nnoremap <C-h> :tabprevious<CR>
-nnoremap <C-l> :tabnext<CR>
+"タブ
+nnoremap <silent> <S-Tab> :tabprevious<CR>
+nnoremap <silent> <Tab> :tabnext<CR>
+nnoremap <silent><C-l> :+tabmove<CR>
+nnoremap <silent><C-h> :-tabmove<CR>
 "}}}
 
 " neovim関連{{{
@@ -238,8 +237,8 @@ set completeopt=menuone,noinsert
 inoremap <expr><C-n> pumvisible() ? "<Down>" : "<C-n>"
 inoremap <expr><C-p> pumvisible() ? "<Up>" : "<C-p>"
 
-" vimrcを開く
-command! Vimrc :tabnew $MYVIMRC
+" Reload vimrc
+command! Vimrc :source ~/.vimrc
 " tmuxをDevModeにする
 command! TmuxModeDev silent !tmux source-file ~/.tmux/.tmux.dev.conf
 
