@@ -45,7 +45,7 @@
       BASE_BRANCH=`git rev-parse --abbrev-ref @`;\
     fi;\
     \
-    if [ \"$BASE_BRANCH\" = $DEFAULT_BRANCH ]; then echo '🔥ATTENTION!! you are trying to make branch from ['$DEFAULT_BRANCH']🔥'; fi;\
+    if [ '$BASE_BRANCH' = $DEFAULT_BRANCH ]; then echo '🔥ATTENTION!! you are trying to make branch from ['$DEFAULT_BRANCH']🔥'; fi;\
     read -p 'You want to make Base Branch:'$BASE_BRANCH' -> New Branch:'$NEW_BRANCH'? (y/n)  ' yn;\
     case $yn in\
       [yY]* ) echo 'OK! Lets Start!!';;\
