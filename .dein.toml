@@ -36,12 +36,11 @@
   '''
 
   [[plugins]]
-  repo = 'vim-airline/vim-airline'
+  repo = 'itchyny/lightline.vim'
+  depends = ['vim-fugitive']
   hook_add = '''
-    source ~/.config/nvim/plugins/vim-airline.vim
+    source ~/.config/nvim/plugins/lightline.vim
   '''
-  [[plugins]]
-  repo = 'vim-airline/vim-airline-themes'
 
 # カッコ系
   # TODO leximaにhook_addを追加したらEnterを押したときにバグったからコメントアウト
