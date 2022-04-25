@@ -5048,7 +5048,7 @@
 	<key>TabsHaveCloseButton</key>
 	<true/>
 	<key>TerminalMargin</key>
-	<integer>0</integer>
+	<integer>5</integer>
 	<key>TerminalVMargin</key>
 	<integer>0</integer>
 	<key>TmuxUsesDedicatedProfile</key>
