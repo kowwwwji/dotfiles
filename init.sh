@@ -2,7 +2,7 @@
 
 DOTFILES_ROOT=`ghq root`/github.com/kowwwwji/dotfiles
 
-# 隠しファイルを配置
+# TODO 一括でHOME配下に展開したい
 for i in ./.* ; do
   [[ -f $i ]] \
     && ln -s ${DOTFILES_ROOT}/${i##./} ${HOME}/${i##./}
@@ -12,7 +12,8 @@ ln -s ${DOTFILES_ROOT}/.config/nvim/UltiSnips ${HOME}/.config/nvim/
 ln -s ${DOTFILES_ROOT}/.config/starship.toml ${HOME}/.config/starship.toml
 ln -s ${DOTFILES_ROOT}/.config/coc-settings.json ${HOME}/.config/coc-settings.json
 
-ln -s ${DOTFILES_ROOT}/.zsh $HOME/
+ln -s ${DOTFILES_ROOT}/.zsh $HOME
+ln -s ${DOTFILES_ROOT}/.scripts $HOME
 
 VSCODE_USER_DIR="${HOME}/Library/Application Support/Code/User"
 if type "code" > /dev/null; then

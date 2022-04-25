@@ -35,6 +35,8 @@ export XDG_CONFIG_HOME=~/.config
 
 # インストールしたものの読込
 path=(/usr/local/bin(N-/) /usr/local/sbin(N-/) $path)
+# 独自スクリプト読み込み
+path=(~/.scripts(N-/) $path)
 
 # 色を使用出来るようにする
 autoload -Uz colors && colors
