@@ -246,12 +246,6 @@
   '''
 
 ## Others
-  [[plugins]]
-  repo = 'kdheepak/lazygit.nvim'
-  rev = 'nvim-v0.4.3'
-  hook_add = '''
-    nnoremap <silent> <Leader>l :LazyGit<CR>
-  '''
 
   [[plugins]]
   repo = 'tyru/open-browser.vim'
