@@ -5,7 +5,6 @@ alias gs='function(){cd $(ghq root)/$(ghq list | fzf --query=$1 --preview "ls -a
 #githubのリモートリポジトリをブラウズ
 alias gsv='hub browse $(ghq list | fzf | cut -d "/" -f 2,3)'
 
-alias brew="PATH=/usr/local/bin:/usr/local/sbin:/usr/bin:/bin:/usr/sbin:/sbin brew"
 alias ll='ls -lha'
 alias vim=nvim
 alias dc=docker-compose
