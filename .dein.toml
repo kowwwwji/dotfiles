@@ -210,6 +210,9 @@
     source ~/.config/nvim/plugins/coc.vim
   '''
 
+  [[plugins]]
+  repo = 'github/copilot.vim'
+
 # # 非同期コードチェッカー
 #   [[plugins]]
 #   repo = 'w0rp/ale'
