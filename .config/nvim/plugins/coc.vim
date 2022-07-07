@@ -23,4 +23,4 @@ endfunction
 " Use NVM default nodejs
 let g:coc_node_path = expand('$NODE_BIN/node')
 
-command! Format :call CocAction('format')>
+command! Format :call CocAction('format')
