@@ -137,6 +137,10 @@ nnoremap <silent> <S-Tab> :tabprevious<CR>
 nnoremap <silent> <Tab> :tabnext<CR>
 nnoremap <silent><C-l> :+tabmove<CR>
 nnoremap <silent><C-h> :-tabmove<CR>
+
+"バッファ
+nnoremap <silent> <C-i> :bprev<CR>
+nnoremap <silent> <C-o> :bnext<CR>
 "}}}
 
 " neovim関連{{{
