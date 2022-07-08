@@ -101,7 +101,7 @@
   hook_add = '''
     nnoremap <silent> <Leader>s :Ag<CR>
     nnoremap <silent> <Leader>f :Files<CR>
-    nnoremap <silent> <Leader>bs :Lines<CR>
+    nnoremap <silent> <Leader>bl :Lines<CR>
     nnoremap <silent> <Leader>bf :Buffers<CR>
     nnoremap <silent> <Leader>h :History<CR>
     nnoremap <silent> <Leader>hc :History:<CR>
@@ -210,8 +210,9 @@
     source ~/.config/nvim/plugins/coc.vim
   '''
 
-  [[plugins]]
-  repo = 'github/copilot.vim'
+  # [[plugins]]
+  # repo = 'github/copilot.vim'
+
 
 # # 非同期コードチェッカー
 #   [[plugins]]

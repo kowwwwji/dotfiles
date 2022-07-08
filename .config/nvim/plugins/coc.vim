@@ -1,8 +1,8 @@
-nmap <silent> gd <Plug>(coc-definition)
-nmap <silent> gy <Plug>(coc-type-definition)
-nmap <silent> gi <Plug>(coc-implementation)
-nmap <silent> gr <Plug>(coc-references)
-nmap <silent> gd <Plug>(coc-definition)
+nmap gd <Plug>(coc-definition)
+nmap gy <Plug>(coc-type-definition)
+nmap gi <Plug>(coc-implementation)
+nmap gr <Plug>(coc-references)
+nmap gd <Plug>(coc-definition)
 nnoremap <silent><Leader>a :<C-u>CocDiagnostics<CR>
 
 " Remap for rename current word
@@ -23,4 +23,4 @@ endfunction
 " Use NVM default nodejs
 let g:coc_node_path = expand('$NODE_BIN/node')
 
-command! Format :call CocAction('format')>
+command! Format :call CocAction('format')
