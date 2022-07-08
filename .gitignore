@@ -4,3 +4,4 @@
 .zsh/.zsh_history
 .zsh/local.zsh
 .config/.gitconfig.local
+iterm/com.googlecode.iterm2.plist
