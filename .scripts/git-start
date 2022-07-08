@@ -19,7 +19,7 @@ fi;
 read "yn?  You want to make Base Branch:$BASE_BRANCH -> New Branch:$NEW_BRANCH? (y/n)  ";
 
 case $yn in
-  [yY]* ) echo "  OK! Let's Start!!";;
+  [yY]* ) echo "  🆗 Let's Start!!";;
   * ) exit 1;;
 esac;
 
@@ -31,6 +31,7 @@ fi;
 
 git branch -r | grep $NEW_BRANCH || git push -u origin $NEW_BRANCH;
 # git branch -r | grep $NEW_BRANCH || echo "push branch";
+echo '✅ Success! Create remote branch';
 
 git remote show origin | grep -q 'github' \
   && gh pr create -d -B ${BASE_BRANCH} -H ${NEW_BRANCH} \
@@ -40,3 +41,4 @@ git remote show origin | grep -q 'github' \
 #   || echo "ghe"
 
 
+echo '✅ Success! create draft branch';
