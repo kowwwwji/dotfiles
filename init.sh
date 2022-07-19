@@ -7,11 +7,14 @@ for i in ./.* ; do
   [[ -f $i ]] \
     && ln -s ${DOTFILES_ROOT}/${i##./} ${HOME}/${i##./}
 done;
-ln -s ${DOTFILES_ROOT}/.config/nvim/init.vim ${HOME}/.vimrc
+mkdir -p ${HOME}/.config/nvim/
+ln -s ${HOME}/.vimrc ${HOME}/.config/nvim/init.vim
 ln -s ${DOTFILES_ROOT}/.config/nvim/plugins ${HOME}/.config/nvim/
 ln -s ${DOTFILES_ROOT}/.config/nvim/UltiSnips ${HOME}/.config/nvim/
+ln -s ${DOTFILES_ROOT}/.config/nvim/coc-settings.json ${HOME}/.config/nvim/coc-settings.json
 ln -s ${DOTFILES_ROOT}/.config/starship.toml ${HOME}/.config/starship.toml
-ln -s ${DOTFILES_ROOT}/.config/coc-settings.json ${HOME}/.config/coc-settings.json
+
+mkdir ${HOME}/.config/git/ && touch ${HOME}/.config/git/.gitconfig.local
 
 ln -s ${DOTFILES_ROOT}/.zsh $HOME
 ln -s ${DOTFILES_ROOT}/.scripts $HOME

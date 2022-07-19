@@ -152,14 +152,14 @@ if has('nvim')
   " ruby用
   let g:ruby_host_prog = '~/.rbenv/shims/neovim-ruby-host'
 
-  " プラグイン設定
-  let s:dein_dir = expand('~/.cache/dein')
-  let s:dein_repo_dir = s:dein_dir . '/repos/github.com/Shougo/dein.vim'
-
   " neovim用pythonの設定
   " https://qiita.com/sigwyg/items/41630f8754c2028a7a9f
   let g:python_host_prog = $PYENV_ROOT . '/versions/neovim-2/bin/python'
   let g:python3_host_prog = $PYENV_ROOT . '/versions/neovim-3/bin/python'
+
+  " プラグインマネージャーの設定
+  let s:dein_dir = expand('~/.cache/dein')
+  let s:dein_repo_dir = s:dein_dir . '/repos/github.com/Shougo/dein.vim'
 
   if !isdirectory(s:dein_repo_dir)
     call system('git clone https://github.com/Shougo/dein.vim ' . shellescape(s:dein_repo_dir))

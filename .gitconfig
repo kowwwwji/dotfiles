@@ -1,10 +1,10 @@
 [include]
-  path = ~/.config/.gitconfig.local
+  path = ~/.config/git/.gitconfig.local
 [core]
   editor = vi
   excludesfile = ~/.gitignore
 [ghq]
-  root = ~/.ghq
+  root = ~/ghq
 [alias]
 ##################
 # 基本コマンド
