@@ -1,5 +1,5 @@
 {
-  "npm.binPath": "~/.nvm/versions/node/v12.19.0/bin/npm",
+  "npm.binPath": "~/.nvm/versions/node/v16.16.0/bin/npm",
   "coc.preferences.formatOnSaveFiletypes": [
     "sql",
     "css",
