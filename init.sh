@@ -20,12 +20,11 @@ ln -s ${DOTFILES_ROOT}/.zsh $HOME
 ln -s ${DOTFILES_ROOT}/.scripts $HOME
 
 VSCODE_USER_DIR="${HOME}/Library/Application Support/Code/User"
-if type "code" > /dev/null; then
+if [[ -d $VSCODE_USER_DIR ]]; then
   for i in ./.vscode/*; do
     cp ${DOTFILES_ROOT}/${i#./} "$VSCODE_USER_DIR${i##./.vscode}"
   done
 fi
 
-# Previmで使用するCSSの最新化
-# TODO cssが変更されるとうまく行かない時がある
-curl https://raw.githubusercontent.com/sindresorhus/github-markdown-css/gh-pages/github-markdown.css | sed -e 's/.markdown-body //g' > ${DOTFILES_ROOT}/.template/github-markdown.css
+TPM_ROOT=${HOME}/.tmux/plugins/tpm
+[[ ! -e $TPM_ROOT ]] && git clone https://github.com/tmux-plugins/tpm $TPM_ROOT
