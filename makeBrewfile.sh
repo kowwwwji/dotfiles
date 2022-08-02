@@ -2,4 +2,4 @@
 
 rm Brewfile;
 brew bundle dump;
-sort -u Brewfile -o Brewfile;
+sort -u Brewfile -o Brewfile -r;
