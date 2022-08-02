@@ -132,15 +132,12 @@ cnoremap <C-j> <Down>
 cnoremap <C-a> <Home>
 cnoremap <C-e> <End>
 
-"タブ
-nnoremap <silent> <S-Tab> :tabprevious<CR>
-nnoremap <silent> <Tab> :tabnext<CR>
-nnoremap <silent><C-l> :+tabmove<CR>
-nnoremap <silent><C-h> :-tabmove<CR>
+""タブ
+nnoremap <silent> <C-h> :tabprevious<CR>
+nnoremap <silent> <C-l> :tabnext<CR>
+" nnoremap <silent> <C-l> :+tabmove<CR>
+" nnoremap <silent> <C-h> :-tabmove<CR>
 
-"バッファ
-nnoremap <silent> <C-i> :bprev<CR>
-nnoremap <silent> <C-o> :bnext<CR>
 "}}}
 
 " neovim関連{{{
@@ -229,9 +226,6 @@ if has('macunix')
   vnoremap ∆ :m '>+1<CR>gv=gv
   vnoremap ˚ :m '<-2<CR>gv=gv
 endif
-
-" Normalモードで改行
-nnoremap <C-j> o<ESC>
 
 " Ctrl+Spaceで補完呼び出し
 " Mac側でシステム環境設定>キーボード>ショートカット>入力ソースをチェックなしにする必要あり
