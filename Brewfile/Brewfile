@@ -1,46 +1,23 @@
-tap "skanehira/docui"
 tap "sanemat/font"
-tap "neovim/neovim"
-tap "kowwwwji/taps"
-tap "kevwil/patches"
+tap "homebrew/services"
 tap "homebrew/core"
 tap "homebrew/cask-versions"
 tap "homebrew/cask-fonts"
 tap "homebrew/cask"
 tap "homebrew/bundle"
-tap "argon/mas"
-mas "iMovie", id: 408981434
-mas "Xcode", id: 497799835
-mas "Wunderlist", id: 410628904
-mas "WebDrop", id: 1125673012
-mas "Twitter", id: 409789998
-mas "TweetDeck", id: 485812721
-mas "Pocket", id: 568494494
-mas "Pages", id: 409201541
-mas "Numbers", id: 409203825
-mas "LINE", id: 539883307
-mas "Kindle", id: 405399194
-mas "Keynote", id: 409183694
-mas "GarageBand", id: 682658836
-mas "Evernote", id: 406056744
-mas "Bluetooth MIDI Connect", id: 1074606480
-mas "1Password", id: 443987910
 cask "visual-studio-code"
 cask "virtualbox"
 cask "vagrant"
-cask "spectacle"
 cask "slack"
 cask "skype"
 cask "raycast"
 cask "pgadmin4"
-cask "macvim"
 cask "iterm2"
 cask "google-japanese-ime"
 cask "font-hack-nerd-font"
 cask "docker"
 cask "dash"
 cask "brewlet"
-cask "atom"
 cask "alfred"
 cask "1password-cli"
 brew "zsh-completions"
@@ -74,7 +51,6 @@ brew "rlwrap"
 brew "ripmime"
 brew "reattach-to-user-namespace"
 brew "rbenv"
-brew "python@3.8"
 brew "pyenv-virtualenv"
 brew "pyenv-pip-migrate"
 brew "pyenv"
@@ -110,9 +86,9 @@ brew "libbluray"
 brew "libassuan"
 brew "leptonica"
 brew "lazygit"
+brew "lazydocker"
 brew "lame"
 brew "krb5"
-brew "kowwwwji/taps/tmux@3.2a", link: false
 brew "jq"
 brew "jo"
 brew "jasper"
@@ -139,18 +115,14 @@ brew "fontforge"
 brew "fontconfig"
 brew "fish"
 brew "ffmpeg"
-brew "docui"
-brew "docker", link: false
 brew "direnv"
 brew "curl"
-brew "ctags"
 brew "coreutils"
 brew "consul"
 brew "cmake"
 brew "cgal"
 brew "bzip2"
 brew "boost"
-brew "blueutil"
 brew "bash"
 brew "automake"
 brew "apr-util"
