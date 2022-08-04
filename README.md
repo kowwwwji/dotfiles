@@ -82,6 +82,7 @@ ssh-keygen -t rsa # ~/.ssh配下に作成する
   - `~/.config/git/.gitconfig.local`
   - `~/.zsh/local.zsh`
   - `~/.vim/local.vim`
+    - `let g:github_enterprise_urls = ['https://example.com']`
   - `~/.ssh/config`
 
 ## 各種言語の設定
