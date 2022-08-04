@@ -1,8 +1,12 @@
 alias lg=lazygit
 alias g=hub
-#githubのローカルリポジトリに移動
-alias gs='function(){cd $(ghq root)/$(ghq list | fzf --query=$1 --preview "ls -a1p $(ghq root)/{}")}'
-#githubのリモートリポジトリをブラウズ
+# ローカルリポジトリに移動
+alias gs='ghqSearch'
+function ghqSearch(){
+  CD_DIR=`ghq list | fzf --query=$1 --preview "ls -a1p $(ghq root)/{}"`
+  [[ $CD_DIR ]] && cd $(ghq root)/$CD_DIR
+}
+# リモートリポジトリをブラウズ
 alias gsv='hub browse $(ghq list | fzf | cut -d "/" -f 2,3)'
 
 alias ll='ls -lha'
