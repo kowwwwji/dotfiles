@@ -2,11 +2,12 @@ let g:lightline = {
   \ 'colorscheme': 'wombat',
   \ 'active': {
   \   'left': [ [ 'mode', 'paste' ],
-  \             [ 'gitbranch', 'readonly', 'filename', 'modified' ] ]
+  \             [ 'gitbranch', 'readonly', 'filename', 'cocstatus', 'modified'] ]
   \ },
   \ 'component_function': {
   \   'gitbranch': 'FugitiveHead',
-  \   'filename': 'LightlineFilename'
+  \   'filename': 'LightlineFilename',
+  \   'cocstatus': 'coc#status'
   \ },
   \ }
 
@@ -22,3 +23,6 @@ endfunction
 let s:palette = g:lightline#colorscheme#wombat#palette
 let s:palette.tabline.tabsel = [ [ '#d0d0d0', '#5f8787', 252, 66, 'bold' ] ]
 unlet s:palette
+
+" Use autocmd to force lightline update.
+autocmd User CocStatusChange,CocDiagnosticChange call lightline#update()
