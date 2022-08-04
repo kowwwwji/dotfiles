@@ -6,6 +6,10 @@
     "vue",
     "typescript",
     "typescriptreact",
-    "python"
+    "python",
+    "markdown",
+    "javascriptreact",
+    "javascript",
+    "json"
   ]
 }
