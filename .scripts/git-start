@@ -1,4 +1,4 @@
-#!/bin/zsh
+#!/bin/zsh -eu
 
 DEFAULT_BRANCH=`git remote show origin | grep 'HEAD branch' | awk '{print $NF}'`;
 
