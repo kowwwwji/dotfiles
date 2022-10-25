@@ -32,8 +32,6 @@
   # https://sjisjis.hatenablog.com/entry/2018/12/29/221812
   add-fixed = !git diff -w --no-color | git apply --cached
 
-# 作業終了後、作成したPRを表示する
-  # hub browse して画面上でPRをクリックする。
 # Merge後、ローカルとリモートブランチをあわせる
   refresh = !"f () { \
     DEFAULT_BRANCH=`git remote show origin | grep 'HEAD branch' | awk '{print $NF}'`; \
