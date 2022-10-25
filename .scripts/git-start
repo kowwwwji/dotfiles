@@ -33,12 +33,6 @@ git branch -r | grep $NEW_BRANCH || git push -u origin $NEW_BRANCH;
 # git branch -r | grep $NEW_BRANCH || echo "push branch";
 echo '✅ Success! Create remote branch';
 
-git remote show origin | grep -q 'github' \
-  && gh pr create -d -B ${BASE_BRANCH} -H ${NEW_BRANCH} \
-  || hub pull-request --draft -b $BASE_BRANCH;
-# git remote show origin | grep -q 'github' \
-#   && echo "github" \
-#   || echo "ghe"
-
+gh pr create -d -B ${BASE_BRANCH} -H ${NEW_BRANCH} \
 
 echo '✅ Success! create draft branch';
