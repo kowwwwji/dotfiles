@@ -299,6 +299,7 @@ let g:coc_global_extensions = [
       \'coc-git',
       \'coc-highlight',
       \'coc-java',
+      \'coc-java-debug',
       \'coc-jedi',
       \'coc-json',
       \'coc-lists',
@@ -310,6 +311,5 @@ let g:coc_global_extensions = [
       \'coc-tslint-plugin',
       \'coc-tsserver',
       \'coc-ultisnips',
-      \'coc-xml',
       \'coc-yaml'
 \]
