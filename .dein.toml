@@ -261,3 +261,7 @@
   repo = 'machakann/vim-textobj-functioncall'
   [[plugins]]
   repo = 'machakann/vim-sandwich'
+
+  [[plugins]]
+  repo = 'puremourning/vimspector'
+  hook_add = 'let g:vimspector_enable_mappings = "HUMAN"'
