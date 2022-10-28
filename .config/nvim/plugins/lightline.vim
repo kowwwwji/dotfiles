@@ -2,12 +2,13 @@ let g:lightline = {
   \ 'colorscheme': 'wombat',
   \ 'active': {
   \   'left': [ [ 'mode', 'paste' ],
-  \             [ 'gitbranch', 'readonly', 'filename', 'cocstatus', 'modified'] ]
+  \             [ 'gitbranch', 'readonly', 'filename', 'method', 'cocstatus', 'modified'] ]
   \ },
   \ 'component_function': {
   \   'gitbranch': 'FugitiveHead',
   \   'filename': 'LightlineFilename',
-  \   'cocstatus': 'coc#status'
+  \   'cocstatus': 'coc#status',
+  \   'method': 'NearestMethodOrFunction'
   \ },
   \ }
 
