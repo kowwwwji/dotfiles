@@ -104,7 +104,6 @@
     nnoremap <silent> <Leader>hc :History:<CR>
     nnoremap <silent> <Leader>hs :History/<CR>
     nnoremap <silent> <Leader>m :Map<CR>
-    nnoremap <silent> <Leader>c :Commits<CR>
   '''
  # [[plugins]]
  # repo = 'Shougo/denite.nvim'
@@ -119,7 +118,7 @@
     nnoremap [GitLeader]    <Nop>
     nmap     <Space>g [GitLeader]
 
-    nnoremap <silent> [GitLeader]c :Git commit -v<CR>
+    nnoremap <silent> [GitLeader]c :Commits<CR>
     nnoremap <silent> [GitLeader]a :Gwrite<CR>
     nnoremap <silent> [GitLeader]b :Git blame<CR>
     nnoremap <silent> [GitLeader]f :GFiles?<CR>
@@ -262,3 +261,7 @@
   repo = 'machakann/vim-textobj-functioncall'
   [[plugins]]
   repo = 'machakann/vim-sandwich'
+
+  [[plugins]]
+  repo = 'puremourning/vimspector'
+  hook_add = 'let g:vimspector_enable_mappings = "HUMAN"'
