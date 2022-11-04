@@ -287,3 +287,29 @@ if filereadable(expand('~/.vim/local.vim'))
   source ~/.vim/local.vim
 endif
 " }}}
+
+" TODO make prettier eslint configfile
+let g:coc_global_extensions = [
+      \'coc-actions',
+      \'coc-deno',
+      \'coc-diagnostic',
+      \'coc-dictionary',
+      \'coc-docker',
+      \'coc-eslint',
+      \'coc-git',
+      \'coc-highlight',
+      \'coc-java',
+      \'coc-java-debug',
+      \'coc-jedi',
+      \'coc-json',
+      \'coc-lists',
+      \'coc-marketplace',
+      \'coc-pairs',
+      \'coc-prettier',
+      \'coc-snippets',
+      \'coc-toml',
+      \'coc-tslint-plugin',
+      \'coc-tsserver',
+      \'coc-ultisnips',
+      \'coc-yaml'
+\]

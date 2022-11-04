@@ -6,6 +6,16 @@
     "vue",
     "typescript",
     "typescriptreact",
-    "python"
-  ]
+    "python",
+    "markdown",
+    "javascriptreact",
+    "javascript",
+    "json"
+  ],
+  "java.home": "/Library/Java/JavaVirtualMachines/adoptopenjdk-16.jdk/Contents/Home",
+  "java.enabled": true,
+  "java.trace.server": "verbose",
+  "java.format.enabled": true,
+  "java.import.maven.enabled": true,
+  "java.maven.downloadSources": true
 }

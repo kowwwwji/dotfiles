@@ -3,40 +3,13 @@
 ########################################
 #zmodload zsh/zprof && zprof
 
-########################################
-# 各種設定ファイル
-########################################
-ZSH_HOME="${HOME}/.zsh"
-
-if [ -d $ZSH_HOME -a -r $ZSH_HOME -a -x $ZSH_HOME ]; then
-  for i in $ZSH_HOME/*; do
-    # echo $i ## for Debug
-    [[ ${i##*/} = *.zsh ]] &&
-      [ \( -f $i -o -h $i \) -a -r $i ] && source $i
-  done
-fi
-
-if [[ -f "$ZSH_HOME/.zsh_history" ]]; then
-  HISTFILE="$ZSH_HOME/.zsh_history"
-fi
-
-GITHUB_CREDENTIAL_FILE=~/.config/.github_credentials
-if [[ -f $GITHUB_CREDENTIAL_FILE ]]; then
-  source $GITHUB_CREDENTIAL_FILE
-fi
 
 ########################################
 # 環境変数
 ########################################
 export LANG=ja_JP.UTF-8
 export LC_CTYPE=en_US.UTF-8
-# export TERM=xterm-256color
 export XDG_CONFIG_HOME=~/.config
-
-# インストールしたものの読込
-path=(/usr/local/bin(N-/) /usr/local/sbin(N-/) $path)
-# 独自スクリプト読み込み
-path=(~/.scripts(N-/) $path)
 
 # 色を使用出来るようにする
 autoload -Uz colors && colors
@@ -117,43 +90,32 @@ case ${OSTYPE} in
 esac
 
 ########################################
-# 言語別の設定
+# 各種設定ファイル読込
 ########################################
-# python用の設定
-export PYENV_ROOT="$HOME/.pyenv"
-export PATH="$PYENV_ROOT/bin:$PATH"
-eval "$(pyenv init --path)"
-eval "$(pyenv init -)"
-eval "$(pyenv virtualenv-init -)"
+# インストールしたものの読込
+path=(/usr/local/bin(N-/) /usr/local/sbin(N-/) $path)
+# 独自スクリプト読み込み
+path=(~/.scripts(N-/) $path)
 
-# node
-# nvmコマンドを使用したときのみnvm.shをロードするようにする。
-# https://qiita.com/uasi/items/80865646607b966aedc8
-export NVM_DIR="$HOME/.nvm"
-[ -s "/usr/local/opt/nvm/nvm.sh" ] && [ -z "$(ls $NVM_DIR)" ] && \. "/usr/local/opt/nvm/nvm.sh"  # This loads nvm
-[ -s "/usr/local/opt/nvm/etc/bash_completion.d/nvm" ] && \. "/usr/local/opt/nvm/etc/bash_completion.d/nvm"  # This loads nvm bash_completion
-NODE_VER=`cat ${NVM_DIR}/alias/default`
-NODE_DIR=${NVM_DIR}/versions/node/${NODE_VER}
-export NODE_BIN=${NODE_DIR}/bin
-PATH=${NODE_BIN}:$PATH
-MANPATH=${NODE_DIR}/share/man:$MANPATH
-export NODE_PATH=${NODE_DIR}/lib/node_modules
-NODE_PATH=${NODE_PATH:A}
-function nvm() {
-    unset -f nvm
-    source "${NVM_DIR:-$HOME/.nvm}/nvm.sh"
-    nvm "$@"
-}
+ZSH_HOME="${HOME}/.zsh"
 
-# Ruby
-export RBENV_ROOT="$HOME/.rbenv"
-eval "$(rbenv init -)"
+if [ -d $ZSH_HOME -a -r $ZSH_HOME -a -x $ZSH_HOME ]; then
+  for i in $ZSH_HOME/*; do
+    # echo $i ## for Debug
+    [[ ${i##*/} = *.zsh ]] &&
+      [ \( -f $i -o -h $i \) -a -r $i ] && source $i
+  done
+fi
 
-# Go
-export GOENV_ROOT="$HOME/.goenv"
-eval "$(goenv init -)"
-export GOPATH=~/.go
-export PATH=$GOPATH/bin:$PATH
+if [[ -f "$ZSH_HOME/.zsh_history" ]]; then
+  HISTFILE="$ZSH_HOME/.zsh_history"
+fi
+
+GITHUB_CREDENTIAL_FILE=~/.config/.github_credentials
+if [[ -f $GITHUB_CREDENTIAL_FILE ]]; then
+  source $GITHUB_CREDENTIAL_FILE
+fi
+
 
 # PATHの重複を削除
 typeset -U PATH
@@ -165,11 +127,3 @@ typeset -U PATH
 #   zprof
 # fi
 
-cd-fzf-dein () {
-  local cache_vim json plugin
-  cache_vim="$HOME/.cache/dein/cache_nvim"
-  json="$(sed 's@\({\|,\)\(\w\+\):@\1"\2":@g' < $cache_vim)"
-  plugin="$(jq -r '.[0] | keys | .[]' <<< "$json" | fzf)"
-  # cd "$(jq -r ".[0].[\"$plugin\"].path" <<< "$json")"
-  cd "$(jq -r ".[0].\"$plugin\".path" <<< "$json")"
-}
