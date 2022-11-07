@@ -1,0 +1,4 @@
+.git
+.svn
+zsh-completions
+node_modules
