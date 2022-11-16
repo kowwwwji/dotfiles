@@ -1,12 +1,9 @@
 ########################################
-# デバッグ用
-########################################
-#zmodload zsh/zprof && zprof
-
-
-########################################
 # 環境変数
 ########################################
+if [ ghq ];then
+  export DOTFILES_ROOT=`ghq root`/github.com/kowwwwji/dotfiles
+fi
 export LANG=ja_JP.UTF-8
 export LC_CTYPE=en_US.UTF-8
 export XDG_CONFIG_HOME=~/.config
@@ -34,25 +31,6 @@ zstyle ':zle:*' word-style unspecified
 ########################################
 # プロンプト
 ########################################
-# # 2行表示
-# PROMPT="%{${fg[green]}%}[%n@%m %*]%{${reset_color}%} %~
-# %# "
-# SPROMPT="%r is correct? [n,y,a,e]: "
-
-# autoload -Uz vcs_info
-
-# # Gitの情報を表示
-# zstyle ':vcs_info:*' formats '%F{green}(%s)-[%b]%f'
-# zstyle ':vcs_info:*' actionformats '%F{red}(%s)-[%b|%a]%f'
-
-# function _update_vcs_info_msg() {
-#   LANG=en_US.UTF-8 vcs_info
-#   RPROMPT="${vcs_info_msg_0_}"
-# }
-
-# autoload -Uz add-zsh-hook
-# add-zsh-hook precmd _update_vcs_info_msg
-
 eval "$(starship init zsh)"
 
 ########################################
@@ -92,6 +70,9 @@ esac
 ########################################
 # 各種設定ファイル読込
 ########################################
+# デバッグ用
+#zmodload zsh/zprof && zprof
+
 # インストールしたものの読込
 path=(/usr/local/bin(N-/) /usr/local/sbin(N-/) $path)
 # 独自スクリプト読み込み
@@ -120,10 +101,7 @@ fi
 # PATHの重複を削除
 typeset -U PATH
 
-########################################
 # デバッグ用
-########################################
 # if (which zprof > /dev/null 2>&1) ;then
 #   zprof
 # fi
-

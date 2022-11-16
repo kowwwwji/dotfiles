@@ -6,3 +6,12 @@ cd-fzf-dein () {
   # cd "$(jq -r ".[0].[\"$plugin\"].path" <<< "$json")"
   cd "$(jq -r ".[0].\"$plugin\".path" <<< "$json")"
 }
+
+init-vimspector () {
+  if [[ $# = 1 ]]; then
+    FileType=$1
+    cp $DOTFILES_ROOT/.template/vimspector/$FileType.json .vimspector.json
+  else
+    echo "require FileType"
+  fi
+}
