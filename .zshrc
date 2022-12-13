@@ -7,18 +7,14 @@ fi
 export LANG=ja_JP.UTF-8
 export LC_CTYPE=en_US.UTF-8
 export XDG_CONFIG_HOME=~/.config
+HISTSIZE=50000
+SAVEHIST=50000
 
 # 色を使用出来るようにする
 autoload -Uz colors && colors
 
 # emacs 風キーバインドにする
 bindkey -e
-
-# ヒストリの設定
-HISTSIZE=50000
-SAVEHIST=50000
-setopt inc_append_history
-setopt share_history
 
 # 単語の区切り文字を指定する
 autoload -Uz select-word-style && select-word-style default
@@ -44,6 +40,7 @@ setopt interactive_comments # '#' 以降をコメントとして扱う
 setopt auto_cd              # ディレクトリ名だけでcdする
 setopt auto_pushd
 setopt pushd_ignore_dups
+setopt inc_append_history
 setopt share_history
 setopt hist_ignore_all_dups
 setopt hist_ignore_space

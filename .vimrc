@@ -205,6 +205,10 @@ highlight comment ctermfg=242 guifg=darkcyan
 
 " others{{{
 
+vnoremap camel :s/\%V\(_\\|-\)\(.\)/\u\2/g<CR>
+vnoremap snake :s/\%V\([A-Z]\)/_\l\1/g<CR>
+vnoremap kebab :s/\%V\([A-Z]\)/-\l\1/g<CR>
+
 " Move current line to up/down
 " Ref: https://vim.fandom.com/wiki/Moving_lines_up_or_down
 nnoremap <A-j> :m .+1<CR>==
