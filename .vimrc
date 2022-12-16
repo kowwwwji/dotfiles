@@ -237,13 +237,6 @@ if has('macunix')
   vnoremap ˚ :m '<-2<CR>gv=gv
 endif
 
-" Ctrl+Spaceで補完呼び出し
-" Mac側でシステム環境設定>キーボード>ショートカット>入力ソースをチェックなしにする必要あり
-inoremap <C-Space> <C-X><C-O>
-
-inoremap <expr><C-n> pumvisible() ? "<Down>" : "<C-n>"
-inoremap <expr><C-p> pumvisible() ? "<Up>" : "<C-p>"
-
 " Reload vimrc
 command! Vimrc :source ~/.vimrc
 " tmuxをDevModeにする
