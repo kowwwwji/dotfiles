@@ -241,7 +241,6 @@ endif
 " Mac側でシステム環境設定>キーボード>ショートカット>入力ソースをチェックなしにする必要あり
 inoremap <C-Space> <C-X><C-O>
 
-set completeopt=menuone,noinsert
 inoremap <expr><C-n> pumvisible() ? "<Down>" : "<C-n>"
 inoremap <expr><C-p> pumvisible() ? "<Up>" : "<C-p>"
 
