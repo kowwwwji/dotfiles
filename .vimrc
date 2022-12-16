@@ -205,6 +205,12 @@ highlight comment ctermfg=242 guifg=darkcyan
 
 " others{{{
 
+" CUIで入力された<S-CR>が拾えないので
+" iTerm2のキー設定を利用して特定の文字入力をmapする
+map ✠ <S-CR>
+nnoremap <CR> zo<CR>
+nnoremap <S-CR> zc<CR>
+
 vnoremap camel :s/\%V\(_\\|-\)\(.\)/\u\2/g<CR>
 vnoremap snake :s/\%V\([A-Z]\)/_\l\1/g<CR>
 vnoremap kebab :s/\%V\([A-Z]\)/-\l\1/g<CR>

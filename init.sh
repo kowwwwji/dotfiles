@@ -12,6 +12,7 @@ ln -nfs ${DOTFILES_ROOT}/.config/nvim/plugins ${HOME}/.config/nvim/
 ln -nfs ${DOTFILES_ROOT}/.config/nvim/UltiSnips ${HOME}/.config/nvim/
 ln -nfs ${DOTFILES_ROOT}/.config/nvim/coc-settings.json ${HOME}/.config/nvim/coc-settings.json
 ln -nfs ${DOTFILES_ROOT}/.config/starship.toml ${HOME}/.config/starship.toml
+ln -nfs ${DOTFILES_ROOT}/.config/lazydocker/config.yml ${HOME}/.config/lazydocker/config.yml
 ln -nfs ${DOTFILES_ROOT}/.config/memo ${HOME}/.config/
 
 mkdir ${HOME}/.config/git/ && touch ${HOME}/.config/git/.gitconfig.local
