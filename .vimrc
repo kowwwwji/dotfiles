@@ -286,12 +286,6 @@ source $VIMRUNTIME/macros/matchit.vim
 
 "}}}
 
-" Terminal{{{
-" tnoremap <Esc> <C-\><C-n> " GitFileしたときに<Esc>でwindowが閉じれなくなる
-" command! -nargs=* T split | wincmd j | resize 20 | terminal <args>
-" autocmd TermOpen * startinsert
-" }}}
-
 " Local Setting{{{
 if filereadable(expand('~/.vim/local.vim'))
   source ~/.vim/local.vim
