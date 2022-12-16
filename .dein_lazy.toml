@@ -79,3 +79,10 @@
     source ~/.config/nvim/plugins/vim-markdown.vim
   '''
 
+##################
+## Csv ##########
+##################
+  [[plugins]]
+  repo = 'mechatroner/rainbow_csv'
+  on_ft = ['csv', 'tsv']
+
