@@ -90,6 +90,19 @@
   hook_add = '''
     source ~/.config/nvim/plugins/fzf.vim
   '''
+
+  [[plugins]]
+  repo ='nvim-lua/plenary.nvim'
+  [[plugins]]
+  repo ='nvim-telescope/telescope.nvim'
+  depends = ['nvim-lua/plenary.nvim', 'nvim-treesitter/nvim-treesitter']
+  [[plugins]]
+  repo ='nvim-telescope/telescope-fzf-native.nvim'
+  depends = 'nvim-telescope/telescope.nvim'
+  [[plugins]]
+  repo ='nvim-treesitter/nvim-treesitter'
+  depends = 'nvim-telescope/telescope.nvim'
+
  # [[plugins]]
  # repo = 'Shougo/denite.nvim'
  # hook_add = '''
