@@ -9,8 +9,8 @@ command! -bang -nargs=* Ag
   \           : fzf#vim#with_preview({'options': '--delimiter : --nth 4..'}, 'right:50%', '?'),
   \   <bang>0)
 
-nnoremap <silent> <Leader>s :Ag<CR>
-nnoremap <silent> <Leader>f :Files<CR>
+" nnoremap <silent> <Leader>s :Ag<CR>
+" nnoremap <silent> <Leader>f :Files<CR>
 nnoremap <silent> <Leader>bl :Lines<CR>
 nnoremap <silent> <Leader>bf :Buffers<CR>
 nnoremap <silent> <Leader>h :History<CR>

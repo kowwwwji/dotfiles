@@ -96,6 +96,12 @@
   [[plugins]]
   repo ='nvim-telescope/telescope.nvim'
   depends = ['nvim-lua/plenary.nvim', 'nvim-treesitter/nvim-treesitter']
+  hook_add = '''
+    nnoremap <silent> <Leader>f <cmd>Telescope git_files<CR>
+    nnoremap <silent> <Leader>fa <cmd>Telescope find_files hidden=true<CR>
+    nnoremap <silent> <Leader>s <cmd>Telescope live_grep hidden=true<CR>
+    '''
+
   [[plugins]]
   repo ='nvim-telescope/telescope-fzf-native.nvim'
   depends = 'nvim-telescope/telescope.nvim'
