@@ -5,6 +5,9 @@
   [[plugins]]
   repo = 'vim-jp/vimdoc-ja'
 
+  [[plugins]]
+  repo = 'tpope/vim-repeat'
+
 # ColorShchemeをdeinで設定した場合、hightはvimrcにdeinの処理の後に書くこと
   [[plugins]]
   repo = 'morhetz/gruvbox'
@@ -137,7 +140,7 @@
   repo = 'glidenote/memolist.vim'
   hook_add = '''
     let g:memolist_memo_suffix = "md"
-    let g:memolist_path = "~/GoogleDrive/memo"
+    let g:memolist_path = "/Users/kowwwwji/Library/Mobile Documents/iCloud~md~obsidian/Documents/Obsidian Vault/Diary"
     let g:memolist_fzf=1
     nnoremap <Leader>mn :MemoNew<CR>
     nnoremap <Leader>ml :MemoList<CR>
