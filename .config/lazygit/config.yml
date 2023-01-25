@@ -1,0 +1,6 @@
+gui:
+  showIcons: true
+  showBottomLine: false
+os:
+  editCommand: 'nvim'
+customCommands:
