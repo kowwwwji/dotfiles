@@ -17,7 +17,6 @@
   b = branch
   bv = branch -vv
   bva = branch -vva
-  see = browse
   st = status
 
 ##################
