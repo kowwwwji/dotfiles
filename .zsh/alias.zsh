@@ -8,7 +8,7 @@ function ghqSearch(){
 }
 
 alias ll='ls -lha'
-alias vim=nvim
+alias nv=nvim
 alias dc=docker-compose
 alias re=rbenv
 alias ar='function(){eval $(command assume-role $@);}'
