@@ -19,7 +19,7 @@
   [[plugins]]
   repo = 'thinca/vim-quickrun'
   hook_add = '''
-    source ~/.config/nvim/plugins/vim-quickrun.vim
+    source ${DOTFILES_ROOT}/.config/vim/plugins/vim-quickrun.vim
   '''
 
   [[plugins]]
@@ -28,7 +28,7 @@
   # [[plugins]]
   # repo = 'majutsushi/tagbar'
   # hook_add = '''
-  #   source ~/.config/nvim/plugins/tagbar.vim
+  #   source ${DOTFILES_ROOT}/.config/vim/plugins/tagbar.vim
   # '''
   [[plugins]]
   repo = 'liuchengxu/vista.vim'
@@ -42,7 +42,7 @@
   repo = 'itchyny/lightline.vim'
   depends = ['vim-fugitive']
   hook_add = '''
-    source ~/.config/nvim/plugins/lightline.vim
+    source ${DOTFILES_ROOT}/.config/vim/plugins/lightline.vim
   '''
 
 # カッコ系
@@ -54,14 +54,14 @@
   [[plugins]]
   repo = 'cohama/lexima.vim'
   hook_add = '''
-    source ~/.config/nvim/plugins/lexima.vim
+    source ${DOTFILES_ROOT}/.config/vim/plugins/lexima.vim
   '''
 
 # テーブル系
   [[plugins]]
   repo = 'godlygeek/tabular'
   hook_add = '''
-    source ~/.config/nvim/plugins/tabular.vim
+    source ${DOTFILES_ROOT}/.config/vim/plugins/tabular.vim
   '''
   [[plugins]]
   repo = 'dhruvasagar/vim-table-mode'
@@ -77,7 +77,7 @@
   [[plugins]]
   repo = 'scrooloose/nerdtree'
   hook_add = '''
-    source ~/.config/nvim/plugins/nerdtree.vim
+    source ${DOTFILES_ROOT}/.config/vim/plugins/nerdtree.vim
   '''
   [[plugins]]
   repo = 'ryanoasis/vim-devicons'
@@ -91,12 +91,12 @@
   repo ='junegunn/fzf.vim'
   depends = 'fzf'
   hook_add = '''
-    source ~/.config/nvim/plugins/fzf.vim
+    source ${DOTFILES_ROOT}/.config/vim/plugins/fzf.vim
   '''
  # [[plugins]]
  # repo = 'Shougo/denite.nvim'
  # hook_add = '''
- #   source ~/.config/nvim/plugins/denite.vim
+ #   source ${DOTFILES_ROOT}/.config/vim/plugins/denite.vim
  # '''
 
 # Git操作
@@ -140,7 +140,7 @@
   repo = 'glidenote/memolist.vim'
   hook_add = '''
     let g:memolist_memo_suffix = "md"
-    let g:memolist_path = "/Users/kowwwwji/Library/Mobile Documents/iCloud~md~obsidian/Documents/Obsidian Vault/Diary"
+    let g:memolist_path = "/Users/kowwwwji/Library/Mobile Documents/iCloud${DOTFILES_ROOT}md${DOTFILES_ROOT}obsidian/Documents/Obsidian Vault/Diary"
     let g:memolist_fzf=1
     nnoremap <Leader>mn :MemoNew<CR>
     nnoremap <Leader>ml :MemoList<CR>
@@ -151,7 +151,7 @@
   # [[plugins]]
   # repo =  'prabirshrestha/vim-lsp'
   # hook_add = '''
-  #   source ~/.config/nvim/plugins/vim-lsp.vim
+  #   source ${DOTFILES_ROOT}/.config/vim/plugins/vim-lsp.vim
   # '''
   # [[plugins]]
   # repo = 'prabirshrestha/asyncomplete.vim'
@@ -169,7 +169,7 @@
   # [[plugins]]
   # repo =  'hrsh7th/vim-vsnip'
   # hook_add = '''
-  #   source ~/.config/nvim/plugins/vim-vsnip.vim
+  #   source ${DOTFILES_ROOT}/.config/vim/plugins/vim-vsnip.vim
   # '''
   # [[plugins]]
   # repo =  'hrsh7th/vim-vsnip-integ'
@@ -190,7 +190,7 @@
   repo = 'neoclide/coc.nvim'
   rev = 'release'
   hook_add = '''
-    source ~/.config/nvim/plugins/coc.vim
+    source ${DOTFILES_ROOT}/.config/vim/plugins/coc.vim
   '''
 
   # [[plugins]]
@@ -243,7 +243,7 @@
   [[plugins]]
   repo = 'tyru/open-browser.vim'
   hook_add = '''
-    source ~/.config/nvim/plugins/open-browser.vim
+    source ${DOTFILES_ROOT}/.config/vim/plugins/open-browser.vim
   '''
 
   [[plugins]]
