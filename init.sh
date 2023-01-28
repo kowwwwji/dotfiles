@@ -6,11 +6,10 @@ for i in ./.* ; do
   [[ -f $i ]] \
     && ln -nfs ${DOTFILES_ROOT}/${i##./} ${HOME}/${i##./}
 done;
-mkdir -p ${HOME}/.config/nvim/
-ln -nfs ${HOME}/.vimrc ${HOME}/.config/nvim/init.vim
-ln -nfs ${DOTFILES_ROOT}/.config/nvim/plugins ${HOME}/.config/nvim/
-ln -nfs ${DOTFILES_ROOT}/.config/nvim/UltiSnips ${HOME}/.config/nvim/
-ln -nfs ${DOTFILES_ROOT}/.config/nvim/coc-settings.json ${HOME}/.config/nvim/coc-settings.json
+mkdir -p ${HOME}/.config/vim/
+ln -nfs ${DOTFILES_ROOT}/.config/vim/plugins ${HOME}/.config/vim/
+ln -nfs ${DOTFILES_ROOT}/.config/vim/UltiSnips ${HOME}/.config/vim/
+ln -nfs ${DOTFILES_ROOT}/.config/vim/coc-settings.json ${HOME}/.config/vim/coc-settings.json
 ln -nfs ${DOTFILES_ROOT}/.config/starship.toml ${HOME}/.config/starship.toml
 ln -nfs ${DOTFILES_ROOT}/.config/lazydocker/config.yml ${HOME}/.config/lazydocker/config.yml
 ln -nfs ${DOTFILES_ROOT}/.config/lazygit/config.yml ${HOME}/.config/lazygit/config.yml

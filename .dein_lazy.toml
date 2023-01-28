@@ -70,13 +70,13 @@
   on_ft = ['md', 'markdown']
   depends = 'open-browser.vim'
   hook_add = '''
-    source ~/.config/nvim/plugins/previm.vim
+    source ${DOTFILES_ROOT}/.config/vim/plugins/previm.vim
   '''
   [[plugins]]
   repo = 'plasticboy/vim-markdown'
   on_ft = ['md', 'markdown']
   hook_add = '''
-    source ~/.config/nvim/plugins/vim-markdown.vim
+    source ${DOTFILES_ROOT}/.config/vim/plugins/vim-markdown.vim
   '''
 
 ##################

@@ -11,7 +11,7 @@ function t(){
   tmux new-session -s $(basename $(pwd))
 }
 function dev(){
-  tmux new-session -s $(basename $(pwd)) \; source-file ~/.tmux/.tmux.dev.conf
+  tmux new-session -s $(basename $(pwd)) \; source-file ${DOTFILES_ROOT}/.tmux/.tmux.dev.conf
 }
 
 function pecoSelectTmuxSession(){
