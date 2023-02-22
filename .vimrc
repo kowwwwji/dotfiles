@@ -309,25 +309,3 @@ let g:coc_global_extensions = [
       \'coc-ultisnips',
       \'coc-yaml'
 \]
-
-" tabでインデント操作
-nnoremap <Tab> :call IndentWithTab(1)<CR>
-nnoremap <S-Tab> :call IndentWithTab(-1)<CR>
-
-function! IndentWithTab(arrow) abort
-  let l = getline('.')
-  if l =~ '^\s*[\-\+\*]'
-    let c = col('.')
-    if a:arrow > 0
-      let c += shiftwidth()
-      execute 'normal >>'
-    else
-      let c -= shiftwidth()
-      execute 'normal <<'
-    endif
-    if strwidth(getline('.')) == c
-      let c += 1
-    endif
-    call cursor(line('.'), c)
-  end
-endfunction
