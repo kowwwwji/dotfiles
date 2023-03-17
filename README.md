@@ -29,29 +29,36 @@ ghq get https://github.com/kowwwwji/dotfiles.git
 cd $(ghq root)/github.com/kowwwwji/dotfiles
 
 zsh init.sh # $HOMEへの適用
-brew bundle # Application Install
-# 以下はログに表示されているものを実行している#####
-chsh -s /bin/zsh
-# fzfの初期化
-# Do you want to update your shell configuration files? はNoにする。
-/usr/local/opt/fzf/install
-######
 
-# 初期化
-nvm
-tmux # [ctrl + I]でtmux pluginをインストール
-vim # neovim関連のインストール
+cd BrewFile && brew bundle # Application Install
+# 以下はログに表示されているものを実行している#####
+# fzfの初期化
+$(brew --prefix)/opt/fzf/install # Do you want to update your shell configuration files? はNoにする。
+###################################################
+sudo shutdown -r now
+
 ```
 
 #### システム環境設定の変更2
 
 - システム環境設定 > キーボード > 入力ソース
   - Googleのひらがなと英数を追加
-  - Appleデフォルトの日本語ローマ字入力の入力モードの英字をチェックしてから日本語ローマ字入力とABCを削除して、PC再起動
+  - Appleデフォルトの日本語ローマ字入力の入力モードの英字をチェック
+  - 日本語ローマ字入力とABCを削除
 
+### Node
+
+```zsh
+nvm ls-remote --lts # 最新のLTSを確認
+nvm install [lts-ver] # 確認したLTS verをInstall
+nvm alias default [lts-ver]
+```
 ### アプリの初期化と設定
 
 ```zsh
+tmux # [ctrl + I]でtmux pluginをインストール
+vim # neovim関連のインストール
+
 open -a hyperSwitch
 open -a Raycast # Advanced > Import/Export
 open -a BetterTouchTool
@@ -86,18 +93,9 @@ ssh-keygen -t rsa # ~/.ssh配下に作成する
   - `~/.ssh/config`
 
 ## 各種言語の設定
-
-### Node
-
-```zsh
-nvm ls-remote --lts # 最新のLTSを確認
-nvm install [lts-ver] # 確認したLTS verをInstall
-nvm alias default [lts-ver]
-```
-
 ### Python
 
-<https://qiita.com/sigwyg/items/41630f8754c2028a7a9f>
+https://qiita.com/sigwyg/items/41630f8754c2028a7a9f
 
 ```zsh
 VER_2=2.7.18
@@ -128,3 +126,10 @@ vim ./config/memo/config.toml # 設定変更する必要あり
 ```
 
 ### coc.nvimの設定
+
+### 手動インストール
+
+- [DMM Books](https://book.dmm.com/info_bookviewer.html#intro-mac)
+- [LuminarAI](https://skylum.com/jp/account/my-softwar://skylum.com/jp/account/my-software)
+- [Imaging Edge Desktop](https://creatorscloud.sony.net/catalog/ja-jp/ie-desktop/index.html)
+- [MOTU M Series System Preferences](https://motu.com/en-us/download/product/408/?details=true)
