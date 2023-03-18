@@ -1,5 +1,3 @@
-set rtp+=/usr/local/opt/fzf
-
 command! -bang -nargs=? -complete=dir Files
   \ call fzf#vim#files(<q-args>, fzf#vim#with_preview({'source': 'ag --hidden --ignore .git -g ""'}), <bang>0)
 command! -bang -nargs=* Ag
