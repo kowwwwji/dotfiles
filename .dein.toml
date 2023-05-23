@@ -49,8 +49,8 @@
   # TODO leximaにhook_addを追加したらEnterを押したときにバグったからコメントアウト
   # [[plugins]]
   # repo = 'tpope/vim-endwise'
-  # [[plugins]]
-  # repo = 'tpope/vim-surround'
+  [[plugins]]
+  repo = 'tpope/vim-surround'
   [[plugins]]
   repo = 'cohama/lexima.vim'
   hook_add = '''
