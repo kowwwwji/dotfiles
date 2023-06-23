@@ -201,8 +201,13 @@
     source ~/.config/nvim/plugins/coc.vim
   '''
 
-  # [[plugins]]
-  # repo = 'github/copilot.vim'
+  [[plugins]]
+  repo = 'github/copilot.vim'
+  hook_add = '''
+    xnoremap <silent> <Space>c :Copilot<CR>
+    inoremap <silent> < :Copilot<CR>
+  '''
+
 
 
 # # 非同期コードチェッカー
