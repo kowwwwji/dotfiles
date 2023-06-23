@@ -16,6 +16,9 @@ ln -nfs ${DOTFILES_ROOT}/.config/lazydocker/config.yml ${HOME}/.config/lazydocke
 ln -nfs ${DOTFILES_ROOT}/.config/lazygit/config.yml ${HOME}/.config/lazygit/config.yml
 ln -nfs ${DOTFILES_ROOT}/.config/memo ${HOME}/.config/
 
+# # linkだとagがうまく動かないのでcp
+# cp -f ${DOTFILES_ROOT}/.agignore ${HOME}/.agignore
+
 mkdir ${HOME}/.config/git/ && touch ${HOME}/.config/git/.gitconfig.local
 mkdir ${HOME}/.ssh && touch ${HOME}/.ssh/config
 
