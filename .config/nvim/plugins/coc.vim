@@ -1,9 +1,11 @@
+command! Format :call CocAction('format')
+
 nmap gd <Plug>(coc-definition)
 nmap gy <Plug>(coc-type-definition)
 nmap gi <Plug>(coc-implementation)
 nmap gr <Plug>(coc-references)
 nmap gd <Plug>(coc-definition)
-nnoremap <silent><F8> :<C-u>CocDiagnostics<CR>
+nnoremap <Leader>d :<C-u>CocDiagnostics<CR>
 
 " Remap for rename current word
 nmap <F2> <Plug>(coc-rename)
@@ -22,8 +24,6 @@ endfunction
 
 " Use NVM default nodejs
 let g:coc_node_path = expand('$NODE_BIN/node')
-
-command! Format :call CocAction('format')
 
 ""coc completion""""""""""""
 inoremap <silent><expr> <TAB>
