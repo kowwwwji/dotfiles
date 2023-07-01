@@ -1,4 +1,6 @@
 .git
 .svn
 zsh-completions
+
 node_modules
+package-lock.json

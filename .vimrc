@@ -230,11 +230,13 @@ highlight comment ctermfg=242 guifg=darkcyan
 
 " others{{{
 
-" CUIで入力された<S-CR>が拾えないので
-" iTerm2のキー設定を利用して特定の文字入力をmapする
-map ✠ <S-CR>
-nnoremap <CR> zo<CR>
-nnoremap <S-CR> zc<CR>
+if !has('gui_running')
+  " CUIで入力された<S-CR>が拾えないので
+  " iTerm2のキー設定を利用して特定の文字入力をmapする
+  map ✠ <S-CR>
+  nnoremap <CR> zo<CR>
+  nnoremap <S-CR> zc<CR>
+endif
 
 vnoremap camel :s/\%V\(_\\|-\)\(.\)/\u\2/g<CR>
 vnoremap snake :s/\%V\([A-Z]\)/_\l\1/g<CR>
@@ -308,29 +310,3 @@ if filereadable(expand('~/.vim/local.vim'))
   source ~/.vim/local.vim
 endif
 " }}}
-
-" TODO make prettier eslint configfile
-let g:coc_global_extensions = [
-      \'coc-actions',
-      \'coc-deno',
-      \'coc-diagnostic',
-      \'coc-dictionary',
-      \'coc-docker',
-      \'coc-eslint',
-      \'coc-git',
-      \'coc-highlight',
-      \'coc-java',
-      \'coc-java-debug',
-      \'coc-jedi',
-      \'coc-json',
-      \'coc-lists',
-      \'coc-marketplace',
-      \'coc-pairs',
-      \'coc-prettier',
-      \'coc-snippets',
-      \'coc-toml',
-      \'coc-tslint-plugin',
-      \'coc-tsserver',
-      \'coc-ultisnips',
-      \'coc-yaml'
-\]
