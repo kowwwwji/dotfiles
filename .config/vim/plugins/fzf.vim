@@ -9,8 +9,7 @@ command! -bang -nargs=* Ag
 
 nnoremap <silent> <Leader>s :Ag<CR>
 nnoremap <silent> <Leader>f :Files<CR>
-nnoremap <silent> <Leader>bl :Lines<CR>
-nnoremap <silent> <Leader>bf :Buffers<CR>
+nnoremap <silent> <Leader>b :Buffers<CR>
 nnoremap <silent> <Leader>h :History<CR>
 nnoremap <silent> <Leader>hc :History:<CR>
 nnoremap <silent> <Leader>hs :History/<CR>

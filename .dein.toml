@@ -34,6 +34,14 @@
   repo = 'liuchengxu/vista.vim'
   depends = ['coc.nvim', 'lightline.vim']
   hook_add = '''
+    let g:vista_icon_indent = ["╰─▸ ", "├─▸ "]
+    let g:vista_fzf_preview = ['right:50%']
+    let g:vista#renderer#enable_icon = 1
+    let g:vista#renderer#icons = {
+    \   "function": "\uf794",
+    \   "variable": "\uf71b",
+    \  }
+
     nnoremap  <Leader>v :<C-u>Vista coc<CR>
     nnoremap  <Leader>V :<C-u>Vista finder coc<CR>
   '''
@@ -196,8 +204,13 @@
     source ${DOTFILES_ROOT}/.config/vim/plugins/coc.vim
   '''
 
-  # [[plugins]]
-  # repo = 'github/copilot.vim'
+  [[plugins]]
+  repo = 'github/copilot.vim'
+  hook_add = '''
+    xnoremap <silent> <Space>c :Copilot<CR>
+    inoremap <silent> < :Copilot<CR>
+  '''
+
 
 
 # # 非同期コードチェッカー

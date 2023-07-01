@@ -4,6 +4,10 @@
   if = 'has("python3")'
 
   [[plugins]]
+  repo = 'psf/black'
+  on_ft = 'py'
+
+  [[plugins]]
   repo = 'cespare/vim-toml'
   rev = 'main'
   on_ft = 'toml'

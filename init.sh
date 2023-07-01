@@ -16,6 +16,9 @@ ln -nfs ${DOTFILES_ROOT}/.config/lazygit/config.yml ${HOME}/.config/lazygit/conf
 ln -nfs ${DOTFILES_ROOT}/.config/memo ${HOME}/.config/
 ln -nfs ${DOTFILES_ROOT}/.config/karabiner/assets/complex_modifications/ ${HOME}/.config/karabiner/assets/complex_modifications/
 
+# # linkだとagがうまく動かないのでcp
+# cp -f ${DOTFILES_ROOT}/.agignore ${HOME}/.agignore
+
 mkdir ${HOME}/.config/git/ && touch ${HOME}/.config/git/.gitconfig.local
 mkdir ${HOME}/.ssh && touch ${HOME}/.ssh/config
 
