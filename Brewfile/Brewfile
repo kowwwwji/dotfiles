@@ -1,4 +1,5 @@
 tap "sanemat/font"
+tap "microsoft/git"
 tap "homebrew/services"
 tap "homebrew/core"
 tap "homebrew/cask-versions"
@@ -6,6 +7,7 @@ tap "homebrew/cask-fonts"
 tap "homebrew/cask"
 tap "homebrew/bundle"
 mas "iMovie", id: 408981434
+mas "Xcode", id: 497799835
 mas "WebDrop", id: 1125673012
 mas "Spark", id: 1176895641
 mas "Pages", id: 409201541
@@ -28,6 +30,7 @@ cask "iterm2"
 cask "google-japanese-ime"
 cask "google-drive"
 cask "google-chrome"
+cask "git-credential-manager-core"
 cask "font-hack-nerd-font"
 cask "docker"
 cask "discord"
