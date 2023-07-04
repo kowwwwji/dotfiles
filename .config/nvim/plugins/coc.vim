@@ -6,6 +6,7 @@ nmap gi <Plug>(coc-implementation)
 nmap gr <Plug>(coc-references)
 nmap gd <Plug>(coc-definition)
 nnoremap <Leader>d :<C-u>CocDiagnostics<CR>
+nmap <leader>ac  <Plug>(coc-codeaction)
 
 " Remap for rename current word
 nmap <F2> <Plug>(coc-rename)
@@ -66,3 +67,6 @@ let g:coc_global_extensions = [
       \'coc-ultisnips',
       \'coc-yaml'
 \]
+
+
+autocmd BufNewFile,BufRead *.dockerignore setfiletype gitignore

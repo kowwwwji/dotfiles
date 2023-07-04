@@ -211,8 +211,17 @@ if !has('gui_running')
   map ✠ <S-CR>
   nnoremap <CR> zo<CR>
   nnoremap <S-CR> zc<CR>
+  autocmd BufReadPost quickfix nnoremap <buffer> <CR> <CR>
 endif
 
+" 文字削除時にクリップボードコピーしない
+nnoremap d "_d
+xnoremap d "_d
+xnoremap p "_dP
+" 選択時に改行を含まない
+vnoremap $ g_
+
+" 形式変換
 vnoremap camel :s/\%V\(_\\|-\)\(.\)/\u\2/g<CR>
 vnoremap snake :s/\%V\([A-Z]\)/_\l\1/g<CR>
 vnoremap kebab :s/\%V\([A-Z]\)/-\l\1/g<CR>
