@@ -104,3 +104,5 @@ typeset -U PATH
 # fi
 
 eval "$(direnv hook zsh)"
+export MANPAGER='nvim +Man!'
+
