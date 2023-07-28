@@ -21,3 +21,4 @@ let NERDTreeCustomOpenArgs= {'file':{'keepopen':0}}
 
 let g:NERDTreeMapPreview = 'o'
 let g:NERDTreeMapActivateNode = 'g'
+let g:NERDTreeMapOpenVSplit = '<C-v>'
