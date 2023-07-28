@@ -317,13 +317,6 @@
 			<key>Text</key>
 			<string></string>
 		</dict>
-		<key>0xf72c-0x0</key>
-		<dict>
-			<key>Action</key>
-			<integer>9</integer>
-			<key>Text</key>
-			<string></string>
-		</dict>
 		<key>0xf72c-0x100000</key>
 		<dict>
 			<key>Action</key>
@@ -335,13 +328,6 @@
 		<dict>
 			<key>Action</key>
 			<integer>9</integer>
-			<key>Text</key>
-			<string></string>
-		</dict>
-		<key>0xf72d-0x0</key>
-		<dict>
-			<key>Action</key>
-			<integer>8</integer>
 			<key>Text</key>
 			<string></string>
 		</dict>
@@ -1653,7 +1639,7 @@
 			<key>Mouse Reporting</key>
 			<true/>
 			<key>Name</key>
-			<string>Hotkey Window</string>
+			<string>tmux</string>
 			<key>Non Ascii Font</key>
 			<string>HackNFM-Regular 15</string>
 			<key>Non-ASCII Anti Aliased</key>
