@@ -1,10 +1,8 @@
 tap "sanemat/font"
 tap "microsoft/git"
 tap "homebrew/services"
-tap "homebrew/core"
 tap "homebrew/cask-versions"
 tap "homebrew/cask-fonts"
-tap "homebrew/cask"
 tap "homebrew/bundle"
 mas "iMovie", id: 408981434
 mas "Xcode", id: 497799835
