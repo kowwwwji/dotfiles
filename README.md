@@ -8,16 +8,16 @@ kowwwwji's DotFile & PC setup
 
 1. トラックパッドの`軌跡の速さ`を最大に
 1. キーボード
-   - `キーのリピート`と`リピート入力認識までの時間`を最大に。
-   - F1F2をファンクションキーとして使用にチェック
-   - ショートカットのSpotlight検索を表示をOFF
+  - `キーのリピート`と`リピート入力認識までの時間`を最大に。
+  - F1F2をファンクションキーとして使用にチェック
+  - ショートカットのSpotlight検索を表示をOFF
 1. 音声入力のショートカットを`Fn`に
 1. メニューバーの表示
-   - Dockとメニューバー
-     - bluetooth ON
-   - バッテリー ON
-     - バッテリーの％表示
-   - Spotlight OFF
+  - Dockとメニューバー
+    - bluetooth ON
+  - バッテリー ON
+    - バッテリーの％表示
+  - Spotlight OFF
 
 ### Various Installs
 
