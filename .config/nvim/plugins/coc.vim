@@ -68,5 +68,6 @@ let g:coc_global_extensions = [
       \'coc-yaml'
 \]
 
-
+" Filetype settings
 autocmd BufNewFile,BufRead *.dockerignore setfiletype gitignore
+autocmd BufNewFile,BufRead *.envrc setfiletype bash
