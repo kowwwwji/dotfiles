@@ -1,6 +1,6 @@
 gui:
-  showIcons: true
   showBottomLine: false
+  nerdFontsVersion: "3"
 os:
   edit: 'nvim'
 customCommands:
