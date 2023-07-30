@@ -3,4 +3,8 @@ gui:
   nerdFontsVersion: "3"
 os:
   edit: 'nvim'
+git:
+  paging:
+    colorArg: always
+    pager: delta --dark --paging=never --side-by-side
 customCommands:
