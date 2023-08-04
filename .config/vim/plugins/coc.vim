@@ -23,8 +23,7 @@ function! s:show_documentation()
   endif
 endfunction
 
-" Use NVM default nodejs
-let g:coc_node_path = expand('$NODE_BIN/node')
+let g:coc_node_path = expand('$NODE_BIN')
 
 ""coc completion""""""""""""
 inoremap <silent><expr> <TAB>

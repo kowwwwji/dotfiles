@@ -94,15 +94,17 @@ if [[ -f $GITHUB_CREDENTIAL_FILE ]]; then
   source $GITHUB_CREDENTIAL_FILE
 fi
 
-
 # PATHの重複を削除
 typeset -U PATH
+
+eval "$(direnv hook zsh)"
+export MANPAGER='nvim +Man!'
+
+source /opt/homebrew/opt/asdf/libexec/asdf.sh
+NODE_BIN=$(asdf which node)
+source ~/.asdf/plugins/java/set-java-home.zsh
 
 # デバッグ用
 # if (which zprof > /dev/null 2>&1) ;then
 #   zprof
 # fi
-
-eval "$(direnv hook zsh)"
-export MANPAGER='nvim +Man!'
-
