@@ -46,13 +46,6 @@ sudo shutdown -r now
   - Appleデフォルトの日本語ローマ字入力の入力モードの英字をチェック
   - 日本語ローマ字入力とABCを削除
 
-### Node
-
-```zsh
-nvm ls-remote --lts # 最新のLTSを確認
-nvm install [lts-ver] # 確認したLTS verをInstall
-nvm alias default [lts-ver]
-```
 ### アプリの初期化と設定
 
 ```zsh
