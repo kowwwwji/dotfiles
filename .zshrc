@@ -99,6 +99,10 @@ source /opt/homebrew/opt/asdf/libexec/asdf.sh
 NODE_BIN=$(asdf which node)
 source ~/.asdf/plugins/java/set-java-home.zsh
 
+POWERLEVEL9K_DISABLE_CONFIGURATION_WIZARD=true
+
+eval "$(sheldon source)"
+
 # デバッグ用
 # if (which zprof > /dev/null 2>&1) ;then
 #   zprof

@@ -15,6 +15,7 @@ ln -nfs ${DOTFILES_ROOT}/.config/lazydocker/config.yml ${HOME}/.config/lazydocke
 ln -nfs ${DOTFILES_ROOT}/.config/lazygit/config.yml ${HOME}/.config/lazygit/config.yml
 ln -nfs ${DOTFILES_ROOT}/.config/memo ${HOME}/.config/
 ln -nfs ${DOTFILES_ROOT}/.config/nvim ${HOME}/.config/
+ln -nfs ${DOTFILES_ROOT}/.config/sheldon ${HOME}/.config/
 ln -nfs ${DOTFILES_ROOT}/.config/karabiner/assets/complex_modifications/ ${HOME}/.config/karabiner/assets/complex_modifications/
 
 # # linkだとagがうまく動かないのでcp
