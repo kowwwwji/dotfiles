@@ -42,7 +42,6 @@ endfunction
 
 let g:coc_snippet_next = '<tab>'
 
-" TODO make prettier eslint configfile
 let g:coc_global_extensions = [
       \'coc-actions',
       \'coc-deno',
