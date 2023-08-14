@@ -1,4 +1,25 @@
+local telescope = require("telescope")
 local actions = require("telescope.actions")
+local grep_args =
+  { "--color=never", "--no-heading", "--with-filename", "--line-number", "--column", "--smart-case", "--hidden" }
+
+telescope.setup({
+  pickers = {
+    find_files = {
+      hidden = true,
+    },
+    live_grep = {
+      additional_args = function(opts)
+        return grep_args
+      end,
+    },
+    grep_string = {
+      additional_args = function(opts)
+        return grep_args
+      end,
+    },
+  },
+})
 
 return {
   {
@@ -12,21 +33,27 @@ return {
         desc = "Find Plugin File",
       },
       {
-        "<leader>/",
+        "<leader>ff",
         function()
-          require("telescope.builtin").live_grep({
-            vimgrep_arguments = {
-              "rg",
-              "--color=never",
-              "--no-heading",
-              "--with-filename",
-              "--line-number",
-              "--column",
-              "--smart-case",
-              "--hidden",
-            },
+          require("telescope.builtin").find_files({})
+        end,
+        desc = "Find Files (root dir)",
+      },
+      {
+        "<leader><leader>",
+        function()
+          require("telescope.builtin").find_files({})
+        end,
+        desc = "Find Files (root dir)",
+      },
+      {
+        "<leader>fF",
+        function()
+          require("telescope.builtin").find_files({
+            cwd = vim.fn.expand("%:p:h"),
           })
         end,
+        desc = "Find Files (root dir)",
       },
     },
     -- change some options
@@ -41,16 +68,6 @@ return {
           i = {
             ["<esc>"] = actions.close,
           },
-        },
-        vimgrep_arguments = {
-          "rg",
-          "--color=never",
-          "--no-heading",
-          "--with-filename",
-          "--line-number",
-          "--column",
-          "--smart-case",
-          "-u", -- thats the new thing
         },
       },
     },
