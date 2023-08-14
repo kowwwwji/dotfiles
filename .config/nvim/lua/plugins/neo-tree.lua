@@ -30,4 +30,5 @@ return {
       },
     },
   },
+  -- TODO: close only neotree
 }

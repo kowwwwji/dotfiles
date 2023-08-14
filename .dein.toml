@@ -54,7 +54,7 @@
   '''
 
 # カッコ系
-  # TODO leximaにhook_addを追加したらEnterを押したときにバグったからコメントアウト
+  # FIX: leximaにhook_addを追加したらEnterを押したときにバグったからコメントアウト
   # [[plugins]]
   # repo = 'tpope/vim-endwise'
   [[plugins]]
@@ -267,7 +267,7 @@
   [[plugins]]
   repo = 'machakann/vim-sandwich'
 
-## TODO vimspector_enable_mappings を使用するとKeymapが崩壊するので、調整が必要
+## FIX: vimspector_enable_mappings を使用するとKeymapが崩壊するので、調整が必要
   [[plugins]]
   repo = 'puremourning/vimspector'
   hook_add = 'let g:vimspector_enable_mappings = "HUMAN"'
