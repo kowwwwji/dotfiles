@@ -15,7 +15,8 @@ return {
       end,
       desc = "Explorer NeoTree (cwd)",
     },
-    { "<leader>e", "<leader>fe", desc = "Explorer NeoTree (root dir)", remap = true },
+    { "<leader>e", "<leader>fe", desc = "Explorer NeoTree (root)", remap = true },
+    { "<C-e>", "<leader>fe", desc = "Explorer NeoTree (root)", remap = true },
     { "<leader>E", "<leader>fE", desc = "Explorer NeoTree (cwd)", remap = true },
   },
   opts = {
@@ -30,5 +31,4 @@ return {
       },
     },
   },
-  -- TODO: close only neotree
 }
