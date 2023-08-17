@@ -5,3 +5,4 @@
 .zsh/.zsh_history
 .zsh/local.zsh
 iterm/com.googlecode.iterm2.plist
+.config/nvim/lazy-lock.json
