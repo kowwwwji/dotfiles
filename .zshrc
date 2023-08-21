@@ -1,8 +1,7 @@
 ########################################
 # 環境変数
 ########################################
-if [ ghq ];then
-  export DOTFILES_ROOT=`ghq root`/github.com/kowwwwji/dotfiles
+if [ ghq ];then export DOTFILES_ROOT=`ghq root`/github.com/kowwwwji/dotfiles
 fi
 export LANG=ja_JP.UTF-8
 export LC_CTYPE=en_US.UTF-8
@@ -23,6 +22,7 @@ autoload -Uz select-word-style && select-word-style default
 # / も区切りと扱うので、^W でディレクトリ１つ分を削除できる
 zstyle ':zle:*' word-chars " /=;@:{},|"
 zstyle ':zle:*' word-style unspecified
+
 
 ########################################
 # オプション
@@ -92,16 +92,40 @@ fi
 # PATHの重複を削除
 typeset -U PATH
 
-eval "$(direnv hook zsh)"
 export MANPAGER='nvim +Man!'
 
-source /opt/homebrew/opt/asdf/libexec/asdf.sh
-NODE_BIN=$(asdf which node)
-source ~/.asdf/plugins/java/set-java-home.zsh
+# HomeBrew 関連
+if type brew &>/dev/null
+then
+  FPATH="$(brew --prefix)/share/zsh/site-functions:${FPATH}"
 
-POWERLEVEL9K_DISABLE_CONFIGURATION_WIZARD=true
+  autoload -Uz compinit
+  compinit
 
-eval "$(sheldon source)"
+  eval "$(direnv hook zsh)"
+
+  source /opt/homebrew/opt/asdf/libexec/asdf.sh
+  NODE_BIN=$(asdf which node)
+  source ~/.asdf/plugins/java/set-java-home.zsh
+
+  # Sheldon関連
+  eval "$(sheldon source)"
+  POWERLEVEL9K_DISABLE_CONFIGURATION_WIZARD=true
+  # zsh-autocompleteの設定
+  LISTMAX=1000
+  zstyle ":completion:*:commands" rehash 1
+  zstyle '*:compinit' arguments -D -i -u -C -w
+  bindkey '\t' menu-complete "$terminfo[kcbt]" reverse-menu-complete
+  bindkey '\t' menu-select "$terminfo[kcbt]" menu-select
+  # bindkey -M menuselect '\t' menu-complete "$terminfo[kcbt]" reverse-menu-complete
+  # all Tab widgets
+  zstyle ':autocomplete:*complete*:*' insert-unambiguous yes
+  # all history widgets
+  zstyle ':autocomplete:*history*:*' insert-unambiguous yes
+  zstyle ':autocomplete:*' add-space executables aliases functions builtin
+
+fi
+
 
 # デバッグ用
 # if (which zprof > /dev/null 2>&1) ;then

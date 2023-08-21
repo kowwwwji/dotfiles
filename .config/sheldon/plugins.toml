@@ -14,24 +14,14 @@ shell = "zsh"
 
 [plugins]
 
-# For example:
-#
-# [plugins.base16]
-# github = "chriskempson/base16-shell"
-
-[plugins.completions]
-github="zsh-users/zsh-completions"
-
-[plugins.autosuggestions]
-github="zsh-users/zsh-autosuggestions"
-
 [plugins.zsh-256color]
-github="chrissicool/zsh-256color"
-
+github = "chrissicool/zsh-256color"
 [plugins.zsh-syntax-highlighting]
-github="zsh-users/zsh-syntax-highlighting"
-
+github = "zsh-users/zsh-syntax-highlighting"
 [plugins.powerlevel10k]
-github="romkatv/powerlevel10k"
+github = "romkatv/powerlevel10k"
 
-
+[plugins.autocomplete]
+github = "marlonrichert/zsh-autocomplete"
+[plugins.autosuggestions]
+github = "zsh-users/zsh-autosuggestions"
