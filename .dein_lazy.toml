@@ -1,4 +1,4 @@
- # TODO has python3 is not work
+ # FIX: has python3 is not work
   [[plugins]]
   repo = 'SirVer/ultisnips'
   if = 'has("python3")'
