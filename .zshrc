@@ -25,11 +25,6 @@ zstyle ':zle:*' word-chars " /=;@:{},|"
 zstyle ':zle:*' word-style unspecified
 
 ########################################
-# プロンプト
-########################################
-eval "$(starship init zsh)"
-
-########################################
 # オプション
 ########################################
 setopt print_eight_bit      # 日本語ファイル名を表示可能にする
@@ -103,6 +98,10 @@ export MANPAGER='nvim +Man!'
 source /opt/homebrew/opt/asdf/libexec/asdf.sh
 NODE_BIN=$(asdf which node)
 source ~/.asdf/plugins/java/set-java-home.zsh
+
+POWERLEVEL9K_DISABLE_CONFIGURATION_WIZARD=true
+
+eval "$(sheldon source)"
 
 # デバッグ用
 # if (which zprof > /dev/null 2>&1) ;then

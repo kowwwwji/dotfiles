@@ -1,7 +1,8 @@
 .DS_Store
+.config/.gitconfig.local
+.git
 .tags
-
 .zsh/.zsh_history
 .zsh/local.zsh
-.config/.gitconfig.local
 iterm/com.googlecode.iterm2.plist
+.config/nvim/lazy-lock.json
