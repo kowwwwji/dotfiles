@@ -31,5 +31,10 @@ return {
         },
       },
     },
+    window = {
+      mappings = {
+        ["<C-v>"] = "open_vsplit",
+      },
+    },
   },
 }
