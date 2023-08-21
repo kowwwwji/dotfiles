@@ -20,6 +20,7 @@ return {
     { "<leader>E", "<leader>fE", desc = "Explorer NeoTree (cwd)", remap = true },
   },
   opts = {
+    close_if_last_window = true,
     filesystem = {
       filtered_items = {
         hide_dotfiles = false,
