@@ -104,7 +104,7 @@ then
 
   eval "$(direnv hook zsh)"
 
-  source /opt/homebrew/opt/asdf/libexec/asdf.sh
+  source $(brew --prefix)/opt/asdf/libexec/asdf.sh
   NODE_BIN=$(asdf which node)
   source ~/.asdf/plugins/java/set-java-home.zsh
 
