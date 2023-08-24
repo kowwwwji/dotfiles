@@ -112,17 +112,19 @@ then
   eval "$(sheldon source)"
   POWERLEVEL9K_DISABLE_CONFIGURATION_WIZARD=true
   # zsh-autocompleteの設定
-  LISTMAX=1000
+  LISTMAX=1000 # completionが多すぎるときに出る確認メッセージを出さないようにしている
   zstyle ":completion:*:commands" rehash 1
   zstyle '*:compinit' arguments -D -i -u -C -w
   bindkey '\t' menu-complete "$terminfo[kcbt]" reverse-menu-complete
   bindkey '\t' menu-select "$terminfo[kcbt]" menu-select
-  # bindkey -M menuselect '\t' menu-complete "$terminfo[kcbt]" reverse-menu-complete
+  bindkey -M menuselect '\t' menu-complete "$terminfo[kcbt]" reverse-menu-complete
   # all Tab widgets
   zstyle ':autocomplete:*complete*:*' insert-unambiguous yes
   # all history widgets
   zstyle ':autocomplete:*history*:*' insert-unambiguous yes
   zstyle ':autocomplete:*' add-space executables aliases functions builtin
+  # History menu.
+  zstyle ':autocomplete:history-search-backward:*' list-lines 16
 
 fi
 
