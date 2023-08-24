@@ -1,6 +1,6 @@
 return {
   "skanehira/translate.vim",
-  opt = {
+  opts = {
     translate_source = "en",
     translate_target = "ja",
     -- if you want use popup window, set value 1
