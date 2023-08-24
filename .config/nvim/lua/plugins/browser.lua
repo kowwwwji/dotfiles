@@ -4,7 +4,7 @@ return {
     event = "VimEnter",
     keys = {
       {
-        "gx",
+        "<Leader>o",
         function()
           return "<Plug>(openbrowser-smart-search)"
         end,
@@ -19,7 +19,7 @@ return {
     event = "VimEnter",
     keys = {
       {
-        "<leader>gx",
+        "<leader>gp",
         ":OpenGithubFile<CR>",
         silent = true,
       },
@@ -31,7 +31,12 @@ return {
     ft = { "md", "markdown" },
     lazy = true,
     keys = {
-      vim.keymap.set("n", "<Leader>p", ":PrevimOpen<CR>"),
+      {
+        "<Leader>p",
+        ":PrevimOpen<CR>",
+        mode = "n",
+        silent = true,
+      },
     },
   },
   {
