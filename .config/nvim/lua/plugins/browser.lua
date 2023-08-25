@@ -27,7 +27,6 @@ return {
   },
   {
     "previm/previm",
-    dependencies = "tyru/open-browser.vim",
     ft = { "md", "markdown" },
     lazy = true,
     keys = {
