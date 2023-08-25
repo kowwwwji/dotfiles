@@ -4,6 +4,3 @@
 
 vim.opt.wrap = true
 
--- Filetype settings
-vim.cmd("autocmd BufNewFile,BufRead *.dockerignore setfiletype gitignore")
-vim.cmd("autocmd BufNewFile,BufRead *.env.* setfiletype bash")
