@@ -31,7 +31,11 @@ return {
     ft = { "md", "markdown" },
     lazy = true,
     keys = {
-      vim.keymap.set("n", "<Leader>p", ":PrevimOpen<CR>"),
+      {
+        "<Leader>p",
+        ":PrevimOpen<CR>",
+        silent = true,
+      },
     },
   },
   {
