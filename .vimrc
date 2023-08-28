@@ -166,7 +166,7 @@ endif
 "}}}
 
 " neovim関連{{{
-if has('nvim')
+" if has('nvim')
   set guicursor=n:blinkon10,i-ci:ver50-blinkon10
   " " pyenvで指定したpythonを使用する
   " let $PATH = "~/.pyenv/shims:".$PATH
@@ -203,8 +203,8 @@ if has('nvim')
    call dein#install()
   endif
   "" 補完のポップアップメニューの色 neovim Only
-  set pumblend=10
-endif
+  " set pumblend=10
+" endif
 
 " deinの処理後でないと機能しない{{{
 filetype plugin indent on
