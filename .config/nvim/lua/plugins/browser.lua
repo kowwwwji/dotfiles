@@ -4,12 +4,13 @@ return {
     event = "VimEnter",
     keys = {
       {
-        "gx",
+        "<Leader>o",
         function()
           return "<Plug>(openbrowser-smart-search)"
         end,
         expr = true,
         mode = { "n", "v" },
+        desc = "Search cursol/selection words in web",
       },
     },
   },
@@ -19,7 +20,7 @@ return {
     event = "VimEnter",
     keys = {
       {
-        "<leader>gx",
+        "<leader>gp",
         ":OpenGithubFile<CR>",
         silent = true,
       },
@@ -27,14 +28,15 @@ return {
   },
   {
     "previm/previm",
-    dependencies = "tyru/open-browser.vim",
     ft = { "md", "markdown" },
     lazy = true,
     keys = {
       {
         "<Leader>p",
         ":PrevimOpen<CR>",
+        mode = "n",
         silent = true,
+        desc = "Preview markdown",
       },
     },
   },
