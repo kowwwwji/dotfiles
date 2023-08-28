@@ -1,25 +1,5 @@
-local telescope = require("telescope")
 local actions = require("telescope.actions")
-local grep_args =
-  { "--color=never", "--no-heading", "--with-filename", "--line-number", "--column", "--smart-case", "--hidden" }
-
-telescope.setup({
-  pickers = {
-    find_files = {
-      hidden = true,
-    },
-    live_grep = {
-      additional_args = function(opts)
-        return grep_args
-      end,
-    },
-    grep_string = {
-      additional_args = function(opts)
-        return grep_args
-      end,
-    },
-  },
-})
+local grep_args = { "--color=never", "--no-heading", "--line-number", "--column", "--smart-case", "--hidden" }
 
 return {
   "nvim-telescope/telescope.nvim",
@@ -67,6 +47,21 @@ return {
         i = {
           ["<esc>"] = actions.close,
         },
+      },
+    },
+    pickers = {
+      find_files = {
+        hidden = true,
+      },
+      live_grep = {
+        additional_args = function(opts)
+          return grep_args
+        end,
+      },
+      grep_string = {
+        additional_args = function(opts)
+          return grep_args
+        end,
       },
     },
   },
