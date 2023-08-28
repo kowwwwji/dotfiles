@@ -1,7 +1,8 @@
 ########################################
 # 環境変数
 ########################################
-if [ ghq ];then export DOTFILES_ROOT=`ghq root`/github.com/kowwwwji/dotfiles
+if [ ghq ];then
+  export DOTFILES_ROOT=`ghq root`/github.com/kowwwwji/dotfiles
 fi
 export LANG=ja_JP.UTF-8
 export LC_CTYPE=en_US.UTF-8
@@ -70,26 +71,15 @@ path=(/usr/local/bin(N-/) /usr/local/sbin(N-/) $path)
 # 独自スクリプト読み込み
 path=(~/.scripts(N-/) $path)
 
-if ! type brew &> /dev/null; then
-  echo "`brew` をインストールします。"
-  /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
-
-  read -p "個人のPCですか? (y/N): " yn
-  if [[ $yn = [yY] ]]; then
-    cd ./Brewfile && brew bundle
-  else
-    cd ./Brewfile/dev && brew bundle
-  fi
-fi
-
 ZSH_HOME="${HOME}/.zsh"
 
 # 自作の.zshファイルを読み込み
 if [ -d $ZSH_HOME -a -r $ZSH_HOME -a -x $ZSH_HOME ]; then
   for i in $ZSH_HOME/*; do
-    # echo $i ## for Debug
-    [[ ${i##*/} = *.zsh ]] &&
-      [ \( -f $i -o -h $i \) -a -r $i ] && source $i
+    if [[ ${i##*/} = *.zsh ]] && [ \( -f $i -o -h $i \) -a -r $i ]; then
+      # echo "${i} を読み込みます。"
+      source $i
+    fi
   done
 fi
 
