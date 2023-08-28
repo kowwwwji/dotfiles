@@ -70,8 +70,21 @@ path=(/usr/local/bin(N-/) /usr/local/sbin(N-/) $path)
 # 独自スクリプト読み込み
 path=(~/.scripts(N-/) $path)
 
+if ! type brew &> /dev/null; then
+  echo "`brew` をインストールします。"
+  /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+
+  read -p "個人のPCですか? (y/N): " yn
+  if [[ $yn = [yY] ]]; then
+    cd ./Brewfile && brew bundle
+  else
+    cd ./Brewfile/dev && brew bundle
+  fi
+fi
+
 ZSH_HOME="${HOME}/.zsh"
 
+# 自作の.zshファイルを読み込み
 if [ -d $ZSH_HOME -a -r $ZSH_HOME -a -x $ZSH_HOME ]; then
   for i in $ZSH_HOME/*; do
     # echo $i ## for Debug
@@ -93,40 +106,6 @@ fi
 typeset -U PATH
 
 export MANPAGER='nvim +Man!'
-
-# HomeBrew 関連
-if type brew &>/dev/null
-then
-  FPATH="$(brew --prefix)/share/zsh/site-functions:${FPATH}"
-
-  autoload -Uz compinit
-  compinit
-
-  eval "$(direnv hook zsh)"
-
-  source $(brew --prefix)/opt/asdf/libexec/asdf.sh
-  NODE_BIN=$(asdf which node)
-  source ~/.asdf/plugins/java/set-java-home.zsh
-
-  # Sheldon関連
-  eval "$(sheldon source)"
-  POWERLEVEL9K_DISABLE_CONFIGURATION_WIZARD=true
-  # zsh-autocompleteの設定
-  LISTMAX=1000 # completionが多すぎるときに出る確認メッセージを出さないようにしている
-  zstyle ":completion:*:commands" rehash 1
-  zstyle '*:compinit' arguments -D -i -u -C -w
-  bindkey '\t' menu-complete "$terminfo[kcbt]" reverse-menu-complete
-  bindkey '\t' menu-select "$terminfo[kcbt]" menu-select
-  bindkey -M menuselect '\t' menu-complete "$terminfo[kcbt]" reverse-menu-complete
-  # all Tab widgets
-  zstyle ':autocomplete:*complete*:*' insert-unambiguous yes
-  # all history widgets
-  zstyle ':autocomplete:*history*:*' insert-unambiguous yes
-  zstyle ':autocomplete:*' add-space executables aliases functions builtin
-  # History menu.
-  zstyle ':autocomplete:history-search-backward:*' list-lines 16
-
-fi
 
 
 # デバッグ用
