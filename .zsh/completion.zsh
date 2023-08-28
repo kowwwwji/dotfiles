@@ -3,7 +3,7 @@
 #######################################
 # zsh-completionsを追加 *fpathはzshが自動で読み込んでくれるパス
 if type brew &>/dev/null; then
-  fpath=($(brew --prefix)/share/zsh-completions(N-/) $fpath)
+  fpath=($(brew --prefix)/share/zsh/site-functions(N-/) $fpath)
 fi
 
 # 補完機能を有効にする
