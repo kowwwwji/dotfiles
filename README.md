@@ -49,14 +49,12 @@ sudo shutdown -r now
 ### アプリの初期化と設定
 
 ```zsh
-tmux # [ctrl + I]でtmux pluginをインストール
-vim # neovim関連のインストール
+tmux # [ctrl+\ + I]でtmux pluginをインストール
+nv # neovim関連のインストール
 
-open -a hyperSwitch
 open -a Raycast # Advanced > Import/Export
 open -a BetterTouchTool
 open -a karabiner-elements
-cp ./.config/karabiner/karabiner.json ~/.config/karabiner/
 ```
 
 #### itermの設定
@@ -72,7 +70,7 @@ cp ./.config/karabiner/karabiner.json ~/.config/karabiner/
 gh auth login
 
 # sshの設定
-vim ~/.ssh/config
+nv ~/.ssh/config
 ssh-keygen -t rsa # ~/.ssh配下に作成する
 ```
 
@@ -89,6 +87,8 @@ ssh-keygen -t rsa # ~/.ssh配下に作成する
 ### Python
 
 https://qiita.com/sigwyg/items/41630f8754c2028a7a9f
+
+<!-- TODO:  asdfの設定をする。-->
 
 ```zsh
 VER_2=2.7.18
@@ -115,10 +115,8 @@ pyenv which python
 
 ```zsh
 go get github.com/mattn/memo
-vim ./config/memo/config.toml # 設定変更する必要あり
+nv ./config/memo/config.toml # 設定変更する必要あり
 ```
-
-### coc.nvimの設定
 
 ### 手動インストール
 
