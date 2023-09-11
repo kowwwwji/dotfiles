@@ -53,6 +53,12 @@ sudo shutdown -r now
   - Appleデフォルトの日本語ローマ字入力の入力モードの英字をチェック
   - 日本語ローマ字入力とABCを削除
 
+#### itermの設定
+
+- Preferences > Gerenal > Preferences
+- `Load preferences from a custmom folder or URL`
+  - ./iterm/を設定
+
 ### アプリの初期化と設定
 
 ```zsh
@@ -63,12 +69,6 @@ open -a Raycast # Advanced > Import/Export
 open -a BetterTouchTool
 open -a karabiner-elements
 ```
-
-#### itermの設定
-
-- Preferences > Gerenal > Preferences
-- `Load preferences from a custmom folder or URL`
-  - ./iterm/を設定
 
 ### その他設定
 
