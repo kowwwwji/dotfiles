@@ -6,3 +6,4 @@
 .zsh/local.zsh
 iterm/com.googlecode.iterm2.plist
 .config/nvim/lazy-lock.json
+.config/nvim/lua/config/local.lua

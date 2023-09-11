@@ -1,6 +1,7 @@
 ########################################
 # 環境変数
 ########################################
+export PATH="/opt/homebrew/bin:$PATH"
 if [ ghq ];then
   export DOTFILES_ROOT=`ghq root`/github.com/kowwwwji/dotfiles
 fi

@@ -84,11 +84,11 @@ ssh-keygen -t rsa # ~/.ssh配下に作成する
 ## 環境特有の設定
 
 - 以下の作成/変更
+  - `~/.ssh/config`
   - `~/.config/git/.gitconfig.local`
   - `~/.zsh/local.zsh`
-  - `~/.vim/local.vim`
+  - `~/.vim/local.vim` or `~/.config/nvim/lua/config/local.lua`
     - `let g:github_enterprise_urls = ['https://example.com']`
-  - `~/.ssh/config`
 
 ## 各種言語の設定
 ### Python
