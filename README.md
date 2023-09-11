@@ -6,18 +6,21 @@ kowwwwji's DotFile & PC setup
 
 ### システム環境設定の変更1
 
-1. トラックパッドの`軌跡の速さ`を最大に
+1. トラックパッド
+    - `軌跡の速さ`を最大
+    - １本指タップを有効
 1. キーボード
-  - `キーのリピート`と`リピート入力認識までの時間`を最大に。
-  - F1F2をファンクションキーとして使用にチェック
-  - ショートカットのSpotlight検索を表示をOFF
+    - `キーのリピート`と`リピート入力認識までの時間`を最大
+    - F1F2をファンクションキーとして使用にチェック
+    - ショートカットのSpotlight検索を表示をOFF
+    - `次のウインドウを操作対象にする`のキーをOption+Tabに変更
 1. 音声入力のショートカットを`Fn`に
 1. メニューバーの表示
-  - Dockとメニューバー
-    - bluetooth ON
-  - バッテリー ON
-    - バッテリーの％表示
-  - Spotlight OFF
+    - Dockとメニューバー
+        - bluetooth ON
+    - バッテリー ON
+        - バッテリーの％表示
+    - Spotlight OFF
 
 ### Various Installs
 
@@ -35,8 +38,7 @@ bash init.sh # $HOMEへの適用
 
 chsh -s /bin/zsh
 ```
-
-```zsh
+```sh
 cd BrewFile && brew bundle # Application Install
 # 以下はログに表示されているものを実行している#####
 # fzfの初期化
@@ -49,19 +51,20 @@ sudo shutdown -r now
 #### システム環境設定の変更2
 
 - システム環境設定 > キーボード > 入力ソース
-  - Googleのひらがなと英数を追加
-  - Appleデフォルトの日本語ローマ字入力の入力モードの英字をチェック
-  - 日本語ローマ字入力とABCを削除
+    - Googleのひらがなと英数を追加
+    - Appleデフォルトの日本語ローマ字入力の入力モードの英字をチェック
+    - 日本語ローマ字入力とABCを削除
 
-#### itermの設定
+#### iTermの設定
 
 - Preferences > Gerenal > Preferences
 - `Load preferences from a custmom folder or URL`
-  - ./iterm/を設定
+    - ./iterm/を設定
+- Hotkeyが動かない場合は、PC再起動後に動くはず。
 
 ### アプリの初期化と設定
 
-```zsh
+```sh
 tmux # [ctrl+\ + I]でtmux pluginをインストール
 nv # neovim関連のインストール
 
@@ -72,55 +75,59 @@ open -a karabiner-elements
 
 ### その他設定
 
-```zsh
+```sh
 # githubの設定
 gh auth login
 
 # sshの設定
 nv ~/.ssh/config
-ssh-keygen -t rsa # ~/.ssh配下に作成する
-```
+ssh-keygen -t rsa # ~/.ssh配下に作成する ```
 
 ## 環境特有の設定
 
 - 以下の作成/変更
-  - `~/.ssh/config`
-  - `~/.config/git/.gitconfig.local`
-  - `~/.zsh/local.zsh`
-  - `~/.vim/local.vim` or `~/.config/nvim/lua/config/local.lua`
-    - `let g:github_enterprise_urls = ['https://example.com']`
+    - `~/.ssh/config`
+    - `~/.config/git/.gitconfig.local`
+    - `~/.zsh/local.zsh`
+    - `~/.vim/local.vim` or `~/.config/nvim/lua/config/local.lua`
+        - `let g:github_enterprise_urls = ['https://example.com']`
 
 ## 各種言語の設定
-### Python
 
-https://qiita.com/sigwyg/items/41630f8754c2028a7a9f
+### Install asdf plugin & lang
 
-<!-- TODO:  asdfの設定をする。-->
+```sh 
+ln -s ${DOTFILES_ROOT}.tool-versions ~/
+cut -d' ' -f1 .tool-versions | xargs -I{} asdf plugin add {}
+asdf list 
+asdf install
+```
 
-```zsh
-VER_2=2.7.18
-VER_3=3.10.5
+### Neovim Provider
 
-# python2環境
-pyenv install $VER_2
-pyenv virtualenv $VER_2 neovim-2
-pyenv activate neovim2
-pip2 install neovim
-pyenv which python
+```sh
+# node
+npm i -g neovim
+# ruby
+gem install neovim
 
-# python3環境
-pyenv install $VER_3
-pyenv virtualenv $VER_3 neovim-3
-pyenv activate neovim3
-pip install neovim
-pyenv which python
+# python
+mkdir ~/.poetry
+poetry new nv
+cd nvim
+poetry add Neovim
+
+# in neovim  `:che provider`
+
 ```
 
 ## その他
 
-### [memo commandを使用するとき](https://mattn.kaoriya.net/software/memo.htm)
+### memo commandを使用するとき
 
-```zsh
+https://mattn.kaoriya.net/software/memo.htm
+
+```sh
 go get github.com/mattn/memo
 nv ./config/memo/config.toml # 設定変更する必要あり
 ```

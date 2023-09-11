@@ -6,7 +6,7 @@ else
 fi
 
 if type asdf &>/dev/null; then
-  source $(brew --prefix)/opt/asdf/libexec/asdf.sh
+  source $(brew --prefix asdf)/libexec/asdf.sh
   NODE_BIN=$(asdf which node)
   source ~/.asdf/plugins/java/set-java-home.zsh
 else
