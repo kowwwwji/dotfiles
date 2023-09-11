@@ -33,6 +33,6 @@ zstyle ':completion:*:processes' command 'ps x -o pid,s,args'
 # fzf completion
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 export FZF_DEFAULT_OPTS='--height 40% --reverse --border'
-export FZF_DEFAULT_COMMAND='ag --hidden --ignore .git -g ""'
+export FZF_DEFAULT_COMMAND='rg --hidden --ignore .git -g ""'
 # bindkey '^S' fzf-file-widget
 
