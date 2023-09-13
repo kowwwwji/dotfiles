@@ -19,9 +19,6 @@ ln -nfs ${DOTFILES_ROOT}/.config/sheldon ${HOME}/.config/
 ln -nfs ${DOTFILES_ROOT}/.config/karabiner/karabiner.json ${HOME}/.config/karabiner/karabiner.json
 ln -nfs ${DOTFILES_ROOT}/.config/karabiner/assets/complex_modifications/ ${HOME}/.config/karabiner/assets/complex_modifications/
 
-# FIXME: linkだとagがうまく動かないのでcp
-# cp -f ${DOTFILES_ROOT}/.agignore ${HOME}/.agignore
-
 mkdir ${HOME}/.config/git/ && touch ${HOME}/.config/git/.gitconfig.local
 mkdir ${HOME}/.ssh && touch ${HOME}/.ssh/config
 

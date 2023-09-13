@@ -1,5 +1,5 @@
 command! -bang -nargs=? -complete=dir Files
-  \ call fzf#vim#files(<q-args>, fzf#vim#with_preview({'source': 'ag --hidden --ignore .git -g ""'}), <bang>0)
+  \ call fzf#vim#files(<q-args>, fzf#vim#with_preview({'source': 'rg --hidden --ignore .git -g ""'}), <bang>0)
 command! -bang -nargs=* Ag
   \ call fzf#vim#ag(<q-args>,
   \   '--hidden',
