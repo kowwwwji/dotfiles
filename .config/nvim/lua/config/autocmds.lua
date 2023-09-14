@@ -5,6 +5,7 @@
 -- Filetype settings
 vim.cmd("autocmd BufNewFile,BufRead *.dockerignore setfiletype gitignore")
 vim.cmd("autocmd BufNewFile,BufRead *.env.* setfiletype bash")
+vim.cmd("autocmd BufNewFile,BufRead *.sh setfiletype bash")
 
 -- helpを右側に開く
 vim.cmd("autocmd FileType help wincmd L")
