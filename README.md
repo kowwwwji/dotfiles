@@ -30,7 +30,7 @@ kowwwwji's DotFile & PC setup
 
 echo 'export PATH="/opt/homebrew/bin:$PATH"' >> ~/.bash_profile
 brew install ghq
-# Access Tokenを作る必要あり
+# Access Tokenを作る必要あり
 ghq get https://github.com/kowwwwji/dotfiles.git
 cd $(ghq root)/github.com/kowwwwji/dotfiles
 
@@ -63,6 +63,7 @@ sudo shutdown -r now
 - Hotkeyが動かない場合は、PC再起動後に動くはず。
 
 ### アプリの初期化と設定
+
 
 ```sh
 tmux # [ctrl+\ + I]でtmux pluginをインストール
