@@ -15,18 +15,6 @@ return {
     },
   },
   {
-    "tyru/open-browser-github.vim",
-    dependencies = "tyru/open-browser.vim",
-    event = "VimEnter",
-    keys = {
-      {
-        "<leader>gp",
-        ":OpenGithubFile<CR>",
-        silent = true,
-      },
-    },
-  },
-  {
     "previm/previm",
     ft = { "md", "markdown" },
     lazy = true,
@@ -41,8 +29,29 @@ return {
     },
   },
   {
-    "plasticboy/vim-markdown",
-    ft = { "md", "markdown" },
-    lazy = true,
+    "almo7aya/openingh.nvim",
+    keys = {
+      {
+        "<Leader>gr",
+        ":OpenInGHRepo <CR>",
+        mode = "n",
+        { silent = true, noremap = true },
+        desc = "OpenInGHRepo",
+      },
+      {
+        "<Leader>gf",
+        ":OpenInGHFile <CR>",
+        mode = "n",
+        { silent = true, noremap = true },
+        desc = "OpenInGHFile",
+      },
+      {
+        "<Leader>gf",
+        ":OpenInGHFileLines <CR>",
+        mode = "v",
+        { silent = true, noremap = true },
+        desc = "OpenInGHFileLines",
+      },
+    },
   },
 }
