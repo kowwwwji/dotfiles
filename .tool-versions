@@ -4,3 +4,4 @@ ruby 3.2.2
 golang 1.21.0
 java corretto-8.382.05.1
 poetry 1.6.1
+deno 1.39.0
