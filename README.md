@@ -38,12 +38,14 @@ bash init.sh # $HOMEへの適用
 
 chsh -s /bin/zsh
 ```
+
 ```sh
 cd BrewFile && brew bundle # Application Install
-# 以下はログに表示されているものを実行している#####
+######### 以下はログに表示されているものを実行している ################
 # fzfの初期化
-$(brew --prefix)/opt/fzf/install # Do you want to update your shell configuration files? はNoにする。
-###################################################
+# Do you want to update your shell configuration files? はNoにする。
+$(brew --prefix)/opt/fzf/install
+###########################################################
 sudo shutdown -r now
 
 ```
@@ -51,19 +53,18 @@ sudo shutdown -r now
 #### システム環境設定の変更2
 
 - システム環境設定 > キーボード > 入力ソース
-    - Googleのひらがなと英数を追加
-    - Appleデフォルトの日本語ローマ字入力の入力モードの英字をチェック
-    - 日本語ローマ字入力とABCを削除
+  - Googleのひらがなと英数を追加
+  - Appleデフォルトの日本語ローマ字入力の入力モードの英字をチェック
+  - 日本語ローマ字入力とABCを削除
 
 #### iTermの設定
 
 - Preferences > Gerenal > Preferences
 - `Load preferences from a custmom folder or URL`
-    - ./iterm/を設定
+  - ./iterm/を設定
 - Hotkeyが動かない場合は、PC再起動後に動くはず。
 
 ### アプリの初期化と設定
-
 
 ```sh
 tmux # [ctrl+\ + I]でtmux pluginをインストール
@@ -126,7 +127,7 @@ poetry add Neovim
 
 ### memo commandを使用するとき
 
-https://mattn.kaoriya.net/software/memo.htm
+[ここを参照](https://mattn.kaoriya.net/software/memo.htm)
 
 ```sh
 go get github.com/mattn/memo
