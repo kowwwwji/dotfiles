@@ -22,9 +22,11 @@ require("lazy").setup({
     -- { import = "lazyvim.plugins.extras.lang.typescript" },
 
     { import = "lazyvim.plugins.extras.dap.core" },
+    { import = "lazyvim.plugins.extras.dap.nlua" },
 
     -- INFO: Copilotを使用しない時はコメントアウトする
     { import = "lazyvim.plugins.extras.coding.copilot" },
+    { import = "lazyvim.plugins.extras.vscode" },
 
     { import = "plugins" },
   },
