@@ -58,8 +58,8 @@
 [diff]
   colorMoved = default
 [credential]
-	helper = /usr/local/share/gcm-core/git-credential-manager
+  helper = /usr/local/share/gcm-core/git-credential-manager
 [credential "https://dev.azure.com"]
-	useHttpPath = true
+  useHttpPath = true
 [credential "https://git-codecommit.ap-northeast-1.amazonaws.com"]
-	provider = generic
+  provider = generic
