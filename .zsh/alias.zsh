@@ -8,6 +8,10 @@ function ghqSearch(){
 }
 
 alias ll='ls -lha'
+# Make and change directory at once
+alias mkcd='_(){ mkdir -p $1; cd $1; }; _'
+# fast find
+alias ff='find . -name $1'
 alias nv=nvim
 alias dc=docker-compose
 alias re=rbenv
@@ -16,3 +20,10 @@ alias tf=terraform
 alias tm=tmux
 alias relogin='exec $SHELL -l'
 alias vg=vagrant
+
+# Npm alias
+alias np='npm'
+# Npm install alias
+alias npi='npm install'
+alias npis='npm install --save'
+alias npig='npm install -g'
