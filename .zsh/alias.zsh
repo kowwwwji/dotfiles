@@ -1,4 +1,5 @@
-alias lg=lazygit
+alias lzg=lazygit
+alias lzd=lazydocker
 alias g=gh
 # ローカルリポジトリに移動
 alias gs='ghqSearch'
@@ -13,7 +14,7 @@ alias mkcd='_(){ mkdir -p $1; cd $1; }; _'
 # fast find
 alias ff='find . -name $1'
 alias nv=nvim
-alias dc=docker-compose
+alias dc='docker compose'
 alias re=rbenv
 alias ar='function(){eval $(command assume-role $@);}'
 alias tf=terraform
@@ -23,7 +24,9 @@ alias vg=vagrant
 
 # Npm alias
 alias np='npm'
-# Npm install alias
 alias npi='npm install'
 alias npis='npm install --save'
 alias npig='npm install -g'
+alias nps='npm start'
+alias npd='npm run dev'
+alias npt='npm run test'
