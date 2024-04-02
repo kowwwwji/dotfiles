@@ -15,7 +15,7 @@ function dev(){
 }
 
 function pecoSelectTmuxSession(){
-  local session="$(tmux list-sessions | fzf | cut -d : -f 1)"
+  local session="$(tmux list-sessions | grep -v popup | fzf | cut -d : -f 1)"
   if [ -n "$session" ]; then
     BUFFER="tmux a -t $session"
     if [ -n "$TMUX" ]; then
