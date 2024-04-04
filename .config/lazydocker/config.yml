@@ -1,2 +1,8 @@
 gui:
   returnImmediately: true
+customCommands:
+  containers:
+    - name: sh
+      attach: true
+      command: 'docker exec -it {{ .Container.ID }} /bin/sh'
+      serviceNames: []
