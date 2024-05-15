@@ -51,6 +51,8 @@
   }; f"
 [pull]
   ff = only
+[fetch]
+  prune = true
 [color]
   ui = true
 [merge]
