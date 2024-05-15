@@ -165,47 +165,6 @@ if has('vim_starting') && dein#check_install()
 endif
 "}}}
 
-" neovim関連{{{
-" if has('nvim')
-  set guicursor=n:blinkon10,i-ci:ver50-blinkon10
-  " " pyenvで指定したpythonを使用する
-  " let $PATH = "~/.pyenv/shims:".$PATH
-
-  " ruby用
-  let g:ruby_host_prog = '~/.rbenv/shims/neovim-ruby-host'
-
-  " neovim用pythonの設定
-  " https://qiita.com/sigwyg/items/41630f8754c2028a7a9f
-  let g:python_host_prog = $PYENV_ROOT . '/versions/neovim-2/bin/python'
-  let g:python3_host_prog = $PYENV_ROOT . '/versions/neovim-3/bin/python'
-
-  " プラグインマネージャーの設定
-  let s:dein_dir = expand('~/.cache/dein')
-  let s:dein_repo_dir = s:dein_dir . '/repos/github.com/Shougo/dein.vim'
-
-  if !isdirectory(s:dein_repo_dir)
-    call system('git clone https://github.com/Shougo/dein.vim ' . shellescape(s:dein_repo_dir))
-  endif
-
-  execute 'set runtimepath^=' . s:dein_repo_dir
-
-  let s:toml = '~/.dein.toml'
-  let s:lazy_toml = '~/.dein_lazy.toml'
-  if dein#load_state(s:dein_dir)
-    call dein#begin(s:dein_dir)
-    call dein#load_toml(s:toml,      {'lazy': 0})
-    call dein#load_toml(s:lazy_toml, {'lazy': 1})
-    call dein#end()
-    call dein#save_state()
-  endif
-
-  if has('vim_starting') && dein#check_install()
-   call dein#install()
-  endif
-  "" 補完のポップアップメニューの色 neovim Only
-  " set pumblend=10
-" endif
-
 " deinの処理後でないと機能しない{{{
 filetype plugin indent on
 syntax enable
@@ -224,7 +183,6 @@ highlight EndOfBuffer ctermbg=NONE guibg=NONE
 
 "" colorscheme gruvbox用の設定
 highlight comment ctermfg=242 guifg=darkcyan
-"}}}
 
 "}}}
 
