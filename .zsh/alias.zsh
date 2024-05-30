@@ -30,3 +30,5 @@ alias npig='npm install -g'
 alias nps='npm start'
 alias npd='npm run dev'
 alias npt='npm run test'
+
+alias gc='gcloud'
