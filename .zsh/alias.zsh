@@ -28,6 +28,7 @@ alias npi='npm install'
 alias npis='npm install --save'
 alias npig='npm install -g'
 alias nps='npm start'
+alias npr='npm run'
 alias npd='npm run dev'
 alias npt='npm run test'
 
