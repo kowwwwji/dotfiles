@@ -8,3 +8,14 @@ vim.opt.whichwrap = "b,s,h,l,[,],<,>,~"
 
 -- helpを右側に出す
 vim.opt.splitright = true
+
+-- 不可視文字
+vim.opt.list = true
+vim.opt.listchars = {
+  tab = "»»",
+  trail = "-",
+  eol = "↲",
+  extends = "❯",
+  precedes = "❮",
+  nbsp = "%",
+}
