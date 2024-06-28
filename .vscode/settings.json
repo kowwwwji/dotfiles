@@ -34,8 +34,12 @@
   "vim.changeWordIncludesWhitespace": true,
   "vim.normalModeKeyBindings": [
     {
-      "before": [";"],
-      "after": [":"]
+      "before": [
+        ";"
+      ],
+      "after": [
+        ":"
+      ]
     }
   ],
   "vim.easymotionMarkerFontFamily": "Menlo, Monaco, 'Courier New', monospace",
@@ -51,7 +55,9 @@
   "terminal.integrated.rendererType": "dom",
   "workbench.iconTheme": "vscode-icons",
   "keyboard.dispatch": "keyCode",
-  "editor.rulers": [80],
+  "editor.rulers": [
+    80
+  ],
   "meta.comment": "Ruby用",
   "ruby.intellisense": false,
   "ruby.useBundler": true,
@@ -69,5 +75,6 @@
   "solargraph.useBundler": true,
   "solargraph.commandPath": "/Users/sakamotokouji/.rbenv/shims/solargraph",
   "solargraph.bundlerPath": "/Users/sakamotokouji/.rbenv/shims/bundle",
-  "solargraph.checkGemVersion": true
+  "solargraph.checkGemVersion": true,
+  "terminal.integrated.fontFamily": "Hack Nerd Font"
 }
