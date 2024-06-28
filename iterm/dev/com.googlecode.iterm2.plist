@@ -3192,7 +3192,7 @@
 	<key>TabStyle</key>
 	<integer>1</integer>
 	<key>TerminalMargin</key>
-	<integer>0</integer>
+	<integer>10</integer>
 	<key>TerminalVMargin</key>
 	<integer>0</integer>
 	<key>ToolbeltTools</key>
