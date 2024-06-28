@@ -2,7 +2,7 @@ gui:
   showBottomLine: false
   nerdFontsVersion: "3"
 os:
-  edit: 'nvim'
+  edit: "nvim"
 git:
   paging:
     colorArg: always
@@ -22,12 +22,12 @@ customCommands:
           - name: "fix"
             description: "A bug fix"
             value: "fix"
-          - name: "chore"
-            description: "Other changes that don't modify src or test files"
-            value: "chore"
           - name: "refactor"
             description: "A code change that neither fixes a bug nor adds a feature"
             value: "refactor"
+          - name: "chore"
+            description: "Other changes that don't modify src or test files"
+            value: "chore"
           - name: "docs"
             description: "Documentation only changes"
             value: "docs"
