@@ -1,4 +1,4 @@
-#!/bin/zsh -eu
+#!/bin/zsh -e
 
 DEFAULT_BRANCH=`git remote show origin | grep 'HEAD branch' | awk '{print $NF}'`;
 
@@ -33,6 +33,6 @@ git branch -r | grep $NEW_BRANCH || git push -u origin $NEW_BRANCH;
 # git branch -r | grep $NEW_BRANCH || echo "push branch";
 echo '✅ Success! Create remote branch';
 
-gh pr create -d -B ${BASE_BRANCH} -H ${NEW_BRANCH} \
+gh pr create -d
 
 echo '✅ Success! create draft branch';
