@@ -1,11 +1,13 @@
-memodir = "/Users/kowwwwji/Library/Mobile Documents/iCloud~md~obsidian/Documents/Obsidian Vault/Diary"
-memotemplate = "/Users/kowwwwji/.config/memo/template.txt"
-editor = "vim"
-column = 20
-selectcmd = "fzf"
-# grepcmd = "/Applications/Visual\\ Studio\\ Code.app/Contents/Resources/app/node_modules/vscode-ripgrep/bin/rg -n --no-heading -S ${PATTERN} ${FILES}"
-grepcmd = "grep -nH"
+# memodir = "${MEMO_DIR}"
+memodir = "~/memo"
+memotemplate = "~/.config/memo/template.txt"
 assetsdir = ""
-pluginsdir = "/Users/kowwwwji/.config/memo/plugins"
+pluginsdir = "~/.config/memo/plugins"
+# serveコマンドのテンプレートファイル
 templatedirfile = ""
 templatebodyfile = ""
+
+editor = "nvim"
+column = 20
+selectcmd = "fzf"
+grepcmd = "rg ${PATTERN} ${FILES}"
