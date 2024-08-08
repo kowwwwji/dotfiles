@@ -7,20 +7,20 @@ kowwwwji's DotFile & PC setup
 ### システム環境設定の変更1
 
 1. トラックパッド
-    - `軌跡の速さ`を最大
-    - １本指タップを有効
+   - `軌跡の速さ`を最大
+   - １本指タップを有効
 1. キーボード
-    - `キーのリピート`と`リピート入力認識までの時間`を最大
-    - F1F2をファンクションキーとして使用にチェック
-    - ショートカットのSpotlight検索を表示をOFF
-    - `次のウインドウを操作対象にする`のキーをOption+Tabに変更
+   - `キーのリピート`と`リピート入力認識までの時間`を最大
+   - F1F2をファンクションキーとして使用にチェック
+   - ショートカットのSpotlight検索を表示をOFF
+   - `次のウインドウを操作対象にする`のキーをOption+Tabに変更
 1. 音声入力のショートカットを`Fn`に
 1. メニューバーの表示
-    - Dockとメニューバー
-        - bluetooth ON
-    - バッテリー ON
-        - バッテリーの％表示
-    - Spotlight OFF
+   - Dockとメニューバー
+     - bluetooth ON
+   - バッテリー ON
+     - バッテリーの％表示
+   - Spotlight OFF
 
 ### Various Installs
 
@@ -83,25 +83,26 @@ gh auth login
 
 # sshの設定
 nv ~/.ssh/config
-ssh-keygen -t rsa # ~/.ssh配下に作成する ```
+ssh-keygen -t rsa # ~/.ssh配下に作成する
+```
 
 ## 環境特有の設定
 
 - 以下の作成/変更
-    - `~/.ssh/config`
-    - `~/.config/git/.gitconfig.local`
-    - `~/.zsh/local.zsh`
-    - `~/.vim/local.vim` or `~/.config/nvim/lua/config/local.lua`
-        - `let g:github_enterprise_urls = ['https://example.com']`
+  - `~/.ssh/config`
+  - `~/.config/git/.gitconfig.local`
+  - `~/.zsh/local.zsh`
+  - `~/.vim/local.vim` or `~/.config/nvim/lua/config/local.lua`
+    - `let g:github_enterprise_urls = ['https://example.com']`
 
 ## 各種言語の設定
 
 ### Install asdf plugin & lang
 
-```sh 
+```sh
 ln -s ${DOTFILES_ROOT}.tool-versions ~/
 cut -d' ' -f1 .tool-versions | xargs -I{} asdf plugin add {}
-asdf list 
+asdf list
 asdf install
 ```
 
