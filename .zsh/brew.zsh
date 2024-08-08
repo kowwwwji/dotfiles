@@ -9,6 +9,9 @@ if type asdf &>/dev/null; then
   source $(brew --prefix asdf)/libexec/asdf.sh
   NODE_BIN=$(asdf which node)
   source ~/.asdf/plugins/java/set-java-home.zsh
+
+  # golang
+  export ASDF_GOLANG_MOD_VERSION_ENABLED=true
 else
   $NOT_INSTALL_MODULE+=", asdf"
 fi
