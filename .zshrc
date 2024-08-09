@@ -98,6 +98,7 @@ typeset -U PATH
 
 export MANPAGER='nvim +Man!'
 
+export MEMO_DIR="${HOME}/memo"
 
 # デバッグ用
 # if (which zprof > /dev/null 2>&1) ;then
