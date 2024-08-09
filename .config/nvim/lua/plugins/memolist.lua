@@ -11,6 +11,7 @@ return {
         { silent = true, noremap = true },
         desc = "Memo Grep",
       },
+      { "<Leader>mt", ":e ~/memo/todo.md<CR>", mode = "n", { silent = true, noremap = true }, desc = "Open ToDo.md" },
     },
     config = function()
       vim.g.memolist_memo_suffix = "md"
