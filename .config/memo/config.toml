@@ -1,5 +1,5 @@
-# memodir = "${MEMO_DIR}"
-memodir = "~/memo"
+# ↓は{}で囲むと変数が展開されない
+memodir = "$MEMO_DIR"
 memotemplate = "~/.config/memo/template.txt"
 assetsdir = ""
 pluginsdir = "~/.config/memo/plugins"

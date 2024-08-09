@@ -15,20 +15,17 @@ return {
     config = function()
       vim.g.memolist_memo_suffix = "md"
       vim.g.memolist_fzf = 1
-      -- vim.g.memolist_path = vim.env.MEMO_DIR
       vim.g.memolist_path = "~/memo"
       vim.g.memolist_template_dir_path = "~/.config/memo/template.txt"
     end,
   },
   {
-    {
-      "delphinus/telescope-memo.nvim",
-      requires = {
-        "nvim-telescope/telescope.nvim",
-      },
-      config = function()
-        require("telescope").load_extension("memo")
-      end,
+    "delphinus/telescope-memo.nvim",
+    requires = {
+      "nvim-telescope/telescope.nvim",
     },
+    config = function()
+      require("telescope").load_extension("memo")
+    end,
   },
 }
