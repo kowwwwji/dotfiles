@@ -1,11 +1,12 @@
 return {
   "rcarriga/nvim-notify",
   keys = {
-    {
-      "<leader>sna",
-      function()
-        require("telescope").extensions.notify.notify()
-      end,
-    },
+    -- {
+    --   "<leader>sna",
+    --   desc = "Noice All",
+    --   function()
+    --     require("telescope").extensions.notify.notify()
+    --   end,
+    -- },
   },
 }
