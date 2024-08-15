@@ -1,0 +1,2 @@
+# memoコマンドを使用するときに設定する。
+export MEMO_DIR="${HOME}/memo"
