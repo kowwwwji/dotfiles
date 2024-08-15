@@ -3,15 +3,21 @@ return {
   keys = {
     {
       mode = { "n", "v" },
-      "<Leader>h",
-      ":Translate<CR>",
-      desc = "Translate English",
+      "<Leader>t",
+      -- TODO: iconを設定したい
+      desc = "Translate",
     },
     {
       mode = { "n", "v" },
-      "<Leader>H",
+      "<Leader>te",
+      ":Translate<CR>",
+      desc = "English => Japanese",
+    },
+    {
+      mode = { "n", "v" },
+      "<Leader>tj",
       ":Translate!<CR>",
-      desc = "Translate Japanese",
+      desc = "Japanese => English",
     },
   },
   opts = {
