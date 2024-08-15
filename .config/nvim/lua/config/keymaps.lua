@@ -6,7 +6,7 @@ vim.keymap.set("n", ";", ":")
 vim.keymap.set("n", ":", ";")
 
 -- Buffer Delete Shortcut
-vim.keymap.set("n", "q", ":bd<CR>", { silent = true })
+vim.keymap.set("n", "q", LazyVim.ui.bufremove, { silent = true })
 
 -- move line
 -- Option + J/K
