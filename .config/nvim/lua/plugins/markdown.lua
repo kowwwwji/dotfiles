@@ -9,7 +9,7 @@ return {
     ft = { "markdown", "markdown.mdx", "md" },
     keys = {
       {
-        "¬", -- option + L
+        "≈", -- option + x
         "<cmd>lua require('markdown-toggle').checkbox()<CR>",
         mode = { "n", "v" },
         { silent = true, noremap = true },
