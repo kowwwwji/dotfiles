@@ -1,6 +1,6 @@
 # ↓は{}で囲むと変数が展開されない
 memodir = "$MEMO_DIR"
-memotemplate = "~/.config/memo/template.md"
+memotemplate = "$DOTFILES_ROOT/.template/memo/md.txt"
 assetsdir = ""
 pluginsdir = "~/.config/memo/plugins"
 # serveコマンドのテンプレートファイル
