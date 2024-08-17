@@ -14,8 +14,6 @@ require("lazy").setup({
     { import = "lazyvim.plugins.extras.lang.json" },
     { import = "lazyvim.plugins.extras.lang.python" },
     { import = "lazyvim.plugins.extras.lang.markdown" },
-    -- FIXME: lazyvimのmarkdown extraの中で↓だけうまく動かないから使えないようにしている
-    { "lukas-reineke/headlines.nvim", enabled = false },
 
     { import = "lazyvim.plugins.extras.lang.docker" },
     { import = "lazyvim.plugins.extras.lang.python" },
