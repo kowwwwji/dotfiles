@@ -14,7 +14,6 @@ mas "LINE", id: 539883307
 mas "Kindle", id: 405399194
 mas "Keynote", id: 409183694
 mas "GarageBand", id: 682658836
-mas "1Password 7", id: 1333542190
 cask "visual-studio-code"
 cask "vagrant"
 cask "steam"
@@ -22,6 +21,7 @@ cask "slack"
 cask "skype"
 cask "raycast"
 cask "pgadmin4"
+cask "orbstack"
 cask "mongodb-compass"
 cask "keyboardcleantool"
 cask "karabiner-elements"
@@ -40,6 +40,7 @@ cask "bettertouchtool"
 cask "appcleaner"
 cask "amazon-photos"
 cask "adobe-creative-cloud"
+cask "1password-cli"
 brew "zsh-completions"
 brew "zsh"
 brew "yarn-completion"
