@@ -1,3 +1,8 @@
+local todoCmd = "e ~/memo/todo.md"
+
+vim.api.nvim_create_user_command("Todo", function()
+  vim.cmd(todoCmd)
+end, { nargs = 0 })
 return {
   {
     "glidenote/memolist.vim",
@@ -13,7 +18,7 @@ return {
         { silent = true, noremap = true },
         desc = "Grep",
       },
-      { "<Leader>mt", ":e ~/memo/todo.md<CR>", mode = "n", { silent = true, noremap = true }, desc = "Open todo.md" },
+      { "<Leader>mt", ":" .. todoCmd .. "<CR>", mode = "n", { silent = true, noremap = true }, desc = "Open todo.md" },
     },
     config = function()
       vim.g.memolist_memo_suffix = "md"
