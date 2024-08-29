@@ -27,10 +27,8 @@ vim.cmd("map ✠ <S-CR>")
 vim.keymap.set("n", "<CR>", "zo<CR>", { noremap = true })
 vim.keymap.set("n", "<S-CR>", "zc<CR>", { noremap = true })
 
--- TODO: Command mode で選択する。
--- vim.keymap.set("c", "<C-h>", "<Left>")
--- vim.keymap.set("c", "<C-l>", "<Right>")
--- vim.keymap.set("c", "<C-k>", "<Up>")
--- vim.keymap.set("c", "<C-j>", "<Down>")
--- vim.keymap.set("c", "<C-a>", "<Home>")
--- vim.keymap.set("c", "<C-e>", "<End>")
+-- Command mode でのカーソル移動
+vim.keymap.set("c", "<C-h>", "<Left>")
+vim.keymap.set("c", "<C-l>", "<Right>")
+vim.keymap.set("c", "<C-a>", "<Home>")
+vim.keymap.set("c", "<C-e>", "<End>")
