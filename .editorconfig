@@ -8,5 +8,11 @@ insert_final_newline = true
 indent_style = space
 indent_size = 2
 
-[*.{html,css}]
-indent_size = 4
+[*.{xml,java}]
+indent_style = tab
+
+[*.{md,markdown,mdx}]
+trim_trailing_whitespace = false
+
+[Makefile]
+indent_style = tab
