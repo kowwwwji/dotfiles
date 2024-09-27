@@ -57,6 +57,7 @@
   ui = true
 [merge]
   conflictstyle = diff3
+  ff = false
 [diff]
   colorMoved = default
 [credential]
