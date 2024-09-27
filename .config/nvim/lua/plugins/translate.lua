@@ -3,19 +3,19 @@ return {
   keys = {
     {
       mode = { "n", "v" },
-      "<Leader>t",
+      "<Leader>h",
       -- TODO: iconを設定したい
       desc = "Translate",
     },
     {
       mode = { "n", "v" },
-      "<Leader>te",
+      "<Leader>he",
       ":Translate<CR>",
       desc = "English => Japanese",
     },
     {
       mode = { "n", "v" },
-      "<Leader>tj",
+      "<Leader>hj",
       ":Translate!<CR>",
       desc = "Japanese => English",
     },
