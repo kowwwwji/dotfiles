@@ -45,7 +45,8 @@ return {
       prompt_position = "top",
       mappings = {
         i = {
-          ["<esc>"] = actions.close,
+          -- InsertModeでもctrl+cで終了できる
+          -- ["<esc>"] = actions.close,
         },
       },
     },
