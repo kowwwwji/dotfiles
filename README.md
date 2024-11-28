@@ -29,6 +29,8 @@ kowwwwji's DotFile & PC setup
 /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install.sh)"
 
 echo 'export PATH="/opt/homebrew/bin:$PATH"' >> ~/.bash_profile
+
+chsh -s /bin/bash
 brew install ghq
 # Access Tokenを作る必要あり
 ghq get https://github.com/kowwwwji/dotfiles.git
@@ -37,9 +39,11 @@ cd $(ghq root)/github.com/kowwwwji/dotfiles
 bash init.sh # $HOMEへの適用
 
 chsh -s /bin/zsh
+exit
 ```
 
 ```sh
+cd $(ghq root)/github.com/kowwwwji/dotfiles
 cd BrewFile && brew bundle # Application Install
 ######### 以下はログに表示されているものを実行している ################
 # fzfの初期化
