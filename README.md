@@ -43,13 +43,12 @@ exit
 ```
 
 ```sh
+# google imeで必要
+softwareupdate --install-rosetta
+
 cd $(ghq root)/github.com/kowwwwji/dotfiles
 cd BrewFile && brew bundle # Application Install
-######### 以下はログに表示されているものを実行している ################
-# fzfの初期化
-# Do you want to update your shell configuration files? はNoにする。
-$(brew --prefix)/opt/fzf/install
-###########################################################
+
 sudo shutdown -r now
 
 ```
