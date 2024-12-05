@@ -6,7 +6,9 @@ vim.keymap.set("n", ";", ":")
 vim.keymap.set("n", ":", ";")
 
 -- Buffer Delete Shortcut
-vim.keymap.set("n", "q", LazyVim.ui.bufremove, { silent = true })
+vim.keymap.set("n", "q", function()
+  Snacks.bufdelete()
+end, { silent = true })
 
 -- move line
 -- Option + J/K
