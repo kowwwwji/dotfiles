@@ -134,7 +134,7 @@ poetry add Neovim
 [ここを参照](https://mattn.kaoriya.net/software/memo.htm)
 
 ```sh
-go get github.com/mattn/memo
+go install github.com/mattn/memo@latest
 nv ./config/memo/config.toml # 設定変更する必要あり
 ```
 
