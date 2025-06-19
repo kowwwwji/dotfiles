@@ -129,13 +129,6 @@ poetry add Neovim
 
 ## その他
 
-### memo commandを使用するとき
-
-[ここを参照](https://mattn.kaoriya.net/software/memo.htm)
-
-```sh
-go install github.com/mattn/memo@latest
-nv ./config/memo/config.toml # 設定変更する必要あり
 ```
 
 ### 手動インストール

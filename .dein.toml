@@ -1,119 +1,119 @@
-  [[plugins]]
-  repo = 'Shougo/dein.vim'
+[[plugins]]
+repo = 'Shougo/dein.vim'
 
 # ヘルプ日本語化
-  [[plugins]]
-  repo = 'vim-jp/vimdoc-ja'
+[[plugins]]
+repo = 'vim-jp/vimdoc-ja'
 
-  [[plugins]]
-  repo = 'tpope/vim-repeat'
+[[plugins]]
+repo = 'tpope/vim-repeat'
 
 # ColorShchemeをdeinで設定した場合、hightはvimrcにdeinの処理の後に書くこと
-  [[plugins]]
-  repo = 'morhetz/gruvbox'
-  hook_add = '''
+[[plugins]]
+repo = 'morhetz/gruvbox'
+hook_add = '''
     colorscheme gruvbox
   '''
 
 # 選択したコードを実行できる
-  [[plugins]]
-  repo = 'thinca/vim-quickrun'
-  hook_add = '''
+[[plugins]]
+repo = 'thinca/vim-quickrun'
+hook_add = '''
     source ${DOTFILES_ROOT}/.config/vim/plugins/vim-quickrun.vim
   '''
 
-  [[plugins]]
-  repo = 'editorconfig/editorconfig-vim'
+[[plugins]]
+repo = 'editorconfig/editorconfig-vim'
 
-  # [[plugins]]
-  # repo = 'majutsushi/tagbar'
-  # hook_add = '''
-  #   source ${DOTFILES_ROOT}/.config/vim/plugins/tagbar.vim
-  # '''
-  # [[plugins]]
-  # repo = 'liuchengxu/vista.vim'
-  # depends = ['coc.nvim', 'lightline.vim']
-  # hook_add = '''
-  #   let g:vista_icon_indent = ["╰─▸ ", "├─▸ "]
-  #   let g:vista_fzf_preview = ['right:50%']
-  #   let g:vista#renderer#enable_icon = 1
-  #   let g:vista#renderer#icons = {
-  #   \   "function": "\uf794",
-  #   \   "variable": "\uf71b",
-  #   \  }
-  #
-  #   nnoremap  <Leader>v :<C-u>Vista coc<CR>
-  #   nnoremap  <Leader>V :<C-u>Vista finder coc<CR>
-  # '''
+# [[plugins]]
+# repo = 'majutsushi/tagbar'
+# hook_add = '''
+#   source ${DOTFILES_ROOT}/.config/vim/plugins/tagbar.vim
+# '''
+# [[plugins]]
+# repo = 'liuchengxu/vista.vim'
+# depends = ['coc.nvim', 'lightline.vim']
+# hook_add = '''
+#   let g:vista_icon_indent = ["╰─▸ ", "├─▸ "]
+#   let g:vista_fzf_preview = ['right:50%']
+#   let g:vista#renderer#enable_icon = 1
+#   let g:vista#renderer#icons = {
+#   \   "function": "\uf794",
+#   \   "variable": "\uf71b",
+#   \  }
+#
+#   nnoremap  <Leader>v :<C-u>Vista coc<CR>
+#   nnoremap  <Leader>V :<C-u>Vista finder coc<CR>
+# '''
 
-  # [[plugins]]
-  # repo = 'itchyny/lightline.vim'
-  # depends = ['vim-fugitive']
-  # hook_add = '''
-  #   source ${DOTFILES_ROOT}/.config/vim/plugins/lightline.vim
-  # '''
+# [[plugins]]
+# repo = 'itchyny/lightline.vim'
+# depends = ['vim-fugitive']
+# hook_add = '''
+#   source ${DOTFILES_ROOT}/.config/vim/plugins/lightline.vim
+# '''
 
 # カッコ系
-  # FIX: leximaにhook_addを追加したらEnterを押したときにバグったからコメントアウト
-  # [[plugins]]
-  # repo = 'tpope/vim-endwise'
-  [[plugins]]
-  repo = 'tpope/vim-surround'
-  [[plugins]]
-  repo = 'cohama/lexima.vim'
-  hook_add = '''
+# FIX: leximaにhook_addを追加したらEnterを押したときにバグったからコメントアウト
+# [[plugins]]
+# repo = 'tpope/vim-endwise'
+[[plugins]]
+repo = 'tpope/vim-surround'
+[[plugins]]
+repo = 'cohama/lexima.vim'
+hook_add = '''
     source ${DOTFILES_ROOT}/.config/vim/plugins/lexima.vim
   '''
 
 # テーブル系
-  [[plugins]]
-  repo = 'godlygeek/tabular'
-  hook_add = '''
+[[plugins]]
+repo = 'godlygeek/tabular'
+hook_add = '''
     source ${DOTFILES_ROOT}/.config/vim/plugins/tabular.vim
   '''
-  [[plugins]]
-  repo = 'dhruvasagar/vim-table-mode'
+[[plugins]]
+repo = 'dhruvasagar/vim-table-mode'
 
 
 # 移動
-  [[plugins]]
-  repo = 'easymotion/vim-easymotion'
-  [[plugins]]
-  repo = 'haya14busa/vim-edgemotion'
+[[plugins]]
+repo = 'easymotion/vim-easymotion'
+[[plugins]]
+repo = 'haya14busa/vim-edgemotion'
 
 # サイドバー
-  [[plugins]]
-  repo = 'scrooloose/nerdtree'
-  hook_add = '''
+[[plugins]]
+repo = 'scrooloose/nerdtree'
+hook_add = '''
     source ${DOTFILES_ROOT}/.config/vim/plugins/nerdtree.vim
   '''
-  [[plugins]]
-  repo = 'ryanoasis/vim-devicons'
-  [[plugins]]
-  repo = 'Xuyuanp/nerdtree-git-plugin'
-  [[plugins]]
-  repo = 'tiagofumo/vim-nerdtree-syntax-highlight'
-  hook_add = 'let g:NERDTreeLimitedSyntax = 1'
+[[plugins]]
+repo = 'ryanoasis/vim-devicons'
+[[plugins]]
+repo = 'Xuyuanp/nerdtree-git-plugin'
+[[plugins]]
+repo = 'tiagofumo/vim-nerdtree-syntax-highlight'
+hook_add = 'let g:NERDTreeLimitedSyntax = 1'
 
-  [[plugins]]
-  repo = 'junegunn/fzf'
-  build = './install --all'
-  [[plugins]]
-  repo ='junegunn/fzf.vim'
-  depends = 'fzf'
-  hook_add = '''
+[[plugins]]
+repo = 'junegunn/fzf'
+build = './install --all'
+[[plugins]]
+repo = 'junegunn/fzf.vim'
+depends = 'fzf'
+hook_add = '''
     source ${DOTFILES_ROOT}/.config/vim/plugins/fzf.vim
   '''
- # [[plugins]]
- # repo = 'Shougo/denite.nvim'
- # hook_add = '''
- #   source ${DOTFILES_ROOT}/.config/vim/plugins/denite.vim
- # '''
+# [[plugins]]
+# repo = 'Shougo/denite.nvim'
+# hook_add = '''
+#   source ${DOTFILES_ROOT}/.config/vim/plugins/denite.vim
+# '''
 
 # Git操作
-  [[plugins]]
-  repo = 'tpope/vim-fugitive'
-  hook_add = '''
+[[plugins]]
+repo = 'tpope/vim-fugitive'
+hook_add = '''
     nnoremap [GitLeader]    <Nop>
     nmap     <Space>g [GitLeader]
 
@@ -130,87 +130,75 @@
     highlight DiffChange cterm=bold ctermfg=10 ctermbg=17
     highlight DiffText   cterm=bold ctermfg=10 ctermbg=21
   '''
-  [[plugins]]
-  repo = 'tpope/vim-rhubarb'
-  depends = 'tope/vim-fugitive'
+[[plugins]]
+repo = 'tpope/vim-rhubarb'
+depends = 'tope/vim-fugitive'
 
 # iTerm2の設定を変える必要あり
 # https://qiita.com/satosystems/items/81e292ab2af12249ed8b#%E3%82%AF%E3%83%AA%E3%83%83%E3%83%97%E3%83%9C%E3%83%BC%E3%83%89%E3%82%A2%E3%82%AF%E3%82%BB%E3%82%B9%E8%A8%B1%E5%8F%AF%E8%A8%AD%E5%AE%9A
-  [[plugins]]
-  repo = "tpope/vim-commentary"
+[[plugins]]
+repo = "tpope/vim-commentary"
 
-  [[plugins]]
-  repo = 'mbbill/undotree'
-  hook_add = '''
+[[plugins]]
+repo = 'mbbill/undotree'
+hook_add = '''
     let g:undotree_WindowLayout = 4
     let g:undotree_SetFocusWhenToggle = 1
     nnoremap <Leader>r :UndotreeToggle<CR>
   '''
 
-  [[plugins]]
-  repo = 'glidenote/memolist.vim'
-  hook_add = '''
-    let g:memolist_memo_suffix = "md"
-    let g:memolist_path = "/Users/kowwwwji/Library/Mobile Documents/iCloud${DOTFILES_ROOT}md${DOTFILES_ROOT}obsidian/Documents/Obsidian Vault/Diary"
-    let g:memolist_fzf=1
-    nnoremap <Leader>mn :MemoNew<CR>
-    nnoremap <Leader>ml :MemoList<CR>
-    nnoremap <Leader>mg :MemoGrep<CR>
-  '''
-
 ## LSP関連
-  # [[plugins]]
-  # repo =  'prabirshrestha/vim-lsp'
-  # hook_add = '''
-  #   source ${DOTFILES_ROOT}/.config/vim/plugins/vim-lsp.vim
-  # '''
-  # [[plugins]]
-  # repo = 'prabirshrestha/asyncomplete.vim'
-  # [[plugins]]
-  # repo =  'prabirshrestha/asyncomplete-lsp.vim'
-  # # [[plugins]]
-  # # repo = 'Shougo/deoplete.nvim'
-  # # hook_add = '''
-  # #   let g:deoplete#enable_at_startup = 1
-  # # '''
-  # [[plugins]]
-  # repo =  'mattn/vim-lsp-settings'
-  # [[plugins]]
-  # repo =  'mattn/vim-lsp-icons'
-  # [[plugins]]
-  # repo =  'hrsh7th/vim-vsnip'
-  # hook_add = '''
-  #   source ${DOTFILES_ROOT}/.config/vim/plugins/vim-vsnip.vim
-  # '''
-  # [[plugins]]
-  # repo =  'hrsh7th/vim-vsnip-integ'
-  # depends = 'hrsh7th/vim-vsnip'
-  # [[plugins]]
-  # repo = 'rafamadriz/friendly-snippets'
-  # depends = 'hrsh7th/vim-vsnip'
+# [[plugins]]
+# repo =  'prabirshrestha/vim-lsp'
+# hook_add = '''
+#   source ${DOTFILES_ROOT}/.config/vim/plugins/vim-lsp.vim
+# '''
+# [[plugins]]
+# repo = 'prabirshrestha/asyncomplete.vim'
+# [[plugins]]
+# repo =  'prabirshrestha/asyncomplete-lsp.vim'
+# # [[plugins]]
+# # repo = 'Shougo/deoplete.nvim'
+# # hook_add = '''
+# #   let g:deoplete#enable_at_startup = 1
+# # '''
+# [[plugins]]
+# repo =  'mattn/vim-lsp-settings'
+# [[plugins]]
+# repo =  'mattn/vim-lsp-icons'
+# [[plugins]]
+# repo =  'hrsh7th/vim-vsnip'
+# hook_add = '''
+#   source ${DOTFILES_ROOT}/.config/vim/plugins/vim-vsnip.vim
+# '''
+# [[plugins]]
+# repo =  'hrsh7th/vim-vsnip-integ'
+# depends = 'hrsh7th/vim-vsnip'
+# [[plugins]]
+# repo = 'rafamadriz/friendly-snippets'
+# depends = 'hrsh7th/vim-vsnip'
 
-  [[plugins]]
-  repo = 'honza/vim-snippets'
-  hook_add = '''
+[[plugins]]
+repo = 'honza/vim-snippets'
+hook_add = '''
     let g:UltiSnipsExpandTrigger="<tab>"
     let g:UltiSnipsJumpForwardTrigger="<c-n>"
     let g:UltiSnipsJumpBackwardTrigger="<c-p>"
   '''
 
-  # [[plugins]]
-  # repo = 'neoclide/coc.nvim'
-  # rev = 'release'
-  # hook_add = '''
-  #   source ${DOTFILES_ROOT}/.config/vim/plugins/coc.vim
-  # '''
+# [[plugins]]
+# repo = 'neoclide/coc.nvim'
+# rev = 'release'
+# hook_add = '''
+#   source ${DOTFILES_ROOT}/.config/vim/plugins/coc.vim
+# '''
 
-  [[plugins]]
-  repo = 'github/copilot.vim'
-  hook_add = '''
+[[plugins]]
+repo = 'github/copilot.vim'
+hook_add = '''
     xnoremap <silent> <Space>c :Copilot<CR>
     inoremap <silent> < :Copilot<CR>
   '''
-
 
 
 # # 非同期コードチェッカー
@@ -218,23 +206,23 @@
 #   repo = 'w0rp/ale'
 
 # Syntax checker
-  # [[plugins]]
-  # repo = 'scrooloose/syntastic'
-  # hook_add = '''
-  #   set statusline+=%#warningmsg#
-  #   set statusline+=%{SyntasticStatuslineFlag()}
-  #   set statusline+=%*
-  #   let g:syntastic_always_populate_loc_list = 1
-  #   let g:syntastic_auto_loc_list = 1
-  #   let g:syntastic_check_on_open = 1
-  #   let g:syntastic_check_on_wq = 0
-  #   let g:syntastic_ruby_checkers=['rubocop', 'mri']
-  # '''
+# [[plugins]]
+# repo = 'scrooloose/syntastic'
+# hook_add = '''
+#   set statusline+=%#warningmsg#
+#   set statusline+=%{SyntasticStatuslineFlag()}
+#   set statusline+=%*
+#   let g:syntastic_always_populate_loc_list = 1
+#   let g:syntastic_auto_loc_list = 1
+#   let g:syntastic_check_on_open = 1
+#   let g:syntastic_check_on_wq = 0
+#   let g:syntastic_ruby_checkers=['rubocop', 'mri']
+# '''
 
 ## 翻訳
-  [[plugins]]
-  repo = 'skanehira/translate.vim'
-  hook_add = '''
+[[plugins]]
+repo = 'skanehira/translate.vim'
+hook_add = '''
     let g:translate_source = "en"
     let g:translate_target = "ja"
   " let g:translate_popup_window = 0 " if you want use popup window, set value 1
@@ -249,25 +237,25 @@
   '''
 
 ## Others
-  [[plugins]]
-  repo = 'kdheepak/lazygit.nvim'
-  rev = 'nvim-v0.4.3'
-  hook_add = '''
+[[plugins]]
+repo = 'kdheepak/lazygit.nvim'
+rev = 'nvim-v0.4.3'
+hook_add = '''
     nnoremap <silent> <Leader>l :LazyGit<CR>
   '''
 
-  [[plugins]]
-  repo = 'tyru/open-browser.vim'
-  hook_add = '''
+[[plugins]]
+repo = 'tyru/open-browser.vim'
+hook_add = '''
     source ${DOTFILES_ROOT}/.config/vim/plugins/open-browser.vim
   '''
 
-  [[plugins]]
-  repo = 'machakann/vim-textobj-functioncall'
-  [[plugins]]
-  repo = 'machakann/vim-sandwich'
+[[plugins]]
+repo = 'machakann/vim-textobj-functioncall'
+[[plugins]]
+repo = 'machakann/vim-sandwich'
 
 ## FIX: vimspector_enable_mappings を使用するとKeymapが崩壊するので、調整が必要
-  [[plugins]]
-  repo = 'puremourning/vimspector'
-  hook_add = 'let g:vimspector_enable_mappings = "HUMAN"'
+[[plugins]]
+repo = 'puremourning/vimspector'
+hook_add = 'let g:vimspector_enable_mappings = "HUMAN"'

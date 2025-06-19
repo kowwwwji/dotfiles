@@ -33,5 +33,3 @@ alias npd='npm run dev'
 alias npt='npm run test'
 
 alias gc='gcloud'
-
-alias todo='memo e todo.md'

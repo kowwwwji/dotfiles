@@ -13,7 +13,6 @@ ln -nfs ${DOTFILES_ROOT}/.config/vim/coc-settings.json ${HOME}/.config/vim/coc-s
 ln -nfs ${DOTFILES_ROOT}/.config/starship.toml ${HOME}/.config/starship.toml
 ln -nfs ${DOTFILES_ROOT}/.config/lazydocker/config.yml ${HOME}/.config/lazydocker/config.yml
 ln -nfs ${DOTFILES_ROOT}/.config/lazygit/config.yml ${HOME}/.config/lazygit/config.yml
-ln -nfs ${DOTFILES_ROOT}/.config/memo ${HOME}/.config/
 ln -nfs ${DOTFILES_ROOT}/.config/nvim ${HOME}/.config/
 ln -nfs ${DOTFILES_ROOT}/.config/sheldon ${HOME}/.config/
 ln -nfs ${DOTFILES_ROOT}/.config/karabiner/karabiner.json ${HOME}/.config/karabiner/karabiner.json
