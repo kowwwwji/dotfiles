@@ -66,3 +66,5 @@
   useHttpPath = true
 [credential "https://git-codecommit.ap-northeast-1.amazonaws.com"]
   provider = generic
+[init]
+	defaultBranch = main
