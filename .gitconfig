@@ -60,11 +60,11 @@
   ff = false
 [diff]
   colorMoved = default
-[credential]
-  helper = /usr/local/share/gcm-core/git-credential-manager
 [credential "https://dev.azure.com"]
   useHttpPath = true
 [credential "https://git-codecommit.ap-northeast-1.amazonaws.com"]
   provider = generic
 [init]
 	defaultBranch = main
+[credential]
+	helper = /usr/local/share/gcm-core/git-credential-manager

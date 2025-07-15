@@ -128,11 +128,10 @@ poetry add Neovim
 
 ## その他
 
-```
-
 ### 手動インストール
 
 - [DMM Books](https://book.dmm.com/info_bookviewer.html#intro-mac)
 - [LuminarAI](https://skylum.com/jp/account/my-softwar://skylum.com/jp/account/my-software)
 - [Imaging Edge Desktop](https://creatorscloud.sony.net/catalog/ja-jp/ie-desktop/index.html)
 - [MOTU M Series System Preferences](https://motu.com/en-us/download/product/408/?details=true)
+- [IK product manager](https://www.ikmultimedia.com/products/productmanager/)
