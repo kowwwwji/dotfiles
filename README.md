@@ -30,7 +30,7 @@ kowwwwji's DotFile & PC setup
 
 echo 'export PATH="/opt/homebrew/bin:$PATH"' >> ~/.bash_profile
 
-chsh -s /bin/bash
+chsh -s /bin/bash; exec $SHELL -l
 brew install ghq
 # Access Tokenを作る必要あり
 ghq get https://github.com/kowwwwji/dotfiles.git
@@ -50,7 +50,6 @@ cd $(ghq root)/github.com/kowwwwji/dotfiles
 cd BrewFile && brew bundle # Application Install
 
 sudo shutdown -r now
-
 ```
 
 #### システム環境設定の変更2
