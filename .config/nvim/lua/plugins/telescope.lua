@@ -1,4 +1,3 @@
-local actions = require("telescope.actions")
 local grep_args = { "--color=never", "--no-heading", "--line-number", "--column", "--smart-case", "--hidden" }
 
 return {
