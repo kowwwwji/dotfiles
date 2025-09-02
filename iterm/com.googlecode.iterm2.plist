@@ -1100,7 +1100,7 @@
 			<key>Rows</key>
 			<integer>80</integer>
 			<key>Screen</key>
-			<integer>1</integer>
+			<integer>2</integer>
 			<key>Scrollback Lines</key>
 			<integer>1000</integer>
 			<key>Scrollback With Status Bar</key>
