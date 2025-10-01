@@ -38,6 +38,7 @@ return {
   opts = {
     defaults = {
       layout_strategy = "horizontal",
+      prompt_prefix = "   ",
       layout_config = { prompt_position = "top" },
       sorting_strategy = "ascending",
       winblend = 0,
