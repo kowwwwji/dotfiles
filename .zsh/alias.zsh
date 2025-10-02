@@ -33,3 +33,4 @@ alias npd='npm run dev'
 alias npt='npm run test'
 
 alias gc='gcloud'
+alias mac-notify='terminal-notifier -title "iTerm2" -sound Glass -message $1 '
