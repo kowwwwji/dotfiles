@@ -84,9 +84,10 @@ if [ -d $ZSH_HOME -a -r $ZSH_HOME -a -x $ZSH_HOME ]; then
   done
 fi
 
-if [[ -f "$ZSH_HOME/.zsh_history" ]]; then
-  HISTFILE="$ZSH_HOME/.zsh_history"
+if [[ ! -f "$ZSH_HOME/.zsh_history" ]]; then
+  touch "$ZSH_HOME/.zsh_history"
 fi
+HISTFILE="$ZSH_HOME/.zsh_history"
 
 GITHUB_CREDENTIAL_FILE=~/.config/.github_credentials
 if [[ -f $GITHUB_CREDENTIAL_FILE ]]; then

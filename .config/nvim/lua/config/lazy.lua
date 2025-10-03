@@ -26,7 +26,7 @@ require("lazy").setup({
     -- INFO: Copilotを使用しない時はコメントアウトする
     -- { import = "lazyvim.plugins.extras.coding.copilot" },
     -- { import = "lazyvim.plugins.extras.coding.copilot-chat" },
-    { import = "lazyvim.plugins.extras.vscode" },
+    -- { import = "lazyvim.plugins.extras.vscode" },
 
     { import = "plugins" },
   },

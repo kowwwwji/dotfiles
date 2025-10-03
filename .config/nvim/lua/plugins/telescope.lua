@@ -13,14 +13,14 @@ return {
     {
       "<leader>ff",
       function()
-        require("telescope.builtin").find_files({})
+        require("telescope.builtin").find_files({ hidden = true })
       end,
       desc = "Find Files (root)",
     },
     {
       "<leader><leader>",
       function()
-        require("telescope.builtin").find_files({})
+        require("telescope.builtin").find_files({ hidden = true })
       end,
       desc = "Find Files (root)",
     },
@@ -38,10 +38,10 @@ return {
   opts = {
     defaults = {
       layout_strategy = "horizontal",
+      prompt_prefix = "   ",
       layout_config = { prompt_position = "top" },
       sorting_strategy = "ascending",
       winblend = 0,
-      prompt_position = "top",
       mappings = {
         i = {
           -- InsertModeでもctrl+cで終了できる
@@ -54,12 +54,12 @@ return {
         hidden = true,
       },
       live_grep = {
-        additional_args = function(opts)
+        additional_args = function(_)
           return grep_args
         end,
       },
       grep_string = {
-        additional_args = function(opts)
+        additional_args = function(_)
           return grep_args
         end,
       },
