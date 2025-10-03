@@ -34,3 +34,4 @@ alias npt='npm run test'
 
 alias gc='gcloud'
 alias mac-notify='terminal-notifier -title "iTerm2" -sound Glass -message $1 '
+alias gitroot='git rev-parse --show-toplevel'
