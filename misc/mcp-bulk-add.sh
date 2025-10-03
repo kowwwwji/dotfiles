@@ -87,6 +87,31 @@ resolve_op_reference() {
   fi
 }
 
+# PWDをカレントディレクトリに置き換える関数
+resolve_pwd_reference() {
+  local value="$1"
+  local current_dir="$PWD"
+
+  # ${PWD} または $PWD を実際のパスに置き換え
+  value="${value//\$\{PWD\}/$current_dir}"
+  value="${value//\$PWD/$current_dir}"
+
+  # $() 内のコマンドを実行して結果に置き換え
+  local pattern='[$][(]([^)]+)[)]'
+  while [[ $value =~ $pattern ]]; do
+    local cmd="${BASH_REMATCH[1]}"
+    local result=$(eval "$cmd" 2>/dev/null)
+    if [ $? -eq 0 ]; then
+      value="${value//\$($cmd)/$result}"
+    else
+      echo "Error: Failed to execute command: $cmd" >&2
+      break
+    fi
+  done
+
+  echo "$value"
+}
+
 # 結果を記録する一時ファイル
 TEMP_DIR=$(mktemp -d)
 ADDED_FILE="$TEMP_DIR/added.txt"
@@ -147,13 +172,16 @@ while IFS= read -r server_name; do
 
       value=$(echo "$server_config" | jq -r ".env.\"$key\"")
 
+      # op:// で始まる場合は1Passwordから取得
       if [[ $value == op://* ]]; then
         echo "  🔑 Resolving: $key"
-        resolved_value=$(resolve_op_reference "$value")
-        new_env=$(echo "$new_env" | jq --arg k "$key" --arg v "$resolved_value" '.[$k] = $v')
-      else
-        new_env=$(echo "$new_env" | jq --arg k "$key" --arg v "$value" '.[$k] = $v')
+        value=$(resolve_op_reference "$value")
       fi
+
+      # $PWD や $() を解決
+      value=$(resolve_pwd_reference "$value")
+
+      new_env=$(echo "$new_env" | jq --arg k "$key" --arg v "$value" '.[$k] = $v')
     done <<<"$env_keys"
 
     server_config=$(echo "$server_config" | jq --argjson env "$new_env" '.env = $env')
