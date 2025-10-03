@@ -5,7 +5,7 @@
       "args": [
         "-y",
         "@modelcontextprotocol/server-filesystem",
-        "/Users/kowwwwji/ghq/github.com/kowwwwji/dotfiles"
+        "$(git root)"
       ]
     },
     "notion": {
@@ -35,11 +35,8 @@
         "--context",
         "ide-assistant",
         "--project",
-        "${PWD}"
-      ],
-      "env": {
-        "PWD": "/Users/yourname/your-project"
-      }
+        "$(git root)"
+      ]
     }
   }
 }
