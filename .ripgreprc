@@ -1,0 +1,42 @@
+  # 隠しファイルも検索対象にする
+  --hidden
+
+  # .gitディレクトリは除外
+  --glob=!.git/
+
+  # その他の除外対象
+  --glob=!node_modules/
+  --glob=!.DS_Store
+  --glob=!*.pyc
+  --glob=!__pycache__/
+  --glob=!.cache/
+  --glob=!.venv/
+  --glob=!venv/
+  --glob=!dist/
+  --glob=!build/
+  --glob=!coverage/
+  --glob=!.next/
+  --glob=!.nuxt/
+
+  # スマートケース検索（小文字のみなら大小区別なし、大文字
+  含むなら区別）
+  --smart-case
+
+  # 行番号表示
+  --line-number
+
+  # カラー出力
+  --colors=line:fg:yellow
+  --colors=line:style:bold
+  --colors=path:fg:green
+  --colors=path:style:bold
+  --colors=match:fg:black
+  --colors=match:bg:yellow
+  --colors=match:style:nobold
+
+  # 長い行を切り詰める（パフォーマンス向上）
+  --max-columns=150
+
+  # ファイルタイプ別の設定
+  --type-add=web:*.{html,css,js,jsx,ts,tsx,vue}
+  --type-add=config:*.{json,yaml,yml,toml,conf,ini}

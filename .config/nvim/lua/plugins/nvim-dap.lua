@@ -116,7 +116,8 @@ return {
       {
         "microsoft/vscode-js-debug",
         -- After install, build it and rename the dist directory to out
-        build = "rm .nvmrc && npm install --legacy-peer-deps --no-save && npx gulp vsDebugServerBundle && rm -rf out && mv dist out",
+        -- build = "rm .nvmrc && npm install --legacy-peer-deps --no-save && npx gulp vsDebugServerBundle && rm -rf out && mv dist out",
+        build = "npm install --legacy-peer-deps && npm run compile",
         version = "1.*",
       },
       {

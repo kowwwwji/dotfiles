@@ -1,24 +1,9 @@
 return {
   "skanehira/translate.vim",
   keys = {
-    {
-      mode = { "n", "v" },
-      "<Leader>h",
-      -- TODO: iconを設定したい
-      desc = "Translate",
-    },
-    {
-      mode = { "n", "v" },
-      "<Leader>he",
-      ":Translate<CR>",
-      desc = "English => Japanese",
-    },
-    {
-      mode = { "n", "v" },
-      "<Leader>hj",
-      ":Translate!<CR>",
-      desc = "Japanese => English",
-    },
+    { "<Leader>h", nil, mode = { "n", "v" }, desc = "Translate" },
+    { "<Leader>he", ":Translate<CR>", mode = { "n", "v" }, desc = "English => Japanese" },
+    { "<Leader>hj", ":Translate!<CR>", mode = { "n", "v" }, desc = "Japanese => English" },
   },
   opts = {
     translate_source = "en",
