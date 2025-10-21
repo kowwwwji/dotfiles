@@ -19,3 +19,6 @@ vim.opt.listchars = {
   precedes = "❮",
   nbsp = "%",
 }
+
+-- スワップファイルを作らない
+vim.opt.swapfile = false
