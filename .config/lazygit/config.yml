@@ -44,3 +44,8 @@ customCommands:
         initialValue: ""
     command: "git commit --message '{{.Form.Type}}({{.Form.Scope}}) {{.Form.Message}}'"
     loadingText: "Creating conventional commit..."
+  - key: "<c-a>"
+    context: "files"
+    description: "AI-generated commit message"
+    command: "~/.config/lazygit/scripts/ai-commit.sh"
+    output: terminal
