@@ -35,7 +35,8 @@
         "--context",
         "ide-assistant",
         "--project",
-        "$(git root)"
+        "$(git root)",
+        "--enable-web-dashboard=false"
       ]
     }
   }
