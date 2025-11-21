@@ -25,3 +25,41 @@ github = "romkatv/powerlevel10k"
 github = "marlonrichert/zsh-autocomplete"
 [plugins.autosuggestions]
 github = "zsh-users/zsh-autosuggestions"
+
+# Local .zsh configuration files
+[plugins.local-completion]
+local = "~/.zsh"
+use = ["completion.zsh"]
+
+[plugins.local-alias]
+local = "~/.zsh"
+use = ["alias.zsh"]
+
+[plugins.local-brew]
+local = "~/.zsh"
+use = ["brew.zsh"]
+
+[plugins.local-fzf]
+local = "~/.zsh"
+use = ["fzf.zsh"]
+
+[plugins.local-p10k]
+local = "~/.zsh"
+use = ["p10k.zsh"]
+
+[plugins.local-scripts]
+local = "~/.zsh"
+use = ["scripts.zsh"]
+
+[plugins.local-ssh]
+local = "~/.zsh"
+use = ["ssh.zsh"]
+
+[plugins.local-tmux]
+local = "~/.zsh"
+use = ["tmux.zsh"]
+
+# Load local.zsh if it exists (not the .sample file)
+[plugins.local-custom]
+local = "~/.zsh"
+use = ["local.zsh"]
