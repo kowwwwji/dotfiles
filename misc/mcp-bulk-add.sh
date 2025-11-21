@@ -269,29 +269,3 @@ echo "━━━━━━━━━━━━━━━━━━━━━━━━�
 if [ -f "$FAILED_FILE" ] && [ -s "$FAILED_FILE" ]; then
   exit 1
 fi
-
-if [[ ${#skipped_servers[@]} -gt 0 ]]; then
-  echo "⏭️  Skipped (${#skipped_servers[@]}):"
-  for server in "${skipped_servers[@]}"; do
-    echo "   • $server"
-  done
-  echo ""
-fi
-
-if [[ ${#failed_servers[@]} -gt 0 ]]; then
-  echo "❌ Failed (${#failed_servers[@]}):"
-  for server in "${failed_servers[@]}"; do
-    echo "   • $server"
-  done
-  echo ""
-fi
-
-# 総合カウント
-total=$((${#added_servers[@]} + ${#updated_servers[@]} + ${#skipped_servers[@]} + ${#failed_servers[@]}))
-echo "📊 Total processed: $total servers"
-echo "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"
-
-# 失敗があった場合は終了コードを1にする
-if [[ ${#failed_servers[@]} -gt 0 ]]; then
-  exit 1
-fi
