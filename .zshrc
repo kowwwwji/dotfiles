@@ -74,15 +74,8 @@ path=(~/.scripts(N-/) $path)
 
 ZSH_HOME="${HOME}/.zsh"
 
-# 自作の.zshファイルを読み込み
-if [ -d $ZSH_HOME -a -r $ZSH_HOME -a -x $ZSH_HOME ]; then
-  for i in $ZSH_HOME/*; do
-    if [[ ${i##*/} = *.zsh ]] && [ \( -f $i -o -h $i \) -a -r $i ]; then
-      # echo "${i} を読み込みます。"
-      source $i
-    fi
-  done
-fi
+# sheldonを使用して.zshファイルとプラグインを読み込み
+eval "$(sheldon source)"
 
 if [[ ! -f "$ZSH_HOME/.zsh_history" ]]; then
   touch "$ZSH_HOME/.zsh_history"
