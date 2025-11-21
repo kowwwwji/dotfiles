@@ -2,7 +2,9 @@
 
 set -e
 
-MCP_CONFIG=".mcp.json.sample"
+# スクリプトのディレクトリを取得
+SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+MCP_CONFIG="$SCRIPT_DIR/.mcp.json"
 FORCE_OVERWRITE="${FORCE_OVERWRITE:-false}"
 
 # ヘルプメッセージ
