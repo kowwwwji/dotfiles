@@ -9,3 +9,5 @@ iterm/com.googlecode.iterm2.plist
 .config/nvim/lua/config/local.lua
 .config/nvim/lazyvim.json
 .config/nvim/SKK-JISYO.L
+.claude
+.serena
