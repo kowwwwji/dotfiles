@@ -22,33 +22,43 @@ kowwwwji's DotFile & PC setup
      - バッテリーの％表示
    - Spotlight OFF
 
-### Various Installs
+### 新規マシンでのインストール（chezmoi使用）
+
+**ワンライナーインストール:**
 
 ```bash
-# Terminal
-/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install.sh)"
-
-echo 'export PATH="/opt/homebrew/bin:$PATH"' >> ~/.bash_profile
-
-chsh -s /bin/bash; exec $SHELL -l
-brew install ghq
-# Access Tokenを作る必要あり
-ghq get https://github.com/kowwwwji/dotfiles.git
-cd $(ghq root)/github.com/kowwwwji/dotfiles
-
-bash init.sh # $HOMEへの適用
-
-chsh -s /bin/zsh
-exit
+sh -c "$(curl -fsLS get.chezmoi.io)" -- init --apply kowwwwji/dotfiles
 ```
 
+初回実行時に以下の情報の入力を求められます:
+- Full Name: (あなたの氏名)
+- Email: (Gitで使用するメールアドレス)
+- GPG Signing Key (optional): (GPG署名鍵、オプション)
+
+**age暗号化鍵の復元:**
+
+SSH鍵などの暗号化ファイルにアクセスするには、age鍵が必要です:
+
+```bash
+# パスワードマネージャーまたは別マシンから鍵を復元
+mkdir -p ~/.config/age
+# 鍵ファイルをコピー
+
+# 再適用
+chezmoi apply
+```
+
+**手動セットアップが必要な項目:**
+
 ```sh
-# google imeで必要
+# Google IMEで必要
 softwareupdate --install-rosetta
 
-cd $(ghq root)/github.com/kowwwwji/dotfiles
-cd BrewFile && brew bundle # Application Install
+# シェルをzshに変更
+chsh -s /bin/zsh
+exit
 
+# 再起動
 sudo shutdown -r now
 ```
 
@@ -90,20 +100,27 @@ ssh-keygen -t rsa # ~/.ssh配下に作成する
 
 ## 環境特有の設定
 
-- 以下の作成/変更
-  - `~/.ssh/config`
-  - `~/.config/git/.gitconfig.local`
-  - `~/.zsh/local.zsh`
-  - `~/.vim/local.vim` or `~/.config/nvim/lua/config/local.lua`
-    - `let g:github_enterprise_urls = ['https://example.com']`
+chezmoiのテンプレート機能により、マシン固有の設定は初回セットアップ時のプロンプトで自動的に設定されます。
+
+追加の環境変数が必要な場合は、以下のファイルを編集してください:
+- `~/.zsh/local.zsh` - 環境変数やPATH設定
+- `~/.vim/local.vim` or `~/.config/nvim/lua/config/local.lua` - エディタ固有の設定
+  - 例: `let g:github_enterprise_urls = ['https://example.com']`
+
+設定を変更した場合は、chezmoiで管理:
+```bash
+chezmoi edit ~/.zsh/local.zsh
+chezmoi apply
+```
 
 ## 各種言語の設定
 
 ### Install asdf plugin & lang
 
+asdfプラグインと言語バージョンは、chezmoiの初回セットアップ時に自動的にインストールされます（`run_once_after_02-asdf.sh.tmpl`により実行）。
+
+手動で再インストールする場合:
 ```sh
-ln -s ${DOTFILES_ROOT}.tool-versions ~/
-cut -d' ' -f1 .tool-versions | xargs -I{} asdf plugin add {}
 asdf list
 asdf install
 ```

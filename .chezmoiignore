@@ -1,0 +1,18 @@
+# バージョン管理対象外
+.git/
+.github/
+README.md
+LICENSE
+
+# Brewfile（ブートストラップで使用）
+Brewfile/Brewfile.lock.json
+
+# 動的生成ファイル
+.config/nvim/lazy-lock.json
+.zsh/.zsh_history
+
+# iTerm設定（手動import推奨）
+iterm/com.googlecode.iterm2.plist
+
+# その他
+.DS_Store
