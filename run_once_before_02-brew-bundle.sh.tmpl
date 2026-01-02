@@ -1,0 +1,11 @@
+#!/bin/bash
+
+# Brewfileからパッケージをインストール
+BREWFILE_DIR="{{ .chezmoi.sourceDir }}/Brewfile"
+
+if [ -f "$BREWFILE_DIR/Brewfile" ]; then
+  echo "Installing Homebrew packages from Brewfile..."
+  cd "$BREWFILE_DIR" && brew bundle
+else
+  echo "Brewfile not found at $BREWFILE_DIR/Brewfile"
+fi

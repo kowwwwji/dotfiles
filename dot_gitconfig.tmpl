@@ -1,0 +1,74 @@
+[user]
+  name = {{ .name }}
+  email = {{ .email }}
+{{- if .signingKey }}
+  signingkey = {{ .signingKey }}
+{{- end }}
+[core]
+  editor = vi
+  excludesfile = ~/.gitignore
+  pager = delta
+[interactive]
+  diffFilter = delta --color-only
+[delta]
+    navigate = true
+    light = false
+[ghq]
+  root = ~/ghq
+[alias]
+##################
+# 基本コマンド
+##################
+  st = status
+  cm = commit
+  cma = commit --amend
+  co = checkout
+  cb = checkout -b
+  b = branch
+  bv = branch -vv
+  bva = branch -vva
+  st = status
+
+##################
+# 複合コマンド
+##################
+  delete-merged-branches = !git branch --merged | grep -vE '^\\*|master$|develop|gh-pages$' | xargs -I % git branch -d %
+  delete-gone-branches = !git branch --format '%(refname:short) %(upstream:track)' | grep 'gone' | cut -d ' ' -f1 | xargs -I % git branch -D %
+  ls = log --graph --pretty=format:'%Cred%h %Cgreen(%>(12,trunc)%cr, %ci) %C(bold blue)<%an>%Creset -%C(yellow)%d%Creset %s' --abbrev-commit --date=relative --all
+  wip = !git add --all && git commit -m 'wip'
+  base = !git show-branch | grep '*' | grep -v "$(git rev-parse --abbrev-ref HEAD)" | head -1 | awk -F'[]~^[]' '{print $2}'
+  # Not newline at end of file 対策
+  # https://sjisjis.hatenablog.com/entry/2018/12/29/221812
+  add-fixed = !git diff -w --no-color | git apply --cached
+
+# Merge後、ローカルとリモートブランチをあわせる
+  refresh = !"f () { \
+    DEFAULT_BRANCH=`git remote show origin | grep 'HEAD branch' | awk '{print $NF}'`; \
+    git checkout $DEFAULT_BRANCH; \
+    git pull -p; \
+    echo "---Delete Merged Branch------------------------------"; \
+    git delete-merged-branches; \
+    echo "---Delete Gone Branch------------------------------"; \
+    git delete-gone-branches; \
+    echo "---Local Branch------------------------------"; \
+    git branch -avv; \
+  }; f"
+[pull]
+  ff = only
+[fetch]
+  prune = true
+[color]
+  ui = true
+[merge]
+  conflictstyle = diff3
+  ff = false
+[diff]
+  colorMoved = default
+[credential "https://dev.azure.com"]
+  useHttpPath = true
+[credential "https://git-codecommit.ap-northeast-1.amazonaws.com"]
+  provider = generic
+[init]
+	defaultBranch = main
+[credential]
+	helper = /usr/local/share/gcm-core/git-credential-manager

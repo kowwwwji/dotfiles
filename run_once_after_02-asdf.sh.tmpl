@@ -1,0 +1,23 @@
+#!/bin/bash
+
+# asdfプラグインのインストール
+if command -v asdf &>/dev/null; then
+  echo "Installing asdf plugins..."
+
+  # .tool-versionsに記載されているプラグインをインストール
+  asdf plugin add nodejs || true
+  asdf plugin add python || true
+  asdf plugin add ruby   || true
+  asdf plugin add golang || true
+  asdf plugin add java   || true
+  asdf plugin add poetry || true
+  asdf plugin add deno   || true
+  asdf plugin add maven  || true
+  asdf plugin add rust   || true
+
+  # バージョンをインストール
+  echo "Installing tool versions from .tool-versions..."
+  asdf install
+else
+  echo "asdf is not installed. Skipping asdf plugin installation."
+fi
