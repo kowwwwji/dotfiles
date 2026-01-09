@@ -24,5 +24,12 @@ vim.api.nvim_create_autocmd({ "BufNewFile", "BufRead" }, {
   end,
 })
 
+vim.api.nvim_create_autocmd({ "BufNewFile", "BufRead" }, {
+  pattern = "*.gs",
+  callback = function()
+    vim.bo.filetype = "javascript"
+  end,
+})
+
 -- helpを右側に開く
 vim.cmd("autocmd FileType help wincmd L")
