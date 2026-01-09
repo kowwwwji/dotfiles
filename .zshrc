@@ -71,8 +71,11 @@ esac
 path=(/usr/local/bin(N-/) /usr/local/sbin(N-/) $path)
 # 独自スクリプト読み込み
 path=(~/.scripts(N-/) $path)
+# claude code用
+path=(~/.local/bin(N-/) $path)
 
 ZSH_HOME="${HOME}/.zsh"
+
 
 # 自作の.zshファイルを読み込み
 if [ -d $ZSH_HOME -a -r $ZSH_HOME -a -x $ZSH_HOME ]; then
