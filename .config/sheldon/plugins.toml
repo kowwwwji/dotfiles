@@ -25,3 +25,6 @@ github = "romkatv/powerlevel10k"
 github = "marlonrichert/zsh-autocomplete"
 [plugins.autosuggestions]
 github = "zsh-users/zsh-autosuggestions"
+
+[plugins.zsh-completions]
+github = "zsh-users/zsh-completions"
