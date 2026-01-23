@@ -4,9 +4,9 @@ gui:
 os:
   edit: "nvim"
 git:
-  paging:
-    colorArg: always
-    pager: delta --dark --paging=never --side-by-side --hyperlinks --line-numbers
+  pagers:
+    - pager: delta --dark --paging=never --side-by-side --hyperlinks --line-numbers
+      colorArg: always
 customCommands:
   - key: "C"
     context: "files"

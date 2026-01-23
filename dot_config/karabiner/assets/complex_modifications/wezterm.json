@@ -1,0 +1,25 @@
+{
+  "title": "Alt+1 to toggle WezTerm with previous app",
+  "rules": [
+    {
+      "description": "Alt+1 toggles WezTerm and restores previous app",
+      "manipulators": [
+        {
+          "type": "basic",
+          "from": {
+            "key_code": "1",
+            "modifiers": {
+              "mandatory": ["option"],
+              "optional": ["any"]
+            }
+          },
+          "to": [
+            {
+              "shell_command": "open -a WezTerm"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

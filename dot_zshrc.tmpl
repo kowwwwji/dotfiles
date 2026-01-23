@@ -11,9 +11,6 @@ export XDG_CONFIG_HOME=~/.config
 HISTSIZE=50000
 SAVEHIST=50000
 
-# GitHub Personal Access Token from 1Password
-export GITHUB_TOKEN={{ onepasswordRead "op://Work/GitHub Personal Access Token -all/token" | quote }}
-
 # 色を使用出来るようにする
 autoload -Uz colors && colors
 
