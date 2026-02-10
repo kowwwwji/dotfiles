@@ -36,3 +36,11 @@ vim.keymap.set("c", "<C-a>", "<Home>")
 vim.keymap.set("c", "<C-e>", "<End>")
 vim.keymap.set("c", "<Up>", "<C-p>")
 vim.keymap.set("c", "<Down>", "<C-n>")
+
+-- GitHub PR をブラウザで開く
+vim.keymap.set("n", "<leader>gw", function()
+  vim.fn.system("gh pr view --web")
+  if vim.v.shell_error ~= 0 then
+    vim.notify("No PR found for current branch", vim.log.levels.WARN)
+  end
+end, { desc = "Open PR in browser" })

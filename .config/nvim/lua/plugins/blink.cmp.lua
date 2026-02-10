@@ -22,9 +22,17 @@ return {
         },
 
         menu = {
+          auto_show = true,
           draw = {
             treesitter = { "lsp" },
           },
+        },
+
+        trigger = {
+          show_on_insert_on_trigger_character = true,
+          -- キーワード入力中も補完を表示
+          show_on_keyword = true,
+          show_on_x_blocked_trigger_characters = { " ", "\n", "\t" },
         },
 
         documentation = {
@@ -76,9 +84,10 @@ return {
         },
       },
 
-      -- ★ Tab 補完派向け keymap
       keymap = {
         preset = "none",
+
+        ["<c-space>"] = { "show", "fallback" },
 
         ["<c-n>"] = {
           "select_next",
@@ -91,6 +100,19 @@ return {
           "snippet_backward",
           "fallback",
         },
+
+        -- -- ★ Tab 補完派向け keymap
+        -- ["<Tab>"] = {
+        --   "select_next",
+        --   "snippet_forward",
+        --   "fallback",
+        -- },
+        --
+        -- ["<S-Tab>"] = {
+        --   "select_prev",
+        --   "snippet_backward",
+        --   "fallback",
+        -- },
 
         ["<CR>"] = { "accept", "fallback" },
       },
