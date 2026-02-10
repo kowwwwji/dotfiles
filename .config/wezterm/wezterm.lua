@@ -6,13 +6,13 @@ config.font = wezterm.font_with_fallback({
   -- { family = "Hack Nerd Font", weight = "Bold" },
   -- { family = "PlemolJP Console NF", weight = "Medium" },
 
-  { family = "Maple Mono NF CN", weight = "Medium" },
+  { family = "Maple Mono NF CN", weight = "Bold" },
 })
 
 config.automatically_reload_config = true
 config.font_size = 15
 config.use_ime = true
--- config.line_height = 0.95
+config.line_height = 0.95
 config.window_background_opacity = 0.80
 config.macos_window_background_blur = 0
 
