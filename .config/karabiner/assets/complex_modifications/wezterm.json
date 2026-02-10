@@ -2,14 +2,14 @@
   "title": "Alt+1 to toggle WezTerm with previous app",
   "rules": [
     {
-      "description": "Alt+1 toggles WezTerm and restores previous app",
+      "description": "ctrl+0 toggles WezTerm and restores previous app",
       "manipulators": [
         {
           "type": "basic",
           "from": {
-            "key_code": "1",
+            "key_code": "0",
             "modifiers": {
-              "mandatory": ["option"],
+              "mandatory": ["control"],
               "optional": ["any"]
             }
           },
