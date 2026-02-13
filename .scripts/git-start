@@ -1,38 +1,39 @@
 #!/bin/zsh -e
 
-DEFAULT_BRANCH=`git remote show origin | grep 'HEAD branch' | awk '{print $NF}'`;
-
 NEW_BRANCH=$1;
 
 if [[ -z $1  ]]; then
   echo ' Use this branch as feature branch.';
-  BASE_BRANCH=`git show-branch | grep '!' | awk -F'[]~^[]' '{print $2}'`;
-  NEW_BRANCH=`git rev-parse --abbrev-ref @`;
+  BASE_BRANCH=$(git show-branch | grep '!' | awk -F'[]~^[]' '{print $2}');
+  NEW_BRANCH=$(git rev-parse --abbrev-ref @);
 else
-  BASE_BRANCH=`git rev-parse --abbrev-ref @`;
+  BASE_BRANCH=$(git rev-parse --abbrev-ref @);
 fi;
 
-if [[ $BASE_BRANCH = $DEFAULT_BRANCH ]]; then
-  echo '  🔥ATTENTION!! you are trying to make branch from ['$DEFAULT_BRANCH']🔥';
+if [[ $BASE_BRANCH = "main" ]] || [[ $BASE_BRANCH = "master" ]]; then
+  echo "  🔥ATTENTION!! you are trying to make branch from [$BASE_BRANCH]🔥";
 fi;
 
 read "yn?  You want to make Base Branch: [$BASE_BRANCH] -> New Branch: [$NEW_BRANCH]? (y/n)  ";
 
 case $yn in
-  [yY]* ) echo "  🆗 Let's Start!!";;
+  [yY]* ) echo "  🆗 Let's Start!";;
   * ) exit 1;;
 esac;
 
-if [[ ! $(git branch | grep $NEW_BRANCH) ]]; then
-  git checkout -b $NEW_BRANCH;
-  git commit --allow-empty -m $NEW_BRANCH;
-  # echo "make new branch:"$NEW_BRANCH
+if ! git branch | grep -q "^[* ] ${NEW_BRANCH}$"; then
+  git checkout -b "$NEW_BRANCH";
+  git commit --allow-empty -m "$NEW_BRANCH";
+  # echo "make new branch:$NEW_BRANCH"
 fi;
 
-git branch -r | grep $NEW_BRANCH || git push -u origin $NEW_BRANCH;
-# git branch -r | grep $NEW_BRANCH || echo "push branch";
-echo '✅ Success! Create remote branch';
+git branch -r | grep -q "origin/${NEW_BRANCH}$" || git push -u origin "$NEW_BRANCH";
+# git branch -r | grep "origin/${NEW_BRANCH}$" || echo "push branch";
+echo '✅ Success! Created remote branch';
 
-gh pr create -d
+if ! gh pr create -d; then
+  echo '❌ Failed to create draft PR';
+  exit 1;
+fi;
 
-echo '✅ Success! create draft branch';
+echo '✅ Success! Created draft PR';
