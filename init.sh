@@ -26,15 +26,7 @@ ln -nfs "${DOTFILES_ROOT}/.config/sheldon" "${HOME}/.config/"
 ln -nfs "${DOTFILES_ROOT}/.config/wezterm" "${HOME}/.config/"
 
 mkdir -p "${HOME}/.config/karabiner/assets"
-if [[ -e "${HOME}/.config/karabiner/karabiner.json" ]]; then
-  echo "Error: ${HOME}/.config/karabiner/karabiner.json already exists"
-  exit 1
-fi
 ln -nfs "${DOTFILES_ROOT}/.config/karabiner/karabiner.json" "${HOME}/.config/karabiner/karabiner.json"
-if [[ -e "${HOME}/.config/karabiner/assets/complex_modifications" ]]; then
-  echo "Error: ${HOME}/.config/karabiner/assets/complex_modifications already exists"
-  exit 1
-fi
 ln -nfs "${DOTFILES_ROOT}/.config/karabiner/assets/complex_modifications" "${HOME}/.config/karabiner/assets/complex_modifications"
 
 mkdir -p "${HOME}/.config/git/"
