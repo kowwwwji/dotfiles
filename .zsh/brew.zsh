@@ -33,6 +33,8 @@ if type sheldon &>/dev/null; then
   # all history widgets
   zstyle ':autocomplete:*history*:*' insert-unambiguous yes
   zstyle ':autocomplete:*' add-space executables aliases functions builtin
+  # ~を/Users/...に展開しない
+  zstyle ':completion:*' completer _complete _ignored
   # History menu.
   zstyle ':autocomplete:history-search-backward:*' list-lines 16
 else
