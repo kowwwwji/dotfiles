@@ -1,6 +1,9 @@
 #!/bin/bash
 set -e
 
+# PATHを設定（lazygitから実行する際に必要）
+export PATH="$HOME/.local/bin:$PATH"
+
 # ステージされた変更を取得
 DIFF=$(git diff --staged)
 

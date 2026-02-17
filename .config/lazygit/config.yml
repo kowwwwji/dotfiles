@@ -47,5 +47,5 @@ customCommands:
   - key: "<c-a>"
     context: "files"
     description: "AI-generated commit message"
-    command: "~/.config/lazygit/scripts/ai-commit.sh"
+    command: "$HOME/.config/lazygit/scripts/ai-commit.sh"
     output: terminal
