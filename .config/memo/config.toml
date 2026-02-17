@@ -1,0 +1,8 @@
+memodir = "/Users/kowwwwji/ghq/github.com/kowwwwji/memo/_posts"
+editor = "nvim"
+column = 20
+width = 0
+selectcmd = "fzf --preview 'bat --color=always --style=plain /Users/kowwwwji/ghq/github.com/kowwwwji/memo/_posts/{}' --preview-window=right:60%:wrap"
+grepcmd = "grep -nH ${PATTERN} ${FILES}"
+memotemplate = ""
+assetsdir = "."

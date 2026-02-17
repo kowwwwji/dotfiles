@@ -36,3 +36,4 @@ alias gc='gcloud'
 alias mac-notify='terminal-notifier -title "iTerm2" -sound Glass -message $1 '
 alias gitroot='git rev-parse --show-toplevel'
 alias cl=claude
+alias todo='memo e ~/ghq/github.com/kowwwwji/memo/README.md'
