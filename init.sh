@@ -21,9 +21,11 @@ ln -nfs "${DOTFILES_ROOT}/.config/lazydocker/config.yml" "${HOME}/.config/lazydo
 ln -nfs "${DOTFILES_ROOT}/.config/lazygit/config.yml" "${HOME}/.config/lazygit/config.yml"
 ln -nfs "${DOTFILES_ROOT}/.config/lazygit/scripts" "${HOME}/.config/lazygit/"
 
+# programing
 ln -nfs "${DOTFILES_ROOT}/.config/nvim" "${HOME}/.config/"
 ln -nfs "${DOTFILES_ROOT}/.config/sheldon" "${HOME}/.config/"
 ln -nfs "${DOTFILES_ROOT}/.config/wezterm" "${HOME}/.config/"
+ln -nfs "${DOTFILES_ROOT}/.config/memo/config.toml" "${HOME}/.config/memo/config.toml"
 
 mkdir -p "${HOME}/.config/karabiner/assets"
 ln -nfs "${DOTFILES_ROOT}/.config/karabiner/karabiner.json" "${HOME}/.config/karabiner/karabiner.json"
