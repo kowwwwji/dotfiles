@@ -12,7 +12,7 @@ config.font = wezterm.font_with_fallback({
 config.automatically_reload_config = true
 config.font_size = 15
 config.use_ime = true
-config.line_height = 0.95
+-- config.line_height = 0.90
 config.window_background_opacity = 0.80
 config.macos_window_background_blur = 0
 
