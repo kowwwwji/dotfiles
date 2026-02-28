@@ -16,6 +16,14 @@ config.use_ime = true
 config.window_background_opacity = 0.80
 config.macos_window_background_blur = 0
 
+-- tmuxのステータスラインの下に空白が出るため
+config.window_padding = {
+  left = 3,
+  right = 3,
+  top = 3,
+  bottom = 0,
+}
+
 ----------------------------------------------------
 -- Tab
 ----------------------------------------------------
