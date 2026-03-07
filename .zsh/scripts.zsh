@@ -1,4 +1,4 @@
-cd-fzf-dein () {
+function cd-fzf-dein () {
   local cache_vim json plugin
   cache_vim="$HOME/.cache/dein/cache_nvim"
   json="$(sed 's@\({\|,\)\(\w\+\):@\1"\2":@g' < $cache_vim)"
@@ -7,11 +7,17 @@ cd-fzf-dein () {
   cd "$(jq -r ".[0].\"$plugin\".path" <<< "$json")"
 }
 
-init-vimspector () {
+function init-vimspector () {
   if [[ $# = 1 ]]; then
     FileType=$1
     cp $DOTFILES_ROOT/.template/vimspector/$FileType.json .vimspector.json
   else
     echo "require FileType"
+  fi
+}
+function gcs() {
+  local config=$(gcloud config configurations list --format='value(name)' | fzf)
+  if [ -n "$config" ]; then
+    gcloud config configurations activate "$config"
   fi
 }
