@@ -1,12 +1,17 @@
+# lazy
 alias lzg=lazygit
 alias lzd=lazydocker
+alias lzs=lazysql
+
+# git
 alias g=gh
-# ローカルリポジトリに移動
-alias gs='ghqSearch'
+
+alias ghs='ghqSearch'
 function ghqSearch(){
   CD_DIR=`ghq list | fzf --query=$1 --preview "ls -a1p $(ghq root)/{}"`
   [[ $CD_DIR ]] && cd $(ghq root)/$CD_DIR
 }
+alias gws='gwq cd'
 
 alias ll='ls -lha'
 # Make and change directory at once
