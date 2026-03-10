@@ -6,7 +6,7 @@ config.font = wezterm.font_with_fallback({
   -- { family = "Hack Nerd Font", weight = "Bold" },
   -- { family = "PlemolJP Console NF", weight = "Medium" },
 
-  { family = "Maple Mono NF CN", weight = "Bold" },
+  { family = "Maple Mono NF CN", weight = "Medium" },
 })
 
 config.automatically_reload_config = true
