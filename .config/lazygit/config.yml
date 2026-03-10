@@ -44,8 +44,23 @@ customCommands:
         initialValue: ""
     command: "git commit --message '{{.Form.Type}}({{.Form.Scope}}) {{.Form.Message}}'"
     loadingText: "Creating conventional commit..."
+
+  # ai-commit
   - key: "<c-a>"
     context: "files"
     description: "AI-generated commit message"
     command: "$HOME/.config/lazygit/scripts/ai-commit.sh"
+    output: terminal
+
+  # worktree
+  - key: "W"
+    context: "localBranches"
+    description: "Create worktree with gwq"
+    prompts:
+      - type: "input"
+        title: "New branch name (e.g. feature/xxx, fix/yyy)"
+        key: "Name"
+        initialValue: ""
+    command: "gwq add -b {{.Form.Name}}"
+    loadingText: "Creating worktree with gwq..."
     output: terminal
