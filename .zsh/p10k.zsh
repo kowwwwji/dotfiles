@@ -34,11 +34,21 @@
     # =========================[ Line #1 ]=========================
     os_icon                 # os identifier
     dir                     # current directory
+    git_worktree
     vcs                     # git status
     # =========================[ Line #2 ]=========================
     newline                 # \n
     prompt_char             # prompt symbol
   )
+
+function prompt_git_worktree() {
+  local gitdir
+  gitdir=$(git rev-parse --git-dir 2>/dev/null) || return
+
+  if [[ "$gitdir" == *"/worktrees/"* ]]; then
+    p10k segment -f cyan -i "💼"
+  fi
+}
 
   # The list of segments shown on the right. Fill it with less important segments.
   # Right prompt on the last prompt line (where you are typing your commands) gets
