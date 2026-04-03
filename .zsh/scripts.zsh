@@ -15,9 +15,14 @@ function init-vimspector () {
     echo "require FileType"
   fi
 }
+
+# GoogleCLoudとkubectlの環境を変える
 function gcs() {
   local config=$(gcloud config configurations list --format='value(name)' | fzf)
   if [ -n "$config" ]; then
-    gcloud config configurations activate "$config"
+    gcloud config configurations activate "$config" 
+    echo ""
+    local project=$(gcloud config get-value project --quiet)
+    kubectx gke_"$project"_asia-northeast1_"$project"-cluster
   fi
 }
