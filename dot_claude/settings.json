@@ -6,7 +6,7 @@
         "hooks": [
           {
             "type": "command",
-            "command": "terminal-notifier -title 'Claude Code' -message 'コマンド実行していいですか' -sound default"
+            "command": "tmux_info=$(tmux display-message -p '#S' 2>/dev/null); terminal-notifier -title 'Claude Code: ${tmux_info}' -message \" コマンド実行していいですか\" -sound default "
           }
         ]
       }
@@ -17,7 +17,7 @@
         "hooks": [
           {
             "type": "command",
-            "command": "terminal-notifier -title 'Claude Code' -message '終わったよ' -sound default"
+            "command": "tmux_info=$(tmux display-message -p '#S' 2>/dev/null); terminal-notifier -title 'Claude Code: ${tmux_info}' -message '終わったよ' -sound default"
           }
         ]
       }
