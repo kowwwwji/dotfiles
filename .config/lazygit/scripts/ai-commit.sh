@@ -6,7 +6,6 @@ export PATH="$HOME/.local/bin:$PATH"
 
 # ステージされた変更を取得
 DIFF=$(git diff --staged)
-
 if [ -z "$DIFF" ]; then
   echo "No staged changes to commit."
   read -p "Press Enter to continue..."
@@ -22,11 +21,10 @@ TEMP_FILE=$(mktemp)
 trap "rm -f $TEMP_FILE" EXIT
 
 # Claudeコマンドでメッセージを生成
-claude --print "Based on the following git diff, suggest exactly 3 different commit messages in the format: type(scope) message
+claude --print "以下のgit diffに基づいて、以下の形式で正確に3つの異なるコミットメッセージを提案してください：タイプ（スコープ）メッセージ
+使用できるタイプは、add、fix、refactor、docs、update、deleteです。
+重要：日本語で3つのコミットメッセージのみを、1行に1つずつ出力してください。説明、番号付け、マークダウン、その他のテキストは一切含めないでください。
 
-Use these types: add, fix, refactor, docs, update, delete
-
-IMPORTANT: Output ONLY the 3 commit messages, one per line, with NO explanations, NO numbering, NO markdown, NO extra text.
 
 Git diff:
 $DIFF" > "$TEMP_FILE" 2>&1
