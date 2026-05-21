@@ -1,6 +1,7 @@
 ########################################
 # 環境変数
 ########################################
+export EDITOR=nvim
 export PATH="/opt/homebrew/bin:/opt/homebrew/sbin:$PATH"
 if [ ghq ];then
   export DOTFILES_ROOT=`ghq root`/github.com/kowwwwji/dotfiles
