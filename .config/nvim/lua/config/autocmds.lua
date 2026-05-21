@@ -11,13 +11,6 @@ vim.api.nvim_create_autocmd({ "BufNewFile", "BufRead" }, {
 })
 
 vim.api.nvim_create_autocmd({ "BufNewFile", "BufRead" }, {
-  pattern = { ".env", ".env.*" },
-  callback = function()
-    vim.bo.filetype = "dotenv"
-  end,
-})
-
-vim.api.nvim_create_autocmd({ "BufNewFile", "BufRead" }, {
   pattern = "*.sh",
   callback = function()
     vim.bo.filetype = "zsh"
