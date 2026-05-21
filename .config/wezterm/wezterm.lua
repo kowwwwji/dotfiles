@@ -91,4 +91,8 @@ end)
 -- config.key_tables = require("keybinds").key_tables
 -- config.leader = { key = "q", mods = "CTRL", timeout_milliseconds = 2000 }
 
+-- Kitty Keyboard Protocol を有効化
+-- Shift+Enter, Ctrl+/ など、本来端末で区別できないキーを区別できるようになる
+config.enable_kitty_keyboard = true
+
 return config

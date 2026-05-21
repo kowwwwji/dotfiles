@@ -24,8 +24,7 @@ vim.keymap.set("v", "∆", ":m '>+1<CR>gv=gv", { silent = true })
 vim.keymap.set("v", "$", "g_", { silent = true })
 
 -- 折りたたみ
--- NOTE: iTerm2のKeys>KeyBindings でShift+Enterを設定する必要あり。
-vim.cmd("map ✠ <S-CR>")
+-- WezTerm の Kitty Keyboard Protocol + tmux の extended-keys 経由で <S-CR> が届く
 vim.keymap.set("n", "<CR>", "zo<CR>", { noremap = true })
 vim.keymap.set("n", "<S-CR>", "zc<CR>", { noremap = true })
 
