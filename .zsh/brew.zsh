@@ -5,16 +5,12 @@ else
   $NOT_INSTALL_MODULE="direnv"
 fi
 
-if type asdf &>/dev/null; then
-  source $(brew --prefix asdf)/libexec/asdf.sh
-  NODE_BIN=$(asdf which node)
-  source ~/.asdf/plugins/java/set-java-home.zsh
-
-  # golang
-  export ASDF_GOLANG_MOD_VERSION_ENABLED=true
+if type mise &>/dev/null; then
+  eval "$(mise activate zsh)"
+  # golang: go install でインストールしたバイナリを使えるようにする
   export PATH="$(go env GOPATH)/bin:$PATH"
 else
-  $NOT_INSTALL_MODULE+=", asdf"
+  $NOT_INSTALL_MODULE+=", mise"
 fi
 
 # Sheldon関連
