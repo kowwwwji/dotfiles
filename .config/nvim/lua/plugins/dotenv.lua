@@ -1,7 +1,15 @@
 return {
   {
     "tpope/vim-dotenv",
-    event = { "BufReadPre", "BufNewFile" },
-    ft = { "dotenv" },
+    cmd = { "Dotenv" },
+  },
+  {
+    "nvim-treesitter/nvim-treesitter",
+    init = function()
+      vim.filetype.add({
+        filename = { [".env"] = "conf" },
+        pattern = { ["%.env%.[%w_.-]+"] = "conf" },
+      })
+    end,
   },
 }
