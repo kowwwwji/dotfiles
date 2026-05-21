@@ -7,6 +7,11 @@ if type brew &>/dev/null; then
   fpath=(~/.docker/completions $fpath)
 fi
 
+# mise補完
+if type mise &>/dev/null; then
+  eval "$(mise completion zsh)"
+fi
+
 # 補完機能を有効にする
 autoload -Uz compinit && compinit -C
 
