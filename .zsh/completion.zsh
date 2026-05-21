@@ -47,3 +47,8 @@ export FZF_DEFAULT_COMMAND='rg --hidden --ignore .git -g ""'
 if [ -f '/opt/homebrew/share/google-cloud-sdk/path.zsh.inc' ]; then . '/opt/homebrew/share/google-cloud-sdk/path.zsh.inc'; fi
 if [ -f '/opt/homebrew/share/google-cloud-sdk/completion.zsh.inc' ]; then . '/opt/homebrew/share/google-cloud-sdk/completion.zsh.inc'; fi
 
+# bun
+[ -s "/Users/k-sakamoto/.bun/_bun" ] && source "/Users/k-sakamoto/.bun/_bun"
+export BUN_INSTALL="$HOME/.bun"
+export PATH="$BUN_INSTALL/bin:$PATH"
+
