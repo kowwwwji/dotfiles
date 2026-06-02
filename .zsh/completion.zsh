@@ -16,8 +16,10 @@ fi
 autoload -Uz compinit && compinit -C
 
 # Terraform用
-autoload -U +X bashcompinit && bashcompinit
-complete -o nospace -C /usr/local/bin/terraform terraform
+if type terraform &>/dev/null; then
+  autoload -U +X bashcompinit && bashcompinit
+  complete -o nospace -C "$(command -v terraform)" terraform
+fi
 
 # 先方予測機能 zinitを使用してるためOFF
 # autoload -Uz predict-on && predict-on
