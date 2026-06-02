@@ -20,9 +20,25 @@ function init-vimspector () {
 function gcs() {
   local config=$(gcloud config configurations list --format='value(name)' | fzf)
   if [ -n "$config" ]; then
-    gcloud config configurations activate "$config" 
-    echo ""
+    echo "===gcloud==="
+    gcloud config configurations activate "$config" --quiet
+
+    # kubectx
     local project=$(gcloud config get-value project --quiet)
-    kubectx gke_"$project"_asia-northeast1_"$project"-cluster
+    local context="gke_${project}_asia-northeast1_${project}-cluster"
+    if kubectl config get-contexts -o name 2>/dev/null | grep -qx "$context"; then
+      echo ""
+      echo "===kubectx==="
+      kubectx "$context"
+    fi
+
+    # opentofu (configuration名の末尾をworkspace名とする: ${PROJECT_NAME}-dev -> dev)
+    local workspace="${config##*-}"
+    if [ -n "$(print -l ./*.tf(N))" ] && tofu workspace list 2>/dev/null | sed 's/^[* ]*//' | grep -qx "$workspace"; then
+      echo ""
+      echo "===opentofu==="
+      tofu workspace select "$workspace"
+      echo "Activated [${workspace}]."
+    fi
   fi
 }
