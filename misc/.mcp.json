@@ -8,16 +8,6 @@
         "$(git root)"
       ]
     },
-    "notion": {
-      "command": "npx",
-      "args": [
-        "-y",
-        "@notionhq/notion-mcp-server"
-      ],
-      "env": {
-        "NOTION_API_KEY": "op://Personal/Notion/credential"
-      }
-    },
     "context7": {
       "command": "npx",
       "args": [
