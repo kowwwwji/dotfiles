@@ -15,15 +15,12 @@ alias gws='gwqSwitch'
 # gwq の worktree を fzf で選んで移動する。
 # tmux 内なら同名 window に切り替え（無ければ作成）、tmux 外なら cd する。
 function gwqSwitch(){
-  local wt_path wt_name
-  wt_path=$(gwq get "$@") || return
-  [[ -z $wt_path ]] && return
   if [[ -n $TMUX ]]; then
-    wt_name=$(basename "$wt_path")
-    tmux select-window -t "=$wt_name" 2>/dev/null \
-      || tmux new-window -a -n "$wt_name" -c "$wt_path"
+    gwq-window "$@"
   else
-    cd "$wt_path"
+    local wt_path
+    wt_path=$(gwq get "$@") || return
+    [[ -n $wt_path ]] && cd "$wt_path"
   fi
 }
 

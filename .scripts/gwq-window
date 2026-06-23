@@ -1,0 +1,14 @@
+#!/bin/zsh -e
+# gwq の worktree を fzf で選び、その worktree の window に切り替える。
+# 同名の window が無ければ、worktree をルートにして新規作成する。
+# tmux 内で実行する前提（tmux のキーバインド or gws から呼ばれる）。
+
+wt_path=$(gwq get "$@") || exit 0
+[[ -z $wt_path ]] && exit 0
+
+# window 名 = その worktree のブランチ名（取れなければディレクトリ名）
+name=$(git -C "$wt_path" rev-parse --abbrev-ref HEAD 2>/dev/null)
+[[ -z $name || $name == HEAD ]] && name=$(basename "$wt_path")
+
+tmux select-window -t "=$name" 2>/dev/null \
+  || tmux new-window -a -n "$name" -c "$wt_path"
