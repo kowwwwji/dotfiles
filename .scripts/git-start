@@ -1,5 +1,50 @@
 #!/bin/zsh -e
 
+WORKTREE_MODE=0
+if [[ $1 == "-w" ]]; then
+  WORKTREE_MODE=1
+  shift
+fi
+
+if [[ $WORKTREE_MODE -eq 1 ]]; then
+  # -w：gwq で worktree を作成して、その中で作業を開始する
+  if ! command -v gwq >/dev/null 2>&1; then
+    echo '❌ gwq が見つかりません。`brew install d-kuro/tap/gwq` でインストールしてください'
+    exit 1
+  fi
+
+  if [[ -z $1 ]]; then
+    echo '❌ -w を使うときはブランチ名が必要です（例: git start -w feature/xxx）'
+    exit 1
+  fi
+
+  NEW_BRANCH=$1
+  echo "🌳 Creating worktree with gwq: [$NEW_BRANCH]"
+  gwq add -b "$NEW_BRANCH"
+
+  WORKTREE_PATH=$(gwq get "$NEW_BRANCH")
+  if [[ -z $WORKTREE_PATH ]]; then
+    echo '❌ Failed to resolve worktree path'
+    exit 1
+  fi
+  cd "$WORKTREE_PATH"
+  git commit --allow-empty -m "$NEW_BRANCH"
+
+  # リモートにプッシュ
+  git push -u origin "$NEW_BRANCH"
+  echo '✅ Success! Created remote branch'
+
+  # PRを作成
+  if ! gh pr create -d; then
+    echo '❌ Failed to create draft PR'
+    exit 1
+  fi
+  echo '✅ Success! Created draft PR'
+
+  echo "🌳 Worktree ready: $WORKTREE_PATH"
+  exit 0
+fi
+
 if [[ -n $1 ]]; then
   # 引数あり：新しいブランチを作成
   NEW_BRANCH=$1

@@ -11,7 +11,21 @@ function ghqSearch(){
   CD_DIR=`ghq list | fzf --query=$1 --preview "ls -a1p $(ghq root)/{}"`
   [[ $CD_DIR ]] && cd $(ghq root)/$CD_DIR
 }
-alias gws='gwq cd'
+alias gws='gwqSwitch'
+# gwq の worktree を fzf で選んで移動する。
+# tmux 内なら同名 window に切り替え（無ければ作成）、tmux 外なら cd する。
+function gwqSwitch(){
+  local wt_path wt_name
+  wt_path=$(gwq get "$@") || return
+  [[ -z $wt_path ]] && return
+  if [[ -n $TMUX ]]; then
+    wt_name=$(basename "$wt_path")
+    tmux select-window -t "=$wt_name" 2>/dev/null \
+      || tmux new-window -a -n "$wt_name" -c "$wt_path"
+  else
+    cd "$wt_path"
+  fi
+}
 
 alias ll='ls -lha'
 # Make and change directory at once
