@@ -1,0 +1,8 @@
+#!/bin/zsh -e
+# tmux セッションを fzf-tmux のポップアップで選び、そのセッションへ switch する。
+# 一覧生成は tmux-session-list に集約(zsh の Ctrl+T と共通)。
+# tmux 内で実行する前提（bind s から run-shell で呼ばれる）。
+
+line=$("$HOME/.scripts/tmux-session-list" | fzf-tmux -p) || exit 0
+[[ -z $line ]] && exit 0
+tmux switch-client -t "${line%%$'\t'*}"
