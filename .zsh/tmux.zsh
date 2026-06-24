@@ -30,20 +30,10 @@ add-zsh-hook precmd _tmux_rename_window_to_branch
 add-zsh-hook chpwd _tmux_rename_window_to_branch
 
 function pecoSelectTmuxSession(){
-  # セッション単位で選択。各行に通知(ベル/サイレント)のあるwindowを "index:名前" で表示
+  # セッション単位で選択。一覧生成は tmux-session-list に集約(prefix+s と共通)。
+  # 各行に通知(ベル/サイレント)のあるwindowを "index:名前" で表示する。
   local line session
-  line="$(
-    tmux list-sessions -F '#{session_name}' | grep -v '^popup$' | while read -r s; do
-      # while はパイプ右側=サブシェルなので local 不要(zshでは local が alerts='' を出力してしまう)
-      alerts=$(tmux list-windows -t "$s" -f '#{||:#{window_bell_flag},#{window_silence_flag}}' -F '#{window_index}:#{window_name}' 2>/dev/null | paste -sd ' ' -)
-      # セッション名と通知表示はタブ区切り(表示は空白に見える/抽出はタブで行う)
-      if [ -n "$alerts" ]; then
-        printf '%s\t󱅫 %s\n' "$s" "$alerts"
-      else
-        printf '%s\n' "$s"
-      fi
-    done | fzf
-  )"
+  line="$("$HOME/.scripts/tmux-session-list" | fzf)"
   if [ -n "$line" ]; then
     session="${line%%$'\t'*}"
     BUFFER="tmux a -t $session"
