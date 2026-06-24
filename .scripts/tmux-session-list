@@ -1,0 +1,16 @@
+#!/bin/zsh -e
+# fzf/fzf-tmux に渡すセッション一覧を生成する(選択や移動はしない)。
+# 各行 = "セッション名<TAB>󱅫 index:名前 ..."。
+# 通知(ベル/サイレント)のある window だけを index:名前 で列挙し、無ければ名前のみ。
+# 呼び出し側は選択行から `${line%%$'\t'*}` でセッション名を取り出す。
+
+tmux list-sessions -F '#{session_name}' | grep -v '^popup$' | while read -r s; do
+  alerts=$(tmux list-windows -t "$s" \
+    -f '#{||:#{window_bell_flag},#{window_silence_flag}}' \
+    -F '#{window_index}:#{window_name}' 2>/dev/null | paste -sd ' ' -)
+  if [[ -n $alerts ]]; then
+    printf '%s\t󱅫 %s\n' "$s" "$alerts"
+  else
+    printf '%s\n' "$s"
+  fi
+done
