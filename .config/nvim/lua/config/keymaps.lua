@@ -25,8 +25,14 @@ vim.keymap.set("v", "$", "g_", { silent = true })
 
 -- 折りたたみ
 -- WezTerm の Kitty Keyboard Protocol + tmux の extended-keys 経由で <S-CR> が届く
-vim.keymap.set("n", "<CR>", "zo<CR>", { noremap = true })
-vim.keymap.set("n", "<S-CR>", "zc<CR>", { noremap = true })
+-- 通常バッファでのみ fold 操作にし、quickfix/help などの特殊バッファでは
+-- 本来の <CR>/<S-CR> （quickfix のジャンプ等）を維持する
+vim.keymap.set("n", "<CR>", function()
+  return vim.bo.buftype == "" and "zo<CR>" or "<CR>"
+end, { expr = true, silent = true })
+vim.keymap.set("n", "<S-CR>", function()
+  return vim.bo.buftype == "" and "zc<CR>" or "<S-CR>"
+end, { expr = true, silent = true })
 
 -- Command mode でのカーソル移動
 vim.keymap.set("c", "<C-h>", "<Left>")
