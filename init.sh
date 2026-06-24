@@ -52,6 +52,7 @@ mkdir -p "${HOME}/.claude"
 ln -nfs "${DOTFILES_ROOT}/dot_claude/skills" "${HOME}/.claude/skills"
 ln -nfs "${DOTFILES_ROOT}/dot_claude/CLAUDE.md" "${HOME}/.claude/CLAUDE.md"
 ln -nfs "${DOTFILES_ROOT}/dot_claude/settings.json" "${HOME}/.claude/settings.json"
+ln -nfs "${DOTFILES_ROOT}/dot_claude/statusline-command.sh" "${HOME}/.claude/statusline-command.sh"
 
 # tmux
 TPM_ROOT="${HOME}/.tmux/plugins/tpm"
