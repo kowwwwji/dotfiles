@@ -6,7 +6,7 @@
         "hooks": [
           {
             "type": "command",
-            "command": "tmux_info=$(tmux display-message -p '#S' 2>/dev/null); terminal-notifier -title \"Claude Code: ${tmux_info}\" -message \" コマンド実行していいですか\" -sound default "
+            "command": "tmux_info=$(tmux display-message -p -t \"$TMUX_PANE\" '#S:#W' 2>/dev/null); terminal-notifier -title \"Claude Code: ${tmux_info}\" -message \" コマンド実行していいですか\" -sound default "
           }
         ]
       }
@@ -17,7 +17,7 @@
         "hooks": [
           {
             "type": "command",
-            "command": "tmux_info=$(tmux display-message -p '#S' 2>/dev/null); terminal-notifier -title \"Claude Code: ${tmux_info}\" -message '終わったよ' -sound default; tty=$(tmux display -p -t \"$TMUX_PANE\" '#{pane_tty}' 2>/dev/null); [ -n \"$tty\" ] && printf '\\a' > \"$tty\""
+            "command": "tmux_info=$(tmux display-message -p -t \"$TMUX_PANE\" '#S:#W' 2>/dev/null); terminal-notifier -title \"Claude Code: ${tmux_info}\" -message '終わったよ' -sound default; tty=$(tmux display -p -t \"$TMUX_PANE\" '#{pane_tty}' 2>/dev/null); [ -n \"$tty\" ] && printf '\\a' > \"$tty\""
           }
         ]
       }
