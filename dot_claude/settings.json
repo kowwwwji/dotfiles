@@ -45,8 +45,8 @@
   "alwaysThinkingEnabled": true,
   "effortLevel": "medium",
   "tui": "fullscreen",
+  "skipWorkflowUsageWarning": true,
   "theme": "dark-daltonized",
   "agentPushNotifEnabled": true,
-  "skipAutoPermissionPrompt": true,
-  "skipWorkflowUsageWarning": true
+  "skipAutoPermissionPrompt": true
 }
