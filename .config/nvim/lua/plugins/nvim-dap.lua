@@ -117,7 +117,10 @@ return {
         "microsoft/vscode-js-debug",
         -- After install, build it and rename the dist directory to out
         -- build = "rm .nvmrc && npm install --legacy-peer-deps --no-save && npx gulp vsDebugServerBundle && rm -rf out && mv dist out",
-        build = "npm install --legacy-peer-deps && npm run compile",
+        -- npm install が package-lock.json を再正規化して git に差分が残り、
+        -- 次回 :Lazy update が「local changes あり」でブロックされる。
+        -- ビルド末尾でロックファイルを元に戻し、作業ツリーを常にクリーンに保つ。
+        build = "npm install --legacy-peer-deps && npm run compile && git checkout -- package-lock.json",
         version = "1.*",
       },
       {
