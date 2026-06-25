@@ -64,3 +64,22 @@ customCommands:
     command: "gwq add -b {{.Form.Name}}"
     loadingText: "Creating worktree with gwq..."
     output: terminal
+
+  # 選択中のブランチをGitHubで開く（branch / PR をメニューで選択）
+  # <c-o> は copyToClipboard 等デフォルトと衝突するため未使用の <c-g>(github) を採用
+  - key: "<c-g>"
+    context: "localBranches"
+    description: "Open selected branch on GitHub (branch / PR)"
+    prompts:
+      - type: "menu"
+        key: "Action"
+        title: "Open on GitHub"
+        options:
+          - name: "branch"
+            description: "Open the branch page (gh browse --branch)"
+            value: "browse --branch"
+          - name: "pr"
+            description: "Open the pull request (gh pr view --web)"
+            value: "pr view --web"
+    command: "gh {{.Form.Action}} {{.SelectedLocalBranch.Name | quote}}"
+    loadingText: "Opening on GitHub..."
