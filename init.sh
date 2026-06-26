@@ -54,6 +54,15 @@ ln -nfs "${DOTFILES_ROOT}/dot_claude/CLAUDE.md" "${HOME}/.claude/CLAUDE.md"
 ln -nfs "${DOTFILES_ROOT}/dot_claude/settings.json" "${HOME}/.claude/settings.json"
 ln -nfs "${DOTFILES_ROOT}/dot_claude/statusline-command.sh" "${HOME}/.claude/statusline-command.sh"
 
+# mise: .tool-versions の言語ランタイム + Go製CLIツールを導入
+# 注: mise は brew bundle で入るため、フレッシュPCでは init.sh 時点で未インストール。
+#     その場合はスキップし、brew bundle 後に init.sh を再実行（または `mise install`）すれば効く。
+if command -v mise >/dev/null 2>&1; then
+  mise install
+else
+  echo "mise が未インストールのため mise install をスキップ（brew bundle 後に再実行してください）"
+fi
+
 # tmux
 TPM_ROOT="${HOME}/.tmux/plugins/tpm"
 [[ ! -e "$TPM_ROOT" ]] && git clone https://github.com/tmux-plugins/tpm "$TPM_ROOT"

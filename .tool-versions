@@ -8,3 +8,6 @@ deno   1.39.0
 maven  3.9.6
 rust   1.76.0
 yarn   1.22.22
+
+# Go製CLIツール（mise の go バックエンドで go install 相当を再現）
+go:github.com/mattn/memo latest
