@@ -50,6 +50,7 @@ fi
 # claude
 mkdir -p "${HOME}/.claude/hooks"
 ln -nfs "${DOTFILES_ROOT}/dot_claude/skills" "${HOME}/.claude/skills"
+ln -nfs "${DOTFILES_ROOT}/dot_claude/rules" "${HOME}/.claude/rules"
 ln -nfs "${DOTFILES_ROOT}/dot_claude/CLAUDE.md" "${HOME}/.claude/CLAUDE.md"
 ln -nfs "${DOTFILES_ROOT}/dot_claude/settings.json" "${HOME}/.claude/settings.json"
 ln -nfs "${DOTFILES_ROOT}/dot_claude/statusline-command.sh" "${HOME}/.claude/statusline-command.sh"
