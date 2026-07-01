@@ -9,11 +9,16 @@ input=$(cat)
 cmd=$(printf '%s' "$input" | jq -r '.tool_input.command // empty')
 [ -n "$cmd" ] || exit 0
 
+# クォートで囲まれた引数値（コミットメッセージ等）を除去してから検査する。
+# 破壊的コマンドはクォートに包まれない前提で、メッセージ内の "git push" 等の
+# 語による誤検知を防ぐ（トレードオフ: `sh -c "rm -rf ..."` は検知しない）。
+scrubbed=$(printf '%s' "$cmd" | sed -e "s/'[^']*'//g" -e 's/"[^"]*"//g')
+
 # 最初にマッチしたパターンの理由を採用する。パターンは拡張正規表現（grep -E）。
 reason=""
 check() {
   [ -z "$reason" ] || return 0
-  printf '%s' "$cmd" | grep -Eq "$1" && reason="$2"
+  printf '%s' "$scrubbed" | grep -Eq "$1" && reason="$2"
   return 0
 }
 
