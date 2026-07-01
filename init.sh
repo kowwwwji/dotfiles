@@ -48,11 +48,14 @@ if [[ -d "$VSCODE_USER_DIR" ]]; then
 fi
 
 # claude
-mkdir -p "${HOME}/.claude"
+mkdir -p "${HOME}/.claude/hooks"
 ln -nfs "${DOTFILES_ROOT}/dot_claude/skills" "${HOME}/.claude/skills"
 ln -nfs "${DOTFILES_ROOT}/dot_claude/CLAUDE.md" "${HOME}/.claude/CLAUDE.md"
 ln -nfs "${DOTFILES_ROOT}/dot_claude/settings.json" "${HOME}/.claude/settings.json"
 ln -nfs "${DOTFILES_ROOT}/dot_claude/statusline-command.sh" "${HOME}/.claude/statusline-command.sh"
+# hooks: dot_claude/hooks/ 配下は個別リンク（新規追加時はここに1行足す）
+ln -nfs "${DOTFILES_ROOT}/dot_claude/hooks/notify.sh" "${HOME}/.claude/hooks/notify.sh"
+ln -nfs "${DOTFILES_ROOT}/dot_claude/hooks/stop.sh" "${HOME}/.claude/hooks/stop.sh"
 
 # mise: .tool-versions の言語ランタイム + Go製CLIツールを導入
 # 注: mise は brew bundle で入るため、フレッシュPCでは init.sh 時点で未インストール。
