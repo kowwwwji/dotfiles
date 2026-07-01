@@ -42,6 +42,15 @@
             "command": "sh ~/.claude/hooks/pre-bash-guard.sh"
           }
         ]
+      },
+      {
+        "matcher": "Edit|Write|NotebookEdit",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "sh ~/.claude/hooks/require-worktree.sh"
+          }
+        ]
       }
     ]
   },
