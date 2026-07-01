@@ -56,6 +56,8 @@ ln -nfs "${DOTFILES_ROOT}/dot_claude/statusline-command.sh" "${HOME}/.claude/sta
 # hooks: dot_claude/hooks/ 配下は個別リンク（新規追加時はここに1行足す）
 ln -nfs "${DOTFILES_ROOT}/dot_claude/hooks/notify.sh" "${HOME}/.claude/hooks/notify.sh"
 ln -nfs "${DOTFILES_ROOT}/dot_claude/hooks/stop.sh" "${HOME}/.claude/hooks/stop.sh"
+ln -nfs "${DOTFILES_ROOT}/dot_claude/hooks/session-start.sh" "${HOME}/.claude/hooks/session-start.sh"
+ln -nfs "${DOTFILES_ROOT}/dot_claude/hooks/pre-bash-guard.sh" "${HOME}/.claude/hooks/pre-bash-guard.sh"
 
 # mise: .tool-versions の言語ランタイム + Go製CLIツールを導入
 # 注: mise は brew bundle で入るため、フレッシュPCでは init.sh 時点で未インストール。
