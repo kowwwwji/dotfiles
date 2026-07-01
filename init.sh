@@ -62,6 +62,7 @@ ln -nfs "${DOTFILES_ROOT}/dot_claude/hooks/notify.sh" "${HOME}/.claude/hooks/not
 ln -nfs "${DOTFILES_ROOT}/dot_claude/hooks/stop.sh" "${HOME}/.claude/hooks/stop.sh"
 ln -nfs "${DOTFILES_ROOT}/dot_claude/hooks/session-start.sh" "${HOME}/.claude/hooks/session-start.sh"
 ln -nfs "${DOTFILES_ROOT}/dot_claude/hooks/pre-bash-guard.sh" "${HOME}/.claude/hooks/pre-bash-guard.sh"
+ln -nfs "${DOTFILES_ROOT}/dot_claude/hooks/require-worktree.sh" "${HOME}/.claude/hooks/require-worktree.sh"
 
 # mise: .tool-versions の言語ランタイム + Go製CLIツールを導入
 # 注: mise は brew bundle で入るため、フレッシュPCでは init.sh 時点で未インストール。
