@@ -1,16 +1,19 @@
 #!/bin/sh
 # Claude Code の PreToolUse(Edit|Write|NotebookEdit) hook。
-# auto mode(bypassPermissions) でメインの作業ツリーにいるときは編集を deny し、
+# 自律編集モード（auto / bypassPermissions）でメインの作業ツリーにいるときは編集を deny し、
 # git worktree の中でしか自律編集できないよう矯正する
-# （原則7: 全自動より軽い確認。auto mode の影響範囲を worktree に閉じ込める）。
+# （原則7: 全自動より軽い確認。自律編集の影響範囲を worktree に閉じ込める）。
 # deny は permission-mode チェックより前に効くため bypass でも回避できない。
 # 使い方: settings.json の hooks.PreToolUse(matcher "Edit|Write|NotebookEdit") から呼ぶ。
 
 input=$(cat)
 
-# auto mode 以外は通常フローに委ねる。
+# 自律編集モード以外（default / acceptEdits / plan）は通常フローに委ねる。
 mode=$(printf '%s' "$input" | jq -r '.permission_mode // empty')
-[ "$mode" = "bypassPermissions" ] || exit 0
+case "$mode" in
+  auto | bypassPermissions) ;;
+  *) exit 0 ;;
+esac
 
 cwd=$(printf '%s' "$input" | jq -r '.cwd // empty')
 [ -n "$cwd" ] || exit 0
