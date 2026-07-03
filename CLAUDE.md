@@ -62,6 +62,12 @@ chezmoi の自動変換ではなく、`dot_claude/` を明示的に `~/.claude/`
 > `.tmux/` はディレクトリ全体を symlink できない（TPM が `~/.tmux/plugins` を実体で使うため）。
 > よって `.tmux/` 配下の新規スクリプトは必ず init.sh に1行足すこと。
 
+> 例外: `dot_claude/settings.json` は **symlink しない**。Claude Code が `/model` 等の UI 操作を
+> `~/.claude/settings.json` に書き込むため、直結するとリポジトリが汚れ続ける。
+> `.scripts/claude-settings-sync` が「実体の上に base を重ねる」マージで配布する
+> （base にあるキーは全PC共通で base が正、base に無いキーは実体側の値を保持）。
+> **base を編集したら同スクリプトを再実行する**（他PCも pull 後に実行）。
+
 新ファイルを追加したら、**作業中のPCにも今すぐ symlink を張る**（init.sh は再実行しない限り
 効かないため）。例: `ln -nfs "$PWD/.tmux/foo.sh" "$HOME/.tmux/foo.sh"`
 
@@ -75,9 +81,11 @@ chezmoi の自動変換ではなく、`dot_claude/` を明示的に `~/.claude/`
 | git | `~/.config/git/.gitconfig.local` | `.gitconfig` が `[include]` で読み込む。user名/メール等 |
 | ssh | `~/.ssh/config` | 鍵・ホスト設定 |
 | nvim | `~/.config/nvim/lua/config/local.lua` | PC固有のエディタ設定 |
-| Claude | `~/.claude/settings.local.json` | **仕事用**（`movus-kit` 等）・permissions。リポジトリ外の実体 |
+| Claude | `~/.claude/settings.json` | git管理外の実体。Claude Code の自動書き込み（model 等）と machine固有・仕事固有の追記。base に無いキーは `claude-settings-sync` が保持する |
 
-`dot_claude/settings.json` は共有（公式プラグイン・個人の好み）。仕事固有のものをここに書かない。
+`dot_claude/settings.json` は共有 base（hooks・statusline・共通プラグイン・個人の好み）。仕事固有・
+machine固有のものをここに書かない。なお `~/.claude/settings.local.json` は **Claude Code に読み込まれない**
+（local settings はプロジェクトレベル `.claude/settings.local.json` のみ。ユーザーレベルは実測で不読を確認済み）。
 
 ## 補助スクリプトの方針（原則3の具体）
 

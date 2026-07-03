@@ -52,7 +52,14 @@ mkdir -p "${HOME}/.claude/hooks"
 ln -nfs "${DOTFILES_ROOT}/dot_claude/skills" "${HOME}/.claude/skills"
 ln -nfs "${DOTFILES_ROOT}/dot_claude/rules" "${HOME}/.claude/rules"
 ln -nfs "${DOTFILES_ROOT}/dot_claude/CLAUDE.md" "${HOME}/.claude/CLAUDE.md"
-ln -nfs "${DOTFILES_ROOT}/dot_claude/settings.json" "${HOME}/.claude/settings.json"
+# settings.json は symlink せずマージ生成（Claude Code が /model 等を書き込むため。詳細は CLAUDE.md）
+# 注: jq は brew bundle で入るため、フレッシュPCでは init.sh 時点で未インストール。
+#     その場合はスキップし、brew bundle 後に `.scripts/claude-settings-sync` を再実行すれば効く。
+if command -v jq >/dev/null 2>&1; then
+  sh "${DOTFILES_ROOT}/.scripts/claude-settings-sync"
+else
+  echo "jq が未インストールのため claude-settings-sync をスキップ（brew bundle 後に再実行してください）"
+fi
 ln -nfs "${DOTFILES_ROOT}/dot_claude/statusline-command.sh" "${HOME}/.claude/statusline-command.sh"
 # agents: ~/.claude/agents/ にはローカル専用 agent も同居するため個別リンク（新規追加時はここに1行足す）
 mkdir -p "${HOME}/.claude/agents"
