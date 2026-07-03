@@ -26,4 +26,4 @@ commondir=$(git -C "$cwd" rev-parse --path-format=absolute --git-common-dir 2>/d
 # 食い違う＝正しく worktree 内 → 通す。一致＝メイン作業ツリー → deny。
 [ "$gitdir" != "$commondir" ] && exit 0
 
-jq -n '{hookSpecificOutput: {hookEventName: "PreToolUse", permissionDecision: "deny", permissionDecisionReason: "auto mode(bypassPermissions) ではメインの作業ツリーを編集しない。git-start / gwq-window で worktree を作り、その中で起動して作業してください。"}}'
+jq -n '{hookSpecificOutput: {hookEventName: "PreToolUse", permissionDecision: "deny", permissionDecisionReason: "自律編集モード（auto / bypassPermissions）ではメインの作業ツリーを編集しない。~/.claude/rules/worktree.md の手順（gwq）で worktree を作り、その中で作業してください。"}}'
