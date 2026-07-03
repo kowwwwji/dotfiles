@@ -21,8 +21,8 @@ model: sonnet
 - 「作業中PCへ即 symlink したか」も確認(init.sh は再実行しない限り効かない)。
 
 ### 3. machine固有・秘匿の分離（原則2）
-- 秘密・トークン・仕事固有・PC固有設定がコミット対象に混入していないか。`local.*`（`~/.zsh/local.zsh`, `~/.config/git/.gitconfig.local`, `~/.config/nvim/lua/config/local.lua`, `~/.claude/settings.local.json`）へ逃がしてあるか。
-- `dot_claude/settings.json` は共有。ここに仕事固有(`movus-kit` 等)を書いていないか。
+- 秘密・トークン・仕事固有・PC固有設定がコミット対象に混入していないか。git管理外ファイル（`~/.zsh/local.zsh`, `~/.config/git/.gitconfig.local`, `~/.config/nvim/lua/config/local.lua`, Claude は `~/.claude/settings.json` 実体）へ逃がしてあるか。
+- `dot_claude/settings.json` は共有 base。ここに仕事固有(`movus-kit` 等)や揺れるキー(`model`, `effortLevel`)を書いていないか。
 
 ### 4. 最小依存（原則3）
 - 既製バイナリを新規導入していないか。statusline・tmux git 表示・`.scripts/`・hooks 等は `git`/`brew`/`jq`/POSIX sh で完結しているか。build ツール・linter を前提にしていないか。

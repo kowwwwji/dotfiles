@@ -1,0 +1,40 @@
+#!/bin/sh -eu
+# claude-settings-sync: dotfiles の base (dot_claude/settings.json) を ~/.claude/settings.json へマージ反映する
+#
+# ~/.claude/settings.json は Claude Code が /model 等の UI 操作を書き込む先のため、
+# symlink でリポジトリに直結するとリポジトリが汚れ続ける。そこで実体を git 管理外に置き、
+# 「実体の上に base を重ねる」一方向マージで共有設定だけを配布する。
+#   - base にあるキー: base が正（全PCで固定。実体側での変更は次回 sync で戻る）
+#   - 実体にしかないキー（model, effortLevel 等）: 保持（machine 固有・揺れは実体に閉じる）
+# 注意: base からのキー削除は伝播しない。プラグイン等を無効化したいときは削除でなく false を明示する。
+
+# ~/.scripts はディレクトリ symlink なので pwd -P で実体パスに解決してリポジトリを特定する
+SCRIPT_DIR=$(CDPATH= cd -- "$(dirname -- "$0")" && pwd -P)
+BASE="$(dirname "$SCRIPT_DIR")/dot_claude/settings.json"
+DEST="${HOME}/.claude/settings.json"
+
+if ! command -v jq >/dev/null 2>&1; then
+  echo '❌ jq が見つかりません。`brew install jq` でインストールしてください' >&2
+  exit 1
+fi
+
+# base が壊れていたら実体に触る前に止める
+jq -e . "$BASE" >/dev/null
+
+mkdir -p "${HOME}/.claude"
+
+# 旧 symlink 運用からの移行: リンク先の内容で実体化してから通常フローへ
+if [ -L "$DEST" ]; then
+  cat "$DEST" > "${DEST}.tmp"
+  rm "$DEST"
+  mv "${DEST}.tmp" "$DEST"
+fi
+
+if [ -f "$DEST" ]; then
+  jq -s '.[0] * .[1]' "$DEST" "$BASE" > "${DEST}.tmp"
+  mv "${DEST}.tmp" "$DEST"
+else
+  cp "$BASE" "$DEST"
+fi
+
+echo "✅ ~/.claude/settings.json に base をマージしました"
