@@ -62,3 +62,9 @@
 ## tmux
 
 「tmux の〇ペインを見て」系の依頼を受けたら `~/.claude/rules/tmux.md` の手順に従う。
+
+---
+
+## worktree
+
+worktree を切って作業するとき（require-worktree hook に deny されたときを含む）は `~/.claude/rules/worktree.md` の手順に従う（作成は gwq）。
