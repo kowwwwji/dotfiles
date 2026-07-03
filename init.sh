@@ -25,6 +25,11 @@ ln -nfs "${DOTFILES_ROOT}/.config/lazygit/scripts" "${HOME}/.config/lazygit/"
 ln -nfs "${DOTFILES_ROOT}/.config/nvim" "${HOME}/.config/"
 ln -nfs "${DOTFILES_ROOT}/.config/sheldon" "${HOME}/.config/"
 ln -nfs "${DOTFILES_ROOT}/.config/wezterm" "${HOME}/.config/"
+# memo: 旧構成の名残で ~/.config/memo がディレクトリごと repo への symlink だと、
+# ln がリンクを貫通して repo 側の実ファイルを自己参照リンクに置き換えてしまう。
+# 実ディレクトリに正してから file 単位でリンクする。
+[[ -L "${HOME}/.config/memo" ]] && rm "${HOME}/.config/memo"
+mkdir -p "${HOME}/.config/memo"
 ln -nfs "${DOTFILES_ROOT}/.config/memo/config.toml" "${HOME}/.config/memo/config.toml"
 
 mkdir -p "${HOME}/.config/karabiner/assets"
