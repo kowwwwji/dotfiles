@@ -8,6 +8,11 @@
 - **Why**: gwq の規約パス外に作った worktree は `gwq get` / `gwq-window`（fzf →
   tmux window 切替）の一覧に載らず、ghq → gwq → tmux window の統合ワークフローと
   可視性から外れる。
+- **ブランチ名は `type/短い説明`**（type はコミット規約と同じ語彙: add / fix /
+  refactor / docs / update / delete。例: `add/worktree-rule`）。対応するタスクが
+  Linear にあれば ID を説明の前に入れる（例: `fix/MOV-677-settings-sync`）。
+  Linear はブランチ名中の ID で issue へ自動リンクする。`gwq-window` が tmux の
+  window 名にブランチ名をそのまま使うため、説明は短く保つ。
 - パスは `gwq get <branch>` で解決する。
 - Claude Code セッションを worktree へ移すときは EnterWorktree を `path` 指定
   （`gwq get` の結果）で使う。Bash の `cd` はハーネスが元のディレクトリへ戻すため
