@@ -72,7 +72,7 @@ sudo shutdown -r now
 tmux # [ctrl+\ + I]でtmux pluginをインストール
 nv # neovim関連のインストール
 
-open -a Raycast # Advanced > Import/Export
+open -a Raycast # Advanced > Import/Export。さらに Settings > Extensions > Script Commands に ~/.scripts/raycast を登録
 open -a BetterTouchTool
 open -a karabiner-elements
 ```
