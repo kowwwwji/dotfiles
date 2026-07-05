@@ -33,7 +33,13 @@ mkdir -p "${HOME}/.config/memo"
 ln -nfs "${DOTFILES_ROOT}/.config/memo/config.toml" "${HOME}/.config/memo/config.toml"
 
 mkdir -p "${HOME}/.config/karabiner/assets"
-ln -nfs "${DOTFILES_ROOT}/.config/karabiner/karabiner.json" "${HOME}/.config/karabiner/karabiner.json"
+# karabiner.json は symlink せず sync で配布（Karabiner が保存時にファイルを置き換えて
+# symlink が切れるため。詳細は CLAUDE.md）。jq 未導入時の扱いは claude-settings-sync と同じ。
+if command -v jq >/dev/null 2>&1; then
+  sh "${DOTFILES_ROOT}/.scripts/karabiner-settings-sync"
+else
+  echo "jq が未インストールのため karabiner-settings-sync をスキップ（brew bundle 後に再実行してください）"
+fi
 ln -nfs "${DOTFILES_ROOT}/.config/karabiner/assets/complex_modifications" "${HOME}/.config/karabiner/assets/complex_modifications"
 
 mkdir -p "${HOME}/.config/git/"
