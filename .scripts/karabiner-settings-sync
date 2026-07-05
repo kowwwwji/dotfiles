@@ -1,0 +1,54 @@
+#!/bin/sh
+# karabiner-settings-sync: dotfiles の .config/karabiner/karabiner.json を実体へ反映する
+#
+# Karabiner-Elements は設定保存時（GUI 操作や karabiner_cli --select-profile での
+# selected フラグ書き込みを含む）にファイルを丸ごと置き換えるため、symlink は保存の
+# たびに切れる。そこで実体を git 管理外に置き、リポジトリを正として配布する。
+#   - ルール・設定本体: リポジトリが正（実体側での変更は次回 sync で戻る）
+#   - profiles[].selected: 実体側を保持（どの profile を使うかは machine 状態）
+# 注意: GUI で足したルールは sync で消える。残したいルールは先にリポジトリの
+# karabiner.json へ取り込んでから sync すること。
+
+# shebang でなく本文で set する（init.sh が `sh script` で起動すると shebang の
+# フラグは無視され、base 破損時のガードが素通りして実体を壊すため）
+set -eu
+
+SCRIPT_DIR=$(CDPATH= cd -- "$(dirname -- "$0")" && pwd -P)
+BASE="$(dirname "$SCRIPT_DIR")/.config/karabiner/karabiner.json"
+DEST="${HOME}/.config/karabiner/karabiner.json"
+
+if ! command -v jq >/dev/null 2>&1; then
+  echo '❌ jq が見つかりません。`brew install jq` でインストールしてください' >&2
+  exit 1
+fi
+
+# base が壊れていたら実体に触る前に止める
+jq -e . "$BASE" >/dev/null
+
+mkdir -p "${HOME}/.config/karabiner"
+
+# 旧 symlink 運用からの移行: リンク先の内容で実体化してから通常フローへ
+if [ -L "$DEST" ]; then
+  cat "$DEST" > "${DEST}.tmp"
+  rm "$DEST"
+  mv "${DEST}.tmp" "$DEST"
+fi
+
+# 実体が壊れていても selected 取得だけ諦めて base で復旧できるよう、失敗は空扱いにする
+if [ -f "$DEST" ]; then
+  selected=$(jq -r '[.profiles[]? | select(.selected == true) | .name][0] // empty' "$DEST" 2>/dev/null || true)
+else
+  selected=""
+fi
+
+if [ -n "$selected" ]; then
+  jq --arg cur "$selected" \
+    '.profiles = [.profiles[] | (if .name == $cur then . + {selected: true} else del(.selected) end)]' \
+    "$BASE" > "${DEST}.tmp"
+  mv "${DEST}.tmp" "$DEST"
+else
+  # 実体が無い/選択情報が無い場合は base をそのまま配布する
+  cp "$BASE" "$DEST"
+fi
+
+echo "✅ ~/.config/karabiner/karabiner.json に base を反映しました（selected: ${selected:-baseのまま}）"
