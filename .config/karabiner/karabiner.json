@@ -5,6 +5,22 @@
             "complex_modifications": {
                 "rules": [
                     {
+                        "description": "ctrl+0 toggles WezTerm and restores previous app",
+                        "manipulators": [
+                            {
+                                "from": {
+                                    "key_code": "0",
+                                    "modifiers": {
+                                        "mandatory": ["control"],
+                                        "optional": ["any"]
+                                    }
+                                },
+                                "to": [{ "shell_command": "open -a WezTerm" }],
+                                "type": "basic"
+                            }
+                        ]
+                    },
+                    {
                         "description": "escキーを押したときに、英数キーも送信する（vim用）",
                         "manipulators": [
                             {
