@@ -1,4 +1,4 @@
-#!/bin/sh -eu
+#!/bin/sh
 # claude-settings-sync: dotfiles の base (dot_claude/settings.json) を ~/.claude/settings.json へマージ反映する
 #
 # ~/.claude/settings.json は Claude Code が /model 等の UI 操作を書き込む先のため、
@@ -7,6 +7,10 @@
 #   - base にあるキー: base が正（全PCで固定。実体側での変更は次回 sync で戻る）
 #   - 実体にしかないキー（model, effortLevel 等）: 保持（machine 固有・揺れは実体に閉じる）
 # 注意: base からのキー削除は伝播しない。プラグイン等を無効化したいときは削除でなく false を明示する。
+
+# shebang でなく本文で set する（init.sh が `sh script` で起動すると shebang の
+# フラグは無視され、base 破損時のガードが素通りして実体を壊すため）
+set -eu
 
 # ~/.scripts はディレクトリ symlink なので pwd -P で実体パスに解決してリポジトリを特定する
 SCRIPT_DIR=$(CDPATH= cd -- "$(dirname -- "$0")" && pwd -P)
