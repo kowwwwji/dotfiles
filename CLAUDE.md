@@ -68,6 +68,13 @@ chezmoi の自動変換ではなく、`dot_claude/` を明示的に `~/.claude/`
 > （base にあるキーは全PC共通で base が正、base に無いキーは実体側の値を保持）。
 > **base を編集したら同スクリプトを再実行する**（他PCも pull 後に実行）。
 
+> 例外: `.config/karabiner/karabiner.json` も **symlink しない**。Karabiner-Elements は
+> 設定保存時（GUI 操作や `karabiner_cli --select-profile` を含む）にファイルを丸ごと
+> 置き換えるため、symlink は保存のたびに切れる。`.scripts/karabiner-settings-sync` が
+> リポジトリを正として配布する（`profiles[].selected` のみ実体側を保持）。
+> **リポジトリ側を編集したら同スクリプトを再実行する**。GUI で足したルールは sync で
+> 消えるので、残したいものは先にリポジトリの karabiner.json へ取り込む。
+
 新ファイルを追加したら、**作業中のPCにも今すぐ symlink を張る**（init.sh は再実行しない限り
 効かないため）。例: `ln -nfs "$PWD/.tmux/foo.sh" "$HOME/.tmux/foo.sh"`
 
