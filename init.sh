@@ -115,3 +115,14 @@ mkdir -p "${HOME}/.tmux"
 ln -nfs "${DOTFILES_ROOT}/.tmux/.tmux.dev.conf" "${HOME}/.tmux/.tmux.dev.conf"
 ln -nfs "${DOTFILES_ROOT}/.tmux/git-status.sh" "${HOME}/.tmux/git-status.sh"
 ln -nfs "${DOTFILES_ROOT}/.tmux/session-alerts.sh" "${HOME}/.tmux/session-alerts.sh"
+
+# tmux-which-key: メニュー定義をリポジトリ管理の実体へ向ける
+# 注: plugin ディレクトリ内の config.yaml は plugin 側で gitignore された
+#     カスタマイズ用パス。plugin 本体は tmux 内で prefix+I (TPM) で入るため、
+#     フレッシュPCではプラグインインストール後に init.sh を再実行すれば張られる。
+WHICH_KEY_ROOT="${HOME}/.tmux/plugins/tmux-which-key"
+if [[ -d "$WHICH_KEY_ROOT" ]]; then
+  ln -nfs "${DOTFILES_ROOT}/.tmux/which-key.yaml" "${WHICH_KEY_ROOT}/config.yaml"
+else
+  echo "tmux-which-key が未インストールのため config.yaml の symlink をスキップ（tmux で prefix+I 後に再実行してください）"
+fi
