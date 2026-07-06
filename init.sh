@@ -83,6 +83,9 @@ ln -nfs "${DOTFILES_ROOT}/dot_claude/hooks/pre-bash-guard.sh" "${HOME}/.claude/h
 ln -nfs "${DOTFILES_ROOT}/dot_claude/hooks/require-worktree.sh" "${HOME}/.claude/hooks/require-worktree.sh"
 
 # mise: .tool-versions の言語ランタイム + Go製CLIツールを導入
+# config は mise 未導入でも先に配置する（brew bundle 後の mise がそのまま読めるように）
+mkdir -p "${HOME}/.config/mise"
+ln -nfs "${DOTFILES_ROOT}/.config/mise/config.toml" "${HOME}/.config/mise/config.toml"
 # 注: mise は brew bundle で入るため、フレッシュPCでは init.sh 時点で未インストール。
 #     その場合はスキップし、brew bundle 後に init.sh を再実行（または `mise install`）すれば効く。
 if command -v mise >/dev/null 2>&1; then
