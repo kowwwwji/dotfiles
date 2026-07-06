@@ -1,0 +1,3 @@
+[settings]
+# gwq で切る worktree 配下の .mise.toml を毎回 mise trust しなくて済むようにする
+trusted_config_paths = ["~/worktrees"]
