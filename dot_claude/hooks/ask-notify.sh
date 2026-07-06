@@ -17,6 +17,11 @@ case "$tool" in
   *) msg="入力待ち" ;;
 esac
 
+# この直後に来る permission 通知を notify.sh が重ねないよう、印を残す
+# （notify.sh が一回きりで消費する。詳細な判定は notify.sh 側）。
+session=$(printf '%s' "$input" | jq -r '.session_id // empty')
+[ -n "$session" ] && date +%s > "${TMPDIR:-/tmp}/claude-ask-notify-${session}"
+
 tmux_info=$(tmux display-message -p -t "$TMUX_PANE" '#S:#W' 2>/dev/null)
 terminal-notifier -title "Claude Code: ${tmux_info}" -message "$msg" -sound Ping >/dev/null 2>&1
 exit 0
