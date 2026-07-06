@@ -22,3 +22,8 @@ vim.opt.listchars = {
 
 -- スワップファイルを作らない
 vim.opt.swapfile = false
+
+-- 日本語（CJK文字）を spell check の対象外にする
+-- LazyVim が markdown 等で spell を有効化するが、spelllang=en のままだと
+-- 日本語がすべて誤字扱いされて下線がつくため（:h spell-cjk）
+vim.opt.spelllang = { "en", "cjk" }
