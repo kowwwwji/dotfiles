@@ -13,5 +13,9 @@ message=$(printf '%s' "$input" | jq -r '.message // empty')
 [ "$type" = "idle_prompt" ] && exit 0
 case "$message" in *"waiting for your input"*) exit 0 ;; esac
 
+# payload の message（例: "Claude needs your permission to use Bash"）を出し、
+# 何の許可待ちかを通知だけで分かるようにする。
+[ -n "$message" ] || message="コマンド実行していいですか"
+
 tmux_info=$(tmux display-message -p -t "$TMUX_PANE" '#S:#W' 2>/dev/null)
-terminal-notifier -title "Claude Code: ${tmux_info}" -message "コマンド実行していいですか" -sound Ping
+terminal-notifier -title "Claude Code: ${tmux_info}" -message "$message" -sound Ping

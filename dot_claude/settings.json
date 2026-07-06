@@ -51,6 +51,15 @@
             "command": "sh ~/.claude/hooks/require-worktree.sh"
           }
         ]
+      },
+      {
+        "matcher": "AskUserQuestion|ExitPlanMode",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "sh ~/.claude/hooks/ask-notify.sh"
+          }
+        ]
       }
     ]
   },
