@@ -4,7 +4,7 @@
 # 使い方: settings.json の hooks.Stop から `sh ~/.claude/hooks/stop.sh` で呼ぶ。
 
 tmux_info=$(tmux display-message -p -t "$TMUX_PANE" '#S:#W' 2>/dev/null)
-terminal-notifier -title "Claude Code: ${tmux_info}" -message '終わったよ' -sound default
+terminal-notifier -title "Claude Code: ${tmux_info}" -message '終わったよ' -sound Glass
 
 # 発火元 pane の tty に bell(\a)を直接書き込む。裏 window でも monitor-bell フラグが立つ。
 tty=$(tmux display -p -t "$TMUX_PANE" '#{pane_tty}' 2>/dev/null)
