@@ -89,6 +89,9 @@ ln -nfs "${DOTFILES_ROOT}/.config/mise/config.toml" "${HOME}/.config/mise/config
 # 注: mise は brew bundle で入るため、フレッシュPCでは init.sh 時点で未インストール。
 #     その場合はスキップし、brew bundle 後に init.sh を再実行（または `mise install`）すれば効く。
 if command -v mise >/dev/null 2>&1; then
+  # mise は config を実体パスで信頼管理するため、symlink 先のリポジトリパスを明示的に trust する
+  # （デフォルト信頼パスは ~/.config/mise 直下のみ。trust しないと mise install が失敗する）
+  mise trust "${DOTFILES_ROOT}/.config/mise/config.toml"
   mise install
 else
   echo "mise が未インストールのため mise install をスキップ（brew bundle 後に再実行してください）"
