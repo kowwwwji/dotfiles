@@ -13,11 +13,18 @@ message=$(printf '%s' "$input" | jq -r '.message // empty')
 [ "$type" = "idle_prompt" ] && exit 0
 case "$message" in *"waiting for your input"*) exit 0 ;; esac
 
-# 質問・Plan承認の permission 通知は ask-notify.sh（PreToolUse）が質問文つきで
-# 通知するため、ここでも出すと同じ場面で通知が2通重なる。こちらを黙らせる。
-case "$message" in
-  *"permission to use AskUserQuestion"*|*"permission to use ExitPlanMode"*) exit 0 ;;
-esac
+# 質問・Plan承認では ask-notify.sh（PreToolUse）が質問文つきで通知済みのため、
+# 直後に来る permission 通知（message にツール名が入らず文言では判別不能）を
+# 重ねない。ask-notify.sh が残す印を一回きりで消費し、10秒以内なら黙る。
+if [ "$type" = "permission_prompt" ] || [ -z "$type" ]; then
+  session=$(printf '%s' "$input" | jq -r '.session_id // empty')
+  marker="${TMPDIR:-/tmp}/claude-ask-notify-${session}"
+  if [ -n "$session" ] && [ -f "$marker" ]; then
+    marked_at=$(cat "$marker")
+    rm -f "$marker"
+    [ $(( $(date +%s) - marked_at )) -le 10 ] && exit 0
+  fi
+fi
 
 # payload の message（例: "Claude needs your permission to use Bash"）を出し、
 # 何の許可待ちかを通知だけで分かるようにする。
