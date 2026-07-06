@@ -39,6 +39,10 @@ check '(tofu|terraform)[[:space:]]+(apply|destroy)'          'IaC の apply/dest
 check 'kubectl[[:space:]]+(delete|apply)'                     'kubectl によるクラスタ変更'
 
 if [ -n "$reason" ]; then
+  # PreToolUse の ask 起因の許可プロンプトでは Notification イベントが発火せず
+  # notify.sh が呼ばれないため、ここで直接通知する（原則4: awareness）。
+  tmux_info=$(tmux display-message -p -t "$TMUX_PANE" '#S:#W' 2>/dev/null)
+  terminal-notifier -title "Claude Code: ${tmux_info}" -message "確認が必要: ${reason}" -sound default >/dev/null 2>&1
   jq -n --arg r "$reason" \
     '{hookSpecificOutput: {hookEventName: "PreToolUse", permissionDecision: "ask", permissionDecisionReason: ("確認が必要: " + $r)}}'
 fi
