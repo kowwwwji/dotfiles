@@ -14,4 +14,4 @@ message=$(printf '%s' "$input" | jq -r '.message // empty')
 case "$message" in *"waiting for your input"*) exit 0 ;; esac
 
 tmux_info=$(tmux display-message -p -t "$TMUX_PANE" '#S:#W' 2>/dev/null)
-terminal-notifier -title "Claude Code: ${tmux_info}" -message "コマンド実行していいですか" -sound default
+terminal-notifier -title "Claude Code: ${tmux_info}" -message "コマンド実行していいですか" -sound Ping
