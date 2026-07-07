@@ -26,7 +26,7 @@ macros:
   - name: reload-config
     commands:
       - display "#{log_info} Loading config... "
-      - source-file $HOME/.tmux.conf
+      - run-shell "$HOME/.tmux/reload.sh"
       - display -p "\n\n... Press ENTER to continue"
   - name: restart-pane
     commands:
