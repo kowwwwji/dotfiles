@@ -2,7 +2,7 @@
   path = ~/.config/git/.gitconfig.local
 [core]
   editor = vi
-  excludesfile = ~/.gitignore
+  excludesfile = ~/.gitignore_global
   pager = delta
 [interactive]
   diffFilter = delta --color-only

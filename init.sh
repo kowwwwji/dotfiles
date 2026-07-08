@@ -3,10 +3,14 @@
 DOTFILES_ROOT=$(ghq root)/github.com/kowwwwji/dotfiles
 
 # ドットファイルのシンボリックリンク作成
+# 注: .gitignore はこのリポジトリ専用のため $HOME に張らない（global 用は .gitignore_global）。
 for i in ./.* ; do
-  [[ "$i" == "./." || "$i" == "./.." || "$i" == "./init.sh" ]] && continue
+  [[ "$i" == "./." || "$i" == "./.." || "$i" == "./init.sh" || "$i" == "./.gitignore" ]] && continue
   [[ -f "$i" ]] && ln -nfs "${DOTFILES_ROOT}/${i##./}" "${HOME}/${i##./}"
 done
+# 旧構成（repo の .gitignore を global 兼用で ~/.gitignore に張っていた）の名残は
+# 誤参照のもとになるため掃除する。
+[[ -L "${HOME}/.gitignore" ]] && rm "${HOME}/.gitignore"
 
 # vim
 mkdir -p "${HOME}/.config/vim/"
@@ -72,9 +76,14 @@ else
   echo "jq が未インストールのため claude-settings-sync をスキップ（brew bundle 後に再実行してください）"
 fi
 ln -nfs "${DOTFILES_ROOT}/dot_claude/statusline-command.sh" "${HOME}/.claude/statusline-command.sh"
-# agents: ~/.claude/agents/ にはローカル専用 agent も同居するため個別リンク（新規追加時はここに1行足す）
+# agents: 汎用 agent は ~/.claude/agents/ へ個別リンク（ローカル専用 agent も同居するため。
+# 新規追加時はここに1行足す）。このリポジトリ専用 agent（dotfiles-reviewer 等）は
+# .claude/agents/ に実体を置くのでリンク不要。
 mkdir -p "${HOME}/.claude/agents"
-ln -nfs "${DOTFILES_ROOT}/dot_claude/agents/dotfiles-reviewer.md" "${HOME}/.claude/agents/dotfiles-reviewer.md"
+ln -nfs "${DOTFILES_ROOT}/dot_claude/agents/code-reviewer.md" "${HOME}/.claude/agents/code-reviewer.md"
+ln -nfs "${DOTFILES_ROOT}/dot_claude/agents/security-auditor.md" "${HOME}/.claude/agents/security-auditor.md"
+# 旧構成（dotfiles-reviewer を ~/.claude/agents/ へ張っていた）のダングリングリンクを掃除する。
+[[ -L "${HOME}/.claude/agents/dotfiles-reviewer.md" ]] && rm "${HOME}/.claude/agents/dotfiles-reviewer.md"
 # hooks: dot_claude/hooks/ 配下は個別リンク（新規追加時はここに1行足す）
 ln -nfs "${DOTFILES_ROOT}/dot_claude/hooks/notify.sh" "${HOME}/.claude/hooks/notify.sh"
 ln -nfs "${DOTFILES_ROOT}/dot_claude/hooks/stop.sh" "${HOME}/.claude/hooks/stop.sh"
