@@ -59,6 +59,7 @@ function prompt_git_worktree() {
     status                  # exit code of the last command
     command_execution_time  # duration of the last command
     background_jobs         # presence of background jobs
+    brew_outdated           # brew の更新可能パッケージ件数（.zsh/brew-outdated.zsh のキャッシュ）
     direnv                  # direnv status (https://direnv.net/)
     asdf                    # asdf version manager (https://github.com/asdf-vm/asdf)
     virtualenv              # python virtual environment (https://docs.python.org/3/library/venv.html)
@@ -1556,6 +1557,19 @@ function prompt_git_worktree() {
   # typeset -g POWERLEVEL9K_TIME_VISUAL_IDENTIFIER_EXPANSION='⭐'
   # Custom prefix.
   # typeset -g POWERLEVEL9K_TIME_PREFIX='%fat '
+
+  # brew の更新可能パッケージ件数。.zsh/brew-outdated.zsh が非同期更新するキャッシュを
+  # 読むだけなので描画をブロックしない。0件・キャッシュ不在・不正値のときは非表示。
+  # アイコンは Material Design 系 U+F03D6（package-variant）。literal でなく \U エスケープで
+  # 書くことで、Edit ツールの非ASCII欠落を避けている。
+  function prompt_brew_outdated() {
+    local cache="${BREW_OUTDATED_CACHE:-${XDG_CACHE_HOME:-$HOME/.cache}/brew-outdated-count}"
+    [[ -r $cache ]] || return
+    local count="$(<$cache)"
+    [[ $count == <-> && $count -gt 0 ]] || return
+    p10k segment -f 178 -i $'\U000F03D6' -t "$count"
+  }
+  function instant_prompt_brew_outdated() { prompt_brew_outdated }
 
   # Example of a user-defined prompt segment. Function prompt_example will be called on every
   # prompt if `example` prompt segment is added to POWERLEVEL9K_LEFT_PROMPT_ELEMENTS or
