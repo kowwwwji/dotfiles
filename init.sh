@@ -131,6 +131,7 @@ mkdir -p "${HOME}/.tmux"
 ln -nfs "${DOTFILES_ROOT}/.tmux/.tmux.dev.conf" "${HOME}/.tmux/.tmux.dev.conf"
 ln -nfs "${DOTFILES_ROOT}/.tmux/git-status.sh" "${HOME}/.tmux/git-status.sh"
 ln -nfs "${DOTFILES_ROOT}/.tmux/session-alerts.sh" "${HOME}/.tmux/session-alerts.sh"
+ln -nfs "${DOTFILES_ROOT}/.tmux/loadavg.sh" "${HOME}/.tmux/loadavg.sh"
 ln -nfs "${DOTFILES_ROOT}/.tmux/reload.sh" "${HOME}/.tmux/reload.sh"
 
 # tmux-which-key: メニュー定義をリポジトリ管理の実体へ向ける
