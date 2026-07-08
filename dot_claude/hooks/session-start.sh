@@ -9,8 +9,16 @@ input=$(cat)
 cwd=$(printf '%s' "$input" | jq -r '.cwd // empty')
 [ -n "$cwd" ] || cwd=$PWD
 
-# lessons の探索場所（commit されない .claude/tasks を優先、無ければ tasks/）
-for f in "$cwd/.claude/tasks/lessons.md" "$cwd/tasks/lessons.md"; do
+# worktree で起動したセッションは gitignore 済みの .claude/ を持たないため、
+# main worktree 側にもフォールバックする（--git-common-dir は worktree でも main の
+# .git を指す）。main 自身や git 外では cwd と同じ場所を指すだけで無害。
+main=$(git -C "$cwd" rev-parse --path-format=absolute --git-common-dir 2>/dev/null)
+main=${main%/.git}
+
+# lessons の探索場所（commit されない .claude/tasks を優先、無ければ tasks/。
+# cwd に無ければ main worktree 側を同順で探す）
+for f in "$cwd/.claude/tasks/lessons.md" "$cwd/tasks/lessons.md" \
+         "${main:+$main/.claude/tasks/lessons.md}" "${main:+$main/tasks/lessons.md}"; do
   [ -f "$f" ] || continue
   lessons=$(cat "$f")
   [ -n "$lessons" ] || continue
