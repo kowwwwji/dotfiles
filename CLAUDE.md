@@ -75,6 +75,12 @@ chezmoi の自動変換ではなく、`dot_claude/` を明示的に `~/.claude/`
 > **リポジトリ側を編集したら同スクリプトを再実行する**。GUI で足したルールは sync で
 > 消えるので、残したいものは先にリポジトリの karabiner.json へ取り込む。
 
+> agent のスコープ: 汎用 agent は `dot_claude/agents/`（init.sh で `~/.claude/agents/` へ個別リンク）、
+> このリポジトリ専用 agent は `.claude/agents/` に実体を置く（`.gitignore` の carve-out で追跡。リンク不要）。
+
+> ignore の書き分け: `.gitignore` は**このリポジトリ専用**（$HOME には張らない）。全リポジトリ共通の
+> パターンは `.gitignore_global`（init.sh が `~/.gitignore_global` へリンクし、core.excludesfile が参照）へ。
+
 新ファイルを追加したら、**作業中のPCにも今すぐ symlink を張る**（init.sh は再実行しない限り
 効かないため）。例: `ln -nfs "$PWD/.tmux/foo.sh" "$HOME/.tmux/foo.sh"`
 
