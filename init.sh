@@ -75,6 +75,12 @@ if command -v jq >/dev/null 2>&1; then
 else
   echo "jq が未インストールのため claude-settings-sync をスキップ（brew bundle 後に再実行してください）"
 fi
+# user スコープ MCP は ~/.claude.json が置き場所のため symlink 不可。claude CLI 経由で配布（詳細は CLAUDE.md）
+if command -v claude >/dev/null 2>&1; then
+  sh "${DOTFILES_ROOT}/.scripts/claude-mcp-sync"
+else
+  echo "claude が未インストールのため claude-mcp-sync をスキップ（Claude Code 導入後に再実行してください）"
+fi
 ln -nfs "${DOTFILES_ROOT}/dot_claude/statusline-command.sh" "${HOME}/.claude/statusline-command.sh"
 # agents: 汎用 agent は ~/.claude/agents/ へ個別リンク（ローカル専用 agent も同居するため。
 # 新規追加時はここに1行足す）。このリポジトリ専用 agent（dotfiles-reviewer 等）は

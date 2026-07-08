@@ -1,0 +1,32 @@
+#!/bin/sh
+# claude-mcp-sync: user スコープの独自 MCP サーバー定義を ~/.claude.json へ反映する
+#
+# user スコープ MCP の置き場所は ~/.claude.json（Claude Code が頻繁に書き込む
+# ホットな状態ファイル・git 管理外）のため、settings-sync のような jq 直接編集は
+# 意図しない上書きのリスクが高い。公式 CLI（claude mcp add-json --scope user）経由で書かせる。
+# サーバー定義はこのスクリプト内にインラインで持つ（ここが正。base を編集したら
+# 全PCで本スクリプトを再実行して配布する）。
+#
+# 注意: add-json は同名既存時に「already exists」で失敗し更新されないため、
+# remove を先行させて置き換える（定義の更新も配布できるようにする）。
+
+# shebang でなく本文で set する（init.sh が `sh script` で起動すると shebang の
+# フラグは無視されるため）
+set -eu
+
+if ! command -v claude >/dev/null 2>&1; then
+  echo '❌ claude CLI が見つかりません。Claude Code をインストールしてください' >&2
+  exit 1
+fi
+
+# serena: 複数プロジェクトで使う個人ツールなので user スコープ（公式推奨に合致）。
+# --project . は起動ディレクトリ（= 各プロジェクトのルート）を指す。
+claude mcp remove --scope user serena >/dev/null 2>&1 || true
+claude mcp add-json --scope user serena '{
+  "type": "stdio",
+  "command": "uvx",
+  "args": ["--from", "git+https://github.com/oraios/serena", "serena",
+           "start-mcp-server", "--context", "ide-assistant", "--project", "."]
+}' >/dev/null
+
+echo "✅ ~/.claude.json に user スコープ MCP を反映しました"
