@@ -1,6 +1,7 @@
 tap "sanemat/font"
 tap "nikitabobko/tap"
 tap "microsoft/git"
+tap "homebrew/autoupdate"
 tap "felixkratz/formulae"
 tap "d-kuro/tap"
 mas "Xcode", id: 497799835
