@@ -3,10 +3,14 @@
 DOTFILES_ROOT=$(ghq root)/github.com/kowwwwji/dotfiles
 
 # ドットファイルのシンボリックリンク作成
+# 注: .gitignore はこのリポジトリ専用のため $HOME に張らない（global 用は .gitignore_global）。
 for i in ./.* ; do
-  [[ "$i" == "./." || "$i" == "./.." || "$i" == "./init.sh" ]] && continue
+  [[ "$i" == "./." || "$i" == "./.." || "$i" == "./init.sh" || "$i" == "./.gitignore" ]] && continue
   [[ -f "$i" ]] && ln -nfs "${DOTFILES_ROOT}/${i##./}" "${HOME}/${i##./}"
 done
+# 旧構成（repo の .gitignore を global 兼用で ~/.gitignore に張っていた）の名残は
+# 誤参照のもとになるため掃除する。
+[[ -L "${HOME}/.gitignore" ]] && rm "${HOME}/.gitignore"
 
 # vim
 mkdir -p "${HOME}/.config/vim/"

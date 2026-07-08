@@ -1,0 +1,7 @@
+# 全リポジトリ共通の ignore。init.sh が ~/.gitignore_global へ symlink し、
+# .gitconfig の core.excludesfile が参照する。このリポジトリ固有の ignore は .gitignore へ。
+.DS_Store
+.git
+.tags
+.claude
+.serena

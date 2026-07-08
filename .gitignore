@@ -1,7 +1,5 @@
-.DS_Store
+# このリポジトリ専用の ignore（$HOME には張らない）。全リポジトリ共通の ignore は .gitignore_global へ。
 .config/.gitconfig.local
-.git
-.tags
 .zsh/.zsh_history
 .zsh/local.zsh
 iterm/com.googlecode.iterm2.plist
@@ -9,5 +7,3 @@ iterm/com.googlecode.iterm2.plist
 .config/nvim/lua/config/local.lua
 .config/nvim/lazyvim.json
 .config/nvim/SKK-JISYO.L
-.claude
-.serena
