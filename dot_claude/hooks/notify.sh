@@ -32,3 +32,9 @@ fi
 
 tmux_info=$(tmux display-message -p -t "$TMUX_PANE" '#S:#W' 2>/dev/null)
 terminal-notifier -title "Claude Code: ${tmux_info}" -message "$message" -sound Ping
+
+# 発火元 pane の tty に bell(\a)を直接書き込む。裏 window でも monitor-bell フラグが立ち、
+# 通知を見逃してもステータスバーの色で許可待ちに気づける。
+# 早期 return した重複通知（idle / ask-notify 済み）では bell も鳴らさない。
+tty=$(tmux display -p -t "$TMUX_PANE" '#{pane_tty}' 2>/dev/null)
+[ -n "$tty" ] && printf '\a' > "$tty"
