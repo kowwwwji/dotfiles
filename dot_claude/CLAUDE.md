@@ -59,6 +59,12 @@
 
 ---
 
+## Git / PR
+
+- **PR は必ず draft で作成する**（`gh pr create --draft`）。ready への昇格はユーザーが判断する。
+
+---
+
 ## tmux
 
 「tmux の〇ペインを見て」系の依頼を受けたら `~/.claude/rules/tmux.md` の手順に従う。
