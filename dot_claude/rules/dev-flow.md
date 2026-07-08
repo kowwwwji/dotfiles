@@ -56,4 +56,11 @@ claude セッションを起動して作業を任せる:
 
 ユーザーの「レビューOK / マージして」の指示を受けたら Claude がまとめて行う:
 セッション開始ブランチへのマージ → リポジトリ固有の反映作業（あれば）→
-worktree・ブランチの削除（コマンドは worktree.md）。指示があるまでは何もしない。
+worktree・ブランチの削除（コマンドは worktree.md）→ 委譲先 tmux window のクローズ。
+指示があるまでは何もしない。
+
+- **window のクローズまでが片付け**。window は worktree とセットで作られる（手順2）ため、
+  worktree 削除後に window だけ残るとノイズになる。
+- 委譲先セッション自身が片付けを行う場合、閉じると window 内の claude セッションも
+  終了するため、最終報告を出してから遅延バックグラウンドで自分の window を閉じる
+  （例: `(sleep 3 && tmux kill-window -t <session>:<window>) &`）。
