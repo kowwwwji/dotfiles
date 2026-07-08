@@ -124,6 +124,15 @@ else
   echo "gh が未導入または未認証のため gh extension install をスキップ（gh auth login 後に再実行してください）"
 fi
 
+# brew autoupdate: brew update を毎日自動実行する launchd ジョブを登録（冪等）
+# 注: homebrew/autoupdate tap は brew bundle で入る。フレッシュPCでは init.sh 時点で
+#     未導入のためスキップし、brew bundle 後に init.sh を再実行すれば有効になる。
+if command -v brew >/dev/null 2>&1 && autoupdate_status=$(brew autoupdate status 2>/dev/null); then
+  echo "$autoupdate_status" | grep -q "running" || brew autoupdate start
+else
+  echo "brew または homebrew/autoupdate tap が未導入のため brew autoupdate start をスキップ（brew bundle 後に再実行してください）"
+fi
+
 # tmux
 TPM_ROOT="${HOME}/.tmux/plugins/tpm"
 [[ ! -e "$TPM_ROOT" ]] && git clone https://github.com/tmux-plugins/tpm "$TPM_ROOT"
