@@ -24,4 +24,9 @@ session=$(printf '%s' "$input" | jq -r '.session_id // empty')
 
 tmux_info=$(tmux display-message -p -t "$TMUX_PANE" '#S:#W' 2>/dev/null)
 terminal-notifier -title "Claude Code: ${tmux_info}" -message "$msg" -sound Ping >/dev/null 2>&1
+
+# 発火元 pane の tty に bell(\a)を直接書き込む。裏 window でも monitor-bell フラグが立ち、
+# 通知を見逃してもステータスバーの色で入力待ちに気づける。
+tty=$(tmux display -p -t "$TMUX_PANE" '#{pane_tty}' 2>/dev/null)
+[ -n "$tty" ] && printf '\a' > "$tty"
 exit 0
