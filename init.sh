@@ -82,6 +82,8 @@ ln -nfs "${DOTFILES_ROOT}/dot_claude/statusline-command.sh" "${HOME}/.claude/sta
 mkdir -p "${HOME}/.claude/agents"
 ln -nfs "${DOTFILES_ROOT}/dot_claude/agents/code-reviewer.md" "${HOME}/.claude/agents/code-reviewer.md"
 ln -nfs "${DOTFILES_ROOT}/dot_claude/agents/security-auditor.md" "${HOME}/.claude/agents/security-auditor.md"
+# 旧構成（dotfiles-reviewer を ~/.claude/agents/ へ張っていた）のダングリングリンクを掃除する。
+[[ -L "${HOME}/.claude/agents/dotfiles-reviewer.md" ]] && rm "${HOME}/.claude/agents/dotfiles-reviewer.md"
 # hooks: dot_claude/hooks/ 配下は個別リンク（新規追加時はここに1行足す）
 ln -nfs "${DOTFILES_ROOT}/dot_claude/hooks/notify.sh" "${HOME}/.claude/hooks/notify.sh"
 ln -nfs "${DOTFILES_ROOT}/dot_claude/hooks/stop.sh" "${HOME}/.claude/hooks/stop.sh"
