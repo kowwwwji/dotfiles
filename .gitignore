@@ -1,12 +1,9 @@
 # このリポジトリ専用の ignore（$HOME には張らない）。全リポジトリ共通の ignore は .gitignore_global へ。
-.config/.gitconfig.local
 .zsh/.zsh_history
 .zsh/local.zsh
-iterm/com.googlecode.iterm2.plist
 .config/nvim/lazy-lock.json
 .config/nvim/lua/config/local.lua
 .config/nvim/lazyvim.json
-.config/nvim/SKK-JISYO.L
 # .claude はローカル作業領域（global 側で除外）だが、このリポジトリ専用 agent だけは
 # 配布物として追跡する。gitignore は除外ディレクトリの中身を再包含できないため、
 # ディレクトリ除外を打ち消してから対象ファイルのみに絞り直す。
