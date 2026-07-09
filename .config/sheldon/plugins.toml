@@ -28,3 +28,7 @@ github = "zsh-users/zsh-autosuggestions"
 
 [plugins.zsh-completions]
 github = "zsh-users/zsh-completions"
+
+# bd: 親ディレクトリへ名前で一気に戻る（例: bd foo）
+[plugins.zsh-bd]
+github = "Tarrasch/zsh-bd"
