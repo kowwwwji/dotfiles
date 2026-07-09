@@ -1,0 +1,3 @@
+# machine ラベル: Brewfile の machine固有ファイル(Brewfile.<label>)の選択に使う。
+# このPCの用途に合わせて設定する（例: work / personal）。
+# export DOTFILES_HOST=work

@@ -47,7 +47,13 @@ exit
 softwareupdate --install-rosetta
 
 cd $(ghq root)/github.com/kowwwwji/dotfiles
-cd BrewFile && brew bundle # Application Install
+
+# machine ラベルを設定（このPCは work、個人PCは personal）。現シェルと今後の両方に効かせる。
+export DOTFILES_HOST=work
+echo "export DOTFILES_HOST=$DOTFILES_HOST" >> ~/.zsh/local.zsh
+
+# 共通 + このPC固有をまとめて導入
+cd Brewfile && ./brewInstall.sh
 
 sudo shutdown -r now
 ```
