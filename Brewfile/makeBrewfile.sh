@@ -1,14 +1,29 @@
 #!/bin/zsh
+# このPCに入っているパッケージから共通分(Brewfile.common)を差し引き、
+# machine固有ファイル(Brewfile.$DOTFILES_HOST)を再生成する。
+# machineラベルは ~/.zsh/local.zsh の DOTFILES_HOST（git管理外）で決まる。
 
-# Get the directory where this script is located
+set -eu
+
 SCRIPT_DIR=$(cd "$(dirname "$0")" && pwd)
-BREWFILE_PATH="$SCRIPT_DIR/Brewfile"
+COMMON="$SCRIPT_DIR/Brewfile.common"
 
-# Remove existing Brewfile
-rm -f "$BREWFILE_PATH"
+if [ -z "${DOTFILES_HOST:-}" ]; then
+  echo "DOTFILES_HOST が未設定です。~/.zsh/local.zsh に 'export DOTFILES_HOST=work' 等を設定してください。" >&2
+  exit 1
+fi
 
-# Generate new Brewfile
-brew bundle dump --file="$BREWFILE_PATH"
+HOST_FILE="$SCRIPT_DIR/Brewfile.$DOTFILES_HOST"
 
-# Sort the Brewfile
-sort -u "$BREWFILE_PATH" -o "$BREWFILE_PATH" -r
+# brew bundle dump は「入っているもの全部」をフラットに出す（共通/固有の区別なし）。
+# dump 全体から common を差し引いた集合差が、このPC固有のパッケージ。
+# --no-describe: brew は説明コメント行を各行に付けるのが既定。common はコメント無しの
+# フラット形式なので、付けると comm の集合差でコメント行が相殺されず残る。無効化する。
+TMP=$(mktemp)
+trap 'rm -f "$TMP"' EXIT
+brew bundle dump --file="$TMP" --force --no-describe
+
+# comm は sorted 前提。出力は逆順ソート（tap 行を先頭に）。
+comm -23 <(sort "$TMP") <(sort "$COMMON") | sort -r > "$HOST_FILE"
+
+echo "生成: $HOST_FILE ($(wc -l < "$HOST_FILE") 行)"
