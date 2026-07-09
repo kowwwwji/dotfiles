@@ -20,10 +20,15 @@ HOST_FILE="$SCRIPT_DIR/Brewfile.$DOTFILES_HOST"
 # --no-describe: brew は説明コメント行を各行に付けるのが既定。common はコメント無しの
 # フラット形式なので、付けると comm の集合差でコメント行が相殺されず残る。無効化する。
 TMP=$(mktemp)
-trap 'rm -f "$TMP"' EXIT
+COMMON_SORTED=$(mktemp)
+trap 'rm -f "$TMP" "$COMMON_SORTED"' EXIT
 brew bundle dump --file="$TMP" --force --no-describe
 
-# comm は sorted 前提。出力は逆順ソート（tap 行を先頭に）。
-comm -23 <(sort "$TMP") <(sort "$COMMON") | sort -r > "$HOST_FILE"
+# comm は sorted 前提。プロセス置換 <() は zsh 専用で `sh makeBrewfile.sh` と起動すると
+# 構文エラーになるため、一時ファイルへソートしてから渡す（POSIX sh でも動く）。
+# 出力は逆順ソート（tap 行を先頭に）。
+sort "$TMP" -o "$TMP"
+sort "$COMMON" > "$COMMON_SORTED"
+comm -23 "$TMP" "$COMMON_SORTED" | sort -r > "$HOST_FILE"
 
 echo "生成: $HOST_FILE ($(wc -l < "$HOST_FILE") 行)"
