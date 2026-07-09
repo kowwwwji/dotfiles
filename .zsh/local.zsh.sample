@@ -1,3 +1,4 @@
 # machine ラベル: Brewfile の machine固有ファイル(Brewfile.<label>)の選択に使う。
+# hostname は macOS の名前衝突時に自動連番(-2 等)が付いて揺れるため使わず、手動ラベルにする。
 # このPCの用途に合わせて設定する（例: work / personal）。
 # export DOTFILES_HOST=work
