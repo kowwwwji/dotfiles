@@ -48,7 +48,7 @@ softwareupdate --install-rosetta
 
 cd $(ghq root)/github.com/kowwwwji/dotfiles
 
-# machine ラベルを設定（このPCは work、個人PCは personal）。現シェルと今後の両方に効かせる。
+# machine ラベルを設定（仕事用PCは work、個人用PCは personal）。
 export DOTFILES_HOST=work
 echo "export DOTFILES_HOST=$DOTFILES_HOST" >> ~/.zsh/local.zsh
 
