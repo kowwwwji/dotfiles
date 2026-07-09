@@ -66,18 +66,18 @@
   cmd = nvim -d $LOCAL $BASE $REMOTE $MERGED -c '$wincmd w' -c 'wincmd J'
 [diff]
   colorMoved = default
-[credential "https://git-codecommit.ap-northeast-1.amazonaws.com"]
-  provider = generic
 [init]
 	defaultBranch = main
-[credential "https://github.com"]
-	helper = 
-	helper = !/opt/homebrew/bin/gh auth git-credential
-[credential "https://gist.github.com"]
-	helper = 
-	helper = !/opt/homebrew/bin/gh auth git-credential
+
 [credential]
-	helper = 
 	helper = /usr/local/share/gcm-core/git-credential-manager
+[credential "https://git-codecommit.ap-northeast-1.amazonaws.com"]
+  provider = generic
 [credential "https://dev.azure.com"]
 	useHttpPath = true
+[credential "https://github.com"]
+	helper =
+	helper = !/opt/homebrew/bin/gh auth git-credential
+[credential "https://gist.github.com"]
+	helper =
+	helper = !/opt/homebrew/bin/gh auth git-credential
