@@ -1,14 +1,11 @@
 tap "nikitabobko/tap", trusted: true
-tap "homebrew/autoupdate"
 tap "felixkratz/formulae", "https://github.com/FelixKratz/homebrew-formulae", trusted: true
+tap "domt4/autoupdate", "https://github.com/DomT4/homebrew-autoupdate.git"
 tap "d-kuro/tap", trusted: true
-npm "corepack"
 mas "WebDrop", id: 1125673012
 mas "Spark", id: 1176895641
 mas "LINE", id: 539883307
 mas "Kindle", id: 302584613
-go "cmd/gofmt"
-go "cmd/go"
 cask "whatsapp"
 cask "wezterm"
 cask "vagrant"
@@ -41,6 +38,7 @@ brew "opentofu"
 brew "mise"
 brew "luarocks"
 brew "lua"
+brew "libtiff"
 brew "fswatch"
 brew "fish"
 brew "felixkratz/formulae/borders"

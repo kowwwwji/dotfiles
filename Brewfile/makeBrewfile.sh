@@ -29,6 +29,10 @@ brew bundle dump --file="$TMP" --force --no-describe
 # 出力は逆順ソート（tap 行を先頭に）。
 sort "$TMP" -o "$TMP"
 sort "$COMMON" > "$COMMON_SORTED"
-comm -23 "$TMP" "$COMMON_SORTED" | sort -r > "$HOST_FILE"
+# dump が実体のないエントリを拾うため除外する:
+# - npm "corepack": Node 同梱の corepack が npm list -g に出るだけで、明示インストールではない
+# - go "cmd/...": mise 環境では GOBIN が go ツールチェーン自身の bin を指すため、
+#   go/gofmt 本体を「go install されたパッケージ」と誤検出する
+comm -23 "$TMP" "$COMMON_SORTED" | grep -vE '^(npm "corepack"|go "cmd/)' | sort -r > "$HOST_FILE"
 
 echo "生成: $HOST_FILE ($(wc -l < "$HOST_FILE") 行)"
