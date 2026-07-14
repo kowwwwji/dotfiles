@@ -21,6 +21,12 @@ if type terraform &>/dev/null; then
   complete -o nospace -C "$(command -v terraform)" terraform
 fi
 
+# OpenTofu用（zsh 用の補完関数は配布されておらず、コマンド自身が候補を返す Go 方式のため complete -C で登録）
+if type tofu &>/dev/null; then
+  autoload -U +X bashcompinit && bashcompinit
+  complete -o nospace -C "$(command -v tofu)" tofu
+fi
+
 # 先方予測機能 zinitを使用してるためOFF
 # autoload -Uz predict-on && predict-on
 
