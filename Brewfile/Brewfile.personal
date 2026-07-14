@@ -1,20 +1,15 @@
 tap "nikitabobko/tap", trusted: true
 tap "felixkratz/formulae", "https://github.com/FelixKratz/homebrew-formulae", trusted: true
-tap "domt4/autoupdate", "https://github.com/DomT4/homebrew-autoupdate.git", trusted: true
-tap "d-kuro/tap", trusted: true
 mas "WebDrop", id: 1125673012
 mas "Spark", id: 1176895641
 mas "LINE", id: 539883307
 mas "Kindle", id: 302584613
 cask "whatsapp"
-cask "wezterm"
 cask "vagrant"
 cask "swiftbar"
 cask "steam"
 cask "keyboardcleantool"
-cask "google-drive"
 cask "font-plemol-jp-nf"
-cask "font-maple-mono-nf-cn"
 cask "dropbox@beta"
 cask "discord"
 cask "container"
@@ -22,23 +17,18 @@ cask "consul"
 cask "arduino-ide"
 cask "appcleaner"
 cask "amazon-photos"
-cask "alt-tab"
 cask "adobe-creative-cloud"
+cask "bettertouchtool"
 brew "zsh"
 brew "yazi"
 brew "tlrc"
 brew "python@3.12"
-brew "opentofu"
-brew "mise"
 brew "luarocks"
 brew "lua"
-brew "libtiff"
 brew "fswatch"
 brew "felixkratz/formulae/borders"
 brew "eza"
 brew "docker-compose"
-brew "d-kuro/tap/gwq"
-brew "colima"
 brew "bat"
 brew "bash"
 brew "age"
