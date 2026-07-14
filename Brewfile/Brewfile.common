@@ -1,5 +1,5 @@
-tap "sanemat/font"
-tap "microsoft/git"
+tap "sanemat/font", trusted: true
+tap "microsoft/git", trusted: true
 mas "Xcode", id: 497799835
 mas "Pages", id: 409201541
 mas "Numbers", id: 409203825
@@ -37,7 +37,6 @@ brew "tmux"
 brew "tesseract"
 brew "terminal-notifier"
 brew "sheldon"
-brew "sha2"
 brew "sfcgal"
 brew "rlwrap"
 brew "ripmime"
@@ -47,7 +46,6 @@ brew "qt"
 brew "protobuf-c"
 brew "proj"
 brew "procmail"
-brew "postgresql@14"
 brew "poppler"
 brew "pinentry"
 brew "peco"

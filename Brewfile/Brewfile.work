@@ -1,6 +1,6 @@
 tap "sayyoungman/tap", "https://github.com/SayYoungMan/homebrew-tap", trusted: { casks: ["tfui"] }
 tap "domt4/autoupdate", "https://github.com/DomT4/homebrew-autoupdate.git", trusted: true
-tap "d-kuro/tap"
+tap "d-kuro/tap", trusted: true
 npm "corepack"
 npm "@hubspot/cli"
 mas "iMovie", id: 408981434
