@@ -4,6 +4,12 @@ gui:
 os:
   edit: "nvim"
 git:
+  # 紫のマージ済みPRアイコンが残り続けるのを防ぐ。(OPEN/DRAFT の間は表示される）
+  mainBranches:
+    - master
+    - main
+    - develop
+    - development
   pagers:
     - pager: delta --dark --paging=never --side-by-side --hyperlinks --line-numbers
       colorArg: always
