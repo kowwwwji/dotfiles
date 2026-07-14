@@ -1,12 +1,10 @@
 tap "sanemat/font", trusted: true
-tap "microsoft/git", trusted: true
 tap "domt4/autoupdate", "https://github.com/DomT4/homebrew-autoupdate.git", trusted: true
 tap "d-kuro/tap", trusted: true
 mas "Xcode", id: 497799835
 mas "Pages", id: 409201541
 mas "Numbers", id: 409203825
 mas "Keynote", id: 409183694
-mas "GarageBand", id: 682658836
 cask "wezterm"
 cask "visual-studio-code"
 cask "slack"
@@ -25,7 +23,6 @@ cask "font-maple-mono-nf-cn"
 cask "font-hack-nerd-font"
 cask "docker-desktop"
 cask "bettercmdtab"
-cask "bettertouchtool"
 cask "1password-cli"
 brew "zsh-completions"
 brew "yarn-completion"
