@@ -87,7 +87,8 @@ function prompt_git_worktree() {
     scalaenv                # scala version from scalaenv (https://github.com/scalaenv/scalaenv)
     haskell_stack           # haskell version from stack (https://haskellstack.org/)
     kubecontext             # current kubernetes context (https://kubernetes.io/)
-    terraform               # terraform workspace (https://www.terraform.io)
+    tofu                    # OpenTofu workspace（自作セグメント。定義は下方の prompt_tofu）
+    # terraform             # terraform workspace。tofu セグメントと表示が重複するため無効
     # terraform_version     # terraform version (https://www.terraform.io)
     aws                     # aws profile (https://docs.aws.amazon.com/cli/latest/userguide/cli-configure-profiles.html)
     aws_eb_env              # aws elastic beanstalk environment (https://aws.amazon.com/elasticbeanstalk/)
@@ -1573,6 +1574,23 @@ function prompt_git_worktree() {
     p10k segment -f 178 -i $'\U000F03D6' -t "$count"
   }
   function instant_prompt_brew_outdated() { prompt_brew_outdated }
+
+  # OpenTofu の workspace。組み込みの terraform セグメントは表示条件が terraform コマンドの
+  # 存在にハードコードされていて tofu のみの環境では出ないため自作。workspace の記録先は
+  # terraform と同じ ${TF_DATA_DIR:-.terraform}/environment。"default" は表示しない
+  # （POWERLEVEL9K_TERRAFORM_SHOW_DEFAULT=false に合わせた挙動）。
+  # アイコンは Material Design 系 U+F1062（terraform）。
+  function prompt_tofu() {
+    (( $+commands[tofu] )) || return
+    local ws=$TF_WORKSPACE
+    if [[ -z $ws ]]; then
+      local f=${${TF_DATA_DIR:-.terraform}:A}/environment
+      [[ -r $f ]] || return
+      read -r ws < $f
+    fi
+    [[ -z $ws || $ws == default ]] && return
+    p10k segment -f 38 -i $'\U000F1062' -t $ws
+  }
 
   # Example of a user-defined prompt segment. Function prompt_example will be called on every
   # prompt if `example` prompt segment is added to POWERLEVEL9K_LEFT_PROMPT_ELEMENTS or
