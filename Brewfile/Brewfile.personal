@@ -1,6 +1,6 @@
 tap "nikitabobko/tap", trusted: true
 tap "felixkratz/formulae", "https://github.com/FelixKratz/homebrew-formulae", trusted: true
-tap "domt4/autoupdate", "https://github.com/DomT4/homebrew-autoupdate.git"
+tap "domt4/autoupdate", "https://github.com/DomT4/homebrew-autoupdate.git", trusted: true
 tap "d-kuro/tap", trusted: true
 mas "WebDrop", id: 1125673012
 mas "Spark", id: 1176895641
@@ -27,26 +27,18 @@ cask "adobe-creative-cloud"
 brew "zsh"
 brew "yazi"
 brew "tlrc"
-brew "stow"
-brew "ruby"
-brew "ruby-build"
 brew "python@3.12"
-brew "php"
-brew "perl"
-brew "perl-build"
 brew "opentofu"
 brew "mise"
 brew "luarocks"
 brew "lua"
 brew "libtiff"
 brew "fswatch"
-brew "fish"
 brew "felixkratz/formulae/borders"
 brew "eza"
 brew "docker-compose"
 brew "d-kuro/tap/gwq"
 brew "colima"
-brew "chezmoi"
 brew "bat"
 brew "bash"
 brew "age"
