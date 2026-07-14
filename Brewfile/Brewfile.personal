@@ -1,11 +1,14 @@
-tap "nikitabobko/tap"
+tap "nikitabobko/tap", trusted: true
 tap "homebrew/autoupdate"
-tap "felixkratz/formulae"
-tap "d-kuro/tap"
+tap "felixkratz/formulae", "https://github.com/FelixKratz/homebrew-formulae", trusted: true
+tap "d-kuro/tap", trusted: true
+npm "corepack"
 mas "WebDrop", id: 1125673012
 mas "Spark", id: 1176895641
 mas "LINE", id: 539883307
 mas "Kindle", id: 302584613
+go "cmd/gofmt"
+go "cmd/go"
 cask "whatsapp"
 cask "wezterm"
 cask "vagrant"
@@ -26,23 +29,24 @@ cask "alt-tab"
 cask "adobe-creative-cloud"
 brew "zsh"
 brew "yazi"
-brew "tldr"
+brew "tlrc"
 brew "stow"
-brew "ruby", link: true
+brew "ruby"
 brew "ruby-build"
+brew "python@3.12"
 brew "php"
 brew "perl"
 brew "perl-build"
 brew "opentofu"
-brew "openjdk@11"
+brew "mise"
 brew "luarocks"
 brew "lua"
 brew "fswatch"
 brew "fish"
 brew "felixkratz/formulae/borders"
 brew "eza"
-brew "docker"
 brew "docker-compose"
+brew "d-kuro/tap/gwq"
 brew "colima"
 brew "chezmoi"
 brew "bat"
