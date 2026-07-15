@@ -4,7 +4,6 @@ mas "WebDrop", id: 1125673012
 mas "Spark", id: 1176895641
 mas "LINE", id: 539883307
 mas "Kindle", id: 302584613
-mas "GarageBand", id: 682658836
 cask "vagrant"
 cask "swiftbar"
 cask "steam"
