@@ -1,0 +1,40 @@
+# Ghostty 設定（~/.config/ghostty/config へ symlink される）
+# 反映はウィンドウ再起動 or cmd+shift+,（自動リロードはない）
+
+font-family = Maple Mono NF CN
+font-style = Medium
+font-size = 15
+
+# 左 Option を Alt として送る（wezterm のデフォルトと同じ挙動。nvim の Meta キー用）
+# 右 Option は特殊文字入力用に残す
+macos-option-as-alt = left
+
+# 背景は黒ベース + 透過（blur なし）
+background = #000000
+background-opacity = 0.80
+
+# テーマは Snazzy（wezterm 側も同スキーム指定で発色を揃える）
+# Why: ANSI 色の発色はターミナルのパレット依存のため、両ターミナルに同じ
+#      スキームを宣言して統一する。background / background-opacity 等の明示指定は
+#      テーマより優先されるので黒背景+透過はそのまま維持される。
+theme = Snazzy
+
+# tmux のステータスラインの下に空白が出るため bottom は 0
+window-padding-x = 3
+window-padding-y = 3,0
+
+# タイトルバー非表示（フレーム・角丸は維持されるためリサイズは可能）
+# NOTE: タブ多重化は tmux に任せるため、Ghostty 側のタブは使わない前提
+macos-titlebar-style = hidden
+
+# 再起動時にウィンドウ位置・サイズを復元（tmux セッションと合わせて復帰を無操作にする）
+window-save-state = always
+
+# マウス選択だけでシステムクリップボードへコピー（tmux copy-mode を経由しない選択用）
+copy-on-select = clipboard
+
+# ベル受信時に Dock バウンス + タイトルに🔔（tmux monitor-bell と合わせた awareness 用）
+bell-features = attention,title
+
+# どこからでも Cmd+` でドロップダウン端末（グローバルキーはアクセシビリティ許可が必要）
+keybind = global:cmd+backquote=toggle_quick_terminal
