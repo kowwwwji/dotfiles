@@ -1,0 +1,88 @@
+# herdr 設定 — tmux (.tmux.conf) と操作感を揃える
+# herdr のデフォルトとの差分だけを書く（hjkl ペイン移動・vi コピーモード等は既定で一致）。
+# 全項目の既定値は `herdr --default-config`、検証は `herdr config check`、
+# 反映は `herdr server reload-config`（または prefix+Shift+r）。
+
+[keys]
+# prefix は tmux と同じ C-Space（JIS/US HHKB で同位置。macOS の入力ソース切替(Ctrl+Space)は OFF にすること）
+prefix = "ctrl+space"
+
+# デタッチは tmux 既定の d に揃える（herdr 既定の q は tmux では kill-session なので誤操作のもと）
+detach = "prefix+d"
+
+# 新規タブは tmux の t（new-window）と同じ
+new_tab = "prefix+t"
+
+# タブ切替は tmux の Tab / Shift+Tab（window 切替）と同じ。
+# このキーの既定はペイン循環だが、ペイン移動は hjkl で足りるため解除する
+next_tab = "prefix+tab"
+previous_tab = "prefix+shift+tab"
+cycle_pane_next = ""
+cycle_pane_previous = ""
+
+# ペイン最大化トグルは tmux の Enter と同じ
+zoom = "prefix+enter"
+
+# ペイン分割は tmux の | / - と同じ
+split_vertical = "prefix+|"
+split_horizontal = "prefix+-"
+
+# セッションナビゲータは tmux の s（セッション移動）に寄せ、
+# 既定の g は lazygit popup（tmux の g）に譲る。玉突きで settings を Shift+s へ
+goto = "prefix+s"
+settings = "prefix+shift+s"
+
+# worktree 作成は gwq / git-start の既存フローを使うため解除し、
+# 空いた Shift+g を gh dash popup（tmux の G）に充てる
+new_worktree = ""
+
+# tmux の popup 群と同じ（g=lazygit, c=lazydocker, G=gh dash, `=シェル）
+[[keys.command]]
+key = "prefix+g"
+type = "popup"
+command = "lazygit"
+width = "95%"
+height = "95%"
+
+[[keys.command]]
+key = "prefix+c"
+type = "popup"
+command = "lazydocker"
+width = "95%"
+height = "95%"
+
+[[keys.command]]
+key = "prefix+shift+g"
+type = "popup"
+command = "gh dash"
+width = "95%"
+height = "95%"
+
+[[keys.command]]
+key = "prefix+backtick"
+type = "popup"
+command = "exec \"${SHELL:-sh}\""
+width = "95%"
+height = "95%"
+
+# tmux ステータスバーの配色（.tmux.conf の @c-* パレット）を移植
+[theme.custom]
+panel_bg = "#1c1c1c" # @c-bg
+text = "#c0c0c0"     # @c-fg
+accent = "#5f5f87"   # @c-primary
+blue = "#00BAFE"     # @c-info
+yellow = "#d7af5f"   # @c-silence
+
+# バックグラウンドのエージェント状態変化を macOS 通知へ
+# （tmux の bell 監視 + terminal-notifier と同じ「気づき」重視）
+[ui.toast]
+delivery = "system"
+
+# 日本語 IME まわり（experimental。不安定なら個別にコメントアウトして戻す）
+[experimental]
+# prefix モード中だけ ASCII 入力ソースへ自動切替（IME ON のままでも prefix コマンドが効くように）
+switch_ascii_input_source_in_prefix = true
+# 自前カーソル描画の TUI で IME 候補窓をカーソルに追従させる。
+# vim 等では余計なカーソルが見える副作用があるため対象を claude に限定
+reveal_hidden_cursor_for_cjk_ime = true
+cjk_ime_agents = ["claude"]
