@@ -1,9 +1,20 @@
 # Ghostty 設定（~/.config/ghostty/config へ symlink される）
 # 反映はウィンドウ再起動 or cmd+shift+,（自動リロードはない）
 
-font-family = Maple Mono NF CN
-font-style = Medium
-font-size = 15
+# UDEV Gothic NF（BIZ UDゴシック + JetBrains Mono）
+# Why: Maple Mono NF CN は CJK が簡体字グリフで、漢字が中華字形になる。
+#      日本語字形かつ Nerd Font アイコン込みの UDEV Gothic へ移行。
+#      ウェイトは Regular / Bold のみのため font-style 指定はしない。
+font-family = UDEV Gothic NF
+font-size = 14
+
+# 行間を少し広げる（セルの高さを増やす。グリフは上下中央に配置される）
+adjust-cell-height = 5%
+
+# 描画を少し太らせる（macOS 専用）
+# Why: UDEV Gothic は Regular / Bold の2段階しかなく、Bold では太すぎる。
+#      中間ウェイトの代わりにレンダリング側で厚みを足す。
+font-thicken = true
 
 # 左 Option を Alt として送る（wezterm のデフォルトと同じ挙動。nvim の Meta キー用）
 # 右 Option は特殊文字入力用に残す
