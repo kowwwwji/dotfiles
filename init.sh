@@ -37,6 +37,11 @@ ln -nfs "${DOTFILES_ROOT}/.config/ghostty" "${HOME}/.config/"
 mkdir -p "${HOME}/.config/memo"
 ln -nfs "${DOTFILES_ROOT}/.config/memo/config.toml" "${HOME}/.config/memo/config.toml"
 
+# herdr: ~/.config/herdr にはログ・ソケットの実体が置かれるため、
+# ディレクトリごとではなく config.toml だけを file 単位でリンクする
+mkdir -p "${HOME}/.config/herdr"
+ln -nfs "${DOTFILES_ROOT}/.config/herdr/config.toml" "${HOME}/.config/herdr/config.toml"
+
 mkdir -p "${HOME}/.config/karabiner/assets"
 # karabiner.json は symlink せず sync で配布（Karabiner が保存時にファイルを置き換えて
 # symlink が切れるため。詳細は CLAUDE.md）。jq 未導入時の扱いは claude-settings-sync と同じ。
