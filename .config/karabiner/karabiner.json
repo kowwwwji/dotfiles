@@ -5,7 +5,7 @@
             "complex_modifications": {
                 "rules": [
                     {
-                        "description": "ctrl+0 toggles WezTerm and restores previous app",
+                        "description": "ctrl+0 activates Ghostty",
                         "manipulators": [
                             {
                                 "from": {
@@ -15,7 +15,7 @@
                                         "optional": ["any"]
                                     }
                                 },
-                                "to": [{ "shell_command": "open -a WezTerm" }],
+                                "to": [{ "shell_command": "open -a Ghostty" }],
                                 "type": "basic"
                             }
                         ]
