@@ -125,6 +125,10 @@
     "claude-md-management@claude-plugins-official": true,
     "sentry@claude-plugins-official": true
   },
+  "env": {
+    "CLAUDE_CODE_EXPERIMENTAL_AGENT_TEAMS": "1"
+  },
+  "teammateMode": "auto",
   "language": "japanese",
   "alwaysThinkingEnabled": true,
   "tui": "fullscreen",
