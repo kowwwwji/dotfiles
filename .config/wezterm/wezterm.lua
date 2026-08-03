@@ -95,4 +95,8 @@ end)
 -- Shift+Enter, Ctrl+/ など、本来端末で区別できないキーを区別できるようになる
 config.enable_kitty_keyboard = true
 
+-- Kitty Graphics Protocol を有効化（デフォルト off）
+-- terminal-browser などターミナル内で画像を描画するツールに必要
+config.enable_kitty_graphics = true
+
 return config
