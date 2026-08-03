@@ -46,15 +46,23 @@ return {
     },
   },
   {
+    -- ブラウザプレビューは廃止（バッファ内表示へ移行）。
+    -- lang.markdown extra（lua/config/lazy.lua で import）が同プラグインを宣言しているため、
+    -- 明示的な無効化が必要（自前 spec の削除だけでは extra 側の宣言が生き残る）
     "iamcco/markdown-preview.nvim",
-    cmd = { "MarkdownPreviewToggle", "MarkdownPreview", "MarkdownPreviewStop" },
-    ft = { "markdown" },
-    build = function()
-      vim.fn["mkdp#util#install"]()
-    end,
-    init = function()
-      -- .mdファイルを閉じてもプレビューを閉じない
-      vim.g.mkdp_auto_close = 0
-    end,
+    enabled = false,
+  },
+  -- テキスト装飾（見出し・テーブル罫線・コードブロック背景）は lang.markdown extra が
+  -- 宣言する render-markdown.nvim が担う（<leader>um でトグル）。自前 spec は持たない。
+  {
+    -- バッファ内の画像・mermaid 描画を有効化（LazyVim コアの snacks.nvim に opts をマージ）
+    -- 描画経路: mmdc / imagemagick → kitty graphics protocol → tmux passthrough → Ghostty
+    "folke/snacks.nvim",
+    opts = {
+      image = {
+        -- LaTeX 数式の画像化は使わない（LaTeX 環境が必要になるため）
+        math = { enabled = false },
+      },
+    },
   },
 }
