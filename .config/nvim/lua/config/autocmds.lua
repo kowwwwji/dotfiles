@@ -26,3 +26,26 @@ vim.api.nvim_create_autocmd({ "BufNewFile", "BufRead" }, {
 
 -- helpを右側に開く
 vim.cmd("autocmd FileType help wincmd L")
+
+-- markdown を terminal-browser でプレビュー（.scripts/md-preview）。
+-- <leader>cp は廃止した markdown-preview.nvim のキーの引き継ぎ
+vim.api.nvim_create_autocmd("FileType", {
+  pattern = "markdown",
+  callback = function(ev)
+    vim.keymap.set("n", "<leader>cp", function()
+      local stderr = {}
+      vim.fn.jobstart({ "md-preview", vim.api.nvim_buf_get_name(ev.buf) }, {
+        stderr_buffered = true,
+        on_stderr = function(_, data)
+          stderr = data
+        end,
+        -- 失敗が無反応に見えないよう通知する（依存不足・未保存バッファ等）
+        on_exit = function(_, code)
+          if code ~= 0 then
+            vim.notify(table.concat(stderr, "\n"), vim.log.levels.ERROR)
+          end
+        end,
+      })
+    end, { buffer = ev.buf, desc = "Preview in terminal-browser" })
+  end,
+})
