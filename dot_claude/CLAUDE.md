@@ -55,7 +55,7 @@
 - **実装の内部詳細を書かない**：定義元（コード/IaC）にある事実の再掲や内部メカニズムは削る。残すのは手順と設計判断の理由。
 - **マーカーはコロン付き**（`TODO:` `FIXME:` `NOTE:` `HACK:`）。
 - **判断基準**：「半年後でも、実装が変わっても正しいか？ 定義元に既にあるか？」
-- 詳細と例は、文書・コメントを書く前に `~/.claude/rules/docs-style.md` を読む。複数 doc の役割分担は `~/.claude/rules/doc-roles.md`。
+- 詳細と例は、文書・コメントを書く前に `~/.claude/guides/docs-style.md` を読む。複数 doc の役割分担は `~/.claude/guides/doc-roles.md`。
 
 ---
 
@@ -68,16 +68,16 @@
 
 ## 開発フロー
 
-実装タスク（コード変更を伴う作業）を進めるときは `~/.claude/rules/dev-flow.md` の手順（worktree→実装→検証→レビュー→コミット→引き渡し→片付け）に従う。
+実装タスク（コード変更を伴う作業）を進めるときは `~/.claude/guides/dev-flow.md` の手順（worktree→実装→検証→レビュー→コミット→引き渡し→片付け）に従う。
 
 ---
 
 ## tmux
 
-「tmux の〇ペインを見て」系の依頼を受けたら `~/.claude/rules/tmux.md` の手順に従う。
+「tmux の〇ペインを見て」系の依頼を受けたら `~/.claude/guides/tmux.md` の手順に従う。
 
 ---
 
 ## worktree
 
-worktree を切って作業するとき（require-worktree hook に deny されたときを含む）は `~/.claude/rules/worktree.md` の手順に従う（作成は gwq）。
+worktree を切って作業するとき（require-worktree hook に deny されたときを含む）は `~/.claude/guides/worktree.md` の手順に従う（作成は gwq）。

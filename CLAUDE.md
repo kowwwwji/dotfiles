@@ -152,7 +152,7 @@ MCP サーバーは供給経路ごとに「正」を1箇所に固定する。**�
 
 ## 開発フロー（このリポジトリでの差分）
 
-共通フロー（`dot_claude/rules/dev-flow.md`）との差分:
+共通フロー（`dot_claude/guides/dev-flow.md`）との差分:
 
 - **PR を作らない**。worktree ブランチへのコミットで引き渡し、ユーザーがローカルで
   merge する（master 直接コミット運用の延長）。
