@@ -142,6 +142,14 @@ else
   echo "brew または homebrew/autoupdate tap が未導入のため brew autoupdate start をスキップ（brew bundle 後に再実行してください）"
 fi
 
+# terminal-browser: ターミナル内で Web を表示するブラウザ（https://terminal-browser.com/）
+# 注: brew 未提供・GitHub releases にバイナリ添付も無いため、公式インストーラ
+#     （sha256 検証付きで ~/.local/share/terminal-browser へ展開、~/.local/bin にラッパー配置）
+#     が唯一の導入経路。導入済みなら更新はツール側に任せてスキップする。
+if [[ ! -x "${HOME}/.local/bin/terminal-browser" ]]; then
+  curl -fsSL https://terminal-browser.sh/install | bash
+fi
+
 # tmux
 TPM_ROOT="${HOME}/.tmux/plugins/tpm"
 [[ ! -e "$TPM_ROOT" ]] && git clone https://github.com/tmux-plugins/tpm "$TPM_ROOT"
