@@ -46,12 +46,14 @@ return {
     },
   },
   {
-    -- markdown のテキスト装飾（見出し・テーブル罫線・コードブロック背景など）
-    "MeanderingProgrammer/render-markdown.nvim",
-    ft = { "markdown" },
-    dependencies = { "nvim-treesitter/nvim-treesitter", "echasnovski/mini.icons" },
-    opts = {},
+    -- ブラウザプレビューは廃止（バッファ内表示へ移行）。
+    -- lang.markdown extra（lua/config/lazy.lua で import）が同プラグインを宣言しているため、
+    -- 明示的な無効化が必要（自前 spec の削除だけでは extra 側の宣言が生き残る）
+    "iamcco/markdown-preview.nvim",
+    enabled = false,
   },
+  -- テキスト装飾（見出し・テーブル罫線・コードブロック背景）は lang.markdown extra が
+  -- 宣言する render-markdown.nvim が担う（<leader>um でトグル）。自前 spec は持たない。
   {
     -- バッファ内の画像・mermaid 描画を有効化（LazyVim コアの snacks.nvim に opts をマージ）
     -- 描画経路: mmdc / imagemagick → kitty graphics protocol → tmux passthrough → Ghostty
