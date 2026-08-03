@@ -16,7 +16,7 @@ model: sonnet
 ### 2. symlink 登録漏れ（最頻の落とし穴）
 - 新規ファイルの配置方式を判定する:
   - トップレベルのドットファイル / ディレクトリ symlink 済みの配下（`.config/nvim` `.zsh` `.scripts` 等）→ **追記不要**。
-  - 個別ファイル単位でリンクする配下（`.tmux/` `dot_claude/` の hooks・rules・agents 等）→ `init.sh` に `ln -nfs` の**明示追記が必須**。
+  - 個別ファイル単位でリンクする配下（`.tmux/` `dot_claude/` の hooks・agents 等）→ `init.sh` に `ln -nfs` の**明示追記が必須**。
 - `.tmux/` はディレクトリ全体を symlink できない(TPM が実体を使うため)。`.tmux/` 配下の新規は必ず init.sh に1行あるか確認。
 - 「作業中PCへ即 symlink したか」も確認(init.sh は再実行しない限り効かない)。
 

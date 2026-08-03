@@ -71,7 +71,10 @@ fi
 # claude
 mkdir -p "${HOME}/.claude/hooks"
 ln -nfs "${DOTFILES_ROOT}/dot_claude/skills" "${HOME}/.claude/skills"
-ln -nfs "${DOTFILES_ROOT}/dot_claude/rules" "${HOME}/.claude/rules"
+# 旧構成（dot_claude/rules を ~/.claude/rules に張っていた）の名残は guides への
+# 改名でダングリングリンクになるため掃除する。
+[[ -L "${HOME}/.claude/rules" ]] && rm "${HOME}/.claude/rules"
+ln -nfs "${DOTFILES_ROOT}/dot_claude/guides" "${HOME}/.claude/guides"
 ln -nfs "${DOTFILES_ROOT}/dot_claude/CLAUDE.md" "${HOME}/.claude/CLAUDE.md"
 # settings.json は symlink せずマージ生成（Claude Code が /model 等を書き込むため。詳細は CLAUDE.md）
 # 注: jq は brew bundle で入るため、フレッシュPCでは init.sh 時点で未インストール。

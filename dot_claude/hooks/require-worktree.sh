@@ -49,5 +49,5 @@ fi
 tmux_info=$(tmux display-message -p -t "$TMUX_PANE" '#S:#W' 2>/dev/null)
 terminal-notifier -title "Claude Code: ${tmux_info}" -message "確認が必要: メイン作業ツリーの編集" -sound default >/dev/null 2>&1
 jq -n --arg f "${file:-（パス不明）}" \
-  '{hookSpecificOutput: {hookEventName: "PreToolUse", permissionDecision: "ask", permissionDecisionReason: ("メイン作業ツリーの編集: " + $f + "。簡単な修正なら許可、まとまった作業なら worktree で（~/.claude/rules/worktree.md）")}}'
+  '{hookSpecificOutput: {hookEventName: "PreToolUse", permissionDecision: "ask", permissionDecisionReason: ("メイン作業ツリーの編集: " + $f + "。簡単な修正なら許可、まとまった作業なら worktree で（~/.claude/guides/worktree.md）")}}'
 exit 0
