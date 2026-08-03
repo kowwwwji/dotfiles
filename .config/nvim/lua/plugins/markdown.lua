@@ -46,15 +46,21 @@ return {
     },
   },
   {
-    "iamcco/markdown-preview.nvim",
-    cmd = { "MarkdownPreviewToggle", "MarkdownPreview", "MarkdownPreviewStop" },
+    -- markdown のテキスト装飾（見出し・テーブル罫線・コードブロック背景など）
+    "MeanderingProgrammer/render-markdown.nvim",
     ft = { "markdown" },
-    build = function()
-      vim.fn["mkdp#util#install"]()
-    end,
-    init = function()
-      -- .mdファイルを閉じてもプレビューを閉じない
-      vim.g.mkdp_auto_close = 0
-    end,
+    dependencies = { "nvim-treesitter/nvim-treesitter", "echasnovski/mini.icons" },
+    opts = {},
+  },
+  {
+    -- バッファ内の画像・mermaid 描画を有効化（LazyVim コアの snacks.nvim に opts をマージ）
+    -- 描画経路: mmdc / imagemagick → kitty graphics protocol → tmux passthrough → Ghostty
+    "folke/snacks.nvim",
+    opts = {
+      image = {
+        -- LaTeX 数式の画像化は使わない（LaTeX 環境が必要になるため）
+        math = { enabled = false },
+      },
+    },
   },
 }
