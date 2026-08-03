@@ -1,0 +1,133 @@
+#!/bin/sh
+# md-preview — markdown を HTML に変換して terminal-browser で開く
+#
+# 使い方: md-preview <file.md>
+#
+# 変換ツール（pandoc 等）をローカルに増やさないため、md は jq で JSON 文字列化して
+# HTML テンプレに埋め込むだけにし、描画はブラウザ側の marked.js (CDN) に任せる。
+# mermaid も CDN 描画で、オフライン時はコードブロックのまま表示される（graceful fallback）。
+
+set -eu
+
+usage() {
+  echo 'usage: md-preview <file.md>' >&2
+  exit 1
+}
+
+for cmd in jq terminal-browser; do
+  if ! command -v "$cmd" >/dev/null 2>&1; then
+    echo "md-preview: $cmd が見つかりません" >&2
+    exit 1
+  fi
+done
+
+[ $# -eq 1 ] || usage
+if [ ! -f "$1" ]; then
+  echo "md-preview: ファイルがありません: $1" >&2
+  usage
+fi
+
+# 安定パスに出力し、同じファイルの再実行では上書きする（tmp にゴミを増やさない）
+# macOS の TMPDIR は末尾スラッシュ付きなので %/ で正規化する
+name=$(basename "$1")
+tmp_base=${TMPDIR:-/tmp}
+out_dir="${tmp_base%/}/md-preview"
+mkdir -p "$out_dir"
+out="${out_dir}/${name}.html"
+
+# 前半 heredoc はタイトル埋め込みのため展開あり（$ を含む内容を書かないこと）。
+# 後半は JS を含むため展開なし（クォート付きデリミタ）。
+{
+  cat <<HTML_HEAD
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>${name}</title>
+<style>
+:root { color-scheme: light dark; }
+body {
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Hiragino Sans", "Noto Sans CJK JP", sans-serif;
+  line-height: 1.6;
+  max-width: 860px;
+  margin: 0 auto;
+  padding: 2rem 1.5rem 4rem;
+  color: #1f2328;
+  background: #ffffff;
+}
+h1, h2, h3, h4 { margin-top: 1.5em; margin-bottom: 0.5em; line-height: 1.25; }
+h1, h2 { border-bottom: 1px solid #d1d9e0; padding-bottom: 0.3em; }
+a { color: #0969da; }
+code, pre { font-family: ui-monospace, SFMono-Regular, Menlo, monospace; font-size: 0.9em; }
+code { background: #f0f1f3; padding: 0.15em 0.35em; border-radius: 4px; }
+pre { background: #f6f8fa; padding: 1em; border-radius: 6px; overflow-x: auto; }
+pre code { background: none; padding: 0; }
+pre.mermaid { background: none; text-align: center; }
+blockquote { margin: 0; padding: 0 1em; color: #59636e; border-left: 0.25em solid #d1d9e0; }
+table { border-collapse: collapse; display: block; overflow-x: auto; }
+th, td { border: 1px solid #d1d9e0; padding: 0.4em 0.8em; }
+tr:nth-child(2n) { background: #f6f8fa; }
+img { max-width: 100%; }
+hr { border: 0; border-top: 1px solid #d1d9e0; }
+@media (prefers-color-scheme: dark) {
+  body { color: #f0f6fc; background: #0d1117; }
+  h1, h2 { border-color: #3d444d; }
+  a { color: #4493f8; }
+  code { background: #2a313c; }
+  pre { background: #151b23; }
+  blockquote { color: #9198a1; border-color: #3d444d; }
+  th, td { border-color: #3d444d; }
+  tr:nth-child(2n) { background: #151b23; }
+  hr { border-color: #3d444d; }
+}
+</style>
+</head>
+<body>
+<main id="content"></main>
+<script>
+const MD_SOURCE =
+HTML_HEAD
+  jq -Rs . "$1"
+  cat <<'HTML_TAIL'
+;
+</script>
+<script src="https://cdn.jsdelivr.net/npm/marked@18.0.7/lib/marked.umd.min.js" integrity="sha384-fLcv0/sXzwqIpE+6a2K1pEC+pwVu+cXnn/f4xW4/1Pfea5RBO2PV57uEnG2KwuCF" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/mermaid@11.16.0/dist/mermaid.min.js" integrity="sha384-T/0lMUdJpd2S1ZHtRiofG3htU3xPCrFVeAQ1UUE2TJwlEJSV5NUwn30kP28n238E" crossorigin="anonymous"></script>
+<script>
+const content = document.getElementById("content");
+if (window.marked) {
+  content.innerHTML = marked.parse(MD_SOURCE);
+} else {
+  // オフライン等で marked が読めなければ素の md をそのまま表示
+  const pre = document.createElement("pre");
+  pre.textContent = MD_SOURCE;
+  content.appendChild(pre);
+}
+if (window.mermaid) {
+  // marked が code.language-mermaid にしたブロックを mermaid が拾う形に差し替える。
+  // mermaid が読めなければ差し替え自体が起きず、コードブロックのまま残る。
+  for (const code of document.querySelectorAll("code.language-mermaid")) {
+    const pre = document.createElement("pre");
+    pre.className = "mermaid";
+    pre.textContent = code.textContent;
+    code.closest("pre").replaceWith(pre);
+  }
+  mermaid.initialize({
+    startOnLoad: false,
+    theme: matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "default",
+  });
+  mermaid.run();
+}
+</script>
+</body>
+</html>
+HTML_TAIL
+} > "$out"
+
+# 既にブラウザ pane が開いていれば navigate で再利用する（連打で pane を増やさない）
+if [ "$(terminal-browser ls --json | jq '.browsers | length')" -gt 0 ]; then
+  terminal-browser action -- navigate "file://$out"
+else
+  terminal-browser open "$out" --split right
+fi
