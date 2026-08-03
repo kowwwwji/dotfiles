@@ -15,3 +15,6 @@ Brewfile/Brewfile*.lock.json
 !/.claude/agents
 /.claude/agents/*
 !/.claude/agents/dotfiles-reviewer.md
+# terminal-browser のインストーラが ~/.claude/skills（= dot_claude/skills への symlink）内に
+# machine-local な絶対パスの skill リンクを作るため、追跡しない
+/dot_claude/skills/terminal-browser
