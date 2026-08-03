@@ -46,11 +46,28 @@ return {
     },
   },
   {
-    -- ブラウザプレビューは廃止（バッファ内表示へ移行）。
+    -- iamcco 版（Node 依存）のブラウザプレビューは廃止。
     -- lang.markdown extra（lua/config/lazy.lua で import）が同プラグインを宣言しているため、
     -- 明示的な無効化が必要（自前 spec の削除だけでは extra 側の宣言が生き残る）
     "iamcco/markdown-preview.nvim",
     enabled = false,
+  },
+  {
+    -- 純 Lua のブラウザプレビュー（iamcco 版とは別物。build 不要・SSE 更新・mermaid 対応）
+    "selimacerbas/markdown-preview.nvim",
+    -- リポジトリ末尾名が iamcco 版（上で無効化）と同一のため、name を変えないと
+    -- lazy.nvim が同一プラグインとして spec をマージし enabled = false を引き継いでしまう
+    name = "selim-markdown-preview.nvim",
+    -- name を変えると main モジュールの自動検出が効かなくなるため明示する
+    main = "markdown_preview",
+    dependencies = { "selimacerbas/live-server.nvim" },
+    ft = { "markdown" },
+    -- <leader>cp は autocmds.lua で terminal-browser の md-preview に割当済みのため
+    -- ブラウザ版は大文字 P に分ける（停止は :MarkdownPreviewStop）
+    keys = {
+      { "<leader>cP", "<cmd>MarkdownPreview<cr>", ft = "markdown", desc = "Markdown Preview (browser)" },
+    },
+    opts = {},
   },
   -- テキスト装飾（見出し・テーブル罫線・コードブロック背景）は lang.markdown extra が
   -- 宣言する render-markdown.nvim が担う（<leader>um でトグル）。自前 spec は持たない。
