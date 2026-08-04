@@ -13,7 +13,6 @@ kowwwwji's DotFile & PC setup
    - `キーのリピート`と`リピート入力認識までの時間`を最大
    - F1F2をファンクションキーとして使用にチェック
    - ショートカットのSpotlight検索を表示をOFF
-   - `次のウインドウを操作対象にする`のキーをOption+Tabに変更
 1. 音声入力のショートカットを`Fn`に
 1. メニューバーの表示
    - Dockとメニューバー
@@ -82,6 +81,20 @@ open -a Raycast # Advanced > Import/Export。さらに Settings > Extensions > S
 open -a BetterTouchTool
 open -a karabiner-elements
 ```
+
+### ウィンドウ管理（AeroSpace / JankyBorders / SketchyBar）
+
+自動化できない macOS 側の GUI 操作（PC ごとに手動）:
+
+1. AeroSpace.app を初回起動し、アクセシビリティ権限を許可する
+2. システム設定 > メニューバー > 「メニューバーを自動的に表示/非表示」を「常に」にする
+   （SketchyBar と macOS メニューバーの二重表示を避ける）
+3. （任意）デスクトップとDock > Mission Control「ウィンドウをアプリケーションごとにグループ化」を有効化
+   （Mission Control の表示縮小対策）
+
+> [!NOTE]
+> SketchyBar デフォルト設定のスペース表示は macOS ネイティブのスペース参照のため、
+> AeroSpace のワークスペースとは連動しない（連携ウィジェットは後日の課題）。
 
 ### その他設定
 
