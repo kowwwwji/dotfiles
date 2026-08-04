@@ -30,6 +30,9 @@ ln -nfs "${DOTFILES_ROOT}/.config/nvim" "${HOME}/.config/"
 ln -nfs "${DOTFILES_ROOT}/.config/sheldon" "${HOME}/.config/"
 ln -nfs "${DOTFILES_ROOT}/.config/wezterm" "${HOME}/.config/"
 ln -nfs "${DOTFILES_ROOT}/.config/ghostty" "${HOME}/.config/"
+ln -nfs "${DOTFILES_ROOT}/.config/aerospace" "${HOME}/.config/"
+ln -nfs "${DOTFILES_ROOT}/.config/borders" "${HOME}/.config/"
+ln -nfs "${DOTFILES_ROOT}/.config/sketchybar" "${HOME}/.config/"
 # memo: 旧構成の名残で ~/.config/memo がディレクトリごと repo への symlink だと、
 # ln がリンクを貫通して repo 側の実ファイルを自己参照リンクに置き換えてしまう。
 # 実ディレクトリに正してから file 単位でリンクする。
@@ -141,6 +144,18 @@ if command -v brew >/dev/null 2>&1 && autoupdate_status=$(brew autoupdate status
 else
   echo "brew または homebrew/autoupdate tap が未導入のため brew autoupdate start をスキップ（brew bundle 後に再実行してください）"
 fi
+
+# window management: borders / sketchybar は brew services (launchd) で常駐管理。
+# 一度 start すれば LaunchAgent が登録され、以降はログイン毎に自動起動する。
+# aerospace 自身は start-at-login = true でログイン項目を管理するためここでは扱わない。
+for svc in borders sketchybar; do
+  if brew list "$svc" >/dev/null 2>&1; then
+    # ${svc} のブレースは必須: zsh はクォート内でも $svc[ を添字として解釈する
+    brew services list | grep -qE "^${svc}[[:space:]]+started" || brew services start "$svc"
+  else
+    echo "$svc が未インストールのため brew services start をスキップ（brew bundle 後に再実行してください）"
+  fi
+done
 
 # terminal-browser: ターミナル内で Web を表示するブラウザ（https://terminal-browser.com/）
 # 注: brew 未提供・GitHub releases にバイナリ添付も無いため、公式インストーラ

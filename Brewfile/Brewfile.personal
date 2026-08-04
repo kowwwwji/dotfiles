@@ -1,5 +1,3 @@
-tap "nikitabobko/tap", trusted: true
-tap "felixkratz/formulae", "https://github.com/FelixKratz/homebrew-formulae", trusted: true
 mas "WebDrop", id: 1125673012
 mas "Spark", id: 1176895641
 mas "LINE", id: 539883307
@@ -25,7 +23,6 @@ brew "python@3.12"
 brew "luarocks"
 brew "lua"
 brew "fswatch"
-brew "felixkratz/formulae/borders"
 brew "eza"
 brew "bat"
 brew "age"
