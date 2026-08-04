@@ -33,18 +33,19 @@ exec-on-workspace-change = ['/bin/bash', '-c',
 [key-mapping]
     preset = 'qwerty'
 
-# gaps は inner/outer とも 10。outer.top のみ sketchybar と重ならないよう
-# バーの実下端（height=40 + y_offset=-5 → 35px）+ 1px に合わせて確保する。
+# gaps は inner/outer とも 10。outer.top のみ、sketchybar の実下端
+# （height=40 + y_offset=-5 → 35px）に JankyBorders の枠の外側はみ出し
+# （bordersrc width=5.0 の半分 = 2.5px）が被らないよう 35+2.5+余白1px ≒ 39 を確保する。
 # outer.top は NSScreen.visibleFrame（メニューバー予約領域を除いた矩形）への加算のため、
-# ノッチ行 32px が常時予約される内蔵ディスプレイだけ 32+4=36 になるよう 4 に下げる。
+# ノッチ行 32px が常時予約される内蔵ディスプレイだけ 32+7=39 になるよう 7 に下げる。
 # NOTE: 'built-in' は内蔵ディスプレイを持つ Mac なら必ずマッチする（下のモニタ名パターンの
-# ような不一致 no-op 劣化はしない）。非ノッチ機へ展開する際は先に 4 の調整が必要
+# ような不一致 no-op 劣化はしない）。非ノッチ機へ展開する際は先に 7 の調整が必要
 [gaps]
     inner.horizontal = 10
     inner.vertical =   10
     outer.left =       10
     outer.bottom =     10
-    outer.top =        [{ monitor.'built-in' = 4 }, 36]
+    outer.top =        [{ monitor.'built-in' = 7 }, 39]
     outer.right =      10
 
 # WS をモニタに固定する運用（1=内蔵/確認用, 2=JAPANNEXT/メイン, 3=PL2390/縦長）。
