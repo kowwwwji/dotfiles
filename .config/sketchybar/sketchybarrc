@@ -14,8 +14,11 @@ COLOR_BAR=0xe61c1c1c # @c-bg #1c1c1c（バー背景。透過 e6 + blur）
 COLOR_FG=0xffc0c0c0  # @c-fg #c0c0c0
 
 ##### Bar Appearance #####
-# NOTE: y_offset を負にしてバーを画面上端より少し上へ食い込ませ、表示位置を詰めている
-sketchybar --bar position=top height=40 y_offset=-5 blur_radius=30 color=$COLOR_BAR
+# NOTE: 実下端 35px は aerospace.toml の gaps.outer.top が前提にする値。
+# 表示を詰める目的で height=40 y_offset=-5 とすると下端は同じ 35px でも、
+# アイテム（バー全体の垂直中央に配置される）が見えている領域の中央より上にずれる。
+# height 自体を 35 にして中央揃えを保つ
+sketchybar --bar position=top height=35 blur_radius=30 color=$COLOR_BAR
 
 ##### Changing Defaults #####
 default=(
@@ -46,6 +49,7 @@ do
     icon.padding_left=7
     icon.padding_right=7
     label.font="sketchybar-app-font:Regular:16.0"
+    label.y_offset=-2
     label.padding_right=7
     background.corner_radius=5
     background.height=25
@@ -61,24 +65,31 @@ do
 done
 
 ##### Adding Left Items #####
-# front_app の icon は自アプリのリガチャアイコン（plugins/front_app.sh が設定）
+# front_app の icon は自アプリのリガチャアイコン（plugins/front_app.sh が設定）。
+# y_offset=-2 は sketchybar-app-font のグリフが UDEV Gothic の文字よりベースライン上に
+# 高く描かれるための補正（WS チップの label.y_offset と同値。目視で合わせた値）
 sketchybar --add item front_app left \
            --set front_app icon.font="sketchybar-app-font:Regular:16.0" \
+                 icon.y_offset=-2 \
                  script="$PLUGIN_DIR/front_app.sh" \
            --subscribe front_app front_app_switched
 
 ##### Adding Right Items #####
-# ime はイベントが無いためポーリング（update_freq=1。clock の左隣・clock 最右は維持）
+# ime はイベントが無いためポーリング（update_freq=1）。最後に追加して battery の左
+# （右側グループの最左）に置く。icon は使わないが、空のままだと icon の既定 padding
+# だけが残り左に空きすぎるため明示 off。label 単独のアイテムは icon+label 構成の
+# 隣接アイテムより文字が 2px 上に描かれるため y_offset で補正（目視で合わせた値）
 sketchybar --add item clock right \
            --set clock update_freq=10 icon=󰥔 script="$PLUGIN_DIR/clock.sh" \
-           --add item ime right \
-           --set ime update_freq=1 script="$PLUGIN_DIR/ime.sh" \
            --add item volume right \
            --set volume script="$PLUGIN_DIR/volume.sh" \
            --subscribe volume volume_change \
            --add item battery right \
            --set battery update_freq=120 script="$PLUGIN_DIR/battery.sh" \
-           --subscribe battery system_woke power_source_change
+           --subscribe battery system_woke power_source_change \
+           --add item ime right \
+           --set ime update_freq=1 icon.drawing=off label.y_offset=-2 \
+                 script="$PLUGIN_DIR/ime.sh"
 
 ##### Force all scripts to run the first time (never do this in a script) #####
 sketchybar --update

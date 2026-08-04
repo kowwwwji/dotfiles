@@ -38,7 +38,7 @@ on-focus-changed = ['exec-and-forget sketchybar --trigger aerospace_workspace_ch
     preset = 'qwerty'
 
 # gaps は inner/outer とも 10。outer.top のみ、sketchybar の実下端
-# （height=40 + y_offset=-5 → 35px）に JankyBorders の枠の外側はみ出し
+# （height=35 → 35px）に JankyBorders の枠の外側はみ出し
 # （bordersrc width=5.0 の半分 = 2.5px）が被らないよう 35+2.5+余白1px ≒ 39 を確保する。
 # outer.top は NSScreen.visibleFrame（メニューバー予約領域を除いた矩形）への加算のため、
 # ノッチ行 32px が常時予約される内蔵ディスプレイだけ 32+7=39 になるよう 7 に下げる。
