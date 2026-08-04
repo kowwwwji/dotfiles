@@ -70,10 +70,10 @@ esac
 
 # インストールしたものの読込
 path=(/usr/local/bin(N-/) /usr/local/sbin(N-/) $path)
-# 独自スクリプト読み込み
-path=(~/.scripts(N-/) $path)
 # claude code用
 path=(~/.local/bin(N-/) $path)
+# 独自スクリプト読み込み（自作 shim が同名の既製コマンドに先勝ちするよう最優先）
+path=(~/.scripts(N-/) $path)
 
 ZSH_HOME="${HOME}/.zsh"
 

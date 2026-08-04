@@ -1,0 +1,22 @@
+#!/bin/sh
+# terminal-browser shim — Vim 風キー操作（tb-vimkeys）を自動注入する
+#
+# .zshrc で ~/.scripts を ~/.local/bin より優先させ、本体より先勝ちさせて使う。
+# open のときだけ注入ポーラーを裏で切り離し、本体へそのまま exec する。
+# ポーラー方式の理由: 本体/agent-browser に init script の登録経路が無い（実測済み）。
+
+dir=$(CDPATH= cd -- "$(dirname -- "$0")" && pwd)
+real="$HOME/.local/bin/terminal-browser"
+
+if [ ! -x "$real" ]; then
+  echo "terminal-browser (shim): 本体が見つかりません: $real" >&2
+  exit 127
+fi
+
+case "${1:-}" in
+  open)
+    nohup "$dir/tb-vimkeys-poller" </dev/null >/dev/null 2>&1 &
+    ;;
+esac
+
+exec "$real" "$@"
