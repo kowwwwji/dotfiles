@@ -61,7 +61,7 @@ on-focus-changed = ['exec-and-forget sketchybar --trigger aerospace_workspace_ch
     2 = 'japannext'
     3 = 'pl2390'
 
-# アプリ自動配置。Slack は WS1（内蔵/確認用）、Ghostty は WS2（メイン作業）へ。
+# アプリ自動配置。Slack は WS1（内蔵/確認用）、Ghostty は WS2（メイン作業）、Apple Music は WS3 へ。
 # ブラウザは全ディスプレイで使うため割当なし。
 # 設定ウィンドウ・ダイアログ主体のアプリはタイルに混ぜず floating にする。
 [[on-window-detected]]
@@ -71,6 +71,10 @@ on-focus-changed = ['exec-and-forget sketchybar --trigger aerospace_workspace_ch
 [[on-window-detected]]
     if.app-id = 'com.mitchellh.ghostty' # Ghostty
     run = 'move-node-to-workspace 2'
+
+[[on-window-detected]]
+    if.app-id = 'com.apple.Music' # Apple Music
+    run = 'move-node-to-workspace 3'
 
 [[on-window-detected]]
     if.app-id = 'com.apple.systempreferences' # システム設定
