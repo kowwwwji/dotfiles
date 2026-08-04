@@ -2,9 +2,9 @@
 # 公式ドキュメント: https://nikitabobko.github.io/AeroSpace/guide
 #
 # 設計方針（.claude/specs/2026-08-04-window-management-design.md）:
-# - キーバインドは alt+数字と alt+記号少数に限定する（hjkl のみ例外）。
+# - キーバインドは alt+数字と alt+記号少数に限定する。
 #   ghostty の macos-option-as-alt = left で左 Option を nvim の Meta に使う運用のため、
-#   公式デフォルトの alt-a〜z 英字ワークスペースは全て落とす。
+#   alt+英字（hjkl 含む）のバインドは置かない。
 # - borders / sketchybar は brew services (launchd) で常駐管理するため
 #   after-startup-command からは起動しない。
 
@@ -86,16 +86,10 @@ exec-on-workspace-change = ['/bin/bash', '-c',
 
 [mode.main.binding]
     # ワークスペース内の全ウィンドウ巡回（Cmd+Tab / Cmd+Shift+Tab と同じ語彙）。
-    # 向き・レイアウトに関係なく順に巡る。方向指定のフォーカス移動（alt-hjkl）は
+    # 向き・レイアウトに関係なく順に巡る。方向指定のフォーカス移動・並べ替え（hjkl）は
     # 左 Option を nvim の Meta に全て譲るため置かない
     alt-tab = 'focus --wrap-around dfs-next'
     alt-shift-tab = 'focus --wrap-around dfs-prev'
-
-    # ウィンドウ移動
-    alt-shift-h = 'move left'
-    alt-shift-j = 'move down'
-    alt-shift-k = 'move up'
-    alt-shift-l = 'move right'
 
     # リサイズ（US 配列前提。JIS を使う場合は要調整）
     alt-minus = 'resize smart -50'
@@ -145,8 +139,3 @@ exec-on-workspace-change = ['/bin/bash', '-c',
     r = ['flatten-workspace-tree', 'mode main'] # レイアウトのリセット
     f = ['layout floating tiling', 'mode main'] # floating / tiling の切替
     backspace = ['close-all-windows-but-current', 'mode main']
-
-    alt-shift-h = ['join-with left', 'mode main']
-    alt-shift-j = ['join-with down', 'mode main']
-    alt-shift-k = ['join-with up', 'mode main']
-    alt-shift-l = ['join-with right', 'mode main']
