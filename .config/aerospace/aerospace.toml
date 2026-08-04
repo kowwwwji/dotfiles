@@ -1,0 +1,98 @@
+# AeroSpace 設定（公式デフォルトをベースに構成）
+# 公式ドキュメント: https://nikitabobko.github.io/AeroSpace/guide
+#
+# 設計方針（.claude/specs/2026-08-04-window-management-design.md）:
+# - キーバインドは alt+数字と alt+記号少数に限定する（hjkl のみ例外）。
+#   ghostty の macos-option-as-alt = left で左 Option を nvim の Meta に使う運用のため、
+#   公式デフォルトの alt-a〜z 英字ワークスペースは全て落とす。
+# - borders / sketchybar は brew services (launchd) で常駐管理するため
+#   after-startup-command からは起動しない。
+
+# aerospace 自身がログイン項目を管理する
+start-at-login = true
+
+# normalization は公式デフォルト値のまま
+enable-normalization-flatten-containers = true
+enable-normalization-opposite-orientation-for-nested-containers = true
+
+accordion-padding = 30
+default-root-container-layout = 'tiles'
+default-root-container-orientation = 'auto'
+
+# フォーカスしたモニタへマウスも追従させる（マルチモニタでの迷子防止）
+on-focused-monitor-changed = ['move-mouse monitor-lazy-center']
+
+[key-mapping]
+    preset = 'qwerty'
+
+# gaps は inner/outer とも 10。outer.top のみ sketchybar と重ならないよう
+# バーの高さ（sketchybarrc の height=40）に合わせて確保する
+[gaps]
+    inner.horizontal = 10
+    inner.vertical =   10
+    outer.left =       10
+    outer.bottom =     10
+    outer.top =        40
+    outer.right =      10
+
+[mode.main.binding]
+    # フォーカス移動（vim 流 hjkl。原則5: 横断統一）
+    alt-h = 'focus left'
+    alt-j = 'focus down'
+    alt-k = 'focus up'
+    alt-l = 'focus right'
+
+    # ウィンドウ移動
+    alt-shift-h = 'move left'
+    alt-shift-j = 'move down'
+    alt-shift-k = 'move up'
+    alt-shift-l = 'move right'
+
+    # リサイズ（US 配列前提。JIS を使う場合は要調整）
+    alt-minus = 'resize smart -50'
+    alt-equal = 'resize smart +50'
+
+    # レイアウト切替
+    alt-slash = 'layout tiles horizontal vertical'
+    alt-comma = 'layout accordion horizontal vertical'
+
+    # ワークスペース切替
+    alt-1 = 'workspace 1'
+    alt-2 = 'workspace 2'
+    alt-3 = 'workspace 3'
+    alt-4 = 'workspace 4'
+    alt-5 = 'workspace 5'
+    alt-6 = 'workspace 6'
+    alt-7 = 'workspace 7'
+    alt-8 = 'workspace 8'
+    alt-9 = 'workspace 9'
+
+    # ウィンドウをワークスペースへ移動
+    alt-shift-1 = 'move-node-to-workspace 1'
+    alt-shift-2 = 'move-node-to-workspace 2'
+    alt-shift-3 = 'move-node-to-workspace 3'
+    alt-shift-4 = 'move-node-to-workspace 4'
+    alt-shift-5 = 'move-node-to-workspace 5'
+    alt-shift-6 = 'move-node-to-workspace 6'
+    alt-shift-7 = 'move-node-to-workspace 7'
+    alt-shift-8 = 'move-node-to-workspace 8'
+    alt-shift-9 = 'move-node-to-workspace 9'
+
+    # 直前のワークスペースと往復
+    alt-tab = 'workspace-back-and-forth'
+    # ワークスペースを次のモニタへ移動
+    alt-shift-tab = 'move-workspace-to-monitor --wrap-around next'
+
+    alt-shift-semicolon = 'mode service'
+
+# service モード（設定リロード・レイアウトのリセット等、たまにしか使わない操作）
+[mode.service.binding]
+    esc = ['reload-config', 'mode main']
+    r = ['flatten-workspace-tree', 'mode main'] # レイアウトのリセット
+    f = ['layout floating tiling', 'mode main'] # floating / tiling の切替
+    backspace = ['close-all-windows-but-current', 'mode main']
+
+    alt-shift-h = ['join-with left', 'mode main']
+    alt-shift-j = ['join-with down', 'mode main']
+    alt-shift-k = ['join-with up', 'mode main']
+    alt-shift-l = ['join-with right', 'mode main']
