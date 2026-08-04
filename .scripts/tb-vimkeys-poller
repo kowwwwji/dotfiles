@@ -1,0 +1,53 @@
+#!/bin/sh
+# tb-vimkeys-poller — terminal-browser のアクティブタブへ tb-vimkeys.js を注入し続ける
+#
+# terminal-browser shim（open 時）から起動される。本体/agent-browser には
+# ページ遷移を跨いで効く init script の登録経路が無い（実測済み）ため、
+# action -- eval の定期再評価で注入を維持する。JS 側の __tbVimKeys ガードで
+# 再評価は冪等。キー入力が届くのはアクティブタブだけなので、アクティブタブ
+# のみへの注入で機能的に足りる。ブラウザが閉じたら自然終了する。
+
+set -u
+
+dir=$(CDPATH= cd -- "$(dirname -- "$0")" && pwd)
+script="$dir/tb-vimkeys.js"
+real="$HOME/.local/bin/terminal-browser"
+log="${TMPDIR:-/tmp}/tb-vimkeys.log"
+
+[ -x "$real" ] || exit 1
+[ -f "$script" ] || exit 1
+command -v jq >/dev/null 2>&1 || exit 1
+
+# ls が失敗しても安全側（0）に倒すブラウザ数カウント
+browsers() {
+  n=$("$real" ls --json 2>/dev/null | jq '.browsers | length' 2>/dev/null)
+  echo "${n:-0}"
+}
+
+# 端末タブ(tmux window)単位で1本だけ動かす
+raw=$("$real" ls --json 2>/dev/null | jq -r '.self.tab // empty' 2>/dev/null)
+tab=$(printf '%s' "$raw" | tr -c 'A-Za-z0-9' '_')
+pidfile="${TMPDIR:-/tmp}/tb-vimkeys-${tab:-solo}.pid"
+if [ -f "$pidfile" ] && kill -0 "$(cat "$pidfile")" 2>/dev/null; then
+  exit 0
+fi
+echo $$ > "$pidfile"
+trap 'rm -f "$pidfile"' EXIT
+
+# shim から exec 前に起動されるため、ブラウザの起動を待つ（最大15秒）
+i=0
+while [ "$(browsers)" = "0" ]; do
+  i=$((i + 1))
+  if [ "$i" -ge 15 ]; then
+    echo "$(date '+%F %T') ブラウザ起動待ちタイムアウト (tab=${tab:-solo})" >> "$log"
+    exit 1
+  fi
+  sleep 1
+done
+
+echo "$(date '+%F %T') 注入ループ開始 (tab=${tab:-solo})" >> "$log"
+while [ "$(browsers)" != "0" ]; do
+  "$real" action -- eval "$(cat "$script")" >/dev/null 2>&1
+  sleep 2
+done
+echo "$(date '+%F %T') ブラウザ終了により停止 (tab=${tab:-solo})" >> "$log"

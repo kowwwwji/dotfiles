@@ -126,7 +126,10 @@ HTML_TAIL
 } > "$out"
 
 # 既にブラウザ pane が開いていれば navigate で再利用する（連打で pane を増やさない）
-if [ "$(terminal-browser ls --json | jq '.browsers | length')" -gt 0 ]; then
+# ls/jq の失敗は 0 扱いに倒して open 分岐へ進める（本体未導入で shim だけが
+# PATH にある場合も、途中の紛らわしいエラーを出さず shim の明確なエラーで落とす）
+count=$(terminal-browser ls --json 2>/dev/null | jq '.browsers | length' 2>/dev/null)
+if [ "${count:-0}" -gt 0 ] 2>/dev/null; then
   terminal-browser action -- navigate "file://$out"
 else
   terminal-browser open "$out" --split right
