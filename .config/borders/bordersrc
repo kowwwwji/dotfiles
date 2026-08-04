@@ -1,0 +1,11 @@
+#!/bin/sh
+# JankyBorders 起動設定（borders が起動時に実行する sh スクリプト）
+# https://github.com/FelixKratz/JankyBorders
+#
+# 色は tmux のパレット（.tmux.conf の Color palette 節）に合わせる:
+# - active:   @c-info の青 (#00BAFE)。通知色と同系でフォーカスが目立つ
+# - inactive: @c-primary の紫灰 (#5f5f87)。目立たせない
+
+borders style=round width=5.0 hidpi=on \
+  active_color=0xff00bafe \
+  inactive_color=0xff5f5f87
