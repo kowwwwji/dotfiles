@@ -1,32 +1,30 @@
-# This is a demo config to showcase some of the most important commands.
-# It is meant to be changed and configured, as it is intentionally kept sparse.
-# For a (much) more advanced configuration example see my dotfiles:
-# https://github.com/FelixKratz/dotfiles
+# sketchybar 設定（統一ミニマル: UDEV Gothic NF + tmux パレット配色）
+# 全オプション: https://felixkratz.github.io/SketchyBar/config/bar
+#
+# 設計方針（.claude/specs/2026-08-04-wm-additional-config-design.md）:
+# - WS ウィジェットは aerospace のイベント駆動（exec-on-workspace-change → --trigger）。
+#   ポーリング・動的なアイテム追加削除はしない。
+# - 配色は tmux パレット（.tmux.conf の Color palette 節）と揃える。形式は 0xAARRGGBB。
+# - Nerd Font アイコンは Material Design 系（U+F0000 台）のみ使う（CLAUDE.md の tmux 節と同じ理由）。
 
 PLUGIN_DIR="$CONFIG_DIR/plugins"
 
-##### Bar Appearance #####
-# Configuring the general appearance of the bar.
-# These are only some of the options available. For all options see:
-# https://felixkratz.github.io/SketchyBar/config/bar
-# If you are looking for other colors, see the color picker:
-# https://felixkratz.github.io/SketchyBar/config/tricks#color-picker
+# tmux パレット対応色（フォーカス WS の配色は plugins/aerospace.sh 側にも同値を持つ）
+COLOR_BAR=0xe61c1c1c # @c-bg #1c1c1c（バー背景。透過 e6 + blur）
+COLOR_FG=0xffc0c0c0  # @c-fg #c0c0c0
 
+##### Bar Appearance #####
 # NOTE: y_offset を負にしてバーを画面上端より少し上へ食い込ませ、表示位置を詰めている
-sketchybar --bar position=top height=40 y_offset=-5 blur_radius=30 color=0x40000000
+sketchybar --bar position=top height=40 y_offset=-5 blur_radius=30 color=$COLOR_BAR
 
 ##### Changing Defaults #####
-# We now change some default values, which are applied to all further items.
-# For a full list of all available item properties see:
-# https://felixkratz.github.io/SketchyBar/config/items
-
 default=(
   padding_left=5
   padding_right=5
-  icon.font="Hack Nerd Font:Bold:17.0"
-  label.font="Hack Nerd Font:Bold:14.0"
-  icon.color=0xffffffff
-  label.color=0xffffffff
+  icon.font="UDEV Gothic NF:Bold:17.0"
+  label.font="UDEV Gothic NF:Bold:14.0"
+  icon.color=$COLOR_FG
+  label.color=$COLOR_FG
   icon.padding_left=4
   icon.padding_right=4
   label.padding_left=4
@@ -34,53 +32,39 @@ default=(
 )
 sketchybar --default "${default[@]}"
 
-##### Adding Mission Control Space Indicators #####
-# Let's add some mission control spaces:
-# https://felixkratz.github.io/SketchyBar/config/components#space----associate-mission-control-spaces-with-an-item
-# to indicate active and available mission control spaces.
+##### aerospace ワークスペース #####
+# aerospace 側の exec-on-workspace-change がこのイベントを FOCUSED_WORKSPACE 付きで trigger する
+sketchybar --add event aerospace_workspace_change
 
-SPACE_ICONS=("1" "2" "3" "4" "5" "6" "7" "8" "9" "10")
-for i in "${!SPACE_ICONS[@]}"
+# alt-1〜9 に対応する space.1〜9 を静的に生成する。表示/非表示と配色は
+# plugins/aerospace.sh が判定する（非空 or フォーカス中のみ表示）
+for sid in 1 2 3 4 5 6 7 8 9
 do
-  sid="$(($i+1))"
   space=(
-    space="$sid"
-    icon="${SPACE_ICONS[i]}"
+    icon="$sid"
     icon.padding_left=7
     icon.padding_right=7
-    background.color=0x40ffffff
     background.corner_radius=5
     background.height=25
+    background.drawing=off
     label.drawing=off
-    script="$PLUGIN_DIR/space.sh"
-    click_script="yabai -m space --focus $sid"
+    drawing=off
+    script="$PLUGIN_DIR/aerospace.sh $sid"
+    click_script="aerospace workspace $sid"
   )
-  sketchybar --add space space."$sid" left --set space."$sid" "${space[@]}"
+  sketchybar --add item space."$sid" left \
+             --set space."$sid" "${space[@]}" \
+             --subscribe space."$sid" aerospace_workspace_change
 done
 
 ##### Adding Left Items #####
-# We add some regular items to the left side of the bar, where
-# only the properties deviating from the current defaults need to be set
-
-sketchybar --add item chevron left \
-           --set chevron icon= label.drawing=off \
-           --add item front_app left \
+sketchybar --add item front_app left \
            --set front_app icon.drawing=off script="$PLUGIN_DIR/front_app.sh" \
            --subscribe front_app front_app_switched
 
 ##### Adding Right Items #####
-# In the same way as the left items we can add items to the right side.
-# Additional position (e.g. center) are available, see:
-# https://felixkratz.github.io/SketchyBar/config/items#adding-items-to-sketchybar
-
-# Some items refresh on a fixed cycle, e.g. the clock runs its script once
-# every 10s. Other items respond to events they subscribe to, e.g. the
-# volume.sh script is only executed once an actual change in system audio
-# volume is registered. More info about the event system can be found here:
-# https://felixkratz.github.io/SketchyBar/config/events
-
 sketchybar --add item clock right \
-           --set clock update_freq=10 icon=  script="$PLUGIN_DIR/clock.sh" \
+           --set clock update_freq=10 icon=󰥔 script="$PLUGIN_DIR/clock.sh" \
            --add item volume right \
            --set volume script="$PLUGIN_DIR/volume.sh" \
            --subscribe volume volume_change \
