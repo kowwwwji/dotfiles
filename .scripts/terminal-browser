@@ -15,7 +15,7 @@ fi
 
 case "${1:-}" in
   open)
-    nohup "$dir/tb-vimkeys-poller" >/dev/null 2>&1 &
+    nohup "$dir/tb-vimkeys-poller" </dev/null >/dev/null 2>&1 &
     ;;
 esac
 
