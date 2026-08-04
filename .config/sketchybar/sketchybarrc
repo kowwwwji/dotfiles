@@ -36,14 +36,17 @@ sketchybar --default "${default[@]}"
 # aerospace 側の exec-on-workspace-change がこのイベントを FOCUSED_WORKSPACE 付きで trigger する
 sketchybar --add event aerospace_workspace_change
 
-# alt-1〜9 に対応する space.1〜9 を静的に生成する。表示/非表示と配色は
-# plugins/aerospace.sh が判定する（非空 or フォーカス中のみ表示）
+# alt-1〜9 に対応する space.1〜9 を静的に生成する。表示/非表示と配色、
+# label（WS 内アプリのアイコン列）は plugins/aerospace.sh が判定する
+# （非空 or フォーカス中のみ表示。label は sketchybar-app-font のリガチャ）
 for sid in 1 2 3 4 5 6 7 8 9
 do
   space=(
     icon="$sid"
     icon.padding_left=7
     icon.padding_right=7
+    label.font="sketchybar-app-font:Regular:16.0"
+    label.padding_right=7
     background.corner_radius=5
     background.height=25
     background.drawing=off
@@ -58,13 +61,18 @@ do
 done
 
 ##### Adding Left Items #####
+# front_app の icon は自アプリのリガチャアイコン（plugins/front_app.sh が設定）
 sketchybar --add item front_app left \
-           --set front_app icon.drawing=off script="$PLUGIN_DIR/front_app.sh" \
+           --set front_app icon.font="sketchybar-app-font:Regular:16.0" \
+                 script="$PLUGIN_DIR/front_app.sh" \
            --subscribe front_app front_app_switched
 
 ##### Adding Right Items #####
+# ime はイベントが無いためポーリング（update_freq=1。clock の左隣・clock 最右は維持）
 sketchybar --add item clock right \
            --set clock update_freq=10 icon=󰥔 script="$PLUGIN_DIR/clock.sh" \
+           --add item ime right \
+           --set ime update_freq=1 script="$PLUGIN_DIR/ime.sh" \
            --add item volume right \
            --set volume script="$PLUGIN_DIR/volume.sh" \
            --subscribe volume volume_change \

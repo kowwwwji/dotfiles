@@ -30,6 +30,10 @@ exec-on-workspace-change = ['/bin/bash', '-c',
     'sketchybar --trigger aerospace_workspace_change FOCUSED_WORKSPACE=$AEROSPACE_FOCUSED_WORKSPACE'
 ]
 
+# 同一 WS 内のウィンドウ開閉・移動でも WS チップのアイコン列を追従させる。
+# FOCUSED_WORKSPACE は渡らないが、plugins/aerospace.sh が空なら aerospace へ問い合わせて補う
+on-focus-changed = ['exec-and-forget sketchybar --trigger aerospace_workspace_change']
+
 [key-mapping]
     preset = 'qwerty'
 

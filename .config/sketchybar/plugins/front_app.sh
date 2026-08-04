@@ -1,10 +1,13 @@
 #!/bin/sh
 
-# Some events send additional information specific to the event in the $INFO
-# variable. E.g. the front_app_switched event sends the name of the newly
-# focused application in the $INFO variable:
+# front_app_switched イベントの $INFO（前面アプリ名）をラベルへ、
+# icon_map.sh のリガチャを icon へ反映する（icon.font は sketchybarrc 側で
+# sketchybar-app-font を指定。未知アプリは :default: グリフに落ちる）
 # https://felixkratz.github.io/SketchyBar/config/events#events-and-scripting
 
+PLUGIN_DIR="$(cd "$(dirname "$0")" && pwd)"
+
 if [ "$SENDER" = "front_app_switched" ]; then
-  sketchybar --set "$NAME" label="$INFO"
+  ICON=$("$PLUGIN_DIR/icon_map.sh" "$INFO")
+  sketchybar --set "$NAME" icon="${ICON% }" label="$INFO"
 fi
