@@ -23,9 +23,17 @@
     !!el && (el.tagName === "INPUT" || el.tagName === "TEXTAREA" ||
              el.tagName === "SELECT" || el.isContentEditable);
 
+  // Shadow DOM 内の実フォーカス要素まで辿る（Web Components のサイトでは
+  // document.activeElement が shadow host を返し、入力欄を見逃すため）
+  const activeEl = () => {
+    let el = document.activeElement;
+    while (el && el.shadowRoot && el.shadowRoot.activeElement) el = el.shadowRoot.activeElement;
+    return el;
+  };
+
   // 文字キーは keypress で処理し、文字種は charCode/which から復元する
   addEventListener("keypress", (e) => {
-    if (inEditable(document.activeElement)) return;
+    if (inEditable(activeEl())) return;
     if (e.metaKey || e.altKey || e.ctrlKey) return;
     const half = Math.round(innerHeight / 2);
     // event.key ではなく charCode/which から文字を復元する（上のコメント参照）
@@ -50,7 +58,7 @@
 
   // Ctrl+d / Ctrl+u は char イベントが出ないため keydown で処理
   addEventListener("keydown", (e) => {
-    if (inEditable(document.activeElement)) return;
+    if (inEditable(activeEl())) return;
     if (e.metaKey || e.altKey || !e.ctrlKey) return;
     const half = Math.round(innerHeight / 2);
     if (e.key === "d") scrollBy(0, half);
