@@ -43,9 +43,43 @@ vim.api.nvim_create_autocmd("FileType", {
         on_exit = function(_, code)
           if code ~= 0 then
             vim.notify(table.concat(stderr, "\n"), vim.log.levels.ERROR)
+          else
+            -- プレビューを起動したバッファだけカーソル同期を有効化する
+            vim.b[ev.buf].md_preview_sync = true
           end
         end,
       })
     end, { buffer = ev.buf, desc = "Preview in terminal-browser" })
+
+    -- プレビューをカーソル行へ追従スクロールさせる。
+    -- CursorMoved 毎では CLI プロセス起動+CDP 往復が重すぎるため、updatetime 経過後に
+    -- 1回だけ発火する CursorHold を自然なデバウンスとして使う。
+    -- FileType は同一バッファで複数回発火しうるので、augroup(clear) で重複登録を防ぐ。
+    local group = vim.api.nvim_create_augroup("md_preview_sync_" .. ev.buf, { clear = true })
+    vim.api.nvim_create_autocmd({ "CursorHold", "CursorHoldI" }, {
+      group = group,
+      buffer = ev.buf,
+      callback = function()
+        if not vim.b[ev.buf].md_preview_sync then
+          return
+        end
+        vim.fn.jobstart({
+          "terminal-browser",
+          "action",
+          "--",
+          "eval",
+          ("window.__scrollToLine(%d)"):format(vim.api.nvim_win_get_cursor(0)[1]),
+        }, {
+          -- browser pane が閉じられた後もカーソル停止のたびプロセスを起動し続けないよう、
+          -- 失敗したら沈黙で同期を無効化する（通知はスパムになるので出さない。
+          -- 次の <leader>cp 成功で復帰する）
+          on_exit = function(_, code)
+            if code ~= 0 then
+              vim.b[ev.buf].md_preview_sync = false
+            end
+          end,
+        })
+      end,
+    })
   end,
 })
