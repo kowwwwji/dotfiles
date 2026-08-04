@@ -30,8 +30,9 @@ background-opacity = 0.80
 #      テーマより優先されるので黒背景+透過はそのまま維持される。
 theme = Snazzy
 
+# 左右は macOS Tahoe のウィンドウ角丸(半径16px)に本文が寄りすぎないよう広めに取る
 # tmux のステータスラインの下に空白が出るため bottom は 0
-window-padding-x = 3
+window-padding-x = 8
 window-padding-y = 3,0
 
 # タイトルバー非表示（フレーム・角丸は維持されるためリサイズは可能）
