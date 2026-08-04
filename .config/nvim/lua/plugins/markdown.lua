@@ -67,7 +67,11 @@ return {
     keys = {
       { "<leader>cP", "<cmd>MarkdownPreview<cr>", ft = "markdown", desc = "Markdown Preview (browser)" },
     },
-    opts = {},
+    opts = {
+      -- Chrome の新規ウィンドウで開き、aerospace でプレビュー専用 workspace へ送る
+      -- （デフォルトの system browser だと既存ウィンドウのタブになり単独で移動できない）
+      browser = { vim.fn.expand("~/.scripts/md-preview-browser") },
+    },
   },
   -- テキスト装飾（見出し・テーブル罫線・コードブロック背景）は lang.markdown extra が
   -- 宣言する render-markdown.nvim が担う（<leader>um でトグル）。自前 spec は持たない。
