@@ -135,9 +135,17 @@ exec-on-workspace-change = ['/bin/bash', '-c',
 
     alt-shift-semicolon = 'mode service'
 
-# service モード（設定リロード・レイアウトのリセット等、たまにしか使わない操作）
+# service モード（設定リロード・レイアウトのリセット・並べ替え等、たまにしか使わない操作）
 [mode.service.binding]
     esc = ['reload-config', 'mode main']
     r = ['flatten-workspace-tree', 'mode main'] # レイアウトのリセット
     f = ['layout floating tiling', 'mode main'] # floating / tiling の切替
     backspace = ['close-all-windows-but-current', 'mode main']
+
+    # タイルの並べ替え。OS の Option+矢印（単語移動/選択）を奪わないよう main ではなく
+    # ここに置く。連続で押せるよう mode main へは戻らない（抜けるのは enter か esc）
+    left = 'move left'
+    down = 'move down'
+    up = 'move up'
+    right = 'move right'
+    enter = 'mode main' # esc と違い config リロードなしで抜ける
