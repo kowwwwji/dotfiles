@@ -108,16 +108,18 @@ on-focus-changed = ['exec-and-forget sketchybar --trigger aerospace_workspace_ch
     alt-comma = ['layout tiling', 'layout accordion horizontal vertical']
     alt-period = 'fullscreen' # トグル
 
-    # ワークスペース切替
-    alt-1 = 'workspace 1'
-    alt-2 = 'workspace 2'
-    alt-3 = 'workspace 3'
-    alt-4 = 'workspace 4'
-    alt-5 = 'workspace 5'
-    alt-6 = 'workspace 6'
-    alt-7 = 'workspace 7'
-    alt-8 = 'workspace 8'
-    alt-9 = 'workspace 9'
+    # ワークスペース切替。native の workspace N で即時に切り替えつつ、ws-focus.sh が
+    # 着地を検証して外れていたら入れ直す（目的 WS の最前面が Chrome 等の複数窓アプリ
+    # だと別 WS の窓にフォーカスを横取りされるため。詳細はスクリプト内コメント）
+    alt-1 = ['workspace 1', 'exec-and-forget ~/.config/aerospace/ws-focus.sh 1']
+    alt-2 = ['workspace 2', 'exec-and-forget ~/.config/aerospace/ws-focus.sh 2']
+    alt-3 = ['workspace 3', 'exec-and-forget ~/.config/aerospace/ws-focus.sh 3']
+    alt-4 = ['workspace 4', 'exec-and-forget ~/.config/aerospace/ws-focus.sh 4']
+    alt-5 = ['workspace 5', 'exec-and-forget ~/.config/aerospace/ws-focus.sh 5']
+    alt-6 = ['workspace 6', 'exec-and-forget ~/.config/aerospace/ws-focus.sh 6']
+    alt-7 = ['workspace 7', 'exec-and-forget ~/.config/aerospace/ws-focus.sh 7']
+    alt-8 = ['workspace 8', 'exec-and-forget ~/.config/aerospace/ws-focus.sh 8']
+    alt-9 = ['workspace 9', 'exec-and-forget ~/.config/aerospace/ws-focus.sh 9']
 
     # ウィンドウをワークスペースへ移動
     alt-shift-1 = 'move-node-to-workspace 1'

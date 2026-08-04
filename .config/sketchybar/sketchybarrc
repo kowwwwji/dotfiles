@@ -57,7 +57,8 @@ do
     label.drawing=off
     drawing=off
     script="$PLUGIN_DIR/aerospace.sh $sid"
-    click_script="aerospace workspace $sid"
+    # 切替の着地検証は alt-N と同じ ws-focus.sh に寄せる（フォーカス横取り対策）
+    click_script="$HOME/.config/aerospace/ws-focus.sh $sid"
   )
   sketchybar --add item space."$sid" left \
              --set space."$sid" "${space[@]}" \
