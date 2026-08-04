@@ -15,25 +15,72 @@ start-at-login = true
 enable-normalization-flatten-containers = true
 enable-normalization-opposite-orientation-for-nested-containers = true
 
-accordion-padding = 30
+# 0 にしてアコーディオンの重なり（左右にはみ出す帯）を出さず、単一ウィンドウ全画面風に見せる。
+# ウィンドウの行き来は alt-h/l（focus left/right）で行う
+accordion-padding = 0
 default-root-container-layout = 'tiles'
 default-root-container-orientation = 'auto'
 
 # フォーカスしたモニタへマウスも追従させる（マルチモニタでの迷子防止）
 on-focused-monitor-changed = ['move-mouse monitor-lazy-center']
 
+# sketchybar の WS ウィジェットへフォーカス変更を通知する（イベント駆動。ポーリング不採用）
+exec-on-workspace-change = ['/bin/bash', '-c',
+    'sketchybar --trigger aerospace_workspace_change FOCUSED_WORKSPACE=$AEROSPACE_FOCUSED_WORKSPACE'
+]
+
 [key-mapping]
     preset = 'qwerty'
 
 # gaps は inner/outer とも 10。outer.top のみ sketchybar と重ならないよう
-# バーの高さ（sketchybarrc の height=40）に合わせて確保する
+# バーの実下端（height=40 + y_offset=-5 → 35px）+ 1px に合わせて確保する。
+# outer.top は NSScreen.visibleFrame（メニューバー予約領域を除いた矩形）への加算のため、
+# ノッチ行 32px が常時予約される内蔵ディスプレイだけ 32+4=36 になるよう 4 に下げる。
+# NOTE: 'built-in' は内蔵ディスプレイを持つ Mac なら必ずマッチする（下のモニタ名パターンの
+# ような不一致 no-op 劣化はしない）。非ノッチ機へ展開する際は先に 4 の調整が必要
 [gaps]
     inner.horizontal = 10
     inner.vertical =   10
     outer.left =       10
     outer.bottom =     10
-    outer.top =        40
+    outer.top =        [{ monitor.'built-in' = 4 }, 36]
     outer.right =      10
+
+# WS をモニタに固定する運用（1=内蔵/確認用, 2=JAPANNEXT/メイン, 3=PL2390/縦長）。
+# パターンは大文字小文字を区別しない部分一致。モニタ名はこのデスクの機材固有だが、
+# 未接続・他PCではパターン不一致で単に固定されないだけ（エラーにならず通常挙動に
+# 劣化）なので共有 config に置いてよい。
+[workspace-to-monitor-force-assignment]
+    1 = 'built-in'
+    2 = 'japannext'
+    3 = 'pl2390'
+
+# アプリ自動配置。Slack は WS1（内蔵/確認用）、Ghostty は WS2（メイン作業）へ。
+# ブラウザは全ディスプレイで使うため割当なし。
+# 設定ウィンドウ・ダイアログ主体のアプリはタイルに混ぜず floating にする。
+[[on-window-detected]]
+    if.app-id = 'com.tinyspeck.slackmacgap' # Slack
+    run = 'move-node-to-workspace 1'
+
+[[on-window-detected]]
+    if.app-id = 'com.mitchellh.ghostty' # Ghostty
+    run = 'move-node-to-workspace 2'
+
+[[on-window-detected]]
+    if.app-id = 'com.apple.systempreferences' # システム設定
+    run = 'layout floating'
+
+[[on-window-detected]]
+    if.app-id = 'com.1password.1password' # 1Password
+    run = 'layout floating'
+
+[[on-window-detected]]
+    if.app-id = 'com.apple.finder' # Finder
+    run = 'layout floating'
+
+[[on-window-detected]]
+    if.app-id = 'us.zoom.xos' # zoom（ミーティング用の子ウィンドウが多いため floating 固定）
+    run = 'layout floating'
 
 [mode.main.binding]
     # フォーカス移動（vim 流 hjkl。原則5: 横断統一）
@@ -55,6 +102,7 @@ on-focused-monitor-changed = ['move-mouse monitor-lazy-center']
     # レイアウト切替
     alt-slash = 'layout tiles horizontal vertical'
     alt-comma = 'layout accordion horizontal vertical'
+    alt-period = 'fullscreen' # トグル
 
     # ワークスペース切替
     alt-1 = 'workspace 1'
@@ -82,6 +130,12 @@ on-focused-monitor-changed = ['move-mouse monitor-lazy-center']
     alt-tab = 'workspace-back-and-forth'
     # ワークスペースを次のモニタへ移動
     alt-shift-tab = 'move-workspace-to-monitor --wrap-around next'
+
+    # モニタ間のフォーカス移動 / ウィンドウ移動（WS=モニタ固定運用での行き来用）
+    alt-leftSquareBracket = 'focus-monitor --wrap-around prev'
+    alt-rightSquareBracket = 'focus-monitor --wrap-around next'
+    alt-shift-leftSquareBracket = 'move-node-to-monitor --wrap-around prev'
+    alt-shift-rightSquareBracket = 'move-node-to-monitor --wrap-around next'
 
     alt-shift-semicolon = 'mode service'
 
