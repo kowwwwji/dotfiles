@@ -133,11 +133,14 @@ exec-on-workspace-change = ['/bin/bash', '-c',
     # ワークスペースを次のモニタへ移動
     alt-shift-tab = 'move-workspace-to-monitor --wrap-around next'
 
-    # モニタ間のフォーカス移動 / ウィンドウ移動（WS=モニタ固定運用での行き来用）
-    alt-leftSquareBracket = 'focus-monitor --wrap-around prev'
-    alt-rightSquareBracket = 'focus-monitor --wrap-around next'
-    alt-shift-leftSquareBracket = 'move-node-to-monitor --wrap-around prev'
-    alt-shift-rightSquareBracket = 'move-node-to-monitor --wrap-around next'
+    # モニタ間のフォーカス移動 / ウィンドウ移動（WS=モニタ固定運用での行き来用）。
+    # aerospace の next/prev はモニタ座標順（左→右）で、このデスクは JAPANNEXT(WS2) が
+    # 最左のため座標順と WS 番号順が一致しない。] を WS1→2→3 の番号順巡回に
+    # 合わせたいので prev/next を逆に割り当てる（他の配置では巡回順が変わるだけで無害）
+    alt-leftSquareBracket = 'focus-monitor --wrap-around next'
+    alt-rightSquareBracket = 'focus-monitor --wrap-around prev'
+    alt-shift-leftSquareBracket = 'move-node-to-monitor --wrap-around next'
+    alt-shift-rightSquareBracket = 'move-node-to-monitor --wrap-around prev'
 
     alt-shift-semicolon = 'mode service'
 
