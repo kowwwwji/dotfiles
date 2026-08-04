@@ -91,6 +91,11 @@ exec-on-workspace-change = ['/bin/bash', '-c',
     alt-k = 'focus up'
     alt-l = 'focus right'
 
+    # ワークスペース内の全ウィンドウ巡回（macOS の Cmd+` と同じ語彙）。
+    # hjkl と違い向き・レイアウトに関係なく順に巡る
+    alt-backtick = 'focus --wrap-around dfs-next'
+    alt-shift-backtick = 'focus --wrap-around dfs-prev'
+
     # ウィンドウ移動
     alt-shift-h = 'move left'
     alt-shift-j = 'move down'
