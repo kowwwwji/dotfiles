@@ -95,9 +95,11 @@ exec-on-workspace-change = ['/bin/bash', '-c',
     alt-minus = 'resize smart -50'
     alt-equal = 'resize smart +50'
 
-    # レイアウト切替
-    alt-slash = 'layout tiles horizontal vertical'
-    alt-comma = 'layout accordion horizontal vertical'
+    # レイアウト切替。floating 中の窓には layout tiles/accordion が拒否され無反応に
+    # 見えるため（"The window is non-tiling"）、先に tiling へ戻してから切り替える
+    # （tiling 中なら no-op・exit 0 なので常に安全）
+    alt-slash = ['layout tiling', 'layout tiles horizontal vertical']
+    alt-comma = ['layout tiling', 'layout accordion horizontal vertical']
     alt-period = 'fullscreen' # トグル
 
     # ワークスペース切替
