@@ -91,9 +91,11 @@ on-focus-changed = ['exec-and-forget sketchybar --trigger aerospace_workspace_ch
 [mode.main.binding]
     # ワークスペース内の全ウィンドウ巡回（Cmd+Tab / Cmd+Shift+Tab と同じ語彙）。
     # 向き・レイアウトに関係なく順に巡る。方向指定のフォーカス移動・並べ替え（hjkl）は
-    # 左 Option を nvim の Meta に全て譲るため置かない
-    alt-tab = 'focus --wrap-around dfs-next'
-    alt-shift-tab = 'focus --wrap-around dfs-prev'
+    # 左 Option を nvim の Meta に全て譲るため置かない。
+    # 標準の focus dfs-next/prev ではなく自作巡回（focus-cycle.sh）なのは、巡回順を
+    # sketchybar WS チップのアイコン列（list-windows 順）と一致させるため
+    alt-tab = 'exec-and-forget ~/.config/aerospace/focus-cycle.sh next'
+    alt-shift-tab = 'exec-and-forget ~/.config/aerospace/focus-cycle.sh prev'
 
     # リサイズ（US 配列前提。JIS を使う場合は要調整）
     alt-minus = 'resize smart -50'

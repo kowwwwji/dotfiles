@@ -31,8 +31,10 @@ if [ "$WS" != "$FOCUSED" ] && ! aerospace list-workspaces --empty no --monitor a
 fi
 
 # 表示する WS のみアプリ一覧を引き、重複を除いてリガチャ列へ変換する。
+# list-windows の出力順を保った初出順の重複除去にする（alt+tab の自作巡回
+# focus-cycle.sh と同じ順序ソースにして、アイコン列と巡回順を一致させる）。
 # アプリが無い（フォーカス中の空 WS）ときは label 自体を消して WS 番号だけにする
-APPS=$(aerospace list-windows --workspace "$WS" --format '%{app-name}' 2>/dev/null | sort -u)
+APPS=$(aerospace list-windows --workspace "$WS" --format '%{app-name}' 2>/dev/null | awk '!seen[$0]++')
 if [ -n "$APPS" ]; then
   OLD_IFS=$IFS
   IFS='
