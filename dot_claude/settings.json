@@ -126,9 +126,9 @@
     "sentry@claude-plugins-official": false
   },
   "env": {
-    "CLAUDE_CODE_EXPERIMENTAL_AGENT_TEAMS": "1"
+    "CLAUDE_CODE_EXPERIMENTAL_AGENT_TEAMS": "0"
   },
-  "teammateMode": "auto",
+  "teammateMode": "in-process",
   "language": "japanese",
   "alwaysThinkingEnabled": true,
   "tui": "fullscreen",
