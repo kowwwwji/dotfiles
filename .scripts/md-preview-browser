@@ -1,0 +1,47 @@
+#!/bin/sh
+# md-preview-browser — URL を Chrome の新規ウィンドウで開き、aerospace で
+# プレビュー専用 workspace へ送る
+#
+# 使い方: md-preview-browser <url>
+# （nvim の markdown-preview.nvim から browser オプション経由で呼ばれる想定）
+#
+# タブとして開くと単独では workspace 移動できないため --new-window で新規ウィンドウを
+# 強制し、開いた window-id を特定して move-node-to-workspace で送る。
+# on-window-detected で Chrome 全体を固定しないのは、通常の Chrome は
+# 全 workspace で使うため（プレビュー経路だけを分ける）。
+
+set -eu
+
+WORKSPACE="${MD_PREVIEW_WORKSPACE:-3}"
+APP_ID='com.google.Chrome'
+
+[ $# -eq 1 ] || { echo 'usage: md-preview-browser <url>' >&2; exit 1; }
+url=$1
+
+# aerospace が動いていなくてもプレビュー自体は開けるよう、移動は best-effort
+list_ids() {
+  aerospace list-windows --monitor all --app-bundle-id "$APP_ID" \
+    --format '%{window-id}' 2>/dev/null || true
+}
+
+before=" $(list_ids | tr '\n' ' ') "
+
+open -na 'Google Chrome' --args --new-window "$url"
+
+# 新規ウィンドウの出現を最大5秒待つ（Chrome 未起動からの初回起動は数秒かかる）
+i=0
+while [ "$i" -lt 50 ]; do
+  for id in $(list_ids); do
+    case "$before" in
+      *" $id "*) ;; # 既存ウィンドウ
+      *)
+        aerospace move-node-to-workspace --window-id "$id" "$WORKSPACE"
+        exit 0
+        ;;
+    esac
+  done
+  sleep 0.1
+  i=$((i + 1))
+done
+
+echo "md-preview-browser: 新規ウィンドウを検出できず workspace 移動をスキップ" >&2
