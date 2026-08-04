@@ -9,6 +9,10 @@
 # 強制し、開いた window-id を特定して move-node-to-workspace で送る。
 # on-window-detected で Chrome 全体を固定しないのは、通常の Chrome は
 # 全 workspace で使うため（プレビュー経路だけを分ける）。
+#
+# 移動は「載ったことの確認 + リトライ」で行う。生成直後の move は Chrome 側の
+# ウィンドウ配置処理に巻き戻されて静かに失敗することがあるため、move の成功
+# ではなく「対象ウィンドウが目的 workspace の一覧に居る」ことを成功条件にする。
 
 set -eu
 
@@ -18,30 +22,73 @@ APP_ID='com.google.Chrome'
 [ $# -eq 1 ] || { echo 'usage: md-preview-browser <url>' >&2; exit 1; }
 url=$1
 
-# aerospace が動いていなくてもプレビュー自体は開けるよう、移動は best-effort
-list_ids() {
-  aerospace list-windows --monitor all --app-bundle-id "$APP_ID" \
-    --format '%{window-id}' 2>/dev/null || true
+# 失敗を nvim から見えるようにする（stderr は mkdp 経由では届かないため通知も出す）
+notify() {
+  echo "md-preview-browser: $1" >&2
+  command -v terminal-notifier >/dev/null 2>&1 &&
+    terminal-notifier -title 'md-preview' -message "$1" >/dev/null 2>&1 || true
 }
 
-before=" $(list_ids | tr '\n' ' ') "
+# aerospace が動いていなければ移動なしで開くだけ（best-effort はこの分岐に限定し、
+# 稼働中の一覧取得失敗まで握りつぶさない）
+if ! aerospace list-workspaces --focused >/dev/null 2>&1; then
+  open -na 'Google Chrome' --args --new-window "$url"
+  exit 0
+fi
+
+list_ids() {
+  aerospace list-windows --monitor all --app-bundle-id "$APP_ID" --format '%{window-id}'
+}
+
+# before スナップショット。ここが欠けると既存ウィンドウを「新規」と誤認して
+# 無関係なウィンドウを飛ばすため、失敗時は移動を諦めて開くだけにする
+# （パイプにすると tr の成功で list_ids の失敗が隠れるため、素の代入で判定する）
+if ! before_raw=$(list_ids); then
+  notify 'ウィンドウ一覧の取得に失敗。workspace 移動をスキップ'
+  open -na 'Google Chrome' --args --new-window "$url"
+  exit 1
+fi
+before=" $(printf '%s' "$before_raw" | tr '\n' ' ') "
 
 open -na 'Google Chrome' --args --new-window "$url"
 
-# 新規ウィンドウの出現を最大5秒待つ（Chrome 未起動からの初回起動は数秒かかる）
+# 新規ウィンドウの出現を最大5秒待つ（Chrome 未起動からの初回起動は数秒かかる。
+# ポーリング中の一時的な一覧取得失敗は次の周回で拾えるため許容する）
+new_id=''
 i=0
 while [ "$i" -lt 50 ]; do
-  for id in $(list_ids); do
+  for id in $(list_ids 2>/dev/null || true); do
     case "$before" in
       *" $id "*) ;; # 既存ウィンドウ
-      *)
-        aerospace move-node-to-workspace --window-id "$id" "$WORKSPACE"
-        exit 0
-        ;;
+      *) new_id=$id; break 2 ;;
     esac
   done
   sleep 0.1
   i=$((i + 1))
 done
 
-echo "md-preview-browser: 新規ウィンドウを検出できず workspace 移動をスキップ" >&2
+if [ -z "$new_id" ]; then
+  notify "新規ウィンドウを検出できず workspace $WORKSPACE への移動をスキップ"
+  exit 1
+fi
+
+# 目的 workspace に載るまで move をリトライ。載った後も一拍おいて再確認する
+# （巻き戻りは move 直後でなく少し遅れて起きるため、1回の確認では取りこぼす）
+on_target() {
+  aerospace list-windows --workspace "$WORKSPACE" --format '%{window-id}' 2>/dev/null |
+    grep -qx "$new_id"
+}
+
+i=0
+while [ "$i" -lt 8 ]; do
+  aerospace move-node-to-workspace --window-id "$new_id" "$WORKSPACE" 2>/dev/null || true
+  sleep 0.3
+  if on_target; then
+    sleep 0.7
+    on_target && exit 0
+  fi
+  i=$((i + 1))
+done
+
+notify "workspace $WORKSPACE への移動に失敗（window-id $new_id）"
+exit 1
