@@ -102,5 +102,18 @@ sketchybar --add item clock right \
            --set ime update_freq=1 icon.drawing=off label.y_offset=-1 \
                  script="$PLUGIN_DIR/ime.sh"
 
+##### Apple Music #####
+# Music.app は再生/一時停止/曲変更のたびに com.apple.Music.playerInfo を
+# distributed notification として発行する。これをカスタムイベント化して購読し、
+# ポーリングなしで再生中トラックを表示する（取得ロジックは plugins/music.sh）。
+# ime の後に追加 = 右側グループの最左。可変長ラベルが clock/volume/battery の
+# 位置を揺らさないための配置。初期 drawing=off で、末尾の --update が状態を確定する
+sketchybar --add event music_change "com.apple.Music.playerInfo" \
+           --add item music right \
+           --set music drawing=off padding_left=0 label.padding_left=0 \
+                 label.max_chars=30 \
+                 script="$PLUGIN_DIR/music.sh" \
+           --subscribe music music_change
+
 ##### Force all scripts to run the first time (never do this in a script) #####
 sketchybar --update
