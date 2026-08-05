@@ -1,3 +1,8 @@
+# 自己更新する cask（Chrome, Discord 等 auto_updates true）を brew upgrade / brew bundle の
+# 更新対象から外す。アプリ側の自動更新と brew の管理バージョンが乖離した状態で brew が
+# 上書きしようとすると衝突する（Caskroom への退避失敗や sudo 要求）ため、自己更新に任せる。
+export HOMEBREW_NO_UPGRADE_AUTO_UPDATES_CASKS=1
+
 NOT_INSTALL_MODULE="";
 if type direnv &>/dev/null; then
   eval "$(direnv hook zsh)"
