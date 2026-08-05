@@ -35,6 +35,13 @@ theme = Snazzy
 window-padding-x = 8
 window-padding-y = 3,0
 
+# ウィンドウ高さがセル高で割り切れない端数は下側に寄るため、ウィンドウの高さ次第で
+# tmux ステータスラインの下に最大1行弱の隙間が出る（タイル型WM管理下では高さを選べない）。
+# extend は隣接セルの背景色を端数領域へ延長し、隙間の色途切れを目立たなくする緩和策。
+# メインモニタは aerospace.toml の outer.bottom 調整で端数自体をゼロにしており、
+# extend はそれ以外のモニタ・PC向けの保険として残す
+window-padding-color = extend
+
 # タイトルバー非表示（フレーム・角丸は維持されるためリサイズは可能）
 # NOTE: タブ多重化は tmux に任せるため、Ghostty 側のタブは使わない前提
 macos-titlebar-style = hidden
