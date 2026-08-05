@@ -10,8 +10,8 @@ git:
     - main
     - develop
     - development
-  pagers:
-    - pager: delta --dark --paging=never --side-by-side --hyperlinks --line-numbers
+  diffRenderers:
+    - command: delta --dark --paging=never --side-by-side --hyperlinks --line-numbers
       colorArg: always
 customCommands:
   - key: "C"
@@ -50,14 +50,12 @@ customCommands:
         initialValue: ""
     command: "git commit --message '{{.Form.Type}}({{.Form.Scope}}) {{.Form.Message}}'"
     loadingText: "Creating conventional commit..."
-
   # ai-commit
   - key: "<c-a>"
     context: "files"
     description: "AI-generated commit message"
     command: "$HOME/.config/lazygit/scripts/ai-commit.sh"
     output: terminal
-
   # worktree
   - key: "W"
     context: "localBranches"
@@ -70,7 +68,6 @@ customCommands:
     command: "gwq add -b {{.Form.Name}}"
     loadingText: "Creating worktree with gwq..."
     output: terminal
-
   # 選択中のブランチをGitHubで開く（branch / PR をメニューで選択）
   # <c-o> は copyToClipboard 等デフォルトと衝突するため未使用の <c-g>(github) を採用
   - key: "<c-g>"
