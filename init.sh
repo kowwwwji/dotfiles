@@ -94,6 +94,8 @@ else
   echo "claude が未インストールのため claude-mcp-sync をスキップ（Claude Code 導入後に再実行してください）"
 fi
 ln -nfs "${DOTFILES_ROOT}/dot_claude/statusline-command.sh" "${HOME}/.claude/statusline-command.sh"
+# statusline から呼ぶモデル別シェアの集計スクリプト
+ln -nfs "${DOTFILES_ROOT}/dot_claude/model-share.sh" "${HOME}/.claude/model-share.sh"
 # agents: 汎用 agent は ~/.claude/agents/ へ個別リンク（ローカル専用 agent も同居するため。
 # 新規追加時はここに1行足す）。このリポジトリ専用 agent（dotfiles-reviewer 等）は
 # .claude/agents/ に実体を置くのでリンク不要。
