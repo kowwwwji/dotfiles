@@ -5,7 +5,7 @@
 # 起動時の sketchybar --update、ホバー（mouse.entered/exited）から呼ばれる。
 # ポーリングはしない（sketchybarrc の設計方針）。
 #
-# バー上は曲名のみ短め表示（max_chars は sketchybarrc 側）。フル情報は popup の
+# バー上はアイコンのみ（label は sketchybarrc 側で drawing=off）。曲情報は popup の
 # music.title / music.artist / music.album に music_change 時点で事前セットしておき、
 # ホバーは popup.drawing のトグルだけにする（ホバーごとの osascript 遅延を避ける）。
 #
@@ -82,7 +82,8 @@ else
   ALBUM_DRAWING=off
 fi
 
-sketchybar --set "$NAME" drawing=on icon="$ICON" label="$TITLE" \
+# --set の並びは popup の行順（sketchybarrc の追加順: 曲名/アルバム/アーティスト）に合わせる
+sketchybar --set "$NAME" drawing=on icon="$ICON" \
            --set music.title label="$TITLE" \
-           --set music.artist label="$ARTIST" \
-           --set music.album label="$ALBUM" drawing=$ALBUM_DRAWING
+           --set music.album label="$ALBUM" drawing=$ALBUM_DRAWING \
+           --set music.artist label="$ARTIST"
