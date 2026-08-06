@@ -83,8 +83,8 @@ on-focus-changed = ['exec-and-forget sketchybar --trigger aerospace_workspace_ch
     check-further-callbacks = true
     run = 'layout floating'
 
-# アプリ自動配置。Slack は WS1（内蔵/確認用）、Ghostty は WS2（メイン作業）、Apple Music は WS3 へ。
-# ブラウザは全ディスプレイで使うため割当なし。
+# アプリ自動配置。Slack は WS1（内蔵/確認用）、Ghostty は WS2（メイン作業）、
+# Apple Music・LINE は WS3（縦長）へ。ブラウザは全ディスプレイで使うため割当なし。
 [[on-window-detected]]
     if.app-id = 'com.tinyspeck.slackmacgap' # Slack
     run = 'move-node-to-workspace 1'
@@ -95,6 +95,10 @@ on-focus-changed = ['exec-and-forget sketchybar --trigger aerospace_workspace_ch
 
 [[on-window-detected]]
     if.app-id = 'com.apple.Music' # Apple Music
+    run = 'move-node-to-workspace 3'
+
+[[on-window-detected]]
+    if.app-id = 'jp.naver.line.mac' # LINE
     run = 'move-node-to-workspace 3'
 
 [mode.main.binding]
