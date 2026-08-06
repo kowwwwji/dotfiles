@@ -18,7 +18,8 @@ enable-normalization-opposite-orientation-for-nested-containers = true
 # 0 にしてアコーディオンの重なり（左右にはみ出す帯）を出さず、単一ウィンドウ全画面風に見せる。
 # ウィンドウの行き来は alt-tab（ワークスペース内巡回）で行う
 accordion-padding = 0
-# 常用はアコーディオン（accordion-padding=0 の全画面風運用）。タイルへは alt-slash で切替
+# ウィンドウ既定は floating（下の catch-all on-window-detected）。tiling に戻した窓が
+# 入るルートコンテナのレイアウトがこれ（accordion-padding=0 の全画面風運用）
 default-root-container-layout = 'accordion'
 default-root-container-orientation = 'auto'
 
@@ -72,9 +73,18 @@ on-focus-changed = ['exec-and-forget sketchybar --trigger aerospace_workspace_ch
     2 = 'japannext'
     3 = 'pl2390'
 
+# 新規ウィンドウは既定で floating。aerospace には floating を既定にする専用オプションが
+# 無い（default-root-container-layout は tiles / accordion のみ）ため、条件なしの
+# on-window-detected を catch-all として使う。
+# on-window-detected は既定で「最初にマッチした1件」しか実行しないので、以降のアプリ別
+# ルール（WS 割当）まで届くよう check-further-callbacks = true を付ける。位置も先頭必須。
+# タイルに載せたいウィンドウは alt-f（floating/tiling トグル）か alt-slash / alt-comma で戻す
+[[on-window-detected]]
+    check-further-callbacks = true
+    run = 'layout floating'
+
 # アプリ自動配置。Slack は WS1（内蔵/確認用）、Ghostty は WS2（メイン作業）、Apple Music は WS3 へ。
 # ブラウザは全ディスプレイで使うため割当なし。
-# 設定ウィンドウ・ダイアログ主体のアプリはタイルに混ぜず floating にする。
 [[on-window-detected]]
     if.app-id = 'com.tinyspeck.slackmacgap' # Slack
     run = 'move-node-to-workspace 1'
@@ -86,22 +96,6 @@ on-focus-changed = ['exec-and-forget sketchybar --trigger aerospace_workspace_ch
 [[on-window-detected]]
     if.app-id = 'com.apple.Music' # Apple Music
     run = 'move-node-to-workspace 3'
-
-[[on-window-detected]]
-    if.app-id = 'com.apple.systempreferences' # システム設定
-    run = 'layout floating'
-
-[[on-window-detected]]
-    if.app-id = 'com.1password.1password' # 1Password
-    run = 'layout floating'
-
-[[on-window-detected]]
-    if.app-id = 'com.apple.finder' # Finder
-    run = 'layout floating'
-
-[[on-window-detected]]
-    if.app-id = 'us.zoom.xos' # zoom（ミーティング用の子ウィンドウが多いため floating 固定）
-    run = 'layout floating'
 
 [mode.main.binding]
     # ワークスペース内の全ウィンドウ巡回（Cmd+Tab / Cmd+Shift+Tab と同じ語彙）。
