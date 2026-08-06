@@ -108,13 +108,12 @@ sketchybar --add item clock right \
 # ポーリングなしで再生中トラックを表示する（取得ロジックは plugins/music.sh）。
 # ime の後に追加 = 右側グループの最左。可変長ラベルが clock/volume/battery の
 # 位置を揺らさないための配置。初期 drawing=off で、末尾の --update が状態を確定する。
-# バー上は曲名のみ短め（15文字）に抑え、フル情報（曲名/アーティスト/アルバム）は
+# バー上はアイコンのみに抑え、曲情報（曲名/アーティスト/アルバム）は
 # ホバーで開く popup 3行に寄せる。popup の中身は music_change 時に music.sh が
 # 事前セットするため、ホバー時は popup.drawing のトグルだけで即表示できる
 sketchybar --add event music_change "com.apple.Music.playerInfo" \
            --add item music right \
-           --set music drawing=off padding_left=0 label.padding_left=0 \
-                 label.max_chars=15 \
+           --set music drawing=off padding_left=0 label.drawing=off \
                  popup.background.color=$COLOR_BAR \
                  popup.background.corner_radius=5 \
                  popup.blur_radius=30 \
@@ -122,10 +121,10 @@ sketchybar --add event music_change "com.apple.Music.playerInfo" \
            --subscribe music music_change mouse.entered mouse.exited \
            --add item music.title popup.music \
            --set music.title icon=󰝚 \
-           --add item music.artist popup.music \
-           --set music.artist icon=󰀄 \
            --add item music.album popup.music \
-           --set music.album icon=󰀥
+           --set music.album icon=󰀥 \
+           --add item music.artist popup.music \
+           --set music.artist icon=󰀄
 
 ##### Force all scripts to run the first time (never do this in a script) #####
 sketchybar --update
