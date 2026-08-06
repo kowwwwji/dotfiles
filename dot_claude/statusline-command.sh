@@ -1,7 +1,7 @@
 #!/bin/sh
 # Claude Code の statusLine。ディレクトリと git はシェルプロンプト側に出るので、
 # ここは Claude セッションの情報だけを出す: モデル・コンテキスト残量・コスト・使用量上限
-# 表示例: Opus 4.8  ctx:73%  💰$0.42  5h:23% 7d:41%(F~33%)
+# 表示例: Opus 4.8  ctx:73%  💰$0.42  5h:23% 7d:41% Fable:100%
 
 input=$(cat)
 
@@ -25,33 +25,35 @@ fi
 five_h=$(echo "$input" | jq -r '.rate_limits.five_hour.used_percentage // empty')
 seven_d=$(echo "$input" | jq -r '.rate_limits.seven_day.used_percentage // empty')
 
-# ── 週次のうち Fable が占める分（推定・(F~n%)） ────────────────────────────────
-# 対象モデル・按分方式・その限界は model-share.sh を参照。ここの責務はキャッシュを
-# 読んで整形するだけ。集計は 0.6 秒ほどかかるので毎レンダーでは待たず、古い値を出しつつ
-# バックグラウンドで直す。取れないものが1つでもあれば黙って省略する
-# （statusline 本体は絶対に壊さない）。
-fable_str=""
-resets_at=$(echo "$input" | jq -r '.rate_limits.seven_day.resets_at // empty')
-case "$resets_at" in ''|*[!0-9]*) resets_at="" ;; esac
-if [ -n "$seven_d" ] && [ -n "$resets_at" ]; then
-  cache="${HOME}/.claude/cache/model-share.json"
-  # 集計期間は「直近7日」ではなく公式の週次ウィンドウに合わせる（resets_at の7日前が起点）
-  since=$(( resets_at - 7 * 24 * 3600 ))
-  # TTL 180秒。切れていたら再集計をキックするが、待たずに今回は古い値を出す
+# ── モデル個別の週次上限（例: Fable:100%） ─────────────────────────────────────
+# 5h/7d と違い statusline の JSON には来ないので、usage-limits.sh が API から取って
+# 置いたキャッシュを読む。ここの責務は読んで整形するだけ。API を待たせないため、
+# TTL 180秒を過ぎていたら取り直しをバックグラウンドでキックしつつ今回は古い値を出す。
+# 取れなければ黙って省略する（statusline 本体は絶対に壊さない）。
+# 7d と並列の別枠の上限なので、7d の内訳ではなく兄弟として並べる。
+#
+# サブスクセッション（= 5h/7d が来ている）でのみ扱う。API キー利用のセッションで
+# 前回のサブスク由来のキャッシュを出すと嘘になるため、取得と表示に同じ門番をかける。
+scoped_str=""
+if [ -n "$seven_d" ]; then
+  cache="${HOME}/.claude/cache/usage-limits.json"
   if [ -z "$(find "$cache" -maxdepth 0 -mmin -3 2>/dev/null)" ]; then
-    (sh "$(dirname "$0")/model-share.sh" "$since" >/dev/null 2>&1 </dev/null &)
+    (sh "$(dirname "$0")/usage-limits.sh" >/dev/null 2>&1 </dev/null &)
   fi
-  share=$(jq -r '.share // empty' "$cache" 2>/dev/null)
-  case "$share" in ''|*[!0-9.]*) share="" ;; esac
-  if [ -n "$share" ]; then
-    fable=$(awk -v pct="$seven_d" -v s="$share" 'BEGIN { printf "%d", pct * s }')
-    [ "$fable" -gt 0 ] 2>/dev/null && fable_str="(F~${fable}%)"
-  fi
+  # 上限に達しているものは赤くする（原則4: 見落とさない）。severity は API の判定をそのまま使う。
+  scoped_str=$(jq -r '
+    [ (.scoped // [])[]
+      | select(.name != null and .percent != null)
+      | (if .severity == "critical" then "\u001b[31m" else "" end)
+        + .name + ":" + (.percent | floor | tostring) + "%"
+        + (if .severity == "critical" then "\u001b[0m" else "" end) ]
+    | join(" ")' "$cache" 2>/dev/null)
 fi
 
 rate_str=""
 [ -n "$five_h" ]  && rate_str="${rate_str} 5h:${five_h%.*}%"
-[ -n "$seven_d" ] && rate_str="${rate_str} 7d:${seven_d%.*}%${fable_str}"
+[ -n "$seven_d" ] && rate_str="${rate_str} 7d:${seven_d%.*}%"
+[ -n "$scoped_str" ] && rate_str="${rate_str} ${scoped_str}"
 [ -n "$rate_str" ] && rate_str="  ${rate_str# }"
 
 printf '%s%s%s%s\n' "$model" "$ctx_str" "$cost_str" "$rate_str"
