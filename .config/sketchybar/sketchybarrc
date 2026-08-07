@@ -10,8 +10,10 @@
 PLUGIN_DIR="$CONFIG_DIR/plugins"
 
 # tmux パレット対応色（フォーカス WS の配色は plugins/aerospace.sh 側にも同値を持つ）
-COLOR_BAR=0xe61c1c1c # @c-bg #1c1c1c（バー背景。透過 e6 + blur）
-COLOR_FG=0xffc0c0c0  # @c-fg #c0c0c0
+COLOR_BAR=0xe61c1c1c   # @c-bg #1c1c1c（バー背景。透過 e6 + blur）
+COLOR_BG=0xff1c1c1c    # @c-bg #1c1c1c（不透過。反転チップの文字色用）
+COLOR_FG=0xffc0c0c0    # @c-fg #c0c0c0
+COLOR_ALERT=0xffd7af5f # @c-silence #d7af5f（tmux が silence フラグに使う「一時的な注意状態」の色）
 
 ##### Bar Appearance #####
 # NOTE: 実下端 35px は aerospace.toml の gaps.outer.top が前提にする値。
@@ -34,6 +36,74 @@ default=(
   label.padding_right=4
 )
 sketchybar --default "${default[@]}"
+
+##### aerospace service mode インジケータ #####
+# aerospace には mode 変更のイベントフックが無いため、aerospace.toml の mode バインド側が
+# このイベントを MODE=service / main 付きで trigger する（詳細は aerospace.toml の注意書き）。
+# popup のキー一覧は aerospace.toml の [mode.service.binding] を唯一の定義元として組み立てる。
+# 生成は起動・--reload 時の一度きりで、実行時は drawing のトグルだけ
+# （WS ウィジェットと同じくポーリング・動的なアイテム追加削除はしない）。
+# → aerospace.toml のバインドを変えたときは sketchybar --reload するまで popup は古いまま。
+sketchybar --add event aerospace_mode_change
+
+# 左端に置く（front_app や WS チップより手前 = 最も目に入る位置）。
+# 通常時は drawing=off で、service mode の間だけ反転チップとして現れる
+sketchybar --add item service left \
+           --set service drawing=off label=SERVICE icon.drawing=off \
+                 label.color=$COLOR_BG \
+                 background.drawing=on background.color=$COLOR_ALERT \
+                 background.corner_radius=5 background.height=25 \
+                 popup.background.color=$COLOR_BAR \
+                 popup.background.corner_radius=5 \
+                 popup.blur_radius=30 \
+                 script="$PLUGIN_DIR/service_mode.sh" \
+           --subscribe service aerospace_mode_change
+
+# [mode.service.binding] の各行を「キー | 説明」に落とす。説明は行末コメントを優先し、
+# 無ければコマンド名をそのまま使う（説明を出したいキーは toml 側に行末コメントを足す運用）。
+# 通知用の --trigger 要素は一覧に出しても意味がないので落とす。
+SERVICE_KEYS=$(awk '
+/^\[mode\.service\.binding\]/ { inseg = 1; next }
+/^\[/ { inseg = 0 }
+!inseg { next }
+/^[[:space:]]*#/ { next }
+!/=/ { next }
+{
+  key = $0; sub(/[[:space:]]*=.*/, "", key); gsub(/^[[:space:]]+/, "", key)
+  rest = $0; sub(/^[^=]*=[[:space:]]*/, "", rest)
+  h = index(rest, "#")
+  if (h > 0) {
+    desc = substr(rest, h + 1)
+  } else {
+    desc = rest
+    gsub(/^\[|\]$/, "", desc)
+    gsub(/\047/, "", desc) # \047 = 単一引用符（シェルのクォートを割らずに書くため）
+    n = split(desc, parts, /,[[:space:]]*/)
+    desc = ""
+    for (i = 1; i <= n; i++) {
+      if (parts[i] ~ /^exec-and-forget sketchybar --trigger/) continue
+      desc = (desc == "" ? parts[i] : desc ", " parts[i])
+    }
+  }
+  gsub(/^[[:space:]]+|[[:space:]]+$/, "", desc)
+  if (desc != "") print key "\t" desc
+}
+' "$HOME/.config/aerospace/aerospace.toml")
+
+# icon.width はキー列の幅（最長の backspace が収まる値）。説明の頭を揃えるために固定する
+TAB=$(printf '\t')
+SERVICE_ROW=0
+while IFS="$TAB" read -r key desc; do
+  [ -z "$key" ] && continue
+  SERVICE_ROW=$((SERVICE_ROW + 1))
+  sketchybar --add item service."$SERVICE_ROW" popup.service \
+             --set service."$SERVICE_ROW" icon="$key" label="$desc" \
+                   icon.font="UDEV Gothic NF:Bold:14.0" \
+                   icon.color=$COLOR_ALERT icon.width=100 icon.align=left \
+                   label.align=left
+done <<EOF
+$SERVICE_KEYS
+EOF
 
 ##### aerospace ワークスペース #####
 # aerospace 側の exec-on-workspace-change がこのイベントを FOCUSED_WORKSPACE 付きで trigger する
