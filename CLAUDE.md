@@ -152,17 +152,12 @@ MCP サーバーは供給経路ごとに「正」を1箇所に固定する。**�
 
 ## aerospace / sketchybar
 
-- **aerospace の `mode` を切り替える行には必ず `sketchybar --trigger aerospace_mode_change`
-  を添える**。aerospace にモード変更のイベントフックが無く、SERVICE インジケータはこの
-  trigger だけを頼りに点灯・消灯するため、添え忘れると出っぱなしになる（tmux の
-  which-key.yaml と同様、自動検出されないので手で揃える）。
-- **`[mode.service.binding]` は 1バインド = 1行を保つ**。sketchybarrc がこのセクションを
-  awk で読んで popup のキー一覧を生成するため、複数行の配列にすると抽出が壊れる。
-  一覧の説明文は行末コメントがそのまま出る（無ければコマンド名）。
-- **aerospace.toml のバインドを変えたら `sketchybar --reload`**。popup の一覧は
-  sketchybarrc の実行時に一度だけ生成される（動的なアイテム追加削除を避けつつ、
-  定義元を aerospace.toml 単一に保つための設計）。aerospace 側は service mode の
-  `esc`（`reload-config` を含む）で反映されるため、sketchybar だけ取り残されやすい。
+- **`mode` を切り替える行には `sketchybar --trigger aerospace_mode_change` を必ず添える。
+  `[mode.service.binding]` は 1バインド = 1行を保つ**（tmux の which-key.yaml と同様、
+  自動検出されないので手で揃える類のもの）。理由と挙動は aerospace.toml の同セクション
+  直前のコメントが正。
+- **aerospace.toml のバインドを変えたら `sketchybar --reload`**。aerospace 側は service mode の
+  `esc` で反映されるため、sketchybar だけ取り残されやすい。
 
 ## 開発フロー（このリポジトリでの差分）
 
