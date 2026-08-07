@@ -150,6 +150,20 @@ MCP サーバーは供給経路ごとに「正」を1箇所に固定する。**�
 > 注: 非ASCII（アイコン）を Edit ツールで挿入するとコードポイントが欠落して空白になることがある。
 > 入った後に `[hex(ord(c)) for c in line if ord(c)>0x2000]` 等で実際に入ったか必ず検証する。
 
+## aerospace / sketchybar
+
+- **aerospace の `mode` を切り替える行には必ず `sketchybar --trigger aerospace_mode_change`
+  を添える**。aerospace にモード変更のイベントフックが無く、SERVICE インジケータはこの
+  trigger だけを頼りに点灯・消灯するため、添え忘れると出っぱなしになる（tmux の
+  which-key.yaml と同様、自動検出されないので手で揃える）。
+- **`[mode.service.binding]` は 1バインド = 1行を保つ**。sketchybarrc がこのセクションを
+  awk で読んで popup のキー一覧を生成するため、複数行の配列にすると抽出が壊れる。
+  一覧の説明文は行末コメントがそのまま出る（無ければコマンド名）。
+- **aerospace.toml のバインドを変えたら `sketchybar --reload`**。popup の一覧は
+  sketchybarrc の実行時に一度だけ生成される（動的なアイテム追加削除を避けつつ、
+  定義元を aerospace.toml 単一に保つための設計）。aerospace 側は service mode の
+  `esc`（`reload-config` を含む）で反映されるため、sketchybar だけ取り残されやすい。
+
 ## 開発フロー（このリポジトリでの差分）
 
 共通フロー（`dot_claude/guides/dev-flow.md`）との差分:

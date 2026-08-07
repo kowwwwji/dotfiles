@@ -154,14 +154,22 @@ on-focus-changed = ['exec-and-forget sketchybar --trigger aerospace_workspace_ch
     alt-shift-leftSquareBracket = 'move-node-to-monitor --wrap-around next'
     alt-shift-rightSquareBracket = 'move-node-to-monitor --wrap-around prev'
 
-    alt-shift-semicolon = 'mode service'
+    alt-shift-semicolon = ['mode service',
+        'exec-and-forget sketchybar --trigger aerospace_mode_change MODE=service']
 
 # service モード（設定リロード・レイアウトのリセット・並べ替え等、たまにしか使わない操作）
+#
+# 注意1: mode を切り替える行には必ず sketchybar --trigger を添える。aerospace には
+#   モード変更のイベントフックが無く、sketchybar 側の SERVICE インジケータは
+#   この trigger だけを頼りに点灯・消灯するため、添え忘れると出っぱなしになる。
+# 注意2: このセクションの各行は sketchybarrc が awk で読み、SERVICE の popup に出す
+#   キー一覧を生成する（行末コメントがあればそれを、無ければコマンド名を説明にする）。
+#   1バインド = 1行を保つこと（複数行の配列にすると抽出が壊れる）。
 [mode.service.binding]
-    esc = ['reload-config', 'mode main']
-    r = ['flatten-workspace-tree', 'mode main'] # レイアウトのリセット
-    f = ['layout floating tiling', 'mode main'] # floating / tiling の切替
-    backspace = ['close-all-windows-but-current', 'mode main']
+    esc = ['reload-config', 'mode main', 'exec-and-forget sketchybar --trigger aerospace_mode_change MODE=main'] # 設定を再読込して抜ける
+    r = ['flatten-workspace-tree', 'mode main', 'exec-and-forget sketchybar --trigger aerospace_mode_change MODE=main'] # レイアウトのリセット
+    f = ['layout floating tiling', 'mode main', 'exec-and-forget sketchybar --trigger aerospace_mode_change MODE=main'] # floating / tiling の切替
+    backspace = ['close-all-windows-but-current', 'mode main', 'exec-and-forget sketchybar --trigger aerospace_mode_change MODE=main'] # 現在のウィンドウ以外を閉じる
 
     # タイルの並べ替え。OS の Option+矢印（単語移動/選択）を奪わないよう main ではなく
     # ここに置く。連続で押せるよう mode main へは戻らない（抜けるのは enter か esc）
@@ -169,4 +177,4 @@ on-focus-changed = ['exec-and-forget sketchybar --trigger aerospace_workspace_ch
     down = 'move down'
     up = 'move up'
     right = 'move right'
-    enter = 'mode main' # esc と違い config リロードなしで抜ける
+    enter = ['mode main', 'exec-and-forget sketchybar --trigger aerospace_mode_change MODE=main'] # esc と違い config リロードなしで抜ける
