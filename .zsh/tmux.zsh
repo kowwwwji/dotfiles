@@ -45,5 +45,7 @@ function pecoSelectTmuxSession(){
   fi
 }
 zle -N pecoSelectTmuxSession
-bindkey '^T' pecoSelectTmuxSession
+# tmux の prefix+s と同じ s に揃える。^S は zsh-autocomplete の menu-search
+# （補完/履歴メニュー内の絞り込み）を承知の上で奪う。要 .zshrc の no_flow_control
+bindkey '^S' pecoSelectTmuxSession
 

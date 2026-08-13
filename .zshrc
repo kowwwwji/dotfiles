@@ -32,7 +32,7 @@ zstyle ':zle:*' word-style unspecified
 ########################################
 setopt print_eight_bit      # 日本語ファイル名を表示可能にする
 setopt no_beep
-setopt no_flow_control      # 履歴検索時にctrl+s で1個前の検索に戻れるようにする。
+setopt no_flow_control      # Ctrl+S を XOFF(画面停止)に取られない。^S は .zsh/tmux.zsh が使う
 setopt ignore_eof           # Ctrl+Dでzshを終了しない
 setopt interactive_comments # '#' 以降をコメントとして扱う
 setopt auto_cd              # ディレクトリ名だけでcdする
