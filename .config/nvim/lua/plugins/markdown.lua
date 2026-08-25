@@ -65,7 +65,7 @@ return {
     -- <leader>cp は autocmds.lua で terminal-browser の md-preview に割当済みのため
     -- ブラウザ版は大文字 P に分ける（停止は :MarkdownPreviewStop）
     keys = {
-      { "<leader>cP", "<cmd>MarkdownPreview<cr>", ft = "markdown", desc = "Markdown Preview (browser)" },
+      { "<leader>cp", "<cmd>MarkdownPreview<cr>", ft = "markdown", desc = "Markdown Preview (browser)" },
     },
     opts = {
       -- Chrome の新規ウィンドウで開き、aerospace でプレビュー専用 workspace へ送る
