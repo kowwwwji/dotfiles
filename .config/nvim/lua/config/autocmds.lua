@@ -32,7 +32,7 @@ vim.cmd("autocmd FileType help wincmd L")
 vim.api.nvim_create_autocmd("FileType", {
   pattern = "markdown",
   callback = function(ev)
-    vim.keymap.set("n", "<leader>cp", function()
+    vim.keymap.set("n", "<leader>cP", function()
       local stderr = {}
       vim.fn.jobstart({ "md-preview", vim.api.nvim_buf_get_name(ev.buf) }, {
         stderr_buffered = true,
