@@ -171,6 +171,19 @@ if [[ ! -x "${HOME}/.local/bin/terminal-browser" ]]; then
   curl -fsSL https://terminal-browser.sh/install | bash
 fi
 
+# archify: アーキテクチャ図を生成する Claude Code の skill（https://github.com/tt-a1i/archify）
+# 注: ~/.claude/skills は dot_claude/skills への symlink のため実体がリポジトリ内に落ちるが、
+#     追跡しない（理由は .gitignore 参照）。各PCでここから導入し、更新はツール側に任せる
+#     （`npx skills update -g`）。npx は mise の node で入るため、フレッシュPCでは
+#     mise install 後に init.sh を再実行すれば入る。
+if command -v npx >/dev/null 2>&1; then
+  if [[ ! -d "${HOME}/.claude/skills/archify" ]]; then
+    npx -y skills add tt-a1i/archify -g -a claude-code -s archify -y
+  fi
+else
+  echo "npx が未インストールのため archify skill の導入をスキップ（mise install 後に再実行してください）"
+fi
+
 # tmux
 TPM_ROOT="${HOME}/.tmux/plugins/tpm"
 [[ ! -e "$TPM_ROOT" ]] && git clone https://github.com/tmux-plugins/tpm "$TPM_ROOT"
