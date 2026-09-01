@@ -18,3 +18,6 @@ Brewfile/Brewfile*.lock.json
 # terminal-browser のインストーラが ~/.claude/skills（= dot_claude/skills への symlink）内に
 # machine-local な絶対パスの skill リンクを作るため、追跡しない
 /dot_claude/skills/terminal-browser
+# archify skill も同様に追跡しない（サイズが大きく上流の更新も活発なため）。
+# 導入・更新は init.sh の npx skills add 経由。
+/dot_claude/skills/archify
