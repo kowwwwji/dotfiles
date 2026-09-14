@@ -87,6 +87,10 @@ chezmoi の自動変換ではなく、`dot_claude/` を明示的に `~/.claude/`
 > ignore の書き分け: `.gitignore` は**このリポジトリ専用**（$HOME には張らない）。全リポジトリ共通の
 > パターンは `.gitignore_global`（init.sh が `~/.gitignore_global` へリンクし、core.excludesfile が参照）へ。
 
+> hooks の注意: Claude の pane 状態（waiting/running/idle）は `dot_claude/settings.json` 直登録の hook と
+> 既存 hook スクリプト（notify.sh / ask-notify.sh / stop.sh）内の追記の**2経路**から書かれる。
+> 状態遷移を変えるときは両方を確認する（どこに置くかの Why は各追記箇所のコメントが正）。
+
 新ファイルを追加したら、**作業中のPCにも今すぐ symlink を張る**（init.sh は再実行しない限り
 効かないため）。例: `ln -nfs "$PWD/.tmux/foo.sh" "$HOME/.tmux/foo.sh"`
 
