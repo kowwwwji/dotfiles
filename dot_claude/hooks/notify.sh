@@ -38,3 +38,7 @@ terminal-notifier -title "Claude Code: ${tmux_info}" -message "$message" -sound 
 # 早期 return した重複通知（idle / ask-notify 済み）では bell も鳴らさない。
 tty=$(tmux display -p -t "$TMUX_PANE" '#{pane_tty}' 2>/dev/null)
 [ -n "$tty" ] && printf '\a' > "$tty"
+
+# 一覧（.scripts/tmux-session-list）へ「待ち」を伝える。ここに置くのは、上の早期 return
+# （idle_prompt / ask-notify 済みの重複）を通り抜けた＝本物の待ちだけを記録するため。
+sh "$HOME/.claude/hooks/pane-state.sh" waiting
