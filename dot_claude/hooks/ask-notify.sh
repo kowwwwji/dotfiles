@@ -29,4 +29,7 @@ terminal-notifier -title "Claude Code: ${tmux_info}" -message "$msg" -sound Ping
 # 通知を見逃してもステータスバーの色で入力待ちに気づける。
 tty=$(tmux display -p -t "$TMUX_PANE" '#{pane_tty}' 2>/dev/null)
 [ -n "$tty" ] && printf '\a' > "$tty"
+
+# 一覧（.scripts/tmux-session-list）へ「待ち」を伝える（notify.sh と同じ理由でここに置く）。
+sh "$HOME/.claude/hooks/pane-state.sh" waiting
 exit 0
