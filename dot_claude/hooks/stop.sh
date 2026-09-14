@@ -9,3 +9,6 @@ terminal-notifier -title "Claude Code: ${tmux_info}" -message '終わったよ' 
 # 発火元 pane の tty に bell(\a)を直接書き込む。裏 window でも monitor-bell フラグが立つ。
 tty=$(tmux display -p -t "$TMUX_PANE" '#{pane_tty}' 2>/dev/null)
 [ -n "$tty" ] && printf '\a' > "$tty"
+
+# 一覧（.scripts/tmux-session-list）へ「応答完了」を伝える。
+sh "$HOME/.claude/hooks/pane-state.sh" idle
