@@ -112,6 +112,7 @@ ln -nfs "${DOTFILES_ROOT}/dot_claude/agents/security-auditor.md" "${HOME}/.claud
 ln -nfs "${DOTFILES_ROOT}/dot_claude/hooks/notify.sh" "${HOME}/.claude/hooks/notify.sh"
 ln -nfs "${DOTFILES_ROOT}/dot_claude/hooks/stop.sh" "${HOME}/.claude/hooks/stop.sh"
 ln -nfs "${DOTFILES_ROOT}/dot_claude/hooks/session-start.sh" "${HOME}/.claude/hooks/session-start.sh"
+ln -nfs "${DOTFILES_ROOT}/dot_claude/hooks/pane-state.sh" "${HOME}/.claude/hooks/pane-state.sh"
 ln -nfs "${DOTFILES_ROOT}/dot_claude/hooks/pre-bash-guard.sh" "${HOME}/.claude/hooks/pre-bash-guard.sh"
 ln -nfs "${DOTFILES_ROOT}/dot_claude/hooks/require-worktree.sh" "${HOME}/.claude/hooks/require-worktree.sh"
 ln -nfs "${DOTFILES_ROOT}/dot_claude/hooks/ask-notify.sh" "${HOME}/.claude/hooks/ask-notify.sh"
