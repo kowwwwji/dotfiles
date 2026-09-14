@@ -1,15 +1,58 @@
 #!/bin/zsh -e
 # fzf/fzf-tmux に渡すセッション一覧を生成する(選択や移動はしない)。
-# 各行 = "セッション名<TAB>󱅫 index:名前 ..."。
-# 通知(ベル/サイレント)のある window だけを index:名前 で列挙し、無ければ名前のみ。
+# 各行 = "セッション名<TAB>アイコン index:名前 ..."。
+# Claude Code の状態(待ち/実行中)を最優先で出し、状態の無い window は
+# 従来どおり通知(ベル/サイレント)フラグを出す。どれも無ければ名前のみ。
 # 呼び出し側は選択行から `${line%%$'\t'*}` でセッション名を取り出す。
 
+# アイコンは Material Design 系(U+F0000 台)。グリフ直書きはエディタで欠落しうるため
+# コードポイント指定で埋め込む(CLAUDE.md の tmux 節の注記)。
+ICON_WAITING=$'\U000F03E4'  # nf-md-pause: 入力/承認待ち
+ICON_RUNNING=$'\U000F040A'  # nf-md-play : 実行中
+ICON_BELL=$'\U000F116B'     # 従来のベル/サイレント
+
+# Claude の hooks(pane-state.sh)が書いた pane 単位の状態を読む。
+# ディレクトリは tmux サーバ世代ごと(→ pane id の振り直しと混ざらない)。
+typeset -A pane_state
+state_dir="${TMPDIR:-/tmp}/claude-pane-state-$(tmux display -p '#{pid}')"
+for f in "$state_dir"/*(N.); do
+  pane_state[${f:t}]=$(<"$f")
+done
+
+# window 単位に集約する。同一 window に複数 pane があれば 待ち > 実行中 > ベル で代表を決める。
+# win_keys が list-panes の出力順(session→window index 順)を保持し、表示順の正になる
+# (連想配列のキー列挙は順不同のため、それに頼ると window が index 順に並ばない)。
+typeset -A win_rank win_label
+typeset -a win_keys
+while IFS=$'\t' read -r pane sess widx wname bell; do
+  rank=0
+  case ${pane_state[${pane#\%}]} in
+    (waiting) rank=3 ;;
+    (running) rank=2 ;;
+  esac
+  [[ $rank -eq 0 && $bell == 1 ]] && rank=1
+  key="$sess"$'\t'"$widx"
+  if (( ! ${+win_rank[$key]} )); then
+    win_keys+=("$key")
+    win_rank[$key]=$rank
+    win_label[$key]="$widx:$wname"
+  elif (( rank > win_rank[$key] )); then
+    win_rank[$key]=$rank
+  fi
+done < <(tmux list-panes -a -F $'#{pane_id}\t#{session_name}\t#{window_index}\t#{window_name}\t#{||:#{window_bell_flag},#{window_silence_flag}}')
+
 tmux list-sessions -F '#{session_name}' | grep -v '^popup$' | while read -r s; do
-  alerts=$(tmux list-windows -t "$s" \
-    -f '#{||:#{window_bell_flag},#{window_silence_flag}}' \
-    -F '#{window_index}:#{window_name}' 2>/dev/null | paste -sd ' ' -)
-  if [[ -n $alerts ]]; then
-    printf '%s\t󱅫 %s\n' "$s" "$alerts"
+  marks=()
+  for key in $win_keys; do
+    [[ ${key%%$'\t'*} == "$s" ]] || continue
+    case ${win_rank[$key]} in
+      (3) marks+=("$ICON_WAITING ${win_label[$key]}") ;;
+      (2) marks+=("$ICON_RUNNING ${win_label[$key]}") ;;
+      (1) marks+=("$ICON_BELL ${win_label[$key]}") ;;
+    esac
+  done
+  if (( ${#marks} )); then
+    printf '%s\t%s\n' "$s" "${(j: :)marks}"
   else
     printf '%s\n' "$s"
   fi
