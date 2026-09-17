@@ -30,6 +30,13 @@ function gcs() {
       echo ""
       echo "===kubectx==="
       kubectx "$context"
+    elif [ -n "$(kubectl config current-context 2>/dev/null)" ]; then
+      # 合致する GKE context が無い configuration へ切り替えたときは前の context を残さない。
+      # 残すと gcloud は新プロジェクト・kubectl は旧クラスタ（本番の可能性あり）を向いたまま
+      # 気づかず kubectl を叩ける。unset すれば kubectl はエラーで止まり p10k の kubecontext も消える。
+      echo ""
+      echo "===kubectx (unset)==="
+      kubectl config unset current-context
     fi
 
     # opentofu (configuration名の末尾をworkspace名とする: ${PROJECT_NAME}-dev -> dev)
