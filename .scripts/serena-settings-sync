@@ -1,0 +1,47 @@
+#!/bin/sh
+# serena-settings-sync: dotfiles の base (dot_serena/serena_config.yml) を ~/.serena/serena_config.yml へマージ反映する
+#
+# ~/.serena/serena_config.yml は serena が実行時に書き換える先（projects の自動登録）のため、
+# symlink でリポジトリに直結するとリポジトリが汚れ続ける。さらに machine 固有（projects の
+# 絶対パス）と秘匿（auth_secret）を含むためコミットもできない。そこで実体を git 管理外に置き、
+# 「実体の上に base を重ねる」一方向マージで共有設定だけを配布する。
+#   - base にあるキー: base が正（全PCで固定。実体側での変更は次回 sync で戻る）
+#   - 実体にしかないキー（projects, auth_secret 等）: 保持（machine 固有・秘匿は実体に閉じる）
+# 注意: base からのキー削除は伝播しない。無効化したい設定は削除でなく明示的な値で上書きする。
+
+# shebang でなく本文で set する（init.sh が `sh script` で起動すると shebang の
+# フラグは無視され、base 破損時のガードが素通りして実体を壊すため）
+set -eu
+
+# ~/.scripts はディレクトリ symlink なので pwd -P で実体パスに解決してリポジトリを特定する
+SCRIPT_DIR=$(CDPATH= cd -- "$(dirname -- "$0")" && pwd -P)
+BASE="$(dirname "$SCRIPT_DIR")/dot_serena/serena_config.yml"
+DEST="${HOME}/.serena/serena_config.yml"
+
+if ! command -v yq >/dev/null 2>&1; then
+  echo '❌ yq が見つかりません。`brew install yq` でインストールしてください' >&2
+  exit 1
+fi
+
+# base が壊れていたら実体に触る前に止める
+yq e . "$BASE" >/dev/null
+
+# 秘匿ガード: machine 固有・秘匿キーが base に取り込まれていたら配布前に止める
+# （実体からの取り込みミスで全PCへ projects / auth_secret が撒かれるのを防ぐ）
+if [ "$(yq 'has("projects") or has("auth_secret")' "$BASE")" = "true" ]; then
+  echo '❌ base (dot_serena/serena_config.yml) に projects または auth_secret が含まれています。除去してから再実行してください' >&2
+  exit 1
+fi
+
+mkdir -p "${HOME}/.serena"
+
+if [ -f "$DEST" ]; then
+  # 一方向マージ: base にあるキーは base が正、実体にしかないキーは保持
+  yq eval-all 'select(fileIndex==0) * select(fileIndex==1)' "$DEST" "$BASE" > "${DEST}.tmp"
+  mv "${DEST}.tmp" "$DEST"
+else
+  # machine 固有キー（projects, auth_secret）は serena が初回起動時に生成する
+  cp "$BASE" "$DEST"
+fi
+
+echo "✅ ~/.serena/serena_config.yml に base をマージしました"

@@ -75,6 +75,12 @@ chezmoi の自動変換ではなく、`dot_claude/` を明示的に `~/.claude/`
 > **リポジトリ側を編集したら同スクリプトを再実行する**。GUI で足したルールは sync で
 > 消えるので、残したいものは先にリポジトリの karabiner.json へ取り込む。
 
+> 例外: `.serena/serena_config.yml`（リポジトリでは `dot_serena/`）も **symlink しない**。serena が
+> 実行時に書き換え（`projects:` の自動登録）、machine 固有（projects の絶対パス）と秘匿
+> （`auth_secret:`）を含むため。`.scripts/serena-settings-sync` が「実体の上に base を重ねる」
+> マージで配布する（base にあるキーは base が正、base に無いキーは実体側の値を保持）。
+> **base を編集したら同スクリプトを再実行する**（他PCも pull 後に実行）。
+
 > 例外: user スコープの MCP サーバー定義も **symlink で配布できない**。置き場所が
 > `~/.claude.json`（Claude Code が頻繁に書き込むホットな状態ファイル・git 管理外）のため、
 > `.scripts/claude-mcp-sync` が公式 CLI（`claude mcp add-json`）経由で登録する
@@ -105,6 +111,7 @@ chezmoi の自動変換ではなく、`dot_claude/` を明示的に `~/.claude/`
 | ssh | `~/.ssh/config` | 鍵・ホスト設定 |
 | nvim | `~/.config/nvim/lua/config/local.lua` | PC固有のエディタ設定 |
 | Claude | `~/.claude/settings.json` | git管理外の実体。Claude Code の自動書き込み（model 等）と machine固有・仕事固有の追記。base に無いキーは `claude-settings-sync` が保持する |
+| serena | `~/.serena/serena_config.yml` | git管理外の実体。projects / auth_secret は実体側に閉じる（base に無いキーは `serena-settings-sync` が保持する） |
 
 `dot_claude/settings.json` は共有 base（hooks・statusline・共通プラグイン・個人の好み）。仕事固有・
 machine固有のものをここに書かない。なお `~/.claude/settings.local.json` は **Claude Code に読み込まれない**
