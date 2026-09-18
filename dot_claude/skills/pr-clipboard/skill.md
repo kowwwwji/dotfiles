@@ -1,3 +1,8 @@
+---
+name: pr-clipboard
+description: 現在のgitブランチの変更内容を分析し、PR（Pull Request）文書をMarkdown形式で生成してクリップボードにコピーする
+---
+
 # PR Clipboard - Pull Request文書生成とクリップボードコピー
 
 このスキルは、現在のgitブランチの変更内容を分析し、PR（Pull Request）文書をMarkdown形式で生成してクリップボードにコピーします。
