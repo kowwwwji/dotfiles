@@ -103,6 +103,9 @@
   "permissions": {
     "defaultMode": "auto",
     "allow": [
+      "Edit",
+      "Write",
+      "NotebookEdit",
       "WebSearch",
       "WebFetch(domain:github.com)",
       "WebFetch(domain:raw.githubusercontent.com)",
