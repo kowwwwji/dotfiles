@@ -15,9 +15,13 @@ Brewfile/Brewfile*.lock.json
 !/.claude/agents
 /.claude/agents/*
 !/.claude/agents/dotfiles-reviewer.md
+# path 限定ルール（CLAUDE.md から分離した常駐不要の規約）も配布物として追跡する
+!/.claude/rules
 # terminal-browser のインストーラが ~/.claude/skills（= dot_claude/skills への symlink）内に
 # machine-local な絶対パスの skill リンクを作るため、追跡しない
 /dot_claude/skills/terminal-browser
 # archify skill も同様に追跡しない（サイズが大きく上流の更新も活発なため）。
 # 導入・更新は init.sh の npx skills add 経由。
 /dot_claude/skills/archify
+# claude.ai が自動同期するスキル束も追跡しない（claude.ai 側が正・アカウント連携で自動配布）
+/dot_claude/skills/synced
