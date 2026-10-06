@@ -29,10 +29,9 @@ return {
     window = {
       mappings = {
         ["<C-v>"] = "open_vsplit",
+        -- カーソル下のファイル/フォルダを OS の既定アプリで開く（LazyVim の O と同じ語彙）
         ["O"] = function(state)
-          local node = state.tree:get_node()
-          local path = node:get_id()
-          vim.fn.jobstart({ "open", "-R", path }, { detach = true })
+          vim.ui.open(state.tree:get_node():get_id())
         end,
       },
     },
