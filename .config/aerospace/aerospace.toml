@@ -92,9 +92,9 @@ on-focus-changed = ['exec-and-forget sketchybar --trigger aerospace_workspace_ch
     run = 'layout floating'
 
 # アプリ自動配置。Slack は WS1（内蔵/確認用）、Ghostty は WS2（メイン作業）、
-# Apple Music・LINE・メモは WS3（縦長）へ。ブラウザは全ディスプレイで使うため割当なし。
+# Apple Music・LINE・ジャーナルは WS3（縦長）へ。ブラウザは全ディスプレイで使うため割当なし。
 # Apple Music だけは先頭 catch-all の floating を 'layout tiling' で打ち消して WS3 の tiles に載せる
-# （LINE は tiles に載せず floating のまま。メモは ws3-layout.sh が tiles に載せる）
+# （LINE は tiles に載せず floating のまま。ジャーナルは ws3-layout.sh が tiles に載せる）
 [[on-window-detected]]
     if.app-id = 'com.tinyspeck.slackmacgap' # Slack
     run = 'move-node-to-workspace 1'
@@ -112,7 +112,7 @@ on-focus-changed = ['exec-and-forget sketchybar --trigger aerospace_workspace_ch
     run = 'move-node-to-workspace 3'
 
 [[on-window-detected]]
-    if.app-id = 'com.apple.Notes' # メモ（WS3 下段。tiles への配置は ws3-layout.sh）
+    if.app-id = 'com.apple.journal' # ジャーナル（WS3 下段。tiles への配置は ws3-layout.sh）
     run = 'move-node-to-workspace 3'
 
 [mode.main.binding]
@@ -184,7 +184,7 @@ on-focus-changed = ['exec-and-forget sketchybar --trigger aerospace_workspace_ch
     r = ['flatten-workspace-tree', 'mode main', 'exec-and-forget sketchybar --trigger aerospace_mode_change MODE=main'] # レイアウトのリセット
     f = ['layout floating tiling', 'mode main', 'exec-and-forget sketchybar --trigger aerospace_mode_change MODE=main'] # floating / tiling の切替
     backspace = ['close-all-windows-but-current', 'mode main', 'exec-and-forget sketchybar --trigger aerospace_mode_change MODE=main'] # 現在のウィンドウ以外を閉じる
-    3 = ['exec-and-forget ~/.config/aerospace/ws3-layout.sh', 'mode main', 'exec-and-forget sketchybar --trigger aerospace_mode_change MODE=main'] # WS3 を既定配置（上から Music / カレンダー / リマインダー｜メモ）に組み直す
+    3 = ['exec-and-forget ~/.config/aerospace/ws3-layout.sh', 'mode main', 'exec-and-forget sketchybar --trigger aerospace_mode_change MODE=main'] # WS3 を既定配置（上から Music / カレンダー / リマインダー｜ジャーナル）に組み直す
 
     # タイルの並べ替え。OS の Option+矢印（単語移動/選択）を奪わないよう main ではなく
     # ここに置く。連続で押せるよう mode main へは戻らない（抜けるのは enter か esc）

@@ -1,7 +1,7 @@
 #!/bin/sh
 
 # WS3（縦置き PL2390）を既定配置に組み直す:
-#   上段 = ミュージック ／ 中段 = カレンダー ／ 下段 = リマインダー（左）｜メモ（右）
+#   上段 = ミュージック ／ 中段 = カレンダー ／ 下段 = リマインダー（左）｜ジャーナル（右）
 #
 # aerospace のツリー構造は実行時状態で、窓の開き直しや再起動で崩れる。配置を設定で
 # 宣言する手段が無いため、CLI で毎回同じ手順を踏んで組み直す。
@@ -20,7 +20,7 @@ TMP_WS="ws${WS}-rebuild"
 # 1 行 = 1 段。上から順に、同じ段は左から順に bundle id を並べる（1 段 2 窓まで想定）
 ROWS='com.apple.Music
 com.apple.iCal
-com.apple.reminders com.apple.Notes'
+com.apple.reminders com.apple.journal'
 
 win_id() {
   aerospace list-windows --workspace "$WS" --app-bundle-id "$1" --format '%{window-id}' 2>/dev/null | head -1
