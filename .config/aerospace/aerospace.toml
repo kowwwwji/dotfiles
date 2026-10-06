@@ -26,7 +26,7 @@ default-root-container-orientation = 'auto'
 # フォーカスしたモニタへマウスも追従させる（マルチモニタでの迷子防止）
 on-focused-monitor-changed = ['move-mouse monitor-lazy-center']
 
-# WS3（縦置き PL2390）だけ root を上下 tiles にし、決まった順に縦積みする。aerospace に WS ごとの
+# WS3（縦置き PL2390）だけ root を上下 tiles にし、決まった配置に組む。aerospace に WS ごとの
 # 既定レイアウトを宣言する手段は無いため、公式ガイドが案内する after-startup-command から
 # 組み直しスクリプト（ws3-layout.sh。service モードの 3 と同じもの）を走らせて代替する
 # （他 WS は default-root-container-layout の accordion のまま）。
@@ -92,9 +92,9 @@ on-focus-changed = ['exec-and-forget sketchybar --trigger aerospace_workspace_ch
     run = 'layout floating'
 
 # アプリ自動配置。Slack は WS1（内蔵/確認用）、Ghostty は WS2（メイン作業）、
-# Apple Music・LINE は WS3（縦長）へ。ブラウザは全ディスプレイで使うため割当なし。
+# Apple Music・LINE・メモは WS3（縦長）へ。ブラウザは全ディスプレイで使うため割当なし。
 # Apple Music だけは先頭 catch-all の floating を 'layout tiling' で打ち消して WS3 の tiles に載せる
-# （LINE は tiles に載せず floating のまま）
+# （LINE は tiles に載せず floating のまま。メモは ws3-layout.sh が tiles に載せる）
 [[on-window-detected]]
     if.app-id = 'com.tinyspeck.slackmacgap' # Slack
     run = 'move-node-to-workspace 1'
@@ -109,6 +109,10 @@ on-focus-changed = ['exec-and-forget sketchybar --trigger aerospace_workspace_ch
 
 [[on-window-detected]]
     if.app-id = 'jp.naver.line.mac' # LINE
+    run = 'move-node-to-workspace 3'
+
+[[on-window-detected]]
+    if.app-id = 'com.apple.Notes' # メモ（WS3 下段。tiles への配置は ws3-layout.sh）
     run = 'move-node-to-workspace 3'
 
 [mode.main.binding]
@@ -180,7 +184,7 @@ on-focus-changed = ['exec-and-forget sketchybar --trigger aerospace_workspace_ch
     r = ['flatten-workspace-tree', 'mode main', 'exec-and-forget sketchybar --trigger aerospace_mode_change MODE=main'] # レイアウトのリセット
     f = ['layout floating tiling', 'mode main', 'exec-and-forget sketchybar --trigger aerospace_mode_change MODE=main'] # floating / tiling の切替
     backspace = ['close-all-windows-but-current', 'mode main', 'exec-and-forget sketchybar --trigger aerospace_mode_change MODE=main'] # 現在のウィンドウ以外を閉じる
-    3 = ['exec-and-forget ~/.config/aerospace/ws3-layout.sh', 'mode main', 'exec-and-forget sketchybar --trigger aerospace_mode_change MODE=main'] # WS3 を既定配置（上から Music / カレンダー / リマインダー）に組み直す
+    3 = ['exec-and-forget ~/.config/aerospace/ws3-layout.sh', 'mode main', 'exec-and-forget sketchybar --trigger aerospace_mode_change MODE=main'] # WS3 を既定配置（上から Music / カレンダー / リマインダー｜メモ）に組み直す
 
     # タイルの並べ替え。OS の Option+矢印（単語移動/選択）を奪わないよう main ではなく
     # ここに置く。連続で押せるよう mode main へは戻らない（抜けるのは enter か esc）
