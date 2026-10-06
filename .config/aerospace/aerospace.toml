@@ -26,6 +26,13 @@ default-root-container-orientation = 'auto'
 # フォーカスしたモニタへマウスも追従させる（マルチモニタでの迷子防止）
 on-focused-monitor-changed = ['move-mouse monitor-lazy-center']
 
+# WS3（縦置き PL2390）だけ root を上下 tiles にする。aerospace に WS ごとの既定レイアウト
+# オプションは無く、公式ガイドが案内する after-startup-command + layout --workspace で代替する
+# （他 WS は default-root-container-layout の accordion のまま）。
+# 起動時にしか走らないので、変更後の反映は reload-config ではなく aerospace の再起動か
+# 同コマンドの手動実行。モニタ未接続・他 PC では空 WS3 に効くだけで無害
+after-startup-command = ['layout --workspace 3 --root v_tiles']
+
 # sketchybar の WS ウィジェットへフォーカス変更を通知する（イベント駆動。ポーリング不採用）
 exec-on-workspace-change = ['/bin/bash', '-c',
     'sketchybar --trigger aerospace_workspace_change FOCUSED_WORKSPACE=$AEROSPACE_FOCUSED_WORKSPACE'
@@ -85,6 +92,7 @@ on-focus-changed = ['exec-and-forget sketchybar --trigger aerospace_workspace_ch
 
 # アプリ自動配置。Slack は WS1（内蔵/確認用）、Ghostty は WS2（メイン作業）、
 # Apple Music・LINE は WS3（縦長）へ。ブラウザは全ディスプレイで使うため割当なし。
+# WS3 行きは先頭 catch-all の floating を 'layout tiling' で打ち消し、上下 tiles に載せる
 [[on-window-detected]]
     if.app-id = 'com.tinyspeck.slackmacgap' # Slack
     run = 'move-node-to-workspace 1'
@@ -95,11 +103,11 @@ on-focus-changed = ['exec-and-forget sketchybar --trigger aerospace_workspace_ch
 
 [[on-window-detected]]
     if.app-id = 'com.apple.Music' # Apple Music
-    run = 'move-node-to-workspace 3'
+    run = ['layout tiling', 'move-node-to-workspace 3']
 
 [[on-window-detected]]
     if.app-id = 'jp.naver.line.mac' # LINE
-    run = 'move-node-to-workspace 3'
+    run = ['layout tiling', 'move-node-to-workspace 3']
 
 [mode.main.binding]
     # ワークスペース内の全ウィンドウ巡回（Cmd+Tab / Cmd+Shift+Tab と同じ語彙）。
