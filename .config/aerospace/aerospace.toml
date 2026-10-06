@@ -92,7 +92,8 @@ on-focus-changed = ['exec-and-forget sketchybar --trigger aerospace_workspace_ch
 
 # アプリ自動配置。Slack は WS1（内蔵/確認用）、Ghostty は WS2（メイン作業）、
 # Apple Music・LINE は WS3（縦長）へ。ブラウザは全ディスプレイで使うため割当なし。
-# WS3 行きは先頭 catch-all の floating を 'layout tiling' で打ち消し、上下 tiles に載せる
+# Apple Music だけは先頭 catch-all の floating を 'layout tiling' で打ち消して WS3 の tiles に載せる
+# （LINE は tiles に載せず floating のまま）
 [[on-window-detected]]
     if.app-id = 'com.tinyspeck.slackmacgap' # Slack
     run = 'move-node-to-workspace 1'
@@ -107,7 +108,7 @@ on-focus-changed = ['exec-and-forget sketchybar --trigger aerospace_workspace_ch
 
 [[on-window-detected]]
     if.app-id = 'jp.naver.line.mac' # LINE
-    run = ['layout tiling', 'move-node-to-workspace 3']
+    run = 'move-node-to-workspace 3'
 
 [mode.main.binding]
     # ワークスペース内の全ウィンドウ巡回（Cmd+Tab / Cmd+Shift+Tab と同じ語彙）。
