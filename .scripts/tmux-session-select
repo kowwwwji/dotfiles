@@ -3,6 +3,7 @@
 # 一覧生成は tmux-session-list に集約(zsh の Ctrl+S と共通)。行は "セッション名<TAB>表示テキスト" で、
 # 表示は2列目だけ(--with-nth=2)、1行目はヘッダ。ポップアップのサイズは表に合わせる
 # (幅: 下限は min、上限は画面の9割。高さ: 行数ぴったり、上限は画面の半分)。
+# 位置はカーソルの直下（下に収まらなければ直上）。作業中の行から目を離さずに選べるようにするため。
 # tmux 内で実行する前提（bind s から run-shell で呼ばれる）。
 
 min=60                          # 表が狭くても確保する幅(列数)。狭すぎると fzf の検索欄や枠が窮屈になるため
@@ -19,6 +20,17 @@ width=$(( width + 6 ))          # 枠線・ポインタ・余白ぶん
 height=$(( ${#${(f)list}} + 4 ))
 maxh=$(( $(tmux display -p '#{client_height}') / 2 ))
 (( height > maxh )) && height=$maxh
-line=$(print -r -- "$list" | fzf-tmux -p "${width},${height}" -- --delimiter=$'\t' --with-nth=2 --header-lines=1) || exit 0
+# 位置: display-popup の -x は左端列、-y は「下端の次の行」(top = y - height) を指す。
+# カーソル直下に top を置き、ステータス行(最下 1 行)を除いた画面に収まらなければ
+# 下端をカーソル行に合わせて直上へ出す(カーソル行自体は隠れない)。画面端は tmux 側が丸める
+read -r pleft ptop cx cy ch <<< "$(tmux display -p '#{pane_left} #{pane_top} #{cursor_x} #{cursor_y} #{client_height}')"
+x=$(( pleft + cx ))
+top=$(( ptop + cy + 1 ))
+if (( top + height > ch - 1 )); then
+  y=$(( ptop + cy ))
+else
+  y=$(( top + height ))
+fi
+line=$(print -r -- "$list" | fzf-tmux -p "${width},${height}" -x "$x" -y "$y" -- --delimiter=$'\t' --with-nth=2 --header-lines=1) || exit 0
 [[ -z $line ]] && exit 0
 tmux switch-client -t "${line%%$'\t'*}"
