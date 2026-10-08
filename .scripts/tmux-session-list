@@ -15,11 +15,11 @@
 setopt extended_glob
 
 # 状態は人が気づくべきものなので色付きの絵文字にする(tmux ステータスバーの Nerd Font とは別扱い)。
-# 絵文字は端末・tmux とも2セルだが、▶️ ⏹️ は U+FE0F 付きで zsh の幅計算(${(m)#})が1を返す。
+# 絵文字は端末・tmux とも2セルだが、▶️ は U+FE0F 付きで zsh の幅計算(${(m)#})が1を返す。
 # そのためアイコン幅は ICON_WIDTH で決め打ちし、幅計算にアイコンを含めない。
 ICON_WAITING=$'\U0001F534'            # 🔴 承認・入力待ち: 人の操作が要る
 ICON_RUNNING=$'\U000025B6\U0000FE0F'  # ▶️ 実行中
-ICON_IDLE=$'\U000023F9\U0000FE0F'     # ⏹️ 応答完了: 次の入力待ち
+ICON_IDLE=$'\U00002705'               # ✅ 応答完了: 次の入力待ち
 ICON_BELL=$'\U0001F514'               # 🔔 bell/silence 通知
 ICON_WIDTH=2
 GAP='  '  # セル間・列間の区切り
