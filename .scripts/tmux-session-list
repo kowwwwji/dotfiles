@@ -8,8 +8,10 @@
 #      名前セルを空白で埋めると呼び出し側が末尾空白を削る必要が出る。
 #      表示用と抽出用を分ければどちらの都合も持ち込まずに済む。
 #
-# Claude 列: Claude Code の hooks(pane-state.sh)が書いた pane 状態を window 単位で出す。
-# 通知列:   Claude の状態が無い window の bell/silence フラグ(状態がある window は Claude 列が正)。
+# Claude 列: Claude Code の hooks(pane-state.sh)が書いた pane 状態を window 単位で出す(いまの状態)。
+# 通知列:   bell/silence フラグが立っている window(人がまだ見ていない通知)。
+#           フラグは見ていない window(裏 window・別セッション)にだけ立ち、見に行くと消えるので「未確認」を表せる。
+#           Claude 列とは意味が違う(状態 vs 未確認)ため、Claude の状態がある window でも独立に出す。
 setopt extended_glob
 
 # 状態は人が気づくべきものなので色付きの絵文字にする(tmux ステータスバーの Nerd Font とは別扱い)。
@@ -72,9 +74,8 @@ for s in ${(f)"$(tmux list-sessions -F '#{session_name}' | grep -v '^popup$')"};
     if [[ -n $icon ]]; then
       cells+=("$icon $label")
       cw=$(( cw + (${#cells} > 1 ? ${#GAP} : 0) + ICON_WIDTH + 1 + ${(m)#label} ))
-    elif [[ ${win_bell[$key]} == 1 ]]; then
-      bells+=("$ICON_BELL $label")
     fi
+    [[ ${win_bell[$key]} == 1 ]] && bells+=("$ICON_BELL $label")
   done
   names+=("$s");               name_w+=( ${(m)#s} )
   claudes+=("${(pj:$GAP:)cells}"); claude_w+=( $cw )
