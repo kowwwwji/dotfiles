@@ -39,6 +39,11 @@ terminal-notifier -title "Claude Code: ${tmux_info}" -message "$message" -sound 
 tty=$(tmux display -p -t "$TMUX_PANE" '#{pane_tty}' 2>/dev/null)
 [ -n "$tty" ] && printf '\a' > "$tty"
 
+# PushNotification ツール（notification_type=push_notification）は Claude が自発的に知らせる通知で、
+# 人の操作を待っていない。bell は鳴らして一覧の通知列には出すが「待ち」は書かない。
+# 書くと、この通知が応答完了（Stop hook）より後に遅れて発火したときに 🔴 が次の入力まで残る。
+[ "$type" = "push_notification" ] && exit 0
+
 # 一覧（.scripts/tmux-session-list）へ「待ち」を伝える。ここに置くのは、上の早期 return
-# （idle_prompt / ask-notify 済みの重複）を通り抜けた＝本物の待ちだけを記録するため。
+# （idle_prompt / ask-notify 済みの重複 / push_notification）を通り抜けた＝本物の待ちだけを記録するため。
 sh "$HOME/.claude/hooks/pane-state.sh" waiting
