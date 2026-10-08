@@ -1,7 +1,8 @@
 #!/bin/zsh -e
 # tmux セッションを fzf-tmux のポップアップで選び、そのセッションへ switch する。
 # 一覧生成は tmux-session-list に集約(zsh の Ctrl+S と共通)。行は "セッション名<TAB>表示テキスト" で、
-# 表示は2列目だけ(--with-nth=2)、1行目はヘッダ。ポップアップ幅は表の幅に合わせる(下限は min、上限は画面の9割)。
+# 表示は2列目だけ(--with-nth=2)、1行目はヘッダ。ポップアップのサイズは表に合わせる
+# (幅: 下限は min、上限は画面の9割。高さ: 行数ぴったり、上限は画面の半分)。
 # tmux 内で実行する前提（bind s から run-shell で呼ばれる）。
 
 min=60                          # 表が狭くても確保する幅(列数)。狭すぎると fzf の検索欄や枠が窮屈になるため
@@ -12,6 +13,12 @@ max=$(( $(tmux display -p '#{client_width}') * 9 / 10 ))
 width=$(( width + 6 ))          # 枠線・ポインタ・余白ぶん
 (( width < min )) && width=$min
 (( width > max )) && width=$max # 画面が min より狭いときは上限が勝つ
-line=$(print -r -- "$list" | fzf-tmux -p "${width},50%" -- --delimiter=$'\t' --with-nth=2 --header-lines=1) || exit 0
+# 高さ: fzf-tmux は popup 内で fzf 自身の --border を使うため、行数(ヘッダ込み)に
+# 枠線上下 2 + 検索欄 1 + 件数表示 1 を足せば全セッションがスクロールなしで収まる
+# (件数表示の 1 行は FZF_DEFAULT_OPTS で --info=inline にすると不要になる)。
+height=$(( ${#${(f)list}} + 4 ))
+maxh=$(( $(tmux display -p '#{client_height}') / 2 ))
+(( height > maxh )) && height=$maxh
+line=$(print -r -- "$list" | fzf-tmux -p "${width},${height}" -- --delimiter=$'\t' --with-nth=2 --header-lines=1) || exit 0
 [[ -z $line ]] && exit 0
 tmux switch-client -t "${line%%$'\t'*}"
