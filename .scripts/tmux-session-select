@@ -1,8 +1,15 @@
 #!/bin/zsh -e
 # tmux セッションを fzf-tmux のポップアップで選び、そのセッションへ switch する。
-# 一覧生成は tmux-session-list に集約(zsh の Ctrl+S と共通)。
+# 一覧生成は tmux-session-list に集約(zsh の Ctrl+S と共通)。行は "セッション名<TAB>表示テキスト" で、
+# 表示は2列目だけ(--with-nth=2)、1行目はヘッダ。ポップアップ幅は表の幅に合わせる(上限は画面の9割)。
 # tmux 内で実行する前提（bind s から run-shell で呼ばれる）。
 
-line=$("$HOME/.scripts/tmux-session-list" | fzf-tmux -p) || exit 0
+list=$("$HOME/.scripts/tmux-session-list")
+width=0
+for l in ${(f)list}; do d=${l#*$'\t'}; (( ${(m)#d} > width )) && width=${(m)#d}; done
+max=$(( $(tmux display -p '#{client_width}') * 9 / 10 ))
+width=$(( width + 6 ))          # 枠線・ポインタ・余白ぶん
+(( width > max )) && width=$max
+line=$(print -r -- "$list" | fzf-tmux -p "${width},50%" -- --delimiter=$'\t' --with-nth=2 --header-lines=1) || exit 0
 [[ -z $line ]] && exit 0
 tmux switch-client -t "${line%%$'\t'*}"

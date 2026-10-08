@@ -1,6 +1,6 @@
 #!/bin/sh
 # Claude Code の状態を tmux の pane 単位で記録する hook（原則4: awareness）。
-# セッション一覧（.scripts/tmux-session-list）がこれを読み、待ち/実行中を一覧に出す。
+# セッション一覧（.scripts/tmux-session-list）がこれを読み、待ち/実行中/完了を一覧に出す。
 # bell は「何か起きた」までしか表せず、待ちと完了を区別できないため、状態そのものを残す。
 # 使い方: settings.json の hooks から `sh ~/.claude/hooks/pane-state.sh <状態>`。
 #   状態: waiting（入力/承認待ち） / running（実行中） / idle（応答完了） / clear（削除）
