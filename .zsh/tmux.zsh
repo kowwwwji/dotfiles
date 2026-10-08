@@ -31,9 +31,9 @@ add-zsh-hook chpwd _tmux_rename_window_to_branch
 
 function pecoSelectTmuxSession(){
   # セッション単位で選択。一覧生成は tmux-session-list に集約(prefix+s と共通)。
-  # 各行に通知(ベル/サイレント)のあるwindowを "index:名前" で表示する。
+  # 行は "セッション名<TAB>表示テキスト"。表示は2列目だけ(--with-nth=2)、1行目はヘッダ。
   local line session
-  line="$("$HOME/.scripts/tmux-session-list" | fzf)"
+  line="$("$HOME/.scripts/tmux-session-list" | fzf --delimiter=$'\t' --with-nth=2 --header-lines=1)"
   if [ -n "$line" ]; then
     session="${line%%$'\t'*}"
     BUFFER="tmux a -t $session"

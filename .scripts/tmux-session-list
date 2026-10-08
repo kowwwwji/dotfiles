@@ -1,15 +1,26 @@
 #!/bin/zsh -e
-# fzf/fzf-tmux に渡すセッション一覧を生成する(選択や移動はしない)。
-# 各行 = "セッション名<TAB>アイコン index:名前 ..."。
-# Claude Code の状態(待ち/実行中)を最優先で出し、状態の無い window は
-# 従来どおり通知(ベル/サイレント)フラグを出す。どれも無ければ名前のみ。
-# 呼び出し側は選択行から `${line%%$'\t'*}` でセッション名を取り出す。
+# fzf/fzf-tmux に渡すセッション一覧を「表」として生成する(選択や移動はしない)。
+# 各行 = "セッション名<TAB>表示テキスト"。1行目はヘッダ行(セッション名は空)。
+# 表示テキストは「セッション  Claude  通知」の3列を表示幅で揃えた1本の文字列。
+# 呼び出し側は fzf に --delimiter=$'\t' --with-nth=2 --header-lines=1 を渡して2列目だけ見せ、
+# 選択行から `${line%%$'\t'*}` で生のセッション名を取り出す。
+# Why: 列を TAB 区切りのまま fzf に見せると TAB が8桁単位に展開されて行ごとにずれる。
+#      名前セルを空白で埋めると呼び出し側が末尾空白を削る必要が出る。
+#      表示用と抽出用を分ければどちらの都合も持ち込まずに済む。
+#
+# Claude 列: Claude Code の hooks(pane-state.sh)が書いた pane 状態を window 単位で出す。
+# 通知列:   Claude の状態が無い window の bell/silence フラグ(状態がある window は Claude 列が正)。
+setopt extended_glob
 
-# アイコンは Material Design 系(U+F0000 台)。グリフ直書きはエディタで欠落しうるため
-# コードポイント指定で埋め込む(CLAUDE.md の tmux 節の注記)。
-ICON_WAITING=$'\U000F03E4'  # nf-md-pause: 入力/承認待ち
-ICON_RUNNING=$'\U000F040A'  # nf-md-play : 実行中
-ICON_BELL=$'\U000F116B'     # 従来のベル/サイレント
+# 状態は人が気づくべきものなので色付きの絵文字にする(tmux ステータスバーの Nerd Font とは別扱い)。
+# 絵文字は端末・tmux とも2セルだが、▶️ ⏹️ は U+FE0F 付きで zsh の幅計算(${(m)#})が1を返す。
+# そのためアイコン幅は ICON_WIDTH で決め打ちし、幅計算にアイコンを含めない。
+ICON_WAITING=$'\U0001F534'            # 🔴 承認・入力待ち: 人の操作が要る
+ICON_RUNNING=$'\U000025B6\U0000FE0F'  # ▶️ 実行中
+ICON_IDLE=$'\U000023F9\U0000FE0F'     # ⏹️ 応答完了: 次の入力待ち
+ICON_BELL=$'\U0001F514'               # 🔔 bell/silence 通知
+ICON_WIDTH=2
+GAP='  '  # セル間・列間の区切り
 
 # Claude の hooks(pane-state.sh)が書いた pane 単位の状態を読む。
 # ディレクトリは tmux サーバ世代ごと(→ pane id の振り直しと混ざらない)。
@@ -19,41 +30,70 @@ for f in "$state_dir"/*(N.); do
   pane_state[${f:t}]=$(<"$f")
 done
 
-# window 単位に集約する。同一 window に複数 pane があれば 待ち > 実行中 > ベル で代表を決める。
+# window 単位に集約する。同一 window に複数 pane があれば 待ち > 完了 > 実行中 で代表を決める。
 # win_keys が list-panes の出力順(session→window index 順)を保持し、表示順の正になる
 # (連想配列のキー列挙は順不同のため、それに頼ると window が index 順に並ばない)。
-typeset -A win_rank win_label
+typeset -A win_rank win_label win_bell
 typeset -a win_keys
 while IFS=$'\t' read -r pane sess widx wname bell; do
   rank=0
   case ${pane_state[${pane#\%}]} in
     (waiting) rank=3 ;;
-    (running) rank=2 ;;
+    (idle)    rank=2 ;;
+    (running) rank=1 ;;
   esac
-  [[ $rank -eq 0 && $bell == 1 ]] && rank=1
   key="$sess"$'\t'"$widx"
   if (( ! ${+win_rank[$key]} )); then
     win_keys+=("$key")
     win_rank[$key]=$rank
     win_label[$key]="$widx:$wname"
+    win_bell[$key]=$bell
   elif (( rank > win_rank[$key] )); then
     win_rank[$key]=$rank
   fi
 done < <(tmux list-panes -a -F $'#{pane_id}\t#{session_name}\t#{window_index}\t#{window_name}\t#{||:#{window_bell_flag},#{window_silence_flag}}')
 
-tmux list-sessions -F '#{session_name}' | grep -v '^popup$' | while read -r s; do
-  marks=()
+# セッションごとに3列のセル文字列とその表示幅を組み立てる(幅はアイコンを ICON_WIDTH で数える)。
+typeset -a names claudes notifies
+typeset -a name_w claude_w
+for s in ${(f)"$(tmux list-sessions -F '#{session_name}' | grep -v '^popup$')"}; do
+  typeset -a cells; cells=()
+  typeset -a bells; bells=()
+  cw=0
   for key in $win_keys; do
     [[ ${key%%$'\t'*} == "$s" ]] || continue
+    label=${win_label[$key]}
     case ${win_rank[$key]} in
-      (3) marks+=("$ICON_WAITING ${win_label[$key]}") ;;
-      (2) marks+=("$ICON_RUNNING ${win_label[$key]}") ;;
-      (1) marks+=("$ICON_BELL ${win_label[$key]}") ;;
+      (3) icon=$ICON_WAITING ;;
+      (2) icon=$ICON_IDLE ;;
+      (1) icon=$ICON_RUNNING ;;
+      (*) icon= ;;
     esac
+    if [[ -n $icon ]]; then
+      cells+=("$icon $label")
+      cw=$(( cw + (${#cells} > 1 ? ${#GAP} : 0) + ICON_WIDTH + 1 + ${(m)#label} ))
+    elif [[ ${win_bell[$key]} == 1 ]]; then
+      bells+=("$ICON_BELL $label")
+    fi
   done
-  if (( ${#marks} )); then
-    printf '%s\t%s\n' "$s" "${(j: :)marks}"
-  else
-    printf '%s\n' "$s"
-  fi
+  names+=("$s");               name_w+=( ${(m)#s} )
+  claudes+=("${(pj:$GAP:)cells}"); claude_w+=( $cw )
+  notifies+=("${(pj:$GAP:)bells}")
+done
+
+# 列幅 = ヘッダと全行の最大。ヘッダ行を先頭に出す。
+H_NAME='セッション' H_CLAUDE='Claude' H_NOTIFY='通知'
+name_col=${(m)#H_NAME}; claude_col=${(m)#H_CLAUDE}
+for w in $name_w;   do (( w > name_col ))   && name_col=$w;   done
+for w in $claude_w; do (( w > claude_col )) && claude_col=$w; done
+
+# $1=セル文字列 $2=実表示幅 $3=列幅 → 右に空白を足して列幅に揃える
+pad() { printf '%s%*s' "$1" $(( $3 - $2 )) ''; }
+row() {  # $1=セッション名(抽出用) $2..=各セル(表示用)。末尾の空白は落とす。
+  local disp="$2$GAP$3$GAP$4"
+  printf '%s\t%s\n' "$1" "${disp%%[[:space:]]##}"
+}
+row '' "$(pad "$H_NAME" ${(m)#H_NAME} $name_col)" "$(pad "$H_CLAUDE" ${(m)#H_CLAUDE} $claude_col)" "$H_NOTIFY"
+for (( i = 1; i <= ${#names}; i++ )); do
+  row "$names[$i]" "$(pad "$names[$i]" $name_w[$i] $name_col)" "$(pad "$claudes[$i]" $claude_w[$i] $claude_col)" "$notifies[$i]"
 done
