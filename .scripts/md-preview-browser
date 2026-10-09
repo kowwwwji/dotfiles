@@ -1,6 +1,6 @@
 #!/bin/sh
 # md-preview-browser — URL を Chrome の新規ウィンドウで開き、aerospace で
-# プレビュー専用 workspace へ送る
+# プレビュー専用 workspace へ送ってモニタいっぱいに広げる
 #
 # 使い方: md-preview-browser <url>
 # （nvim の markdown-preview.nvim から browser オプション経由で呼ばれる想定）
@@ -79,16 +79,29 @@ on_target() {
     grep -qx "$new_id"
 }
 
+moved=''
 i=0
 while [ "$i" -lt 8 ]; do
   aerospace move-node-to-workspace --window-id "$new_id" "$WORKSPACE" 2>/dev/null || true
   sleep 0.3
   if on_target; then
     sleep 0.7
-    on_target && exit 0
+    on_target && { moved=1; break; }
   fi
   i=$((i + 1))
 done
 
-notify "workspace $WORKSPACE への移動に失敗（window-id $new_id）"
-exit 1
+if [ -z "$moved" ]; then
+  notify "workspace $WORKSPACE への移動に失敗（window-id $new_id）"
+  exit 1
+fi
+
+# モニタいっぱいに広げる。窓は aerospace.toml の catch-all で floating 化済みで、floating の窓への
+# fullscreen on は fullscreen 状態を残さず矩形を広げるだけなので、tiles ツリーに載せずに最大化できる
+# （tiling に載せると WS3 の段構成を崩す。catch-all の floating 化をやめるならここも要見直し）。
+# outer gaps は残す（--no-outer-gaps は sketchybar の帯に被る）。
+if ! aerospace fullscreen on --window-id "$new_id" 2>/dev/null; then
+  notify "最大化に失敗（window-id $new_id）"
+  exit 1
+fi
+exit 0
