@@ -1397,6 +1397,10 @@ function prompt_git_worktree() {
 
   # Custom icon.
   # typeset -g POWERLEVEL9K_GCLOUD_VISUAL_IDENTIFIER_EXPANSION='⭐'
+  # PARTIAL は project 未設定でも account だけで成立し、内容が空でアイコンだけが残る。
+  # p10k はアイコン式と内容式が両方空ならセグメントごと隠すので、project があるときだけ
+  # アイコンを出す（COMPLETE は project が必ずあるため対象外）。
+  typeset -g POWERLEVEL9K_GCLOUD_PARTIAL_VISUAL_IDENTIFIER_EXPANSION='${P9K_GCLOUD_PROJECT_ID:+$P9K_VISUAL_IDENTIFIER}'
 
   #[ google_app_cred: google application credentials (https://cloud.google.com/docs/authentication/production) ]#
   # Show google_app_cred only when the the command you are typing invokes one of these tools.
