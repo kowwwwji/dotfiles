@@ -117,16 +117,6 @@ ln -nfs "${DOTFILES_ROOT}/dot_claude/hooks/pre-bash-guard.sh" "${HOME}/.claude/h
 ln -nfs "${DOTFILES_ROOT}/dot_claude/hooks/require-worktree.sh" "${HOME}/.claude/hooks/require-worktree.sh"
 ln -nfs "${DOTFILES_ROOT}/dot_claude/hooks/ask-notify.sh" "${HOME}/.claude/hooks/ask-notify.sh"
 
-# serena: serena_config.yml は symlink せずマージ生成（serena が projects を自動書き込みし、
-# machine 固有・秘匿キーを含むため。詳細は CLAUDE.md）
-# 注: yq は brew bundle で入るため、フレッシュPCでは init.sh 時点で未インストール。
-#     その場合はスキップし、brew bundle 後に `.scripts/serena-settings-sync` を再実行すれば効く。
-if command -v yq >/dev/null 2>&1; then
-  sh "${DOTFILES_ROOT}/.scripts/serena-settings-sync"
-else
-  echo "yq が未インストールのため serena-settings-sync をスキップ（brew bundle 後に再実行してください）"
-fi
-
 # mise: .tool-versions の言語ランタイム + Go/npm製CLIツールを導入
 # config は mise 未導入でも先に配置する（brew bundle 後の mise がそのまま読めるように）
 mkdir -p "${HOME}/.config/mise"
@@ -140,6 +130,18 @@ if command -v mise >/dev/null 2>&1; then
   mise install
 else
   echo "mise が未インストールのため mise install をスキップ（brew bundle 後に再実行してください）"
+fi
+
+# serena: serena_config.yml は symlink せずマージ生成（serena が projects を自動書き込みし、
+# machine 固有・秘匿キーを含むため。詳細は CLAUDE.md）
+# 注: yq は上の mise install で入る（.tool-versions の go バックエンド）。mise 未導入や
+#     shim が PATH に乗る前（mise 導入直後の同じシェル）はスキップし、新しいシェルで
+#     `.scripts/serena-settings-sync` を再実行すれば効く。
+#     存在確認を command -v でなく実行で行う理由は serena-settings-sync 側のコメントが正
+if yq --version >/dev/null 2>&1; then
+  sh "${DOTFILES_ROOT}/.scripts/serena-settings-sync"
+else
+  echo "yq が使えないため serena-settings-sync をスキップ（mise install 後、新しいシェルで再実行してください）"
 fi
 
 # gh: gh-dash 設定の配置と拡張のインストール
