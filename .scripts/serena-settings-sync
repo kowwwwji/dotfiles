@@ -18,8 +18,9 @@ SCRIPT_DIR=$(CDPATH= cd -- "$(dirname -- "$0")" && pwd -P)
 BASE="$(dirname "$SCRIPT_DIR")/dot_serena/serena_config.yml"
 DEST="${HOME}/.serena/serena_config.yml"
 
-if ! command -v yq >/dev/null 2>&1; then
-  echo '❌ yq が見つかりません。`brew install yq` でインストールしてください' >&2
+# mise の shim は PATH にあっても設定で版が決まっていないと失敗するため、実行で確認する
+if ! yq --version >/dev/null 2>&1; then
+  echo '❌ yq が使えません。`mise install`（.tool-versions で宣言済み）で入れてください' >&2
   exit 1
 fi
 
