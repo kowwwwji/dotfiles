@@ -1,0 +1,92 @@
+#!/bin/sh
+# macos-defaults: システム設定（GUI）で手動設定していた項目を defaults で再現する
+#
+# どのPCでも init.sh を流せば同じ操作感になるようにする。
+# 値は GUI で設定したときに macOS が書き込む値と一致させている（型も含む）。
+# 現在値と同じ項目は書き込まない（Dock 再起動などの副作用を毎回起こさないため）。
+# 注: キーリピート等の一部はログアウト後に反映される。
+
+# shebang でなく本文で set する（init.sh が `sh script` で起動すると shebang のフラグは無視されるため）
+set -eu
+
+dock_changed=""
+any_changed=""
+
+# スカラー値: ensure [-currentHost] <domain> <key> <type> <value>
+# defaults read は bool を 1/0 で返すため、比較用に読み替える
+ensure() {
+  host=""
+  if [ "$1" = "-currentHost" ]; then host="-currentHost"; shift; fi
+  domain=$1 key=$2 type=$3 value=$4
+  case "$value" in true) expect=1 ;; false) expect=0 ;; *) expect=$value ;; esac
+  cur=$(defaults $host read "$domain" "$key" 2>/dev/null || true)
+  [ "$cur" = "$expect" ] && return 0
+  defaults $host write "$domain" "$key" "-$type" "$value"
+  echo "  設定: $domain $key = $value"
+  any_changed=1
+  [ "$domain" = com.apple.dock ] && dock_changed=1
+  return 0
+}
+
+# 辞書値: ensure_dict <domain> <key> <plistの辞書XML> [<dict-addのサブキー>]
+# 文字列表記で書くと数値が文字列型で保存されショートカットが効かないため、型付き XML で書く。
+# 比較も型ごと行うため、双方を xml1 に正規化して突き合わせる。
+ensure_dict() {
+  domain=$1 key=$2 xml=$3 sub=${4:-}
+  path=$key${sub:+.$sub}
+  cur=$(defaults export "$domain" - | plutil -extract "$path" xml1 -o - - 2>/dev/null || true)
+  want=$(printf '<?xml version="1.0" encoding="UTF-8"?><plist version="1.0">%s</plist>' "$xml" | plutil -convert xml1 -o - -)
+  [ "$cur" = "$want" ] && return 0
+  if [ -n "$sub" ]; then
+    defaults write "$domain" "$key" -dict-add "$sub" "$xml"
+  else
+    defaults write "$domain" "$key" "$xml"
+  fi
+  echo "  設定: $domain $path"
+  any_changed=1
+  return 0
+}
+
+# symbolichotkeys / Siri のショートカット定義（enabled, parameters, type）
+hotkey() {
+  printf '<dict><key>enabled</key><%s/><key>value</key><dict><key>parameters</key><array><integer>%s</integer><integer>%s</integer><integer>%s</integer></array><key>type</key><string>%s</string></dict></dict>' "$@"
+}
+
+echo "macOS の defaults を確認しています..."
+
+# トラックパッド: 軌跡の速さを最大、1本指タップでクリック（内蔵・外付けの両方）
+ensure NSGlobalDomain com.apple.trackpad.scaling float 3
+ensure com.apple.AppleMultitouchTrackpad Clicking bool true
+ensure com.apple.driver.AppleBluetoothMultitouch.trackpad Clicking bool true
+
+# キーボード: キーリピートとリピート入力認識までの時間を最大（GUI の最速値）、F1〜F12 を標準ファンクションキーに
+ensure NSGlobalDomain KeyRepeat int 2
+ensure NSGlobalDomain InitialKeyRepeat int 15
+ensure NSGlobalDomain com.apple.keyboard.fnState bool true
+
+# Spotlight: 検索ショートカット（⌘Space）を無効化し Raycast に譲る。メニューバーからも隠す
+ensure_dict com.apple.symbolichotkeys AppleSymbolicHotKeys "$(hotkey false 65535 49 1048576 standard)" 64
+ensure -currentHost com.apple.Spotlight MenuItemHidden bool true
+
+# 音声入力は左⌘を2回、Siri は右⌘を2回。
+# keycode 55/54 が左/右⌘、第3引数は GUI が書き込む修飾キーフラグをそのまま使う
+ensure_dict com.apple.symbolichotkeys AppleSymbolicHotKeys "$(hotkey true 32 55 1048600 SAE1.0)" 176
+ensure_dict com.apple.Siri KeyboardShortcutSAE "$(hotkey true 32 54 1048592 SAE1.0)"
+
+# メニューバー: バッテリーの％表示。メニューバーは常に自動で隠す（SketchyBar との二重表示を避ける）
+ensure -currentHost com.apple.controlcenter BatteryShowPercentage bool true
+ensure NSGlobalDomain _HIHideMenuBar bool true
+
+# Mission Control: aerospace は非表示ワークスペースのウィンドウを画面の隅へ寄せて隠すため、
+# 既定のままだと Mission Control が全ウィンドウを極小に並べてしまう。アプリ別グループ化で
+# 回避する（aerospace 公式ガイドの推奨）
+ensure com.apple.dock expose-group-apps bool true
+
+if [ -n "$any_changed" ]; then
+  # ショートカット・キーボード設定をログアウトせずに読み込ませる
+  /System/Library/PrivateFrameworks/SystemAdministration.framework/Resources/activateSettings -u
+  [ -n "$dock_changed" ] && killall Dock
+  echo "✅ defaults を反映しました（キーリピート等はログアウト後に反映されます）"
+else
+  echo "✅ defaults はすべて設定済みです"
+fi
