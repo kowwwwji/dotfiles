@@ -176,6 +176,9 @@ for svc in borders sketchybar; do
   fi
 done
 
+# macOS: システム設定の GUI で手動設定していた項目を defaults で再現する（冪等）
+sh "${DOTFILES_ROOT}/.scripts/macos-defaults"
+
 # terminal-browser: ターミナル内で Web を表示するブラウザ（https://terminal-browser.com/）
 # 注: brew 未提供・GitHub releases にバイナリ添付も無いため、公式インストーラ
 #     （sha256 検証付きで ~/.local/share/terminal-browser へ展開、~/.local/bin にラッパー配置）

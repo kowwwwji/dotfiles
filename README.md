@@ -6,20 +6,11 @@ kowwwwji's DotFile & PC setup
 
 ### システム環境設定の変更1
 
-1. トラックパッド
-   - `軌跡の速さ`を最大
-   - １本指タップを有効
-1. キーボード
-   - `キーのリピート`と`リピート入力認識までの時間`を最大
-   - F1F2をファンクションキーとして使用にチェック
-   - ショートカットのSpotlight検索を表示をOFF
-1. 音声入力のショートカットを`Fn`に
+トラックパッド・キーボード・ショートカット・メニューバー等の設定は
+`init.sh` から呼ばれる `.scripts/macos-defaults` が行う。それ以外の手動設定:
+
 1. メニューバーの表示
-   - Dockとメニューバー
-     - bluetooth ON
-   - バッテリー ON
-     - バッテリーの％表示
-   - Spotlight OFF
+   - コントロールセンター > Bluetooth をメニューバーに表示
 
 ### Various Installs
 
@@ -87,10 +78,6 @@ open -a karabiner-elements
 自動化できない macOS 側の GUI 操作（PC ごとに手動）:
 
 1. AeroSpace.app を初回起動し、アクセシビリティ権限を許可する
-2. システム設定 > メニューバー > 「メニューバーを自動的に表示/非表示」を「常に」にする
-   （SketchyBar と macOS メニューバーの二重表示を避ける）
-3. （任意）デスクトップとDock > Mission Control「ウィンドウをアプリケーションごとにグループ化」を有効化
-   （Mission Control の表示縮小対策）
 
 > [!NOTE]
 > SketchyBar のワークスペース表示はフォーカス変更イベントで更新されるため、
