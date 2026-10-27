@@ -13,5 +13,4 @@ yarn   1.22.22
 go:github.com/mattn/memo latest
 go:github.com/mikefarah/yq/v4 latest # serena-settings-sync が使う
 
-# npm製CLIツール（mise の npm バックエンドで npm i -g 相当を再現）
-npm:@mermaid-js/mermaid-cli latest
+# npm製CLIツールはツール別オプションが要るため .config/mise/config.toml の [tools] に置く
