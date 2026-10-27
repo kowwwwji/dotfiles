@@ -23,6 +23,8 @@ check() {
 }
 
 check 'git[[:space:]]+push'                                   'git push（リモートへの反映）'
+check 'gh[[:space:]]+(pr|issue|release|repo|gist|label|secret|variable|workflow|run)[[:space:]]+(create|merge|close|reopen|comment|edit|ready|review|delete|archive|rename|fork|set|run|enable|disable|cancel|rerun|lock|unlock|transfer|pin|unpin|upload)' 'gh によるリモートへの書き込み'
+check 'gh[[:space:]]+api[^|;&]*(-X|--method)[[:space:]]*(POST|PUT|PATCH|DELETE)' 'gh api によるリモートへの書き込み'
 check 'git[[:space:]]+reset[[:space:]]+--hard'                'git reset --hard（変更の破棄）'
 check 'git[[:space:]]+clean[[:space:]]+-'                     'git clean（未追跡ファイルの削除）'
 check 'git[[:space:]]+branch[[:space:]]+(-[[:alnum:]]*D|--delete[[:space:]]+--force)' 'git branch -D（マージ確認なしのブランチ削除）'
