@@ -61,6 +61,7 @@
 
 ## Git / PR
 
+- **ローカルの編集・コミットは確認なしで進める。push などリモートへの操作は必ず確認する**。git 管理下の変更はいつでも戻せるが、リモートへ出たものは他者に届き取り消せないため。
 - **PR は必ず draft で作成する**（`gh pr create --draft`）。ready への昇格はユーザーが判断する。
 - **セッション開始ブランチへのマージを自動で行わない**。worktree ブランチへのコミットで止め、ブランチ名とパスを報告して引き渡す。マージはユーザーがレビュー後に行う（明示的に指示されたときのみ Claude がマージしてよい）。worktree・ブランチの片付けもマージ後に行う。
 
@@ -80,4 +81,4 @@
 
 ## worktree
 
-worktree を切って作業するとき（require-worktree hook に deny されたときを含む）は `~/.claude/guides/worktree.md` の手順に従う（作成は gwq）。
+worktree を切って作業するときは `~/.claude/guides/worktree.md` の手順に従う（作成は gwq）。
