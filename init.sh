@@ -119,7 +119,7 @@ ln -nfs "${DOTFILES_ROOT}/dot_claude/hooks/ask-notify.sh" "${HOME}/.claude/hooks
 # ダングリングリンクを掃除する。
 [[ -L "${HOME}/.claude/hooks/require-worktree.sh" ]] && rm "${HOME}/.claude/hooks/require-worktree.sh"
 
-# mise: .tool-versions の言語ランタイム + Go/npm製CLIツールを導入
+# mise: .tool-versions と config.toml の言語ランタイム + Go/npm製CLIツールを導入
 # config は mise 未導入でも先に配置する（brew bundle 後の mise がそのまま読めるように）
 mkdir -p "${HOME}/.config/mise"
 ln -nfs "${DOTFILES_ROOT}/.config/mise/config.toml" "${HOME}/.config/mise/config.toml"
@@ -130,6 +130,18 @@ if command -v mise >/dev/null 2>&1; then
   # （デフォルト信頼パスは ~/.config/mise 直下のみ。trust しないと mise install が失敗する）
   mise trust "${DOTFILES_ROOT}/.config/mise/config.toml"
   mise install
+  # mermaid-cli: mise の npm バックエンドは依存の install スクリプトを実行しないため、
+  # puppeteer が描画に使うブラウザ（~/.cache/puppeteer）が入らない。同梱 puppeteer の
+  # postinstall を流して取得する（取得済みならダウンロードは起きない）
+  mermaid_dir=$(mise where npm:@mermaid-js/mermaid-cli 2>/dev/null)
+  puppeteer_dirs=("$mermaid_dir"/node_modules/.mise/puppeteer@*/node_modules/puppeteer(N))
+  if [[ -n "$mermaid_dir" && ${#puppeteer_dirs} -gt 0 ]]; then
+    for p in $puppeteer_dirs; do
+      (cd "$p" && mise exec -- node install.mjs)
+    done
+  else
+    echo "mermaid-cli 同梱の puppeteer が見つからないためブラウザ取得をスキップ（mmdc が描画できなければここを確認）"
+  fi
 else
   echo "mise が未インストールのため mise install をスキップ（brew bundle 後に再実行してください）"
 fi

@@ -1,3 +1,11 @@
 [settings]
 # gwq で切る worktree 配下の .mise.toml を毎回 mise trust しなくて済むようにする
 trusted_config_paths = ["~/worktrees"]
+
+[tools]
+# npm製CLIツール（mise の npm バックエンドで npm i -g 相当を再現）
+# chromium-bidi（puppeteer 経由の依存）は Chromium 本体へ移転後、Chrome for Testing の
+# パイプラインから provenance なしで公開される（上流 README の Publish 節）。以前の
+# GitHub Actions 公開版より信頼度が下がったと aube の trust policy に毎回止められるため、
+# 公開元が変わらない限りパッケージ単位で除外する（バージョン指定だと puppeteer 更新ごとに再発する）
+"npm:@mermaid-js/mermaid-cli" = { version = "latest", trust_policy_excludes = ["chromium-bidi"] }
