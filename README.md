@@ -55,13 +55,6 @@ sudo shutdown -r now
   - Appleデフォルトの日本語ローマ字入力の入力モードの英字をチェック
   - 日本語ローマ字入力とABCを削除
 
-#### iTermの設定
-
-- Preferences > Gerenal > Preferences
-- `Load preferences from a custmom folder or URL`
-  - ./iterm/を設定
-- Hotkeyが動かない場合は、PC再起動後に動くはず。
-
 ### アプリの初期化と設定
 
 ```sh
@@ -106,14 +99,7 @@ ssh-keygen -t rsa # ~/.ssh配下に作成する
 
 ## 各種言語の設定
 
-### Install asdf plugin & lang
-
-```sh
-ln -s ${DOTFILES_ROOT}.tool-versions ~/
-cut -d' ' -f1 .tool-versions | xargs -I{} asdf plugin add {}
-asdf list
-asdf install
-```
+言語ランタイムと CLI ツールは `init.sh` が mise で導入する（`.tool-versions` と `.config/mise/config.toml`）。
 
 ### Neovim Provider
 
