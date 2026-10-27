@@ -73,6 +73,10 @@ ensure -currentHost com.apple.Spotlight MenuItemHidden bool true
 ensure_dict com.apple.symbolichotkeys AppleSymbolicHotKeys "$(hotkey true 32 55 1048600 SAE1.0)" 176
 ensure_dict com.apple.Siri KeyboardShortcutSAE "$(hotkey true 32 54 1048592 SAE1.0)"
 
+# 通知センターは ⌥N で開く（既定はショートカット未割り当て）。マウスなしで通知を確認するため
+# 110/45 が n の文字コード/keycode、524288 が ⌥
+ensure_dict com.apple.symbolichotkeys AppleSymbolicHotKeys "$(hotkey true 110 45 524288 standard)" 163
+
 # メニューバー: バッテリーの％表示。メニューバーは常に自動で隠す（SketchyBar との二重表示を避ける）
 ensure -currentHost com.apple.controlcenter BatteryShowPercentage bool true
 ensure NSGlobalDomain _HIHideMenuBar bool true
