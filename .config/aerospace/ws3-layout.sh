@@ -1,8 +1,8 @@
 #!/bin/sh
 
 # WS3（縦置き PL2390）を既定配置に組み直す:
-#   上段 = 左 Notion カレンダー ／ 右 リマインダー / Bluesky の accordion
-#   下段 = ミュージック / ジャーナル の accordion
+#   上段 = ミュージック / Notion カレンダー の accordion
+#   下段 = 左 リマインダー ／ 右 Bluesky
 #   （accordion は padding 0 なので 1 窓が全面。裏の窓へは alt-tab の巡回で移る）
 #
 # aerospace のツリー構造は実行時状態で、窓の開き直しや再起動で崩れる。配置を設定で
@@ -29,8 +29,8 @@ TMP_WS="ws${WS}-rebuild"
 # 行頭に `accordion` を置くとその段を accordion にする（省略時は左右 tiles）。
 # 要素は bundle id。`a+b` と書くとその位置に a / b の accordion を置く（束は 2 窓まで、
 # 1 段に束は 1 つまで）。`bundle-id:幅px` で幅を固定できる（省略時は残り幅を均等に分け合う）
-ROWS='com.cron.electron com.apple.reminders+xyz.blueskyweb.app
-accordion com.apple.Music com.apple.journal'
+ROWS='accordion com.apple.Music com.cron.electron
+com.apple.reminders xyz.blueskyweb.app'
 
 win_id() {
   aerospace list-windows --workspace "$WS" --app-bundle-id "$1" --format '%{window-id}' 2>/dev/null | head -1
