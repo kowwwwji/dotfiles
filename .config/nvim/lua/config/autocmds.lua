@@ -28,7 +28,7 @@ vim.api.nvim_create_autocmd({ "BufNewFile", "BufRead" }, {
 vim.cmd("autocmd FileType help wincmd L")
 
 -- markdown を terminal-browser でプレビュー（.scripts/md-preview）。
--- <leader>cp は廃止した markdown-preview.nvim のキーの引き継ぎ
+-- 大文字 <leader>cP に置く（小文字 <leader>cp はブラウザ版。plugins/markdown.lua）
 vim.api.nvim_create_autocmd("FileType", {
   pattern = "markdown",
   callback = function(ev)
@@ -72,7 +72,7 @@ vim.api.nvim_create_autocmd("FileType", {
         }, {
           -- browser pane が閉じられた後もカーソル停止のたびプロセスを起動し続けないよう、
           -- 失敗したら沈黙で同期を無効化する（通知はスパムになるので出さない。
-          -- 次の <leader>cp 成功で復帰する）
+          -- 次の <leader>cP 成功で復帰する）
           on_exit = function(_, code)
             if code ~= 0 then
               vim.b[ev.buf].md_preview_sync = false
