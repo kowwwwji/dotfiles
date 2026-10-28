@@ -62,8 +62,8 @@ return {
     main = "markdown_preview",
     dependencies = { "selimacerbas/live-server.nvim" },
     ft = { "markdown" },
-    -- <leader>cp は autocmds.lua で terminal-browser の md-preview に割当済みのため
-    -- ブラウザ版は大文字 P に分ける（停止は :MarkdownPreviewStop）
+    -- ブラウザ版は小文字 <leader>cp（terminal-browser 版は autocmds.lua の <leader>cP）。
+    -- 停止は :MarkdownPreviewStop
     keys = {
       { "<leader>cp", "<cmd>MarkdownPreview<cr>", ft = "markdown", desc = "Markdown Preview (browser)" },
     },
