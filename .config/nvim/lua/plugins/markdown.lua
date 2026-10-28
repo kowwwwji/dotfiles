@@ -68,6 +68,10 @@ return {
       { "<leader>cp", "<cmd>MarkdownPreview<cr>", ft = "markdown", desc = "Markdown Preview (browser)" },
     },
     opts = {
+      -- nvim ごとに自前サーバー＋ブラウザ窓を持たせる。既定の "takeover" は最初に起動した nvim が
+      -- port 8421 を握り、以降の nvim は secondary として共有 workspace へ書くだけでブラウザを開かず
+      -- 通知も出さないため、長寿命の nvim が1つあると他の nvim から <leader>cp が無反応になる
+      instance_mode = "multi",
       -- Chrome の新規ウィンドウで開き、aerospace でプレビュー専用 workspace へ送る
       -- （デフォルトの system browser だと既存ウィンドウのタブになり単独で移動できない）
       browser = { vim.fn.expand("~/.scripts/md-preview-browser") },
