@@ -50,9 +50,15 @@ items:
   - name: Lazygit
     key: g
     command: 'popup -w95% -h95% -E -d "#{pane_current_path}" lazygit'
-  - name: gh-dash
+  - name: +GitHub
     key: G
-    command: 'popup -w95% -h95% -E -d "#{pane_current_path}" gh-dash'
+    menu:
+      - name: gh-dash
+        key: d
+        command: 'popup -w95% -h95% -E -d "#{pane_current_path}" gh-dash'
+      - name: gh-board
+        key: b
+        command: 'popup -w95% -h95% -E -d "#{pane_current_path}" gh-board'
   - name: Lazydocker
     key: c
     command: 'popup -w95% -h95% -E -d "#{pane_current_path}" lazydocker'
