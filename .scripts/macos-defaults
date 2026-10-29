@@ -86,6 +86,10 @@ ensure NSGlobalDomain _HIHideMenuBar bool true
 # 回避する（aerospace 公式ガイドの推奨）
 ensure com.apple.dock expose-group-apps bool true
 
+# Music: ミニプレーヤーを常に手前に表示しない。WS3 のタイルに置いていて手前に出す必要が無く、
+# 常に手前だと WS3 全面に広げた markdown プレビュー等の上に浮いて邪魔になるため
+ensure com.apple.Music miniPlayerAlwaysOnTop bool false
+
 if [ -n "$any_changed" ]; then
   # ショートカット・キーボード設定をログアウトせずに読み込ませる
   /System/Library/PrivateFrameworks/SystemAdministration.framework/Resources/activateSettings -u
