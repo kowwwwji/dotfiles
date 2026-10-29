@@ -31,11 +31,12 @@ TMP_WS="ws${WS}-rebuild"
 # 行頭に `accordion` を置くとその段を accordion にする（省略時は左右 tiles）。
 # 要素は bundle id。`a+b` と書くとその位置に a / b の accordion を置く（束は 2 窓まで、
 # 1 段に束は 1 つまで）。`bundle-id:幅px` で幅を固定できる（省略時は残り幅を均等に分け合う）。
+# 幅は inner gap の半分（5px）を含めて数えられるため、実際の窓幅は指定より 5px 狭くなる。
 # `bundle-id@タイトル` でタイトルが一致する窓に絞れる（同じアプリの複数窓から 1 つを選ぶとき用）。
 # タイトルは拡張正規表現の部分一致で、表示言語で変わるため `|` で併記する（`:` `+` 空白は使えない）
 # X は Chrome の PWA。bundle id 末尾の app id は起動 URL から決まるため、どの PC で入れても同じになる
 ROWS='com.apple.iCal
-com.google.Chrome.app.lodlkdfmihgonocnmddehnfgiljnadcf com.apple.Music@ミニプレーヤー|MiniPlayer:535'
+com.google.Chrome.app.lodlkdfmihgonocnmddehnfgiljnadcf com.apple.Music@ミニプレーヤー|MiniPlayer:349'
 
 # $1 = bundle-id[@タイトル]
 win_id() {
