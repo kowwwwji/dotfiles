@@ -1,9 +1,12 @@
 #!/bin/sh
 
 # WS3（縦置き PL2390）を既定配置に組み直す:
-#   上段 = ミュージック / Notion カレンダー の accordion
-#   下段 = 左 リマインダー ／ 右 Bluesky
-#   （accordion は padding 0 なので 1 窓が全面。裏の窓へは alt-tab の巡回で移る）
+#   上段 = カレンダー
+#   下段 = 左 Bluesky ／ 右 ミュージックのミニプレーヤー
+#   （Bluesky は最小幅 515px、ミニプレーヤーは幅 320〜600px しか取れないため、ミニプレーヤーの幅を
+#   固定して残りを Bluesky に渡す）
+# 予定は常時見えるよう tiles に置く。ドキュメント参照は WS3 全面で見るため段に組み込まない
+# （WS3 へ送った窓は floating のまま残るので、fullscreen で全面にする）。
 #
 # aerospace のツリー構造は実行時状態で、窓の開き直しや再起動で崩れる。配置を設定で
 # 宣言する手段が無いため、CLI で毎回同じ手順を踏んで組み直す。
@@ -28,12 +31,21 @@ TMP_WS="ws${WS}-rebuild"
 # 1 行 = 1 段。上から順に、同じ段は左から順に要素を並べる（1 段 2 要素まで想定）。
 # 行頭に `accordion` を置くとその段を accordion にする（省略時は左右 tiles）。
 # 要素は bundle id。`a+b` と書くとその位置に a / b の accordion を置く（束は 2 窓まで、
-# 1 段に束は 1 つまで）。`bundle-id:幅px` で幅を固定できる（省略時は残り幅を均等に分け合う）
-ROWS='accordion com.apple.Music com.cron.electron
-com.apple.reminders xyz.blueskyweb.app'
+# 1 段に束は 1 つまで）。`bundle-id:幅px` で幅を固定できる（省略時は残り幅を均等に分け合う）。
+# `bundle-id@タイトル` でタイトルが一致する窓に絞れる（同じアプリの複数窓から 1 つを選ぶとき用）。
+# タイトルは拡張正規表現の部分一致で、表示言語で変わるため `|` で併記する（`:` `+` 空白は使えない）
+ROWS='com.apple.iCal
+xyz.blueskyweb.app com.apple.Music@ミニプレーヤー|MiniPlayer:535'
 
+# $1 = bundle-id[@タイトル]
 win_id() {
-  aerospace list-windows --workspace "$WS" --app-bundle-id "$1" --format '%{window-id}' 2>/dev/null | head -1
+  app=${1%%@*}
+  title=${1#"$app"}
+  title=${title#@}
+  aerospace list-windows --workspace "$WS" --app-bundle-id "$app" --format '%{window-id} %{window-title}' 2>/dev/null \
+    | while read -r id t; do
+        printf '%s\n' "$t" | grep -Eq -- "$title" && { echo "$id"; break; }
+      done
 }
 
 # 「すでにその状態」でも exit 0 で告知が出るだけなので、告知は捨てる
@@ -70,6 +82,17 @@ ALL_IDS=$(printf '%s\n' "$ROW_IDS" | sed 's/^[a-z_]* *//' | while IFS= read -r r
 
 for id in $ALL_IDS; do
   quiet aerospace layout tiling --window-id "$id"
+done
+
+# ROWS に無い窓が tiles に載っていると段の並びに割り込むため floating へ戻す
+# （WS3 の tiles は段構成専用。参照用の窓は floating のまま fullscreen で全面にして使う）
+aerospace list-windows --workspace "$WS" --format '%{window-id} %{window-layout}' | while read -r id layout; do
+  case " $ALL_IDS " in
+    *" $id "*) continue ;;
+  esac
+  case $layout in
+    *_tiles | *_accordion) quiet aerospace layout floating --window-id "$id" ;;
+  esac
 done
 
 aerospace flatten-workspace-tree --workspace "$WS"
@@ -116,9 +139,14 @@ printf '%s\n' "$ROW_IDS" | while read -r layout row; do
   done
 done
 
-# 幅指定があれば最後に当てる（段・束を組み終えてからでないと効く対象が定まらない）
-for part in $(printf '%s\n' "$ROW_IDS" | sed 's/^[a-z_]* *//' | tr '+' ' '); do
-  if [ "$part" != "${part#*:}" ]; then
-    aerospace resize --window-id "${part%%:*}" width "${part#*:}"
-  fi
+# 幅指定があれば最後に当てる（段・束を組み終えてからでないと効く対象が定まらない）。
+# 要素が 1 つの段は全幅を使う（分け合う相手が無く、その窓への resize width も失敗する）
+printf '%s\n' "$ROW_IDS" | while read -r layout row; do
+  set -- $row
+  [ $# -ge 2 ] || continue
+  for part in $(printf '%s' "$row" | tr '+' ' '); do
+    if [ "$part" != "${part#*:}" ]; then
+      aerospace resize --window-id "${part%%:*}" width "${part#*:}"
+    fi
+  done
 done
