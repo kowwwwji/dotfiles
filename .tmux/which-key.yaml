@@ -52,7 +52,7 @@ items:
     command: 'popup -w95% -h95% -E -d "#{pane_current_path}" lazygit'
   - name: gh-dash
     key: G
-    command: 'popup -w95% -h95% -E -d "#{pane_current_path}" "gh dash"'
+    command: 'popup -w95% -h95% -E -d "#{pane_current_path}" gh-dash'
   - name: Lazydocker
     key: c
     command: 'popup -w95% -h95% -E -d "#{pane_current_path}" lazydocker'

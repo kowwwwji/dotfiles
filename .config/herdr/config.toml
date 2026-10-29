@@ -33,10 +33,10 @@ goto = "prefix+s"
 settings = "prefix+shift+s"
 
 # worktree 作成は gwq / git-start の既存フローを使うため解除し、
-# 空いた Shift+g を gh dash popup（tmux の G）に充てる
+# 空いた Shift+g を gh-dash popup（tmux の G）に充てる
 new_worktree = ""
 
-# tmux の popup 群と同じ（g=lazygit, c=lazydocker, G=gh dash, `=シェル）
+# tmux の popup 群と同じ（g=lazygit, c=lazydocker, G=gh-dash, `=シェル）
 [[keys.command]]
 key = "prefix+g"
 type = "popup"
@@ -54,7 +54,7 @@ height = "95%"
 [[keys.command]]
 key = "prefix+shift+g"
 type = "popup"
-command = "gh dash"
+command = "gh-dash"
 width = "95%"
 height = "95%"
 

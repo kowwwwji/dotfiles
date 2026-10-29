@@ -9,3 +9,14 @@ trusted_config_paths = ["~/worktrees"]
 # GitHub Actions 公開版より信頼度が下がったと aube の trust policy に毎回止められるため、
 # 公開元が変わらない限りパッケージ単位で除外する（バージョン指定だと puppeteer 更新ごとに再発する）
 "npm:@mermaid-js/mermaid-cli" = { version = "latest", trust_policy_excludes = ["chromium-bidi"] }
+
+# gh 拡張（mise の github バックエンドで GitHub Releases の単体バイナリとして取得）
+# gh 本体には拡張の宣言的管理（Brewfile 相当）が無く Homebrew にも formula が無いため、
+# ここを唯一の正として全PCで同じ拡張を揃える。gh は拡張ディレクトリしか見ないので
+# `gh dash` ではなく `gh-dash` のように直接呼ぶ（gh の拡張機構を経由しなくても単体で動く）。
+# github/gh-projects は本体の `gh project` に吸収済み（アーカイブ）のため入れない。
+# gh-board / gh-stack はリリースアセット名が `darwin-arm64` のように OS/arch だけで、
+# mise の自動命名だと `darwin` になり実行ファイルを見つけられないため bin で名前を固定する。
+"github:dlvhdr/gh-dash" = "latest"
+"github:uzimaru0000/gh-board" = { version = "latest", bin = "gh-board" }
+"github:github/gh-stack" = { version = "latest", bin = "gh-stack" }

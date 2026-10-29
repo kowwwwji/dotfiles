@@ -158,16 +158,9 @@ else
   echo "yq が使えないため serena-settings-sync をスキップ（mise install 後、新しいシェルで再実行してください）"
 fi
 
-# gh: gh-dash 設定の配置と拡張のインストール
+# gh-dash の設定配置（本体は mise で入る → .config/mise/config.toml）
 mkdir -p "${HOME}/.config/gh-dash"
 ln -nfs "${DOTFILES_ROOT}/.config/gh-dash/config.yml" "${HOME}/.config/gh-dash/config.yml"
-# 注: gh は brew bundle で入り、拡張のインストールには gh の認証が必要。
-#     フレッシュPCでは brew bundle と gh auth login 後に init.sh を再実行すれば入る。
-if command -v gh >/dev/null 2>&1 && gh auth status >/dev/null 2>&1; then
-  gh extension list 2>/dev/null | grep -q 'dlvhdr/gh-dash' || gh extension install dlvhdr/gh-dash
-else
-  echo "gh が未導入または未認証のため gh extension install をスキップ（gh auth login 後に再実行してください）"
-fi
 
 # brew autoupdate: brew update を毎日自動実行する launchd ジョブを登録（冪等）
 # 注: homebrew/autoupdate tap は brew bundle で入る。フレッシュPCでは init.sh 時点で
