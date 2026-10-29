@@ -35,12 +35,6 @@ on run argv
 		set target to some item of cands
 		set shuffle enabled to true
 		play target
-		set msg to "▶ " & name of theFolder & " / " & name of target
+		return "▶ " & name of theFolder & " / " & name of target
 	end tell
-
-	-- silent モードの HUD は一瞬で消え表示時間も変えられないため、通知センターにも出して残す。
-	-- Raycast 経由の do shell script は PATH に Homebrew が無いので足す。無い PC では通知だけ諦める
-	-- （-group で連続実行時は前の通知を置き換え、クリックで Music を前面に出す）
-	do shell script "PATH=/opt/homebrew/bin:/usr/local/bin:$PATH; command -v terminal-notifier >/dev/null && terminal-notifier -title 'Music Folder Shuffle' -message " & quoted form of msg & " -group music-folder-shuffle -activate com.apple.Music >/dev/null 2>&1 || true"
-	return msg
 end run
