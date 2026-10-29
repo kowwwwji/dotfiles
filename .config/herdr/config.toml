@@ -33,10 +33,13 @@ goto = "prefix+s"
 settings = "prefix+shift+s"
 
 # worktree 作成は gwq / git-start の既存フローを使うため解除し、
-# 空いた Shift+g を gh-dash popup（tmux の G）に充てる
+# 空いた Shift+g を gh-dash popup に充てる
 new_worktree = ""
 
-# tmux の popup 群と同じ（g=lazygit, c=lazydocker, G=gh-dash, `=シェル）
+# tmux の popup 群と同じ（g=lazygit, c=lazydocker, `=シェル）。
+# GitHub 系は tmux では G をサブメニュー（G d=gh-dash, G b=gh-board）にしているが、
+# herdr のキー設定は「prefix + 1 キー」固定で 2 段目を組めないため、
+# Shift+g=gh-dash / Shift+b=gh-board の 1 キーずつにしている
 [[keys.command]]
 key = "prefix+g"
 type = "popup"
@@ -55,6 +58,13 @@ height = "95%"
 key = "prefix+shift+g"
 type = "popup"
 command = "gh-dash"
+width = "95%"
+height = "95%"
+
+[[keys.command]]
+key = "prefix+shift+b"
+type = "popup"
+command = "gh-board"
 width = "95%"
 height = "95%"
 
