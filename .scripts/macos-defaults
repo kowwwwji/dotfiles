@@ -47,7 +47,7 @@ ensure_dict() {
   return 0
 }
 
-# symbolichotkeys / Siri のショートカット定義（enabled, parameters, type）
+# symbolichotkeys のショートカット定義（enabled, parameters, type）
 hotkey() {
   printf '<dict><key>enabled</key><%s/><key>value</key><dict><key>parameters</key><array><integer>%s</integer><integer>%s</integer><integer>%s</integer></array><key>type</key><string>%s</string></dict></dict>' "$@"
 }
@@ -68,10 +68,9 @@ ensure NSGlobalDomain com.apple.keyboard.fnState bool true
 ensure_dict com.apple.symbolichotkeys AppleSymbolicHotKeys "$(hotkey false 65535 49 1048576 standard)" 64
 ensure -currentHost com.apple.Spotlight MenuItemHidden bool true
 
-# 音声入力は左⌘を2回、Siri は右⌘を2回。
-# keycode 55/54 が左/右⌘、第3引数は GUI が書き込む修飾キーフラグをそのまま使う
+# 音声入力は左⌘を2回。
+# keycode 55 が左⌘、第3引数は GUI が書き込む修飾キーフラグをそのまま使う
 ensure_dict com.apple.symbolichotkeys AppleSymbolicHotKeys "$(hotkey true 32 55 1048600 SAE1.0)" 176
-ensure_dict com.apple.Siri KeyboardShortcutSAE "$(hotkey true 32 54 1048592 SAE1.0)"
 
 # 通知センターは ⌥N で開く（既定はショートカット未割り当て）。マウスなしで通知を確認するため
 # 110/45 が n の文字コード/keycode、524288 が ⌥
