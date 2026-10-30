@@ -20,6 +20,15 @@
             "command": "sh ~/.claude/hooks/stop.sh"
           }
         ]
+      },
+      {
+        "matcher": "",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "sh ~/.claude/hooks/revise-claude-md-gate.sh"
+          }
+        ]
       }
     ],
     "SessionStart": [

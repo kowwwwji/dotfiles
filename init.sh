@@ -115,6 +115,7 @@ ln -nfs "${DOTFILES_ROOT}/dot_claude/hooks/session-start.sh" "${HOME}/.claude/ho
 ln -nfs "${DOTFILES_ROOT}/dot_claude/hooks/pane-state.sh" "${HOME}/.claude/hooks/pane-state.sh"
 ln -nfs "${DOTFILES_ROOT}/dot_claude/hooks/pre-bash-guard.sh" "${HOME}/.claude/hooks/pre-bash-guard.sh"
 ln -nfs "${DOTFILES_ROOT}/dot_claude/hooks/ask-notify.sh" "${HOME}/.claude/hooks/ask-notify.sh"
+ln -nfs "${DOTFILES_ROOT}/dot_claude/hooks/revise-claude-md-gate.sh" "${HOME}/.claude/hooks/revise-claude-md-gate.sh"
 # 旧構成（メイン作業ツリーの編集に確認を挟む require-worktree.sh を張っていた）の
 # ダングリングリンクを掃除する。
 [[ -L "${HOME}/.claude/hooks/require-worktree.sh" ]] && rm "${HOME}/.claude/hooks/require-worktree.sh"
