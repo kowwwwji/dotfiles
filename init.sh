@@ -1,4 +1,5 @@
-#!/bin/zsh
+#!/bin/bash
+# bash で動かす前提（README の起動手順が `bash init.sh`）。zsh 専用構文（glob 修飾子 (N) 等）は使わない。
 
 DOTFILES_ROOT=$(ghq root)/github.com/kowwwwji/dotfiles
 
@@ -133,13 +134,16 @@ if command -v mise >/dev/null 2>&1; then
   mise install
   # mermaid-cli: mise の npm バックエンドは依存の install スクリプトを実行しないため、
   # puppeteer が描画に使うブラウザ（~/.cache/puppeteer）が入らない。同梱 puppeteer の
-  # postinstall を流して取得する（取得済みならダウンロードは起きない）
+  # postinstall を流して取得する（取得済みならダウンロードは起きない）。
+  # 同梱 puppeteer は npm の global prefix 構成（lib/node_modules/<pkg>/node_modules/puppeteer）
+  # に置かれるが、階層を固定せず find で探す（mise 側の配置変更に追従させるため）。
   mermaid_dir=$(mise where npm:@mermaid-js/mermaid-cli 2>/dev/null)
-  puppeteer_dirs=("$mermaid_dir"/node_modules/.mise/puppeteer@*/node_modules/puppeteer(N))
-  if [[ -n "$mermaid_dir" && ${#puppeteer_dirs} -gt 0 ]]; then
-    for p in $puppeteer_dirs; do
-      (cd "$p" && mise exec -- node install.mjs)
-    done
+  puppeteer_dir=""
+  if [[ -n "$mermaid_dir" ]]; then
+    puppeteer_dir=$(find "$mermaid_dir" -maxdepth 8 -type d -path '*/node_modules/puppeteer' 2>/dev/null | head -n 1)
+  fi
+  if [[ -n "$puppeteer_dir" && -f "$puppeteer_dir/install.mjs" ]]; then
+    (cd "$puppeteer_dir" && mise exec -- node install.mjs)
   else
     echo "mermaid-cli 同梱の puppeteer が見つからないためブラウザ取得をスキップ（mmdc が描画できなければここを確認）"
   fi
@@ -177,7 +181,7 @@ fi
 # aerospace 自身は start-at-login = true でログイン項目を管理するためここでは扱わない。
 for svc in borders sketchybar; do
   if brew list "$svc" >/dev/null 2>&1; then
-    # ${svc} のブレースは必須: zsh はクォート内でも $svc[ を添字として解釈する
+    # ${svc} のブレースは意図的: zsh で流用したときクォート内でも $svc[ が添字と解釈されるため（bash では不要だが害も無い）
     brew services list | grep -qE "^${svc}[[:space:]]+started" || brew services start "$svc"
   else
     echo "$svc が未インストールのため brew services start をスキップ（brew bundle 後に再実行してください）"
