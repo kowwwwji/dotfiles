@@ -38,7 +38,7 @@ function pecoSelectTmuxSession(){
     session="${line%%$'\t'*}"
     BUFFER="tmux a -t $session"
     if [ -n "$TMUX" ]; then
-      BUFFER="tmux switch -t $session"
+      BUFFER="tmux switch-client -t $session"
     fi
 
     zle accept-line
