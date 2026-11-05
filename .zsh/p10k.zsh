@@ -573,8 +573,10 @@ function prompt_git_worktree() {
   #######################[ direnv: direnv status (https://direnv.net/) ]########################
   # Direnv color.
   typeset -g POWERLEVEL9K_DIRENV_FOREGROUND=178
-  # Custom icon.
-  # typeset -g POWERLEVEL9K_DIRENV_VISUAL_IDENTIFIER_EXPANSION='⭐'
+  # 既定の「▼」1文字では何のセグメントか分からないため、フォルダ＋歯車アイコンに
+  # 「direnv」ラベルを添える（アイコンは nf-md-folder_cog U+F107F。Material Design 系のみ使う）。
+  typeset -g POWERLEVEL9K_DIRENV_VISUAL_IDENTIFIER_EXPANSION='󱁿'
+  typeset -g POWERLEVEL9K_DIRENV_CONTENT_EXPANSION='direnv'
 
   ###############[ asdf: asdf version manager (https://github.com/asdf-vm/asdf) ]###############
   # Default asdf color. Only used to display tools for which there is no color override (see below).
