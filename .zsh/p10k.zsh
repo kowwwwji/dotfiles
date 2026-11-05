@@ -69,13 +69,14 @@ function prompt_git_worktree() {
     nodenv                  # node.js version from nodenv (https://github.com/nodenv/nodenv)
     nvm                     # node.js version from nvm (https://github.com/nvm-sh/nvm)
     nodeenv                 # node.js environment (https://github.com/ekalinin/nodeenv)
-    # node_version          # node.js version
-    # go_version            # go version (https://golang.org)
-    # rust_version          # rustc version (https://www.rust-lang.org)
-    # dotnet_version        # .NET version (https://dotnet.microsoft.com)
-    # php_version           # php version (https://www.php.net/)
-    # laravel_version       # laravel php framework version (https://laravel.com/)
-    # java_version          # java version (https://www.java.com/)
+    node_version            # node.js version
+    go_version              # go version (https://golang.org)
+    rust_version            # rustc version (https://www.rust-lang.org)
+    dotnet_version          # .NET version (https://dotnet.microsoft.com)
+    php_version             # php version (https://www.php.net/)
+    # laravel_version       # laravel version。cd しただけでリポジトリ内の artisan を php で実行する
+                            # 実装のため、信頼できない checkout で任意コード実行になりうるので無効
+    java_version            # java version (https://www.java.com/)
     # package               # name@version from package.json (https://docs.npmjs.com/files/package.json)
     rbenv                   # ruby version from rbenv (https://github.com/rbenv/rbenv)
     rvm                     # ruby version from rvm (https://rvm.io)
@@ -1003,40 +1004,40 @@ function prompt_git_worktree() {
   typeset -g POWERLEVEL9K_NODE_VERSION_FOREGROUND=70
   # Show node version only when in a directory tree containing package.json.
   typeset -g POWERLEVEL9K_NODE_VERSION_PROJECT_ONLY=true
-  # Custom icon.
-  # typeset -g POWERLEVEL9K_NODE_VERSION_VISUAL_IDENTIFIER_EXPANSION='⭐'
+  # 既定の Devicons より識別しやすい Material Design 系に差し替え（nf-md-nodejs U+F0399）。
+  typeset -g POWERLEVEL9K_NODE_VERSION_VISUAL_IDENTIFIER_EXPANSION='󰎙'
 
   #######################[ go_version: go version (https://golang.org) ]########################
   # Go version color.
   typeset -g POWERLEVEL9K_GO_VERSION_FOREGROUND=37
   # Show go version only when in a go project subdirectory.
   typeset -g POWERLEVEL9K_GO_VERSION_PROJECT_ONLY=true
-  # Custom icon.
-  # typeset -g POWERLEVEL9K_GO_VERSION_VISUAL_IDENTIFIER_EXPANSION='⭐'
+  # 既定の Devicons より識別しやすい Material Design 系に差し替え（nf-md-language_go U+F07D3）。
+  typeset -g POWERLEVEL9K_GO_VERSION_VISUAL_IDENTIFIER_EXPANSION='󰟓'
 
   #################[ rust_version: rustc version (https://www.rust-lang.org) ]##################
   # Rust version color.
   typeset -g POWERLEVEL9K_RUST_VERSION_FOREGROUND=37
   # Show rust version only when in a rust project subdirectory.
   typeset -g POWERLEVEL9K_RUST_VERSION_PROJECT_ONLY=true
-  # Custom icon.
-  # typeset -g POWERLEVEL9K_RUST_VERSION_VISUAL_IDENTIFIER_EXPANSION='⭐'
+  # 既定の Devicons より識別しやすい Material Design 系に差し替え（nf-md-language_rust U+F1617）。
+  typeset -g POWERLEVEL9K_RUST_VERSION_VISUAL_IDENTIFIER_EXPANSION='󱘗'
 
   ###############[ dotnet_version: .NET version (https://dotnet.microsoft.com) ]################
   # .NET version color.
   typeset -g POWERLEVEL9K_DOTNET_VERSION_FOREGROUND=134
   # Show .NET version only when in a .NET project subdirectory.
   typeset -g POWERLEVEL9K_DOTNET_VERSION_PROJECT_ONLY=true
-  # Custom icon.
-  # typeset -g POWERLEVEL9K_DOTNET_VERSION_VISUAL_IDENTIFIER_EXPANSION='⭐'
+  # 既定の Devicons より識別しやすい Material Design 系に差し替え（nf-md-dot_net U+F0AAE）。
+  typeset -g POWERLEVEL9K_DOTNET_VERSION_VISUAL_IDENTIFIER_EXPANSION='󰪮'
 
   #####################[ php_version: php version (https://www.php.net/) ]######################
   # PHP version color.
   typeset -g POWERLEVEL9K_PHP_VERSION_FOREGROUND=99
   # Show PHP version only when in a PHP project subdirectory.
   typeset -g POWERLEVEL9K_PHP_VERSION_PROJECT_ONLY=true
-  # Custom icon.
-  # typeset -g POWERLEVEL9K_PHP_VERSION_VISUAL_IDENTIFIER_EXPANSION='⭐'
+  # 既定の Devicons より識別しやすい Material Design 系に差し替え（nf-md-language_php U+F031F）。
+  typeset -g POWERLEVEL9K_PHP_VERSION_VISUAL_IDENTIFIER_EXPANSION='󰌟'
 
   ##########[ laravel_version: laravel php framework version (https://laravel.com/) ]###########
   # Laravel version color.
@@ -1051,8 +1052,8 @@ function prompt_git_worktree() {
   typeset -g POWERLEVEL9K_JAVA_VERSION_PROJECT_ONLY=true
   # Show brief version.
   typeset -g POWERLEVEL9K_JAVA_VERSION_FULL=false
-  # Custom icon.
-  # typeset -g POWERLEVEL9K_JAVA_VERSION_VISUAL_IDENTIFIER_EXPANSION='⭐'
+  # 既定の Devicons より識別しやすい Material Design 系に差し替え（nf-md-language_java U+F0B37）。
+  typeset -g POWERLEVEL9K_JAVA_VERSION_VISUAL_IDENTIFIER_EXPANSION='󰬷'
 
   ###[ package: name@version from package.json (https://docs.npmjs.com/files/package.json) ]####
   # Package color.
