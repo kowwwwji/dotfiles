@@ -124,6 +124,9 @@ statusline や tmux の git 表示などは、**外部バイナリに依存し�
 自作ツール（`git-start`, `gwq-window`, `tmux-session-select` 等）も同様。dotfiles だけで完結させ、
 全PCで `init.sh` を流せば動く状態を保つ。
 
+- p10k の描画確認は `printf 'export DIRENV_DIR=/tmp\nexit\n' | script -q /dev/null zsh -i` のように
+  擬似端末経由で対話シェルを起動し、エスケープを除いて目視する（`zsh -c` では tty がなく検証できない）。
+
 ## MCP の管理
 
 MCP サーバーは供給経路ごとに「正」を1箇所に固定する。**ローカルスコープ
