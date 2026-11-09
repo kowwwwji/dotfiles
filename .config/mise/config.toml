@@ -1,6 +1,8 @@
 [settings]
 # gwq で切る worktree 配下の .mise.toml を毎回 mise trust しなくて済むようにする
 trusted_config_paths = ["~/worktrees"]
+# 自分の fork の release は公開直後に入れたいので release age 待ちから除外する
+minimum_release_age_excludes = ["github:kowwwwji/gh-board"]
 
 [tools]
 # npm製CLIツール（mise の npm バックエンドで npm i -g 相当を再現）
@@ -18,5 +20,7 @@ trusted_config_paths = ["~/worktrees"]
 # gh-board / gh-stack はリリースアセット名が `darwin-arm64` のように OS/arch だけで、
 # mise の自動命名だと `darwin` になり実行ファイルを見つけられないため bin で名前を固定する。
 "github:dlvhdr/gh-dash" = "latest"
-"github:uzimaru0000/gh-board" = { version = "latest", bin = "gh-board" }
+# gh-board は upstream (uzimaru0000) に取り込まれない自前パッチを含む fork (kowwwwji/gh-board) を使う。
+# fork の `fork` ブランチから `vX.Y.Z-fork.N` を tag して release する。
+"github:kowwwwji/gh-board" = { version = "latest", bin = "gh-board" }
 "github:github/gh-stack" = { version = "latest", bin = "gh-stack" }
