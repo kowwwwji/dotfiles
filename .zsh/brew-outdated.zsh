@@ -38,7 +38,7 @@ if type brew &>/dev/null; then
   # パッケージ構成が変わる brew 操作を検知したらキャッシュを破棄し、
   # 次のプロンプトで再集計させる（upgrade 後に表示がすぐ消えるようにする）
   _brew_outdated_preexec() {
-    [[ "$1" == brew\ (upgrade|install|uninstall|remove|rm|reinstall)* ]] \
+    [[ "$1" == (brew\ (upgrade|install|uninstall|remove|rm|reinstall)|bup)* ]] \
       && rm -f "$BREW_OUTDATED_CACHE"
   }
 

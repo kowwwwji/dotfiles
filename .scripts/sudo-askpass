@@ -1,0 +1,15 @@
+#!/bin/sh
+# sudo のパスワード入力を GUI ダイアログで受ける askpass（SUDO_ASKPASS に指定して使う）。
+# Why: quick terminal など裏に隠れた端末で sudo がパスワード待ちになっても気づけない。
+#      ダイアログなら前面に出るので待ちを見落とさない（原則4: awareness）。
+#      pam_tid（Touch ID）はクラムシェル運用の PC で使えないため、全PCで動くこちらを採る。
+# 使われ方: `sudo -A`。Homebrew は SUDO_ASKPASS が設定されていれば自動で -A を付ける。
+# キャンセル時は osascript が非0で終了し、sudo は認証失敗として扱う。
+# NOTE: 初回は呼び出し元アプリ（端末）に「System Events の制御」の許可を求められる。
+
+exec osascript \
+  -e 'tell application "System Events"' \
+  -e 'activate' \
+  -e 'display dialog "sudo のパスワード" default answer "" with hidden answer with title "sudo" with icon caution' \
+  -e 'text returned of result' \
+  -e 'end tell'
