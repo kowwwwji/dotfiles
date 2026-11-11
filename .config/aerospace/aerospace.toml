@@ -177,7 +177,7 @@ on-focus-changed = ['exec-and-forget sketchybar --trigger aerospace_workspace_ch
 #   キー一覧を生成する（行末コメントがあればそれを、無ければコマンド名を説明にする）。
 #   1バインド = 1行を保つこと（複数行の配列にすると抽出が壊れる）。
 [mode.service.binding]
-    esc = ['reload-config', 'mode main', 'exec-and-forget sketchybar --trigger aerospace_mode_change MODE=main && sketchybar --reload'] # aerospace と sketchybar の設定を再読込して抜ける
+    enter = ['reload-config', 'mode main', 'exec-and-forget sketchybar --trigger aerospace_mode_change MODE=main && sketchybar --reload'] # aerospace と sketchybar の設定を再読込して抜ける
     r = ['flatten-workspace-tree', 'mode main', 'exec-and-forget sketchybar --trigger aerospace_mode_change MODE=main'] # レイアウトのリセット
     f = ['layout floating tiling', 'mode main', 'exec-and-forget sketchybar --trigger aerospace_mode_change MODE=main'] # floating / tiling の切替
     backspace = ['close-all-windows-but-current', 'mode main', 'exec-and-forget sketchybar --trigger aerospace_mode_change MODE=main'] # 現在のウィンドウ以外を閉じる
@@ -189,4 +189,4 @@ on-focus-changed = ['exec-and-forget sketchybar --trigger aerospace_workspace_ch
     down = 'move down'
     up = 'move up'
     right = 'move right'
-    enter = ['mode main', 'exec-and-forget sketchybar --trigger aerospace_mode_change MODE=main'] # esc と違い config リロードなしで抜ける
+    esc = ['mode main', 'exec-and-forget sketchybar --trigger aerospace_mode_change MODE=main'] # enter と違い設定の再読込なしで抜ける
