@@ -126,6 +126,8 @@ statusline や tmux の git 表示などは、**外部バイナリに依存し�
 
 - p10k の描画確認は `printf 'export DIRENV_DIR=/tmp\nexit\n' | script -q /dev/null zsh -i` のように
   擬似端末経由で対話シェルを起動し、エスケープを除いて目視する（`zsh -c` では tty がなく検証できない）。
+- Claude から man page を読むときは `MANPAGER=cat man <cmd> </dev/null | col -b` とする
+  （`.zshrc` の `MANPAGER='nvim +Man!'` が非対話実行でも効き、そのままだと固まる）。
 
 ## MCP の管理
 
