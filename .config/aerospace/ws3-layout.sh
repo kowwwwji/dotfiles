@@ -1,7 +1,7 @@
 #!/bin/sh
 
 # WS3（縦置き PL2390）を既定配置に組み直す:
-#   上段 = カレンダー
+#   上段 = Dayo（予定と Todo を 1 本の時間軸で見る自作アプリ。kowwwwji/dayo）
 #   下段 = 左 X（Chrome の PWA）／ 右 ミュージックのミニプレーヤー
 #   （ミニプレーヤーは幅 320〜600px しか取れないため、ミニプレーヤーの幅を固定して残りを X に渡す）
 # 予定は常時見えるよう tiles に置く。ドキュメント参照は WS3 全面で見るため段に組み込まない
@@ -35,7 +35,7 @@ TMP_WS="ws${WS}-rebuild"
 # `bundle-id@タイトル` でタイトルが一致する窓に絞れる（同じアプリの複数窓から 1 つを選ぶとき用）。
 # タイトルは拡張正規表現の部分一致で、表示言語で変わるため `|` で併記する（`:` `+` 空白は使えない）
 # X は Chrome の PWA。bundle id 末尾の app id は起動 URL から決まるため、どの PC で入れても同じになる
-ROWS='com.apple.iCal
+ROWS='com.kowwwwji.Dayo
 com.google.Chrome.app.lodlkdfmihgonocnmddehnfgiljnadcf com.apple.Music@ミニプレーヤー|MiniPlayer:349'
 
 # $1 = bundle-id[@タイトル]
