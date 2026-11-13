@@ -19,4 +19,4 @@
   `action: "keep"`（`path` で入った worktree は remove 対象にならない）。
 - ブランチ作成〜push〜draft PR までまとめて始めるときは `git-start -w <branch>`。
   push・PR 作成という外向き操作を含むため、ユーザーがそう指示したときだけ使う。
-- 片付けは master 取り込み後に `gwq remove <branch>` と不要ブランチの削除。
+- 片付けは ベースブランチへの取り込み後に `gwq remove <branch>` と不要ブランチの削除。

@@ -157,7 +157,7 @@ MCP サーバーは供給経路ごとに「正」を1箇所に固定する。**�
 共通フロー（`dot_claude/guides/dev-flow.md`）との差分:
 
 - **PR を作らない**。worktree ブランチへのコミットで引き渡し、ユーザーがローカルで
-  merge する（master 直接コミット運用の延長）。
+  merge する（main 直接コミット運用の延長）。
 - **レビューは `dotfiles-reviewer`**（このリポジトリ固有の規約チェック）。
 - **マージ後に反映作業がある**。settings / karabiner の sync スクリプト再実行や
   新規ファイルの symlink（→「配置の仕組み」節）。
@@ -166,6 +166,6 @@ MCP サーバーは供給経路ごとに「正」を1箇所に固定する。**�
 
 - **コミットメッセージ**: `type(scope) 日本語説明`。
   type は `add` / `fix` / `refactor` / `docs` / `update` / `delete`、
-  scope は `tmux` `nvim` `claude` `git` など。master へ直接コミットする運用。
+  scope は `tmux` `nvim` `claude` `git` など。main へ直接コミットする運用。
   （lazygit のカスタムコマンド `C` がこの形式を生成する。型の正は `.config/lazygit/config.yml`）
 - 説明・コメントは日本語（原則8）。

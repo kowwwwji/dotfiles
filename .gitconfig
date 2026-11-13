@@ -28,7 +28,7 @@
 ##################
 # 複合コマンド
 ##################
-  delete-merged-branches = !git branch --merged | grep -vE '^\\*|master$|develop|gh-pages$' | xargs -I % git branch -d %
+  delete-merged-branches = !git branch --merged | grep -vE '^\\*|master$|main$|develop|gh-pages$' | xargs -I % git branch -d %
   delete-gone-branches = !git branch --format '%(refname:short) %(upstream:track)' | grep 'gone' | cut -d ' ' -f1 | xargs -I % git branch -D %
   ls = log --graph --pretty=format:'%Cred%h %Cgreen(%>(12,trunc)%cr, %ci) %C(bold blue)<%an>%Creset -%C(yellow)%d%Creset %s' --abbrev-commit --date=relative --all
   wip = !git add --all && git commit -m 'wip'
