@@ -6,6 +6,6 @@
 # - active:   白 (#FFFFFF)。どの壁紙・アプリ配色でもフォーカスが一目で分かる
 # - inactive: tmux パレット（.tmux.conf の Color palette 節）の @c-primary 紫灰 (#5f5f87)。目立たせない
 
-borders style=round width=5.0 hidpi=on \
+borders style=round width=7.0 hidpi=on \
   active_color=0xffffffff \
   inactive_color=0xff5f5f87
