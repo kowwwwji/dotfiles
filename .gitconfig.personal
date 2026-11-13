@@ -1,0 +1,6 @@
+# 個人リポジトリ用の author。.gitconfig の includeIf から読み込む。
+# 既定の author（仕事用など PC ごとに違うもの）は ~/.config/git/.gitconfig.local 側に置く。
+# email は GitHub の noreply アドレス（実アドレスをコミット履歴に出さないため）。
+[user]
+	name = kowwwwji
+	email = 6405822+kowwwwji@users.noreply.github.com

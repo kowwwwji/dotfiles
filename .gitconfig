@@ -83,3 +83,10 @@
 	helper = !/opt/homebrew/bin/gh auth git-credential
 [rebase]
 	updateRefs = true
+
+# 個人リポジトリは個人の author で書く。
+# 先頭の .gitconfig.local（仕事用などの既定 author）を後勝ちで上書きするため、ファイル末尾に置く。
+# gwq の worktree も GIT_DIR は本体の .git/worktrees/ 配下なので、この1行で一致する。
+# パスは上の [ghq] root と揃える（root を変えたらここも直す）。
+[includeIf "gitdir:~/ghq/github.com/kowwwwji/"]
+	path = ~/.gitconfig.personal

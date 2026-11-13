@@ -107,7 +107,7 @@ chezmoi の自動変換ではなく、`dot_claude/` を明示的に `~/.claude/`
 | 層 | ファイル | 用途 |
 |----|---------|------|
 | zsh | `~/.zsh/local.zsh` | 環境変数・トークン等（`local.zsh.sample` がテンプレ） |
-| git | `~/.config/git/.gitconfig.local` | `.gitconfig` が `[include]` で読み込む。user名/メール等 |
+| git | `~/.config/git/.gitconfig.local` | `.gitconfig` が `[include]` で読み込む。既定の user名/メール等（仕事用など PC ごとに違うもの）。個人リポジトリの author は repo の `.gitconfig.personal` が `includeIf` で上書きする |
 | ssh | `~/.ssh/config` | 鍵・ホスト設定 |
 | nvim | `~/.config/nvim/lua/config/local.lua` | PC固有のエディタ設定 |
 | Claude | `~/.claude/settings.json` | git管理外の実体。Claude Code の自動書き込み（model 等）と machine固有・仕事固有の追記。base に無いキーは `claude-settings-sync` が保持する |
