@@ -54,10 +54,10 @@ items:
     key: G
     menu:
       - name: gh-dash
-        key: d
+        key: D
         command: 'popup -w95% -h95% -E -d "#{pane_current_path}" gh-dash'
       - name: gh-board
-        key: b
+        key: B
         command: 'popup -w95% -h95% -E -d "#{pane_current_path}" gh-board'
   - name: Lazydocker
     key: c

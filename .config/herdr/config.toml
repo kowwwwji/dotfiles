@@ -37,7 +37,7 @@ settings = "prefix+shift+s"
 new_worktree = ""
 
 # tmux の popup 群と同じ（g=lazygit, c=lazydocker, `=シェル）。
-# GitHub 系は tmux では G をサブメニュー（G d=gh-dash, G b=gh-board）にしているが、
+# GitHub 系は tmux では G をサブメニュー（G D=gh-dash, G B=gh-board）にしているが、
 # herdr のキー設定は「prefix + 1 キー」固定で 2 段目を組めないため、
 # Shift+g=gh-dash / Shift+b=gh-board の 1 キーずつにしている
 [[keys.command]]
